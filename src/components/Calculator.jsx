@@ -1,10 +1,16 @@
-import BodyParameters from "./BodyParameters";
+import Form from "./Form";
+import Score from "./Score";
 
 function Calculator() {
   return (
-    <section className="bg-blue-600 h-screen p-16">
-      <BodyParameters />
-    </section>
+    <main className="bg-gradient-to-bl from-blue-700 via-blue-800 to-stone-500 p-5 min-h-screen">
+      <h2 className=" text-3xl sm:text-6xl font-semibold  tracking-wider uppercase text-center text-stone-200 my-8">
+        Calculate your Air Force
+        <br /> PT Test Score
+      </h2>
+      <Form />
+      <Score />
+    </main>
   );
 }
 
