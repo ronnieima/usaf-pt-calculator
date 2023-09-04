@@ -1,4 +1,10 @@
+import { useDispatch, useSelector } from "react-redux";
+import { setAge } from "./userDetailsSlice";
+
 function AgeSelect() {
+  const { age } = useSelector((state) => state.userDetails);
+  const dispatch = useDispatch();
+
   return (
     <div>
       <h3 className="text-white text-2xl tracking-widest uppercase mb-3">
@@ -8,6 +14,9 @@ function AgeSelect() {
       <select
         name="ageGroups"
         className="w-full rounded-lg p-5 text-stone-700 shadow-lg font-semibold text-center "
+        onChange={(e) => {
+          dispatch(setAge(e.target.value));
+        }}
       >
         <option value={"<25"}>&lt; 25</option>
         <option value={"25-29"}>25-29</option>

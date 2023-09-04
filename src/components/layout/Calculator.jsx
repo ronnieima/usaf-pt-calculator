@@ -1,5 +1,5 @@
-import Form from "./Form";
-import Score from "./Score";
+import Form from "../features/testResults/Form";
+import Score from "../ui/Score";
 
 function Calculator() {
   return (

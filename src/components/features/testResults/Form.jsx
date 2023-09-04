@@ -1,5 +1,5 @@
-import AgeSelect from "./AgeSelect";
-import GenderSelect from "./GenderSelect";
+import AgeSelect from "../userDetails/AgeSelect";
+import GenderSelect from "../userDetails/GenderSelect";
 
 function Form() {
   return (
