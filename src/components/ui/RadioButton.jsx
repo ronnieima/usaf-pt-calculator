@@ -1,6 +1,6 @@
 import { setGender } from "../features/userDetails/userDetailsSlice";
 
-function RadioButton({ id, name, text, dispatch, value }) {
+function RadioButton({ id, name, text, dispatch, value, defaultChecked }) {
   return (
     <li>
       <input
@@ -16,7 +16,7 @@ function RadioButton({ id, name, text, dispatch, value }) {
       />
       <label
         htmlFor={id}
-        className="text-white block bg-blue-600 py-5 rounded-md transition-colors peer-checked:bg-stone-800 shadow-lg cursor-pointer uppercase  duration-300 hover:bg-stone-700 mt-2 "
+        className="text-white block bg-blue-600 py-5 rounded-md transition-colors peer-checked:bg-stone-800 shadow-lg cursor-pointer uppercase  duration-300 hover:bg-stone-700 mt-2 peer-checked:ring peer-checked:ring-slate-200 "
       >
         {text}
       </label>

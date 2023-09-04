@@ -12,7 +12,12 @@ const initialState = {
 export const testResultsSlice = createSlice({
   name: "testResults",
   initialState,
-  reducers: {},
+  reducers: {
+    setRunExercise(state, action) {
+      state.runExercise = action.payload;
+    },
+  },
 });
 
+export const { setRunExercise } = testResultsSlice.actions;
 export default testResultsSlice.reducer;
