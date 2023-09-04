@@ -1,4 +1,4 @@
-import RadioButton from "./RadioButton";
+import RadioButton from "./ui/RadioButton";
 
 function GenderSelect() {
   return (
