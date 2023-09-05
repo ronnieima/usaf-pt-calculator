@@ -1,26 +1,27 @@
-import { setGender } from "../features/userDetails/userDetailsSlice";
+import { useState } from "react";
 
-function RadioButton({ id, name, text, dispatch, value, defaultChecked }) {
+function RadioButton({ option, name }) {
+  const [isChecked, setIsChecked] = useState(false);
+
   return (
-    <li>
+    <>
       <input
         type="radio"
-        id={id}
+        id={option}
+        value={option}
         name={name}
-        className="hidden peer"
-        value={value}
-        onChange={(e) => {
-          console.log(e.target.value);
-          dispatch(setGender(e.target.value));
-        }}
+        className="hidden"
+        onChange={() => setIsChecked(!isChecked)}
       />
       <label
-        htmlFor={id}
-        className="text-white block bg-blue-600 py-5 rounded-md transition-colors peer-checked:bg-stone-800 shadow-lg cursor-pointer uppercase  duration-300 hover:bg-stone-700 mt-2 peer-checked:ring peer-checked:ring-slate-200 "
+        htmlFor={option}
+        className={`text-white block bg-blue-600 py-5 rounded-md transition-colors shadow-lg cursor-pointer uppercase  duration-300 hover:bg-stone-700 mt-2 ${
+          isChecked ? "bg-stone-800 ring ring-slate-200" : ""
+        }`}
       >
-        {text}
+        {option}
       </label>
-    </li>
+    </>
   );
 }
 
