@@ -1,27 +1,23 @@
-import { useState } from "react";
-
+import { useFormContext } from "react-hook-form";
 function RadioButton({ option, name }) {
-  const [isChecked, setIsChecked] = useState(false);
-
+  const { register } = useFormContext();
   return (
-    <>
+    <div>
       <input
+        {...register(name)}
         type="radio"
         id={option}
         value={option}
         name={name}
-        className="hidden"
-        onChange={() => setIsChecked(!isChecked)}
+        className="hidden peer"
       />
       <label
         htmlFor={option}
-        className={`text-white block bg-blue-600 py-5 rounded-md transition-colors shadow-lg cursor-pointer uppercase  duration-300 hover:bg-stone-700 mt-2 ${
-          isChecked ? "bg-stone-800 ring ring-slate-200" : ""
-        }`}
+        className="text-white block bg-blue-600 py-5 rounded-md transition-colors peer-checked:bg-gray-700 hover:bg-gray-500 shadow-lg cursor-pointer uppercase duration-300 mt-2 peer-checked:ring peer-checked:ring-slate-200"
       >
         {option}
       </label>
-    </>
+    </div>
   );
 }
 

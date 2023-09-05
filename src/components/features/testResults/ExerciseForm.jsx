@@ -1,7 +1,8 @@
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 function ExerciseForm({ type, children }) {
-  const { register, watch } = useForm();
+  const { register, watch } = useFormContext();
+
   const watchExercise = watch(`${type}Exercise`, "");
   return (
     <section className="flex flex-col gap-4">
@@ -20,10 +21,16 @@ function ExerciseForm({ type, children }) {
       </div>
 
       {type === "core" && (
-        <div className={watchExercise === "" ? "hidden" : "block"}>
+        <div
+          className={
+            watchExercise === ""
+              ? "opacity-0 transform -translate-y-4 transition-all duration-300"
+              : "opacity-100 transform transition-all duration-300"
+          }
+        >
           <h3>Core {watchExercise === "plank" ? "Plank Time" : "Reps"}</h3>
           <input
-            {...register("coreResults")}
+            {...register("coreResults", { required: true })}
             className="w-full rounded-full p-5 text-stone-700 shadow-lg font-semibold text-center"
             type={watchExercise === "plank" ? "text" : "number"}
             placeholder={watchExercise === "plank" ? "mm:ss" : "Reps"}
@@ -32,10 +39,16 @@ function ExerciseForm({ type, children }) {
       )}
 
       {type === "upperBody" && (
-        <div className={watchExercise === "" ? "hidden" : "block"}>
+        <div
+          className={
+            watchExercise === ""
+              ? "opacity-0 transform -translate-y-4 transition-all duration-300"
+              : "opacity-100 transform transition-all duration-300"
+          }
+        >
           <h3>Upper Body Reps</h3>
           <input
-            {...register("upperBodyResults")}
+            {...register("upperBodyResults", { required: true })}
             className="w-full rounded-full p-5 text-stone-700 shadow-lg font-semibold text-center"
             type="number"
             placeholder="Reps"
@@ -44,9 +57,16 @@ function ExerciseForm({ type, children }) {
       )}
 
       {type === "run" && (
-        <div className={watchExercise === "" ? "hidden" : "block"}>
+        <div
+          className={
+            watchExercise === ""
+              ? "opacity-0 transform -translate-y-4 transition-all duration-300"
+              : "opacity-100 transform transition-all duration-300"
+          }
+        >
           <h3>{watchExercise === "shuttle" ? "HAMR Reps" : "Run Time"}</h3>
           <input
+            {...register("runResults", { required: true })}
             className="w-full rounded-full p-5 text-stone-700 shadow-lg font-semibold text-center"
             type={watchExercise === "shuttle" ? "number" : "text"}
             placeholder={watchExercise == "shuttle" ? "Reps" : "mm:ss"}

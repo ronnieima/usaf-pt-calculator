@@ -1,7 +1,7 @@
-import { useForm } from "react-hook-form";
+import { useFormContext } from "react-hook-form";
 
 function AgeSelect() {
-  const { register } = useForm();
+  const { register } = useFormContext();
   return (
     <div>
       <label htmlFor="ageGroups">Age Group</label>
@@ -10,7 +10,7 @@ function AgeSelect() {
         name="ageGroups"
         className="w-full rounded-lg p-5 text-stone-700 shadow-lg font-semibold text-center"
         defaultValue=""
-        {...register("ageGroups")}
+        {...register("ageGroups", { required: true })}
       >
         <option value="" disabled hidden>
           Select Age Group

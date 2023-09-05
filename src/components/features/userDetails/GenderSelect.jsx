@@ -1,12 +1,7 @@
-import { useDispatch, useSelector } from "react-redux";
-import RadioButton from "../../ui/RadioButton";
-import { setGender } from "./userDetailsSlice";
-import { useForm } from "react-hook-form";
 import React from "react";
+import RadioButton from "../../ui/RadioButton";
 
 function GenderSelect() {
-  const dispatch = useDispatch();
-
   return (
     <section className=" uppercase">
       <label htmlFor="gender">Gender</label>
