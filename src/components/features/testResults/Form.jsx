@@ -5,13 +5,16 @@ import GenderSelect from "../userDetails/GenderSelect";
 
 import React from "react";
 import ExerciseForm from "./ExerciseForm";
+import { getScores } from "../../../api/supabase";
 
-function Form() {
+function Form({ setScore }) {
   const methods = useForm();
-  const onSubmit = (data, event) => {
+  async function onSubmit(data) {
     console.log(data);
-    console.log(event);
-  };
+    const score = await getScores(data);
+    console.log(score);
+    setScore(score);
+  }
   const onError = () => console.log("error");
   return (
     <FormProvider {...methods}>
@@ -35,7 +38,7 @@ function Form() {
 
         <ExerciseForm type="run">
           <option value="mile">1.5 Mile Run</option>
-          <option value="shuttle">20 Meter HAMR Shuttle</option>
+          <option value="shuttles">20 Meter HAMR Shuttle</option>
         </ExerciseForm>
 
         <SubmitButton />

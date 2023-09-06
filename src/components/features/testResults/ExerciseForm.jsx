@@ -64,12 +64,12 @@ function ExerciseForm({ type, children }) {
               : "opacity-100 transform transition-all duration-300"
           }
         >
-          <h3>{watchExercise === "shuttle" ? "HAMR Reps" : "Run Time"}</h3>
+          <h3>{watchExercise === "shuttles" ? "HAMR Reps" : "Run Time"}</h3>
           <input
             {...register("runResults", { required: true })}
             className="w-full rounded-full p-5 text-stone-700 shadow-lg font-semibold text-center"
-            type={watchExercise === "shuttle" ? "number" : "text"}
-            placeholder={watchExercise == "shuttle" ? "Reps" : "mm:ss"}
+            type={watchExercise === "shuttles" ? "number" : "text"}
+            placeholder={watchExercise === "shuttles" ? "Reps" : "mm:ss"}
           />
         </div>
       )}
