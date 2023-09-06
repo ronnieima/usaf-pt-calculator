@@ -3,8 +3,6 @@ const supabaseUrl = "https://hnnyotwjhikrytqynjyk.supabase.co";
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-export { supabase };
-
 async function getExerciseScore(gender, ageGroups, exercise, results) {
   const { data, error } = await supabase
     .from("scoringCriteria")
@@ -21,7 +19,7 @@ async function getExerciseScore(gender, ageGroups, exercise, results) {
     const points = data[0].points;
     return points;
   } else {
-    return "No matching points found for given input.";
+    return 0;
   }
 }
 
@@ -36,24 +34,31 @@ export async function getScores(formData) {
     runExercise,
     runResults,
   } = formData;
-  const upper = await getExerciseScore(
+  const upperBodyScore = await getExerciseScore(
     gender,
     ageGroups,
     upperBodyExercise,
     upperBodyResults,
   );
-  const core = await getExerciseScore(
+  const coreScore = await getExerciseScore(
     gender,
     ageGroups,
     coreExercise,
     coreResults,
   );
-  const run = await getExerciseScore(
+  const runScore = await getExerciseScore(
     gender,
     ageGroups,
     runExercise,
     runResults,
   );
-  console.log(upper, core, run);
-  return upper + core + run;
+  console.log(`Upper Body: ${upperBodyScore}`);
+  console.log(`Core: ${coreScore}`);
+  console.log(`Run: ${runScore}`);
+
+  if (upperBodyScore === 0 || coreScore === 0 || runScore === 0) {
+    return "fail";
+  } else {
+    return upperBodyScore + coreScore + runScore;
+  }
 }

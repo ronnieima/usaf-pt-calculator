@@ -1,7 +1,7 @@
 import { createClient } from "@supabase/supabase-js";
-import Calculator from "./components/layout/Calculator";
-import Footer from "./components/layout/Footer";
-import NavBar from "./components/layout/NavBar";
+import Calculator from "./layout/Calculator";
+import Footer from "./layout/Footer";
+import NavBar from "./layout/NavBar";
 
 function App() {
   return (

@@ -5,7 +5,7 @@ import GenderSelect from "../userDetails/GenderSelect";
 
 import React from "react";
 import ExerciseForm from "./ExerciseForm";
-import { getScores } from "../../../api/supabase";
+import { getScores } from "../../api/supabase";
 
 function Form({ setScore }) {
   const methods = useForm();
