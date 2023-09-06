@@ -1,9 +1,14 @@
 import { createClient } from "@supabase/supabase-js";
+import convertDurationToSeconds from "../util/convertDurationToSeconds";
 const supabaseUrl = "https://hnnyotwjhikrytqynjyk.supabase.co";
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 async function getExerciseScore(gender, ageGroups, exercise, results) {
+  if (exercise === "plank" || exercise === "mile") {
+    results = convertDurationToSeconds(results);
+    console.log(results);
+  }
   const { data, error } = await supabase
     .from("scoringCriteria")
     .select("points")
