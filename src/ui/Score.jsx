@@ -1,7 +1,7 @@
 function Score({ score }) {
   return (
     <>
-      <p className="text-center text-white text-6xl my-16 uppercase">
+      <p className="text-center text-white text-6xl my-24 uppercase">
         Your Score is <span className="font-bold">{score}</span>
       </p>
     </>
