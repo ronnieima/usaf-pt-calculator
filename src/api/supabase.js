@@ -4,7 +4,7 @@ const supabaseUrl = "https://hnnyotwjhikrytqynjyk.supabase.co";
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-async function getExerciseScore(gender, ageGroups, exercise, results) {
+async function getExerciseScore(gender, ageGroup, exercise, results) {
   if (exercise === "plank" || exercise === "mile") {
     results = convertDurationToSeconds(results);
     console.log(results);
@@ -13,7 +13,7 @@ async function getExerciseScore(gender, ageGroups, exercise, results) {
     .from("scoringCriteria")
     .select("points")
     .eq("gender", gender)
-    .eq("ageGroup", ageGroups)
+    .eq("ageGroup", ageGroup)
     .eq("activityType", exercise)
     .gte("maxPerformanceValue", results)
     .lte("minPerformanceValue", results);
@@ -31,7 +31,7 @@ async function getExerciseScore(gender, ageGroups, exercise, results) {
 export async function getScores(formData) {
   const {
     gender,
-    ageGroups,
+    ageGroup,
     upperBodyExercise,
     upperBodyResults,
     coreExercise,
@@ -41,19 +41,19 @@ export async function getScores(formData) {
   } = formData;
   const upperBodyScore = await getExerciseScore(
     gender,
-    ageGroups,
+    ageGroup,
     upperBodyExercise,
     upperBodyResults,
   );
   const coreScore = await getExerciseScore(
     gender,
-    ageGroups,
+    ageGroup,
     coreExercise,
     coreResults,
   );
   const runScore = await getExerciseScore(
     gender,
-    ageGroups,
+    ageGroup,
     runExercise,
     runResults,
   );

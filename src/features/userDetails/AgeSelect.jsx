@@ -4,13 +4,13 @@ function AgeSelect() {
   const { register } = useFormContext();
   return (
     <div>
-      <label htmlFor="ageGroups">Age Group</label>
+      <label htmlFor="ageGroup">Age Group</label>
       <select
-        id="ageGroups"
-        name="ageGroups"
+        id="ageGroup"
+        name="ageGroup"
         className="w-full rounded-lg p-5 text-stone-700 shadow-lg font-semibold text-center"
         defaultValue=""
-        {...register("ageGroups", { required: true })}
+        {...register("ageGroup", { required: true })}
       >
         <option value="" disabled hidden>
           Select Age Group

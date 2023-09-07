@@ -9,13 +9,18 @@ import { getScores } from "../../api/supabase";
 
 function Form({ setScore }) {
   const methods = useForm();
+  const isSubmitting = methods.formState.isSubmitting;
+
   async function onSubmit(data) {
     console.log(data);
     const score = await getScores(data);
     console.log(score);
     setScore(score);
+    console.log(isLoading);
   }
+
   const onError = () => console.log("error");
+
   return (
     <FormProvider {...methods}>
       <form
@@ -41,7 +46,7 @@ function Form({ setScore }) {
           <option value="shuttles">20 Meter HAMR Shuttle</option>
         </ExerciseForm>
 
-        <SubmitButton />
+        <SubmitButton isSubmitting={isSubmitting} />
       </form>
     </FormProvider>
   );
