@@ -1,4 +1,8 @@
-function SubmitButton({ isSubmitting }) {
+import { useFormContext } from "react-hook-form";
+function SubmitButton() {
+  const {
+    formState: { isSubmitting },
+  } = useFormContext();
   return (
     <input
       type="submit"

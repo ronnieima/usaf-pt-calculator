@@ -1,7 +1,10 @@
 import { useFormContext } from "react-hook-form";
+import ErrorMessage from "../../ui/ErrorMessage";
+import ExerciseInput from "../../ui/ExerciseInput";
 
 function ExerciseForm({ type, children }) {
-  const { register, watch } = useFormContext();
+  const { register, watch, formState } = useFormContext();
+  const { errors } = formState;
 
   const watchExercise = watch(`${type}Exercise`, "");
   return (
@@ -9,7 +12,15 @@ function ExerciseForm({ type, children }) {
       <div>
         <h3 className="uppercase">{type} Exercise Type</h3>
         <select
-          {...register(`${type}Exercise`, { required: true })}
+          {...register(`${type}Exercise`, {
+            required: `${
+              type === "upperBody"
+                ? "Upper body"
+                : type === "core"
+                ? "Core"
+                : "Cardio"
+            } exercise type is required.`,
+          })}
           className="w-full rounded-lg p-5 text-stone-700 shadow-lg font-semibold text-center "
           defaultValue={""}
         >
@@ -21,57 +32,72 @@ function ExerciseForm({ type, children }) {
       </div>
 
       {type === "core" && (
-        <div
-          className={
-            watchExercise === ""
-              ? "opacity-0 transform -translate-y-4 transition-all duration-300"
-              : "opacity-100 transform transition-all duration-300"
-          }
-        >
-          <h3>Core {watchExercise === "plank" ? "Plank Time" : "Reps"}</h3>
-          <input
-            {...register("coreResults", { required: true })}
-            className="w-full rounded-full p-5 text-stone-700 shadow-lg font-semibold text-center"
-            type={watchExercise === "plank" ? "text" : "number"}
-            placeholder={watchExercise === "plank" ? "mm:ss" : "Reps"}
-          />
-        </div>
+        <ExerciseInput
+          watchExercise={watchExercise}
+          title={`Core ${watchExercise === "plank" ? "Plank Time" : "Reps"}`}
+          registerProps={{
+            name: "coreResults",
+            validation: {
+              required:
+                watchExercise === "plank"
+                  ? "Plank time is required"
+                  : "Rep amount is required",
+              ...(watchExercise === "plank"
+                ? {
+                    pattern: {
+                      value: /^(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$/,
+                      message: "Invalid time format. (mm:ss)",
+                    },
+                  }
+                : {}),
+            },
+          }}
+          inputType={watchExercise === "plank" ? "text" : "number"}
+          placeholder={watchExercise === "plank" ? "mm:ss" : "Reps"}
+          error={errors.coreResults}
+        />
       )}
 
       {type === "upperBody" && (
-        <div
-          className={
-            watchExercise === ""
-              ? "opacity-0 transform -translate-y-4 transition-all duration-300"
-              : "opacity-100 transform transition-all duration-300"
-          }
-        >
-          <h3>Upper Body Reps</h3>
-          <input
-            {...register("upperBodyResults", { required: true })}
-            className="w-full rounded-full p-5 text-stone-700 shadow-lg font-semibold text-center"
-            type="number"
-            placeholder="Reps"
-          />
-        </div>
+        <ExerciseInput
+          title="Upper Body Reps"
+          registerProps={{
+            name: "upperBodyResults",
+            validation: {
+              required: "Rep amount is required.",
+            },
+          }}
+          inputType="number"
+          placeholder="Reps"
+          error={errors.upperBodyResults}
+        />
       )}
 
       {type === "run" && (
-        <div
-          className={
-            watchExercise === ""
-              ? "opacity-0 transform -translate-y-4 transition-all duration-300"
-              : "opacity-100 transform transition-all duration-300"
-          }
-        >
-          <h3>{watchExercise === "shuttles" ? "HAMR Reps" : "Run Time"}</h3>
-          <input
-            {...register("runResults", { required: true })}
-            className="w-full rounded-full p-5 text-stone-700 shadow-lg font-semibold text-center"
-            type={watchExercise === "shuttles" ? "number" : "text"}
-            placeholder={watchExercise === "shuttles" ? "Reps" : "mm:ss"}
-          />
-        </div>
+        <ExerciseInput
+          title={watchExercise === "shuttles" ? "HAMR Reps" : "Run Time"}
+          registerProps={{
+            name: "runResults",
+            validation: {
+              required: `${
+                watchExercise === "shuttles"
+                  ? "Rep amount is required"
+                  : "Time is required"
+              }`,
+              ...(watchExercise === "mile" || watchExercise === "walk"
+                ? {
+                    pattern: {
+                      value: /^(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$/,
+                      message: "Invalid time format (mm:ss)",
+                    },
+                  }
+                : {}),
+            },
+          }}
+          inputType={watchExercise === "shuttles" ? "number" : "text"}
+          placeholder={watchExercise === "shuttles" ? "Reps" : "mm:ss"}
+          error={errors.runResults}
+        />
       )}
     </section>
   );

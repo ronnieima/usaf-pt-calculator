@@ -2,6 +2,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import SubmitButton from "../../ui/SubmitButton";
 import AgeSelect from "../userDetails/AgeSelect";
 import GenderSelect from "../userDetails/GenderSelect";
+import { DevTool } from "@hookform/devtools";
 
 import React from "react";
 import ExerciseForm from "./ExerciseForm";
@@ -9,14 +10,12 @@ import { getScores } from "../../api/supabase";
 
 function Form({ setScore }) {
   const methods = useForm();
-  const isSubmitting = methods.formState.isSubmitting;
 
   async function onSubmit(data) {
     console.log(data);
     const score = await getScores(data);
     console.log(score);
     setScore(score);
-    console.log(isLoading);
   }
 
   const onError = () => console.log("error");
@@ -26,6 +25,7 @@ function Form({ setScore }) {
       <form
         className="flex flex-col gap-24 max-w-2xl sm:max-w-4xl m-auto text-stone-200  text-2xl tracking-widest uppercase mb-3"
         onSubmit={methods.handleSubmit(onSubmit)}
+        noValidate
       >
         <GenderSelect />
         <AgeSelect />
@@ -46,8 +46,9 @@ function Form({ setScore }) {
           <option value="shuttles">20 Meter HAMR Shuttle</option>
         </ExerciseForm>
 
-        <SubmitButton isSubmitting={isSubmitting} />
+        <SubmitButton />
       </form>
+      <DevTool control={methods.control} />
     </FormProvider>
   );
 }

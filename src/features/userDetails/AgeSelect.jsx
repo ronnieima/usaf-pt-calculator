@@ -10,7 +10,7 @@ function AgeSelect() {
         name="ageGroup"
         className="w-full rounded-lg p-5 text-stone-700 shadow-lg font-semibold text-center"
         defaultValue=""
-        {...register("ageGroup", { required: true })}
+        {...register("ageGroup", { required: "Age group is required." })}
       >
         <option value="" disabled hidden>
           Select Age Group

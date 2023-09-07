@@ -4,7 +4,7 @@ function RadioButton({ option, name }) {
   return (
     <div>
       <input
-        {...register(name)}
+        {...register(name, { required: "Gender is required." })}
         type="radio"
         id={option}
         value={option}
