@@ -60,6 +60,7 @@ function ExerciseForm({ type, children }) {
 
       {type === "upperBody" && (
         <ExerciseInput
+          watchExercise={watchExercise}
           title="Upper Body Reps"
           registerProps={{
             name: "upperBodyResults",
@@ -75,6 +76,7 @@ function ExerciseForm({ type, children }) {
 
       {type === "run" && (
         <ExerciseInput
+          watchExercise={watchExercise}
           title={watchExercise === "shuttles" ? "HAMR Reps" : "Run Time"}
           registerProps={{
             name: "runResults",
