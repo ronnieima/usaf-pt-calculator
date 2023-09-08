@@ -4,18 +4,21 @@ import AgeSelect from "../userDetails/AgeSelect";
 import GenderSelect from "../userDetails/GenderSelect";
 import { DevTool } from "@hookform/devtools";
 
-import React from "react";
+import React, { useState } from "react";
 import ExerciseForm from "./ExerciseForm";
 import { getScores } from "../../api/supabase";
+import Score from "../../ui/Score";
 
-function Form({ setScore }) {
+function Form() {
+  const [score, setScore] = useState(0);
+
   const methods = useForm();
 
   async function onSubmit(data) {
     console.log(data);
-    const score = await getScores(data);
+    const totalScore = await getScores(data);
     console.log(score);
-    setScore(score);
+    setScore(totalScore);
   }
 
   const onError = () => console.log("error");
@@ -23,7 +26,7 @@ function Form({ setScore }) {
   return (
     <FormProvider {...methods}>
       <form
-        className="flex flex-col gap-24 max-w-2xl sm:max-w-4xl m-auto text-stone-200  text-2xl tracking-widest uppercase mb-3"
+        className="flex flex-col gap-24 max-w-2xl sm:max-w-3xl m-auto text-stone-200  text-2xl tracking-widest uppercase mb-3"
         onSubmit={methods.handleSubmit(onSubmit)}
         noValidate
       >
@@ -48,6 +51,7 @@ function Form({ setScore }) {
 
         <SubmitButton />
       </form>
+      <Score score={score} />
       <DevTool control={methods.control} />
     </FormProvider>
   );

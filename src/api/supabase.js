@@ -61,9 +61,5 @@ export async function getScores(formData) {
   console.log(`Core: ${coreScore}`);
   console.log(`Run: ${runScore}`);
 
-  if (upperBodyScore === 0 || coreScore === 0 || runScore === 0) {
-    return "fail";
-  } else {
-    return upperBodyScore + coreScore + runScore;
-  }
+  return upperBodyScore + coreScore + runScore;
 }
