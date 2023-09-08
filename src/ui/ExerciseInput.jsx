@@ -1,5 +1,4 @@
 import { useFormContext } from "react-hook-form";
-import ErrorMessage from "./ErrorText";
 import ErrorText from "./ErrorText";
 
 function ExerciseInput({

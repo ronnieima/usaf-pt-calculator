@@ -36,8 +36,8 @@ export async function getScores(formData) {
     upperBodyResults,
     coreExercise,
     coreResults,
-    runExercise,
-    runResults,
+    cardioExercise,
+    cardioResults,
   } = formData;
   const upperBodyScore = await getExerciseScore(
     gender,
@@ -51,15 +51,15 @@ export async function getScores(formData) {
     coreExercise,
     coreResults,
   );
-  const runScore = await getExerciseScore(
+  const cardioScore = await getExerciseScore(
     gender,
     ageGroup,
-    runExercise,
-    runResults,
+    cardioExercise,
+    cardioResults,
   );
   console.log(`Upper Body: ${upperBodyScore}`);
   console.log(`Core: ${coreScore}`);
-  console.log(`Run: ${runScore}`);
+  console.log(`cardio: ${cardioScore}`);
 
-  return upperBodyScore + coreScore + runScore;
+  return upperBodyScore + coreScore + cardioScore;
 }

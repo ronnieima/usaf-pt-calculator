@@ -44,7 +44,7 @@ function Form() {
           <option value="plank">Forearm Plank</option>
         </ExerciseForm>
 
-        <ExerciseForm type="run">
+        <ExerciseForm type="cardio">
           <option value="mile">1.5 Mile Run</option>
           <option value="shuttles">20 Meter HAMR Shuttle</option>
         </ExerciseForm>
