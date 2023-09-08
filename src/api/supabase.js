@@ -61,5 +61,5 @@ export async function getScores(formData) {
   console.log(`Core: ${coreScore}`);
   console.log(`cardio: ${cardioScore}`);
 
-  return upperBodyScore + coreScore + cardioScore;
+  return { upper: upperBodyScore, core: coreScore, cardio: cardioScore };
 }

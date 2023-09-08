@@ -1,10 +1,7 @@
 import { useFormContext } from "react-hook-form";
-import Error from "./ErrorText";
-import { ErrorMessage } from "@hookform/error-message";
 
 function RadioButton({ option, name }) {
   const { register, formState } = useFormContext();
-  const { errors } = formState;
   return (
     <div>
       <input

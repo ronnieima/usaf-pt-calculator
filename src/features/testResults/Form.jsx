@@ -8,17 +8,19 @@ import React, { useState } from "react";
 import ExerciseForm from "./ExerciseForm";
 import { getScores } from "../../api/supabase";
 import Score from "../../ui/Score";
+import { useScoreContext } from "../../contexts/ScoreContext";
 
 function Form() {
-  const [score, setScore] = useState(0);
-
   const methods = useForm();
-
+  const { setUpperScore, setCoreScore, setCardioScore, setTotalScore } =
+    useScoreContext();
   async function onSubmit(data) {
     console.log(data);
-    const totalScore = await getScores(data);
-    console.log(score);
-    setScore(totalScore);
+    const { upper, core, cardio } = await getScores(data);
+    setUpperScore(upper);
+    setCoreScore(core);
+    setCardioScore(cardio);
+    setTotalScore(upper + core + cardio);
   }
 
   const onError = () => console.log("error");
@@ -51,7 +53,7 @@ function Form() {
 
         <SubmitButton />
       </form>
-      <Score score={score} />
+      <Score />
       <DevTool control={methods.control} />
     </FormProvider>
   );
