@@ -1,18 +1,19 @@
 import { useFormContext } from "react-hook-form";
-import ErrorMessage from "../../ui/ErrorMessage";
+import ErrorMessage from "../../ui/ErrorText";
 import ExerciseInput from "../../ui/ExerciseInput";
+import ErrorText from "../../ui/ErrorText";
 
 function ExerciseForm({ type, children }) {
   const { register, watch, formState } = useFormContext();
   const { errors } = formState;
-
-  const watchExercise = watch(`${type}Exercise`, "");
+  const selectedExercise = `${type}Exercise`;
+  const watchExercise = watch(selectedExercise, "");
   return (
     <section className="flex flex-col gap-4">
       <div>
         <h3 className="uppercase">{type} Exercise Type</h3>
         <select
-          {...register(`${type}Exercise`, {
+          {...register(selectedExercise, {
             required: `${
               type === "upperBody"
                 ? "Upper body"
@@ -29,6 +30,7 @@ function ExerciseForm({ type, children }) {
           </option>
           {children}
         </select>
+        <ErrorText inputName={selectedExercise} />
       </div>
 
       {type === "core" && (

@@ -1,4 +1,5 @@
 import { useFormContext } from "react-hook-form";
+import ErrorText from "../../ui/ErrorText";
 
 function AgeSelect() {
   const { register } = useFormContext();
@@ -10,7 +11,7 @@ function AgeSelect() {
         name="ageGroup"
         className="w-full rounded-lg p-5 text-stone-700 shadow-lg font-semibold text-center"
         defaultValue=""
-        {...register("ageGroup", { required: "Age group is required." })}
+        {...register("ageGroup", { required: "Age group is required" })}
       >
         <option value="" disabled hidden>
           Select Age Group
@@ -25,6 +26,7 @@ function AgeSelect() {
         <option value="55-59">55-59</option>
         <option value=">60">&gt; 60</option>
       </select>
+      <ErrorText inputName="ageGroup" />
     </div>
   );
 }

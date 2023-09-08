@@ -1,5 +1,6 @@
 import React from "react";
 import RadioButton from "../../ui/RadioButton";
+import ErrorText from "../../ui/ErrorText";
 
 function GenderSelect() {
   return (
@@ -10,6 +11,7 @@ function GenderSelect() {
         <RadioButton option="male" name="gender" />
         <RadioButton option="female" name="gender" />
       </div>
+      <ErrorText inputName="gender" />
     </section>
   );
 }

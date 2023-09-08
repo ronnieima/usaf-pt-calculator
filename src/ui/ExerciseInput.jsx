@@ -1,12 +1,12 @@
 import { useFormContext } from "react-hook-form";
-import ErrorMessage from "./ErrorMessage";
+import ErrorMessage from "./ErrorText";
+import ErrorText from "./ErrorText";
 
 function ExerciseInput({
   title,
   registerProps,
   inputType,
   placeholder,
-  error,
   watchExercise,
 }) {
   const { register } = useFormContext();
@@ -27,7 +27,7 @@ function ExerciseInput({
           type={inputType}
           placeholder={placeholder}
         />
-        <ErrorMessage error={error} />
+        <ErrorText inputName={registerProps.name} />
       </div>
     </div>
   );
