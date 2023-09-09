@@ -24,13 +24,16 @@ function Score() {
               formatValue={(value) => value.toFixed(1)}
             />
           </p>
-          <p className="text-green-500 font-semibold">Excellent 🌟</p>)
+          {totalScore >= 90 && (
+            <p className="text-green-500 font-semibold">Excellent 🌟</p>
+          )}
           {totalScore >= 75.0 && totalScore <= 89.9 && (
             <p className="text-yellow-500 font-semibold">Satisfactory 👌</p>
           )}
           {totalScore < 75 && (
             <p className="text-red-500 font-semibold 		">Unsatisfactory ❌</p>
           )}
+
           <ScoreBreakdown />
         </section>
       )}
