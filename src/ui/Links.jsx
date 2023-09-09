@@ -4,7 +4,6 @@ function Links() {
       <a href="#">Home</a>
       <a href="#">Exercises</a>
       <a href="#">Charts</a>
-      <a href="#">Training Tips</a>
       <a href="#">Resources</a>
     </ul>
   );

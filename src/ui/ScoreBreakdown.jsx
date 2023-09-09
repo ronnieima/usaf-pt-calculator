@@ -8,7 +8,7 @@ function ScoreBreakdown() {
 
   return (
     <aside className={`flex flex-col gap-8 max-w-screen-md w-full `}>
-      <h2 className="my-8 text-center underline">Score Breakdown:</h2>
+      <h2 className="my-8 text-center italic">Score Breakdown:</h2>
       <div className="grid grid-cols-3 justify-items-center ">
         <IndividualExerciseScore
           icon={<GiMuscleUp size="3em" title="flexing icon" />}
