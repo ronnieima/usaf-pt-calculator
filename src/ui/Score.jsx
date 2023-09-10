@@ -6,8 +6,7 @@ import AnimatedNumber from "animated-number-react";
 
 function Score() {
   const { isSubmitting, isSubmitSuccessful } = useFormState();
-  const { totalScore } = useScoreContext();
-  console.log(`${totalScore} in Score.jsx`);
+  const { totalScore, isMinimumNotMet } = useScoreContext();
   return (
     <section className="my-16 flex flex-col items-center justify-center gap-8 text-stone-200 text-4xl uppercase">
       {isSubmitting && <Loader />}
@@ -24,14 +23,17 @@ function Score() {
               formatValue={(value) => value.toFixed(1)}
             />
           </p>
-          {totalScore >= 90 && (
+          {totalScore >= 90 && !isMinimumNotMet && (
             <p className="text-green-500 font-semibold">Excellent 🌟</p>
           )}
-          {totalScore >= 75.0 && totalScore <= 89.9 && (
+          {totalScore >= 75.0 && totalScore <= 89.9 && !isMinimumNotMet && (
             <p className="text-yellow-500 font-semibold">Satisfactory 👌</p>
           )}
-          {totalScore < 75 && (
+          {totalScore < 75 && !isMinimumNotMet && (
             <p className="text-red-500 font-semibold 		">Unsatisfactory ❌</p>
+          )}
+          {isMinimumNotMet && (
+            <p className="text-red-500 font-semibold">Fail. Minimum not met.</p>
           )}
 
           <ScoreBreakdown />

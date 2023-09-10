@@ -2,9 +2,8 @@ import { FormProvider, useForm } from "react-hook-form";
 import SubmitButton from "../../ui/SubmitButton";
 import AgeSelect from "../userDetails/AgeSelect";
 import GenderSelect from "../userDetails/GenderSelect";
-import { DevTool } from "@hookform/devtools";
 
-import React, { useState } from "react";
+import React from "react";
 import ExerciseForm from "./ExerciseForm";
 import { getScores } from "../../api/supabase";
 import Score from "../../ui/Score";
@@ -12,18 +11,24 @@ import { useScoreContext } from "../../contexts/ScoreContext";
 
 function Form() {
   const methods = useForm();
-  const { setUpperScore, setCoreScore, setCardioScore, setTotalScore } =
-    useScoreContext();
+  const {
+    setUpperScore,
+    setCoreScore,
+    setCardioScore,
+    setTotalScore,
+    setIsMinimumNotMet,
+  } = useScoreContext();
   async function onSubmit(data) {
-    console.log(data);
+    setIsMinimumNotMet(false);
     const { upper, core, cardio } = await getScores(data);
+    if (upper === 0 || core === 0 || cardio === 0) {
+      setIsMinimumNotMet(true);
+    }
     setUpperScore(upper);
     setCoreScore(core);
     setCardioScore(cardio);
     setTotalScore(upper + core + cardio);
   }
-
-  const onError = () => console.log("error");
 
   return (
     <FormProvider {...methods}>
@@ -54,7 +59,6 @@ function Form() {
         <SubmitButton />
       </form>
       <Score />
-      <DevTool control={methods.control} />
     </FormProvider>
   );
 }
