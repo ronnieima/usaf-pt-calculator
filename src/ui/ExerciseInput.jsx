@@ -1,4 +1,4 @@
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useFormState } from "react-hook-form";
 import ErrorText from "./ErrorText";
 
 function ExerciseInput({
@@ -9,7 +9,20 @@ function ExerciseInput({
   watchExercise,
 }) {
   const { register } = useFormContext();
+  const { isSubmitting } = useFormState();
   const isVisible = watchExercise !== "";
+  const numberInputOnWheelPreventChange = (e) => {
+    // Prevent the input value change
+    e.target.blur();
+
+    // Prevent the page/container scrolling
+    e.stopPropagation();
+
+    // Refocus immediately, on the next tick (after the current     function is done)
+    setTimeout(() => {
+      e.target.focus();
+    }, 0);
+  };
   return (
     <div className="relative">
       <div
@@ -25,6 +38,8 @@ function ExerciseInput({
           className="w-full rounded-full p-5 text-stone-700 shadow-lg font-semibold text-center"
           type={inputType}
           placeholder={placeholder}
+          disabled={isSubmitting}
+          onWheel={numberInputOnWheelPreventChange}
         />
         <ErrorText inputName={registerProps.name} />
       </div>

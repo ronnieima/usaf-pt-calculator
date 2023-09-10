@@ -5,9 +5,10 @@ import ErrorText from "../../ui/ErrorText";
 
 function ExerciseForm({ type, children }) {
   const { register, watch, formState } = useFormContext();
-  const { errors } = formState;
+  const { errors, isSubmitting } = formState;
   const selectedExercise = `${type}Exercise`;
   const watchExercise = watch(selectedExercise, "");
+
   return (
     <section className="flex flex-col gap-4">
       <div>
@@ -26,6 +27,7 @@ function ExerciseForm({ type, children }) {
           })}
           className="w-full rounded-lg p-5 text-stone-700 shadow-lg font-semibold text-center "
           defaultValue={""}
+          disabled={isSubmitting}
         >
           <option value="" disabled hidden>
             Select Exercise Type
@@ -44,7 +46,7 @@ function ExerciseForm({ type, children }) {
             validation: {
               required: "Rep amount is required",
               min: { value: 0, message: "Reps must be greater than 0" },
-              max: { value: 125, message: "Be real" },
+              max: { value: 125, message: "Maximum amount exceeded" },
             },
           }}
           inputType="number"
@@ -64,7 +66,7 @@ function ExerciseForm({ type, children }) {
                   ? "Plank time is required"
                   : "Rep amount is required",
               min: { value: 0, message: "Reps must be greater than 0" },
-              max: { value: 125, message: "Be real" },
+              max: { value: 125, message: "Maximum amount exceeded" },
               ...(watchExercise === "plank"
                 ? {
                     pattern: {
@@ -98,7 +100,7 @@ function ExerciseForm({ type, children }) {
                   : "Time is required"
               }`,
               min: { value: 0, message: "Reps must be greater than 0" },
-              max: { value: 999, message: "Be real" },
+              max: { value: 999, message: "Maximum amount exceeded" },
               ...(watchExercise === "mile" || watchExercise === "walk"
                 ? {
                     pattern: {

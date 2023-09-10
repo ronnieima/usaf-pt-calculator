@@ -7,6 +7,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        roboto: ["Roboto Mono"],
+      },
       screens: {
         "1000px": "1000px",
       },

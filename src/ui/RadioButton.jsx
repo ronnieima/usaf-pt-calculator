@@ -1,7 +1,9 @@
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useFormState } from "react-hook-form";
 
 function RadioButton({ option, name }) {
-  const { register, formState } = useFormContext();
+  const { register } = useFormContext();
+  const { isSubmitting } = useFormState();
+
   return (
     <div>
       <input
@@ -11,6 +13,7 @@ function RadioButton({ option, name }) {
         value={option}
         name={name}
         className="hidden peer"
+        disabled={isSubmitting}
       />
       <label
         htmlFor={option}

@@ -24,16 +24,19 @@ function Score() {
             />
           </p>
           {totalScore >= 90 && !isMinimumNotMet && (
-            <p className="text-green-500 font-semibold">Excellent 🌟</p>
+            <p className="text-green-500 font-semibold">Excellent</p>
           )}
           {totalScore >= 75.0 && totalScore <= 89.9 && !isMinimumNotMet && (
-            <p className="text-yellow-500 font-semibold">Satisfactory 👌</p>
+            <p className="text-yellow-500 font-semibold">Satisfactory</p>
           )}
-          {totalScore < 75 && !isMinimumNotMet && (
-            <p className="text-red-500 font-semibold 		">Unsatisfactory ❌</p>
+          {(totalScore < 75 || isMinimumNotMet) && (
+            <p className="text-red-500 font-semibold text-6xl">Fail</p>
+          )}
+          {totalScore < 75 && (
+            <p className="text-red-500 font-semibold 		">Score below 75</p>
           )}
           {isMinimumNotMet && (
-            <p className="text-red-500 font-semibold">Fail. Minimum not met.</p>
+            <p className="text-red-500 font-semibold">Minimum not met</p>
           )}
 
           <ScoreBreakdown />

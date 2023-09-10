@@ -1,12 +1,14 @@
-import { useFormContext } from "react-hook-form";
+import { useFormContext, useFormState } from "react-hook-form";
 import ErrorText from "../../ui/ErrorText";
 
 function AgeSelect() {
   const { register } = useFormContext();
+  const { isSubmitting } = useFormState();
   return (
     <div>
       <label htmlFor="ageGroup">Age Group</label>
       <select
+        disabled={isSubmitting}
         id="ageGroup"
         name="ageGroup"
         className="w-full rounded-lg p-5 text-stone-700 shadow-lg font-semibold text-center"

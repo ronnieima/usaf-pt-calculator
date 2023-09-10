@@ -1,4 +1,3 @@
-import { createClient } from "@supabase/supabase-js";
 import Calculator from "./layout/Calculator";
 import Footer from "./layout/Footer";
 import NavBar from "./layout/NavBar";
