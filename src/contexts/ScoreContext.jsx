@@ -1,4 +1,4 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useState } from 'react';
 
 const ScoreContext = createContext(null);
 
@@ -8,9 +8,6 @@ export default function ScoreContextProvider({ children }) {
   const [coreScore, setCoreScore] = useState(null);
   const [cardioScore, setCardioScore] = useState(null);
   const [totalScore, setTotalScore] = useState(null);
-
-  const [coreExercise, setCoreExercise] = useState(null);
-  const [cardioExercise, setCardioExercise] = useState(null);
 
   return (
     <ScoreContext.Provider
@@ -27,8 +24,6 @@ export default function ScoreContextProvider({ children }) {
         setTotalScore,
         coreExercise,
         setCoreExercise,
-        cardioExercise,
-        setCardioExercise,
       }}
     >
       {children}
@@ -40,7 +35,7 @@ export function useScoreContext() {
   const context = useContext(ScoreContext);
   if (!context) {
     throw new Error(
-      "useScoreContext must be used inside the ScoreContextProvider",
+      'useScoreContext must be used inside the ScoreContextProvider',
     );
   }
   return context;

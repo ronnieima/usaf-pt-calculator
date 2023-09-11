@@ -12,12 +12,12 @@ function RadioButton({ option, name }) {
         id={option}
         value={option}
         name={name}
-        className="hidden peer"
+        className="peer hidden"
         disabled={isSubmitting}
       />
       <label
         htmlFor={option}
-        className="text-white block bg-blue-600 py-5 rounded-md transition-colors peer-checked:bg-gray-700 hover:bg-gray-500 shadow-lg cursor-pointer uppercase duration-300 mt-2 peer-checked:ring peer-checked:ring-slate-200"
+        className="mt-2 block cursor-pointer rounded-md bg-blue-600 py-5 uppercase text-white shadow-lg transition-colors duration-300 hover:bg-gray-500 peer-checked:bg-gray-700 peer-checked:ring peer-checked:ring-slate-200"
       >
         {option}
       </label>

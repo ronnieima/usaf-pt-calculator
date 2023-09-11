@@ -1,4 +1,4 @@
-import { InfinitySpin } from "react-loader-spinner";
+import { InfinitySpin } from 'react-loader-spinner';
 
 function Loader() {
   return (

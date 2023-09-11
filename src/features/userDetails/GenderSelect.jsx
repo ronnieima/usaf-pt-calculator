@@ -1,13 +1,13 @@
-import React from "react";
-import RadioButton from "../../ui/RadioButton";
-import ErrorText from "../../ui/ErrorText";
+import React from 'react';
+import RadioButton from '../../ui/RadioButton';
+import ErrorText from '../../ui/ErrorText';
 
 function GenderSelect() {
   return (
     <section className=" uppercase">
       <label htmlFor="gender">Gender</label>
 
-      <div className="grid sm:grid-cols-2 gap-4 text-center">
+      <div className="grid gap-4 text-center sm:grid-cols-2">
         <RadioButton option="male" name="gender" />
         <RadioButton option="female" name="gender" />
       </div>

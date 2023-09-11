@@ -1,14 +1,14 @@
-import { FormProvider, useForm } from "react-hook-form";
-import SubmitButton from "../../ui/SubmitButton";
-import AgeSelect from "../userDetails/AgeSelect";
-import GenderSelect from "../userDetails/GenderSelect";
-import { DevTool } from "@hookform/devtools";
+import { FormProvider, useForm } from 'react-hook-form';
+import SubmitButton from '../../ui/SubmitButton';
+import AgeSelect from '../userDetails/AgeSelect';
+import GenderSelect from '../userDetails/GenderSelect';
+import { DevTool } from '@hookform/devtools';
 
-import React from "react";
-import ExerciseForm from "./ExerciseForm";
-import { getScores } from "../../api/supabase";
-import Score from "../../ui/Score";
-import { useScoreContext } from "../../contexts/ScoreContext";
+import React from 'react';
+import ExerciseForm from './ExerciseForm';
+import { getScores } from '../../api/supabase';
+import Score from '../../ui/Score';
+import { useScoreContext } from '../../contexts/ScoreContext';
 
 function Form() {
   const methods = useForm();
@@ -34,7 +34,7 @@ function Form() {
   return (
     <FormProvider {...methods}>
       <form
-        className="flex flex-col gap-24 max-w-2xl sm:max-w-3xl m-auto text-stone-200  text-2xl tracking-widest uppercase mb-3"
+        className="m-auto mb-3 flex max-w-2xl flex-col gap-24 text-2xl  uppercase tracking-widest text-stone-200 sm:max-w-3xl"
         onSubmit={methods.handleSubmit(onSubmit)}
         noValidate
       >

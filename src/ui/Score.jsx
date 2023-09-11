@@ -1,8 +1,8 @@
-import { useFormState } from "react-hook-form";
-import Loader from "./Loader";
-import ScoreBreakdown from "./ScoreBreakdown";
-import { useScoreContext } from "../contexts/ScoreContext";
-import AnimatedNumber from "animated-number-react";
+import { useFormState } from 'react-hook-form';
+import Loader from './Loader';
+import ScoreBreakdown from './ScoreBreakdown';
+import { useScoreContext } from '../contexts/ScoreContext';
+import AnimatedNumber from 'animated-number-react';
 
 function Score() {
   const { isSubmitting, isSubmitSuccessful } = useFormState();
@@ -13,11 +13,11 @@ function Score() {
       {isSubmitSuccessful && (
         <section
           className={`${
-            isSubmitting && "opacity-0"
+            isSubmitting && 'opacity-0'
           } text-center flex flex-col gap-8`}
         >
           <p className={`  text-6xl tracking-widest   `}>
-            Your Score is{" "}
+            Your Score is{' '}
             <AnimatedNumber
               value={totalScore}
               formatValue={(value) => value.toFixed(1)}

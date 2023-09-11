@@ -1,6 +1,6 @@
 function Header() {
   return (
-    <h1 className=" text-5xl sm:text-6xl font-semibold  tracking-wider uppercase text-center text-stone-200 text-shadow-sm my-16">
+    <h1 className=" my-16 text-center text-5xl  font-semibold uppercase tracking-wider text-stone-200 text-shadow-sm sm:text-6xl">
       Calculate your <br />
       Air Force
       <br /> PT Test Score

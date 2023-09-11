@@ -1,25 +1,25 @@
-import { createClient } from "@supabase/supabase-js";
-import convertDurationToSeconds from "../util/convertDurationToSeconds";
-const supabaseUrl = "https://hnnyotwjhikrytqynjyk.supabase.co";
+import { createClient } from '@supabase/supabase-js';
+import convertDurationToSeconds from '../util/convertDurationToSeconds';
+const supabaseUrl = 'https://hnnyotwjhikrytqynjyk.supabase.co';
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 async function getExerciseScore(gender, ageGroup, exercise, results) {
-  if (exercise === "plank" || exercise === "mile") {
+  if (exercise === 'plank' || exercise === 'mile') {
     results = convertDurationToSeconds(results);
     console.log(results);
   }
   const { data, error } = await supabase
-    .from("scoringCriteria")
-    .select("points")
-    .eq("gender", gender)
-    .eq("ageGroup", ageGroup)
-    .eq("activityType", exercise)
-    .gte("maxPerformanceValue", results)
-    .lte("minPerformanceValue", results);
+    .from('scoringCriteria')
+    .select('points')
+    .eq('gender', gender)
+    .eq('ageGroup', ageGroup)
+    .eq('activityType', exercise)
+    .gte('maxPerformanceValue', results)
+    .lte('minPerformanceValue', results);
 
   if (error) {
-    return "Error fetching points:", error;
+    return 'Error fetching points:', error;
   } else if (data && data.length > 0) {
     const points = data[0].points;
     return points;

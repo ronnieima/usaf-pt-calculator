@@ -1,6 +1,6 @@
-import Calculator from "./layout/Calculator";
-import Footer from "./layout/Footer";
-import NavBar from "./layout/NavBar";
+import Calculator from './layout/Calculator';
+import Footer from './layout/Footer';
+import NavBar from './layout/NavBar';
 
 function App() {
   return (

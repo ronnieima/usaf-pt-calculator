@@ -11,7 +11,7 @@ function ErrorText({ inputName }) {
       name={inputName}
       error={errors.inputName}
       render={({ message }) => (
-        <p className="text-rose-500 mt-1 ">*{message}</p>
+        <p className="mt-1 text-rose-500 ">*{message}</p>
       )}
     />
   );

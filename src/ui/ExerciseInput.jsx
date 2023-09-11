@@ -1,5 +1,5 @@
-import { useFormContext, useFormState } from "react-hook-form";
-import ErrorText from "./ErrorText";
+import { useFormContext, useFormState } from 'react-hook-form';
+import ErrorText from './ErrorText';
 
 function ExerciseInput({
   title,
@@ -10,7 +10,7 @@ function ExerciseInput({
 }) {
   const { register } = useFormContext();
   const { isSubmitting } = useFormState();
-  const isVisible = watchExercise !== "";
+  const isVisible = watchExercise !== '';
   const numberInputOnWheelPreventChange = (e) => {
     // Prevent the input value change
     e.target.blur();
@@ -28,8 +28,8 @@ function ExerciseInput({
       <div
         className={
           isVisible
-            ? "opacity-100 transform transition-all duration-300"
-            : "opacity-0 transform -translate-y-4 transition-all duration-300 absolute h-0 w-0 invisible"
+            ? 'opacity-100 transform transition-all duration-300'
+            : 'opacity-0 transform -translate-y-4 transition-all duration-300 absolute h-0 w-0 invisible'
         }
       >
         <h3>{title}</h3>
