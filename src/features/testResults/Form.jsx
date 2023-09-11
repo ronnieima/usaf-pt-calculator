@@ -60,7 +60,6 @@ function Form() {
         <SubmitButton />
       </form>
       <Score />
-      <DevTool control={methods.control} />
     </FormProvider>
   );
 }
