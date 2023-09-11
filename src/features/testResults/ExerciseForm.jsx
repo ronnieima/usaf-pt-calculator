@@ -52,6 +52,10 @@ function ExerciseForm({ type, children }) {
               required: 'Rep amount is required',
               min: { value: 0, message: 'Reps must be greater than 0' },
               max: { value: 125, message: 'Maximum amount exceeded' },
+              pattern: {
+                value: /^\d*$/,
+                message: 'Must be a whole number',
+              },
             },
           }}
           inputType="number"

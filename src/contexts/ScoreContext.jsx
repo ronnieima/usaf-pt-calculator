@@ -22,8 +22,6 @@ export default function ScoreContextProvider({ children }) {
         setCardioScore,
         totalScore,
         setTotalScore,
-        coreExercise,
-        setCoreExercise,
       }}
     >
       {children}
