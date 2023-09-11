@@ -8,13 +8,13 @@ function Score() {
   const { isSubmitting, isSubmitSuccessful } = useFormState();
   const { totalScore, isMinimumNotMet } = useScoreContext();
   return (
-    <section className="my-16 flex flex-col items-center justify-center gap-8 text-stone-200 text-4xl uppercase">
+    <section className="my-16 flex flex-col items-center justify-center gap-8 text-4xl uppercase text-stone-200">
       {isSubmitting && <Loader />}
       {isSubmitSuccessful && (
         <section
           className={`${
             isSubmitting && 'opacity-0'
-          } text-center flex flex-col gap-8`}
+          } flex flex-col gap-8 text-center`}
         >
           <p className={`  text-6xl tracking-widest   `}>
             Your Score is{' '}
@@ -24,19 +24,21 @@ function Score() {
             />
           </p>
           {totalScore >= 90 && !isMinimumNotMet && (
-            <p className="text-green-500 font-semibold">Excellent</p>
+            <p className="font-semibold text-green-500">Excellent</p>
           )}
           {totalScore >= 75.0 && totalScore <= 89.9 && !isMinimumNotMet && (
-            <p className="text-yellow-500 font-semibold">Satisfactory</p>
+            <p className="font-semibold text-yellow-500">Satisfactory</p>
           )}
-          {(totalScore < 75 || isMinimumNotMet) && (
-            <p className="text-red-500 font-semibold text-6xl">Fail</p>
+          {totalScore < 75 || isMinimumNotMet ? (
+            <p className="text-6xl font-semibold text-red-500">Fail</p>
+          ) : (
+            <p className="text-6xl font-semibold text-green-500">Pass</p>
           )}
           {totalScore < 75 && (
-            <p className="text-red-500 font-semibold 		">Score below 75</p>
+            <p className="font-semibold text-red-500 		">Score below 75</p>
           )}
           {isMinimumNotMet && (
-            <p className="text-red-500 font-semibold">Minimum not met</p>
+            <p className="font-semibold text-red-500">Minimum not met</p>
           )}
 
           <ScoreBreakdown />
