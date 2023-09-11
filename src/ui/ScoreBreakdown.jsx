@@ -12,17 +12,17 @@ function ScoreBreakdown() {
       <div className="grid grid-cols-3 justify-items-center ">
         <IndividualExerciseScore
           icon={<GiMuscleUp size="3em" title="flexing icon" />}
-          score={upperScore}
+          score={`${upperScore} / 20`}
         />
         <IndividualExerciseScore
           type="core"
           icon={<GiAbdominalArmor size="3em" title="abs icon" />}
-          score={coreScore}
+          score={`${coreScore} / 20`}
         />
         <IndividualExerciseScore
           type="cardio"
           icon={<FaRunning size="3em" title="running icon" />}
-          score={cardioScore}
+          score={`${cardioScore} / 60`}
         />
       </div>
     </aside>

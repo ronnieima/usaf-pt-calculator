@@ -9,6 +9,9 @@ export default function ScoreContextProvider({ children }) {
   const [cardioScore, setCardioScore] = useState(null);
   const [totalScore, setTotalScore] = useState(null);
 
+  const [coreExercise, setCoreExercise] = useState(null);
+  const [cardioExercise, setCardioExercise] = useState(null);
+
   return (
     <ScoreContext.Provider
       value={{
@@ -22,6 +25,10 @@ export default function ScoreContextProvider({ children }) {
         setCardioScore,
         totalScore,
         setTotalScore,
+        coreExercise,
+        setCoreExercise,
+        cardioExercise,
+        setCardioExercise,
       }}
     >
       {children}

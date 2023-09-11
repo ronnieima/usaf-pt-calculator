@@ -1,13 +1,18 @@
 import { useFormContext } from "react-hook-form";
-import ErrorMessage from "../../ui/ErrorText";
 import ExerciseInput from "../../ui/ExerciseInput";
 import ErrorText from "../../ui/ErrorText";
+import { useEffect } from "react";
 
 function ExerciseForm({ type, children }) {
-  const { register, watch, formState } = useFormContext();
+  const { register, watch, formState, unregister } = useFormContext();
   const { errors, isSubmitting } = formState;
   const selectedExercise = `${type}Exercise`;
   const watchExercise = watch(selectedExercise, "");
+
+  useEffect(() => {
+    // Unregister the field to remove old validation rules
+    unregister(`${type}Results`);
+  }, [watchExercise]);
 
   return (
     <section className="flex flex-col gap-4">
@@ -65,8 +70,7 @@ function ExerciseForm({ type, children }) {
                 watchExercise === "plank"
                   ? "Plank time is required"
                   : "Rep amount is required",
-              min: { value: 0, message: "Reps must be greater than 0" },
-              max: { value: 125, message: "Maximum amount exceeded" },
+
               ...(watchExercise === "plank"
                 ? {
                     pattern: {
@@ -78,7 +82,10 @@ function ExerciseForm({ type, children }) {
                       message: "Time must be greater than 0",
                     },
                   }
-                : {}),
+                : {
+                    min: { value: 0, message: "Reps must be greater than 0" },
+                    max: { value: 125, message: "Maximum amount exceeded" },
+                  }),
             },
           }}
           inputType={watchExercise === "plank" ? "text" : "number"}

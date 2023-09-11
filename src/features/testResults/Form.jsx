@@ -1,7 +1,8 @@
-import { FormProvider, useForm, useFormState } from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import SubmitButton from "../../ui/SubmitButton";
 import AgeSelect from "../userDetails/AgeSelect";
 import GenderSelect from "../userDetails/GenderSelect";
+import { DevTool } from "@hookform/devtools";
 
 import React from "react";
 import ExerciseForm from "./ExerciseForm";
@@ -59,6 +60,7 @@ function Form() {
         <SubmitButton />
       </form>
       <Score />
+      <DevTool control={methods.control} />
     </FormProvider>
   );
 }
