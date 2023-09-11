@@ -1,6 +1,4 @@
-import { useState } from "react";
 import Form from "../features/testResults/Form";
-import Score from "../ui/Score";
 import Header from "./Header";
 
 function Calculator() {
