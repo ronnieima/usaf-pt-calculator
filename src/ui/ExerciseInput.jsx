@@ -29,7 +29,7 @@ function ExerciseInput({
         className={
           isVisible
             ? 'transform opacity-100 transition-all duration-1000'
-            : 'invisible absolute h-0 w-0 -translate-y-4 transform opacity-0 transition-all duration-1000'
+            : 'invisible absolute h-0 w-0 -translate-y-4 transform opacity-0 transition-all duration-0'
         }
       >
         <h3>{title}</h3>
