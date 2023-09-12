@@ -1,5 +1,4 @@
 import { FormProvider, useForm } from 'react-hook-form';
-import SubmitButton from '../../ui/SubmitButton';
 import AgeSelect from '../userDetails/AgeSelect';
 import GenderSelect from '../userDetails/GenderSelect';
 import { DevTool } from '@hookform/devtools';
@@ -9,6 +8,7 @@ import ExerciseForm from './ExerciseForm';
 import { getScores } from '../../api/supabase';
 import Score from '../../ui/Score';
 import { useScoreContext } from '../../contexts/ScoreContext';
+import FormButtons from '../../ui/FormButtons';
 
 function Form() {
   const methods = useForm();
@@ -57,7 +57,7 @@ function Form() {
           <option value="shuttles">20 Meter HAMR Shuttle</option>
         </ExerciseForm>
 
-        <SubmitButton />
+        <FormButtons />
       </form>
       <Score />
     </FormProvider>

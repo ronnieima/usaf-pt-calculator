@@ -7,7 +7,6 @@ const supabase = createClient(supabaseUrl, supabaseKey);
 async function getExerciseScore(gender, ageGroup, exercise, results) {
   if (exercise === 'plank' || exercise === 'mile') {
     results = convertDurationToSeconds(results);
-    console.log(results);
   }
   const { data, error } = await supabase
     .from('scoringCriteria')
