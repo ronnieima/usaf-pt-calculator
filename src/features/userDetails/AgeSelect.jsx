@@ -11,11 +11,11 @@ function AgeSelect() {
         disabled={isSubmitting}
         id="ageGroup"
         name="ageGroup"
-        className="w-full rounded-lg p-5 text-center font-semibold text-stone-700 shadow-lg"
+        className="w-full cursor-pointer rounded-lg p-5 text-center font-semibold text-stone-700 shadow-lg"
         defaultValue=""
         {...register('ageGroup', { required: 'Age group is required' })}
       >
-        <option value="" disabled hidden>
+        <option value="" disabled>
           Select Age Group
         </option>
         <option value="<25">&lt; 25</option>

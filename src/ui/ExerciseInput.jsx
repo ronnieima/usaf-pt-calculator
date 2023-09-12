@@ -28,14 +28,14 @@ function ExerciseInput({
       <div
         className={
           isVisible
-            ? 'opacity-100 transform transition-all duration-300'
-            : 'opacity-0 transform -translate-y-4 transition-all duration-300 absolute h-0 w-0 invisible'
+            ? 'transform opacity-100 transition-all duration-1000'
+            : 'invisible absolute h-0 w-0 -translate-y-4 transform opacity-0 transition-all duration-1000'
         }
       >
         <h3>{title}</h3>
         <input
           {...register(registerProps.name, registerProps.validation)}
-          className="w-full rounded-full p-5 text-stone-700 shadow-lg font-semibold text-center"
+          className="w-full rounded-full p-5 text-center font-semibold text-stone-700 shadow-lg"
           type={inputType}
           placeholder={placeholder}
           disabled={isSubmitting}

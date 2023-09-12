@@ -30,11 +30,11 @@ function ExerciseForm({ type, children }) {
                 : 'Cardio'
             } exercise type is required`,
           })}
-          className="w-full rounded-lg p-5 text-center font-semibold text-stone-700 shadow-lg "
+          className="w-full cursor-pointer rounded-lg p-5 text-center font-semibold text-stone-700 shadow-lg"
           defaultValue={''}
           disabled={isSubmitting}
         >
-          <option value="" disabled hidden>
+          <option value="" disabled>
             Select Exercise Type
           </option>
           {children}
