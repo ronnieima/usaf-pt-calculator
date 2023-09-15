@@ -7,6 +7,7 @@ function ExerciseInput({
   inputType,
   placeholder,
   watchExercise,
+  children,
 }) {
   const { register } = useFormContext();
   const { isSubmitting } = useFormState();

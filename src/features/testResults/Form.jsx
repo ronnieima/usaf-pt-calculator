@@ -4,7 +4,7 @@ import GenderSelect from '../userDetails/GenderSelect';
 import { DevTool } from '@hookform/devtools';
 
 import React from 'react';
-import ExerciseForm from './ExerciseForm';
+import ExerciseForm from './ExerciseFormRefactor';
 import { getScores } from '../../api/supabase';
 import Score from '../../ui/Score';
 import { useScoreContext } from '../../contexts/ScoreContext';
@@ -12,6 +12,8 @@ import FormButtons from '../../ui/FormButtons';
 
 function Form() {
   const methods = useForm();
+  const { register, isSubmitting } = methods;
+
   const {
     setUpperScore,
     setCoreScore,
@@ -41,12 +43,40 @@ function Form() {
         <GenderSelect />
         <AgeSelect />
 
-        <ExerciseForm type="upperBody">
+        {/* <ExerciseForm type="upperBody">
           <option value="pushups">Pushups</option>
           <option value="handrelease">Hand Release</option>
+        </ExerciseForm> */}
+
+        <ExerciseForm type="upperBody">
+          <ExerciseForm.DropdownHeader>
+            Upper Body Exercise
+          </ExerciseForm.DropdownHeader>
+          <ExerciseForm.Dropdown>
+            <option value="pushups">Pushups</option>
+            <option value="handrelease">Hand Release</option>
+          </ExerciseForm.Dropdown>
+
+          <ExerciseForm.InputHeader>Upper Body Reps</ExerciseForm.InputHeader>
+          <ExerciseForm.Input>
+            <input
+              {...register('upperBodyResults', {
+                required: 'Rep amount is required',
+                min: { value: 0, message: 'Reps must be greater than 0' },
+                max: { value: 125, message: 'Maximum amount exceeded' },
+                pattern: {
+                  value: /^\d*$/,
+                  message: 'Must be a whole number',
+                },
+              })}
+              className="w-full rounded-full p-5 text-center font-semibold text-stone-700 shadow-lg"
+              type="number"
+              placeholder="Reps"
+            />
+          </ExerciseForm.Input>
         </ExerciseForm>
 
-        <ExerciseForm type="core">
+        {/* <ExerciseForm type="core">
           <option value="situps">Situps</option>
           <option value="crunches">Cross Legged Reverse Crunch</option>
           <option value="plank">Forearm Plank</option>
@@ -55,7 +85,7 @@ function Form() {
         <ExerciseForm type="cardio">
           <option value="mile">1.5 Mile Run</option>
           <option value="shuttles">20 Meter HAMR Shuttle</option>
-        </ExerciseForm>
+        </ExerciseForm> */}
 
         <FormButtons />
       </form>
