@@ -1,146 +1,142 @@
-// import { useFormContext } from 'react-hook-form';
-// import ExerciseInput from '../../ui/ExerciseInput';
-// import ErrorText from '../../ui/ErrorText';
-// import { createContext, useEffect } from 'react';
+import { useFormContext } from 'react-hook-form';
+import ErrorText from '../../ui/ErrorText';
+import { cloneElement, createContext, useContext, useEffect } from 'react';
 
-// function ExerciseForm({ type, children }) {
-//   const { register, watch, formState, unregister } = useFormContext();
-//   const { errors, isSubmitting } = formState;
-//   const selectedExercise = `${type}Exercise`;
-//   const watchExercise = watch(selectedExercise, '');
+const ExerciseContext = createContext();
 
-//   useEffect(() => {
-//     // Unregister the field to remove old validation rules
-//     unregister(`${type}Results`);
-//   }, [watchExercise]);
+function DropdownHeader({ children }) {
+  const { type } = useContext(ExerciseContext);
 
-//   return (
-//     <section className="flex flex-col gap-4">
-//       <div>
-//         <h3 className="uppercase">
-//           {type === 'upperBody' ? 'upper body' : type} Exercise Type
-//         </h3>
-//         <select
-//           {...register(selectedExercise, {
-//             required: `${
-//               type === 'upperBody'
-//                 ? 'Upper body'
-//                 : type === 'core'
-//                 ? 'Core'
-//                 : 'Cardio'
-//             } exercise type is required`,
-//           })}
-//           className="w-full cursor-pointer rounded-lg p-5 text-center font-semibold text-stone-700 shadow-lg"
-//           defaultValue={''}
-//           disabled={isSubmitting}
-//         >
-//           <option value="" disabled>
-//             Select Exercise Type
-//           </option>
-//           {children}
-//         </select>
-//         <ErrorText inputName={selectedExercise} />
-//       </div>
+  return (
+    <label className="uppercase" htmlFor={`${type}Dropdown`}>
+      {children}
+    </label>
+  );
+}
 
-//       {type === 'upperBody' && (
-//         <ExerciseInput
-//           watchExercise={watchExercise}
-//           title="Upper Body Reps"
-//           registerProps={{
-//             name: 'upperBodyResults',
-//             validation: {
-//               required: 'Rep amount is required',
-//               min: { value: 0, message: 'Reps must be greater than 0' },
-//               max: { value: 125, message: 'Maximum amount exceeded' },
-//               pattern: {
-//                 value: /^\d*$/,
-//                 message: 'Must be a whole number',
-//               },
-//             },
-//           }}
-//           inputType="number"
-//           placeholder="Reps"
-//           error={errors.upperBodyResults}
-//         />
-//       )}
-//       {type === 'core' && (
-//         <ExerciseInput
-//           watchExercise={watchExercise}
-//           title={`Core ${watchExercise === 'plank' ? 'Plank Time' : 'Reps'}`}
-          registerProps={{
-            name: 'coreResults',
-            validation: {
-              required:
-                watchExercise === 'plank'
-                  ? 'Plank time is required'
-                  : 'Rep amount is required',
+// children will be the exercise selection options
+function Dropdown({ children }) {
+  const { type, selectedExercise, isSubmitting, register } =
+    useContext(ExerciseContext);
+  return (
+    <>
+      <select
+        {...register(selectedExercise, {
+          required: `${
+            type === 'upperBody'
+              ? 'Upper body'
+              : type === 'core'
+              ? 'Core'
+              : 'Cardio'
+          } exercise type is required`,
+        })}
+        className="w-full cursor-pointer rounded-lg p-5 text-center font-semibold text-stone-700 shadow-lg"
+        defaultValue={''}
+        disabled={isSubmitting}
+        id={`${type}Dropdown`}
+      >
+        <option value="" disabled>
+          Select Exercise Type
+        </option>
+        {children}
+      </select>
+      <ErrorText inputName={selectedExercise} />
+    </>
+  );
+}
 
-              ...(watchExercise === 'plank'
-                ? {
-                    pattern: {
-                      value: /^(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$/,
-                      message: 'Invalid time format. (mm:ss)',
-                    },
-                    min: {
-                      value: 0,
-                      message: 'Time must be greater than 0',
-                    },
-                  }
-                : {
-                    min: { value: 0, message: 'Reps must be greater than 0' },
-                    max: { value: 125, message: 'Maximum amount exceeded' },
-                    pattern: {
-                      value: /^\d*$/,
-                      message: 'Must be a whole number',
-                    },
-                  }),
-            },
-          }}
-//           inputType={watchExercise === 'plank' ? 'text' : 'number'}
-//           placeholder={watchExercise === 'plank' ? 'mm:ss' : 'Reps'}
-//           error={errors.coreResults}
-//         />
-//       )}
+function InputVisibilityWrapper({ children }) {
+  const { isVisibleInput } = useContext(ExerciseContext);
 
-//       {type === 'cardio' && (
-//         <ExerciseInput
-//           watchExercise={watchExercise}
-//           title={watchExercise === 'shuttles' ? 'HAMR Reps' : 'Run Time'}
-//           registerProps={{
-//             name: 'cardioResults',
-//             validation: {
-//               required: `${
-//                 watchExercise === 'shuttles'
-//                   ? 'Rep amount is required'
-//                   : 'Time is required'
-//               }`,
-//               min: { value: 0, message: 'Reps must be greater than 0' },
-//               max: { value: 999, message: 'Maximum amount exceeded' },
-//               pattern: {
-//                 value: /^\d*$/,
-//                 message: 'Must be a whole number',
-//               },
-//               ...(watchExercise === 'mile' || watchExercise === 'walk'
-//                 ? {
-//                     pattern: {
-//                       value: /^(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$/,
-//                       message: 'Invalid time format (mm:ss)',
-//                     },
-//                     min: {
-//                       value: 0,
-//                       message: 'Time must be greater than 0',
-//                     },
-//                   }
-//                 : {}),
-//             },
-//           }}
-//           inputType={watchExercise === 'shuttles' ? 'number' : 'text'}
-//           placeholder={watchExercise === 'shuttles' ? 'Reps' : 'mm:ss'}
-//           error={errors.cardioResults}
-//         />
-//       )}
-//     </section>
-//   );
-// }
+  return (
+    <div className="relative">
+      <div
+        className={
+          isVisibleInput
+            ? 'transform opacity-100 transition-all duration-1000'
+            : 'invisible absolute h-0 w-0 -translate-y-4 transform opacity-0 transition-all duration-0'
+        }
+      >
+        {children}
+      </div>
+    </div>
+  );
+}
 
-// export default ExerciseForma;
+function InputHeader({ children }) {
+  const { type } = useContext(ExerciseContext);
+  return <label htmlFor={`${type}Input`}>{children}</label>;
+}
+
+function Input({ children }) {
+  const { isSubmitting, type, watchExercise, unregister } =
+    useContext(ExerciseContext);
+
+  useEffect(() => {
+    // Unregister the field to remove old validation rules
+    unregister(`${type}Results`);
+  }, [watchExercise]);
+
+  const numberInputOnWheelPreventChange = (e) => {
+    // Prevent the input value change
+    e.target.blur();
+
+    // Prevent the page/container scrolling
+    e.stopPropagation();
+
+    // Refocus immediately, on the next tick (after the current     function is done)
+    setTimeout(() => {
+      e.target.focus();
+    }, 0);
+  };
+
+  return (
+    <>
+      {cloneElement(children, {
+        id: `${type}Input`,
+        onWheel: numberInputOnWheelPreventChange,
+        disabled: isSubmitting,
+        // option for user to pass in their own className
+        className: `${
+          children.props.className || ''
+        } w-full rounded-full p-5 text-center font-semibold text-stone-700 shadow-lg`,
+      })}
+
+      <ErrorText inputName={`${type}Results`} />
+    </>
+  );
+}
+
+function ExerciseForm({ children, type }) {
+  const { register, watch, formState, unregister } = useFormContext();
+  const { errors, isSubmitting } = formState;
+  const selectedExercise = `${type}Exercise`;
+  const watchExercise = watch(selectedExercise, '');
+  const isVisibleInput = watchExercise !== '';
+
+  return (
+    <ExerciseContext.Provider
+      value={{
+        register,
+        type,
+        selectedExercise,
+        watchExercise,
+        isSubmitting,
+        errors,
+        unregister,
+        isVisibleInput,
+      }}
+    >
+      <section className="flex flex-col gap-4">{children}</section>
+    </ExerciseContext.Provider>
+  );
+}
+
+ExerciseForm.DropdownHeader = DropdownHeader;
+ExerciseForm.Dropdown = Dropdown;
+
+ExerciseForm.InputVisibilityWrapper = InputVisibilityWrapper;
+ExerciseForm.InputHeader = InputHeader;
+ExerciseForm.Input = Input;
+
+export default ExerciseForm;
