@@ -1,18 +1,17 @@
 import { FormProvider, useForm } from 'react-hook-form';
-import AgeSelect from '../userDetails/AgeSelect';
-import GenderSelect from '../userDetails/GenderSelect';
+import { useScore } from './useScore';
 
-import React from 'react';
-import ExerciseForm from './ExerciseForm';
-import { fetchExerciseScores } from '../../api/supabase';
-import Score from '../../ui/Score';
-import { useScoreContext } from '../../contexts/ScoreContext';
-import FormButtons from '../../ui/FormButtons';
 import {
   cardioValidationRules,
   coreValidationRules,
   upperBodyValidationRules,
 } from './validationRules';
+
+import AgeSelect from '../userDetails/AgeSelect';
+import GenderSelect from '../userDetails/GenderSelect';
+import ExerciseForm from './ExerciseForm';
+import FormButtons from '../../ui/FormButtons';
+import Score from '../../ui/Score';
 
 const InputStyle =
   'w-full rounded-full p-5 text-center font-semibold text-stone-700 shadow-lg';
@@ -20,32 +19,12 @@ const InputStyle =
 function Form() {
   const methods = useForm();
   const { register, watch } = methods;
-
-  const {
-    setUpperBodyScore,
-    setCoreScore,
-    setCardioScore,
-    setTotalScore,
-    setIsMinimumNotMet,
-  } = useScoreContext();
-
-  async function handleFormSubmit(data) {
-    setIsMinimumNotMet(false);
-    const { upper, core, cardio } = await fetchExerciseScores(data);
-    if (upper === 0 || core === 0 || cardio === 0) {
-      setIsMinimumNotMet(true);
-    }
-    setUpperBodyScore(upper);
-    setCoreScore(core);
-    setCardioScore(cardio);
-    setTotalScore(upper + core + cardio);
-  }
-
+  const { fetchAndSetScores } = useScore();
   return (
     <FormProvider {...methods}>
       <form
         className="m-auto mb-3 flex max-w-2xl flex-col gap-24 text-2xl  uppercase tracking-widest text-stone-200 sm:max-w-3xl"
-        onSubmit={methods.handleSubmit(handleFormSubmit)}
+        onSubmit={methods.handleSubmit(fetchAndSetScores)}
         noValidate
       >
         <GenderSelect />
