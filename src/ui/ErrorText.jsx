@@ -1,11 +1,12 @@
-import React from "react";
-import { ErrorMessage } from "@hookform/error-message";
-import { useFormContext } from "react-hook-form";
+import React from 'react';
+import { ErrorMessage } from '@hookform/error-message';
+import { useFormContext } from 'react-hook-form';
 
 function ErrorText({ inputName }) {
   const {
     formState: { errors },
   } = useFormContext();
+
   return (
     <ErrorMessage
       name={inputName}

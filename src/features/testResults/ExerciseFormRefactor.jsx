@@ -8,7 +8,7 @@ function DropdownHeader({ children }) {
   const { type } = useContext(ExerciseContext);
 
   return (
-    <label className="uppercase" htmlFor={type}>
+    <label className="uppercase" htmlFor={`${type}Dropdown`}>
       {children}
     </label>
   );
@@ -33,7 +33,7 @@ function Dropdown({ children }) {
         className="w-full cursor-pointer rounded-lg p-5 text-center font-semibold text-stone-700 shadow-lg"
         defaultValue={''}
         disabled={isSubmitting}
-        id={type}
+        id={`${type}Dropdown`}
       >
         <option value="" disabled>
           Select Exercise Type
@@ -45,22 +45,43 @@ function Dropdown({ children }) {
   );
 }
 
-function InputHeader({ children }) {
-  return <label>{children}</label>;
+function InputVisibilityWrapper({ children }) {
+  const { isVisibleInput } = useContext(ExerciseContext);
+
+  return (
+    <div className="relative">
+      <div
+        className={
+          isVisibleInput
+            ? 'transform opacity-100 transition-all duration-1000'
+            : 'invisible absolute h-0 w-0 -translate-y-4 transform opacity-0 transition-all duration-0'
+        }
+      >
+        {children}
+      </div>
+    </div>
+  );
 }
 
-function Input({ children, title }) {
-  const { errors, type, watchExercise, unregister, selectedExercise } =
+function InputHeader({ children }) {
+  const { type, watchExercise } = useContext(ExerciseContext);
+  return (
+    <label htmlFor={`${type}Input`}>
+      {type === 'core'
+        ? `Core ${watchExercise === 'plank' ? 'Plank Time' : 'Reps'}`
+        : children}
+    </label>
+  );
+}
+
+function Input({ children }) {
+  const { isSubmitting, type, watchExercise, unregister } =
     useContext(ExerciseContext);
 
   useEffect(() => {
     // Unregister the field to remove old validation rules
     unregister(`${type}Results`);
   }, [watchExercise]);
-
-  const isVisible = watchExercise !== '';
-  console.log(isVisible);
-  console.log(children);
 
   const numberInputOnWheelPreventChange = (e) => {
     // Prevent the input value change
@@ -73,26 +94,23 @@ function Input({ children, title }) {
     setTimeout(() => {
       e.target.focus();
     }, 0);
-
-    return (
-      <div className="relative">
-        <div
-          className={
-            isVisible
-              ? 'transform opacity-100 transition-all duration-1000'
-              : 'invisible absolute h-0 w-0 -translate-y-4 transform opacity-0 transition-all duration-0'
-          }
-        >
-          {cloneElement(children, {
-            onWheel: numberInputOnWheelPreventChange,
-            disabled: isSubmitting,
-          })}
-
-          <ErrorText inputName={selectedExercise} />
-        </div>
-      </div>
-    );
   };
+
+  return (
+    <>
+      {cloneElement(children, {
+        id: `${type}Input`,
+        onWheel: numberInputOnWheelPreventChange,
+        disabled: isSubmitting,
+        // option for user to pass in their own className
+        className: `${
+          children.props.className || ''
+        } w-full rounded-full p-5 text-center font-semibold text-stone-700 shadow-lg`,
+      })}
+
+      <ErrorText inputName={`${type}Results`} />
+    </>
+  );
 }
 
 function ExerciseForm({ children, type }) {
@@ -100,6 +118,7 @@ function ExerciseForm({ children, type }) {
   const { errors, isSubmitting } = formState;
   const selectedExercise = `${type}Exercise`;
   const watchExercise = watch(selectedExercise, '');
+  const isVisibleInput = watchExercise !== '';
 
   return (
     <ExerciseContext.Provider
@@ -111,6 +130,7 @@ function ExerciseForm({ children, type }) {
         isSubmitting,
         errors,
         unregister,
+        isVisibleInput,
       }}
     >
       <section className="flex flex-col gap-4">{children}</section>
@@ -121,6 +141,7 @@ function ExerciseForm({ children, type }) {
 ExerciseForm.DropdownHeader = DropdownHeader;
 ExerciseForm.Dropdown = Dropdown;
 
+ExerciseForm.InputVisibilityWrapper = InputVisibilityWrapper;
 ExerciseForm.InputHeader = InputHeader;
 ExerciseForm.Input = Input;
 

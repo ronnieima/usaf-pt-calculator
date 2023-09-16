@@ -67,35 +67,35 @@
 //         <ExerciseInput
 //           watchExercise={watchExercise}
 //           title={`Core ${watchExercise === 'plank' ? 'Plank Time' : 'Reps'}`}
-//           registerProps={{
-//             name: 'coreResults',
-//             validation: {
-//               required:
-//                 watchExercise === 'plank'
-//                   ? 'Plank time is required'
-//                   : 'Rep amount is required',
+          registerProps={{
+            name: 'coreResults',
+            validation: {
+              required:
+                watchExercise === 'plank'
+                  ? 'Plank time is required'
+                  : 'Rep amount is required',
 
-//               ...(watchExercise === 'plank'
-//                 ? {
-//                     pattern: {
-//                       value: /^(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$/,
-//                       message: 'Invalid time format. (mm:ss)',
-//                     },
-//                     min: {
-//                       value: 0,
-//                       message: 'Time must be greater than 0',
-//                     },
-//                   }
-//                 : {
-//                     min: { value: 0, message: 'Reps must be greater than 0' },
-//                     max: { value: 125, message: 'Maximum amount exceeded' },
-//                     pattern: {
-//                       value: /^\d*$/,
-//                       message: 'Must be a whole number',
-//                     },
-//                   }),
-//             },
-//           }}
+              ...(watchExercise === 'plank'
+                ? {
+                    pattern: {
+                      value: /^(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$/,
+                      message: 'Invalid time format. (mm:ss)',
+                    },
+                    min: {
+                      value: 0,
+                      message: 'Time must be greater than 0',
+                    },
+                  }
+                : {
+                    min: { value: 0, message: 'Reps must be greater than 0' },
+                    max: { value: 125, message: 'Maximum amount exceeded' },
+                    pattern: {
+                      value: /^\d*$/,
+                      message: 'Must be a whole number',
+                    },
+                  }),
+            },
+          }}
 //           inputType={watchExercise === 'plank' ? 'text' : 'number'}
 //           placeholder={watchExercise === 'plank' ? 'mm:ss' : 'Reps'}
 //           error={errors.coreResults}
