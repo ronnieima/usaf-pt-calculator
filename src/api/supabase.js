@@ -27,7 +27,7 @@ async function getExerciseScore(gender, ageGroup, exercise, results) {
   }
 }
 
-export async function getScores(formData) {
+export async function fetchExerciseScores(formData) {
   const {
     gender,
     ageGroup,
