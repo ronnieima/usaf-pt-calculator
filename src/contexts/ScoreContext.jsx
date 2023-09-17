@@ -3,25 +3,19 @@ import { createContext, useContext, useState } from 'react';
 const ScoreContext = createContext(null);
 
 export default function ScoreContextProvider({ children }) {
-  const [isMinimumNotMet, setIsMinimumNotMet] = useState(null);
-  const [upperScore, setUpperBodyScore] = useState(null);
-  const [coreScore, setCoreScore] = useState(null);
-  const [cardioScore, setCardioScore] = useState(null);
-  const [totalScore, setTotalScore] = useState(null);
+  const [scores, setScores] = useState({
+    isMinimumNotMet: { upper: false, cardio: false, cardio: false },
+    upperScore: 0,
+    coreScore: 0,
+    cardioScore: 0,
+    totalScore: 0,
+  });
 
   return (
     <ScoreContext.Provider
       value={{
-        isMinimumNotMet,
-        setIsMinimumNotMet,
-        upperScore,
-        setUpperBodyScore,
-        coreScore,
-        setCoreScore,
-        cardioScore,
-        setCardioScore,
-        totalScore,
-        setTotalScore,
+        scores,
+        setScores,
       }}
     >
       {children}

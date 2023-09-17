@@ -1,5 +1,5 @@
 import { FormProvider, useForm } from 'react-hook-form';
-import { useScore } from './useScore';
+import { useScores } from './useScores';
 
 import {
   cardioValidationRules,
@@ -19,7 +19,7 @@ const InputStyle =
 function Form() {
   const methods = useForm();
   const { register, watch } = methods;
-  const { fetchAndSetScores } = useScore();
+  const { fetchAndSetScores } = useScores();
   return (
     <FormProvider {...methods}>
       <form

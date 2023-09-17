@@ -1,13 +1,15 @@
-import { useScoreContext } from "../contexts/ScoreContext";
-import IndividualExerciseScore from "./IndividualExerciseScore";
-import { GiAbdominalArmor, GiMuscleUp } from "react-icons/gi";
-import { FaRunning } from "react-icons/fa";
+import { useScoreContext } from '../contexts/ScoreContext';
+import IndividualExerciseScore from './IndividualExerciseScore';
+import { GiAbdominalArmor, GiMuscleUp } from 'react-icons/gi';
+import { FaRunning } from 'react-icons/fa';
 
 function ScoreBreakdown() {
-  const { upperScore, coreScore, cardioScore } = useScoreContext();
+  const {
+    scores: { upperScore, coreScore, cardioScore },
+  } = useScoreContext();
 
   return (
-    <aside className={`flex flex-col gap-8 max-w-screen-md w-full `}>
+    <aside className={`flex w-full max-w-screen-md flex-col gap-8 `}>
       <h2 className="my-8 text-center italic">Score Breakdown:</h2>
       <div className="grid grid-cols-3 justify-items-center ">
         <IndividualExerciseScore
