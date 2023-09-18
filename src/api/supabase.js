@@ -4,6 +4,17 @@ const supabaseUrl = 'https://hnnyotwjhikrytqynjyk.supabase.co';
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
+async function getExerciseMinimum(gender, ageGroup, exercise) {
+  //   SELECT "minPerformanceValue"
+  // FROM "scoringCriteria"
+  // WHERE gender = gender
+  // AND "ageGroup" = ageGroup
+  // AND "activityType" = activityType
+  // ORDER BY "minPerformanceValue" ASC LIMIT 1
+}
+
+async function getExerciseMaximum(gender, ageGroup, exercise) {}
+
 async function getExerciseScore(gender, ageGroup, exercise, results) {
   if (exercise === 'plank' || exercise === 'mile') {
     results = convertDurationToSeconds(results);
