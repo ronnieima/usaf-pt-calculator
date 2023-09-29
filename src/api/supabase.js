@@ -4,16 +4,46 @@ const supabaseUrl = 'https://hnnyotwjhikrytqynjyk.supabase.co';
 const supabaseKey = import.meta.env.VITE_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-async function getExerciseMinimum(gender, ageGroup, exercise) {
+export async function getExerciseMinimum(gender, ageGroup, exercise) {
   //   SELECT "minPerformanceValue"
   // FROM "scoringCriteria"
   // WHERE gender = gender
   // AND "ageGroup" = ageGroup
   // AND "activityType" = activityType
-  // ORDER BY "minPerformanceValue" ASC LIMIT 1
+  // ORDER BY "minPerformanceValue" ASC LIMIT
+
+  const { data, error } = await supabase
+    .from('scoringCriteria')
+    .select('minPerformanceValue')
+    .eq('gender', gender)
+    .eq('ageGroup', ageGroup)
+    .eq('activityType', exercise)
+    .order('minPerformanceValue', { ascending: true })
+    .limit(1);
+
+  if (error) {
+    return `Error fetching maximum value: ${error}`;
+  } else if (data && data.length > 0) {
+    return data[0];
+  }
 }
 
-async function getExerciseMaximum(gender, ageGroup, exercise) {}
+export async function getExerciseMaximum(gender, ageGroup, exercise) {
+  const { data, error } = await supabase
+    .from('scoringCriteria')
+    .select('minPerformanceValue')
+    .eq('gender', gender)
+    .eq('ageGroup', ageGroup)
+    .eq('activityType', exercise)
+    .order('minPerformanceValue', { ascending: true })
+    .limit(1);
+
+  if (error) {
+    return `Error fetching maximum value: ${error}`;
+  } else if (data && data.length > 0) {
+    return data[0];
+  }
+}
 
 async function getExerciseScore(gender, ageGroup, exercise, results) {
   if (exercise === 'plank' || exercise === 'mile') {

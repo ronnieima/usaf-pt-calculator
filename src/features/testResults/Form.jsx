@@ -32,9 +32,12 @@ function Form() {
 
         <ExerciseForm type="upperBody">
           <div>
-            <ExerciseForm.DropdownHeader>
-              Upper Body Exercise
-            </ExerciseForm.DropdownHeader>
+            <div className="flex justify-between">
+              <ExerciseForm.DropdownHeader>
+                Upper Body Exercise
+              </ExerciseForm.DropdownHeader>
+              <p>Test</p>
+            </div>
             <ExerciseForm.Dropdown>
               <option value="pushups">Pushups</option>
               <option value="handrelease">Hand Release</option>
