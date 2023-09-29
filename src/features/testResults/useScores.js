@@ -15,6 +15,7 @@ export function useScores() {
     const total = upper + core + cardio;
 
     setScores({
+      //TODO: Make a minimum and maximum score state to use from the useEffect
       isMinimumNotMet,
       upperScore: upper,
       coreScore: core,

@@ -41,7 +41,8 @@ export async function getExerciseMaximum(gender, ageGroup, exercise) {
   if (error) {
     return `Error fetching maximum value: ${error}`;
   } else if (data && data.length > 0) {
-    return data[0];
+    const minPerformanceValue = data[0].minPerformanceValue;
+    return minPerformanceValue;
   }
 }
 
