@@ -1,5 +1,5 @@
-import Form from "../features/testResults/Form";
-import Header from "./Header";
+import Form from '../features/testResults/Form';
+import Header from './Header';
 
 function Calculator() {
   return (

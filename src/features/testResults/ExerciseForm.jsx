@@ -1,6 +1,7 @@
 import { useFormContext } from 'react-hook-form';
 import ErrorText from '../../ui/ErrorText';
 import { cloneElement, createContext, useContext, useEffect } from 'react';
+import { getExerciseMinimum } from '../../api/supabase';
 
 const ExerciseContext = createContext();
 
@@ -11,6 +12,30 @@ function DropdownHeader({ children }) {
     <label className="uppercase" htmlFor={`${type}Dropdown`}>
       {children}
     </label>
+  );
+}
+
+function MinMaxNumbers({ children }) {
+  const { watch } = useFormContext();
+  const { watchExercise } = useContext(ExerciseContext);
+  const gender = watch('gender');
+  const ageGroup = watch('ageGroup');
+  console.log(gender);
+  console.log(ageGroup);
+  console.log(watchExercise);
+  useEffect(() => {
+    const minPerformanceValue = getExerciseMinimum(
+      gender,
+      ageGroup,
+      watchExercise,
+    );
+  }, [gender, ageGroup, watchExercise]);
+
+  return (
+    <div>
+      <span>Min</span>
+      <span>Max</span>
+    </div>
   );
 }
 
@@ -133,6 +158,7 @@ function ExerciseForm({ children, type }) {
 }
 
 ExerciseForm.DropdownHeader = DropdownHeader;
+ExerciseForm.MinMaxNumbers = MinMaxNumbers;
 ExerciseForm.Dropdown = Dropdown;
 
 ExerciseForm.InputVisibilityWrapper = InputVisibilityWrapper;
