@@ -4,7 +4,7 @@ const ScoreContext = createContext(null);
 
 export default function ScoreContextProvider({ children }) {
   const [scores, setScores] = useState({
-    isMinimumNotMet: { upper: false, cardio: false, cardio: false },
+    isMinimumNotMet: { upper: false, core: false, cardio: false },
     upperScore: 0,
     coreScore: 0,
     cardioScore: 0,
