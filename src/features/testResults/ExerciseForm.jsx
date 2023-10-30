@@ -15,29 +15,29 @@ function DropdownHeader({ children }) {
   );
 }
 
-function MinMaxNumbers({ children }) {
-  const { watch } = useFormContext();
-  const { watchExercise } = useContext(ExerciseContext);
-  const gender = watch('gender');
-  const ageGroup = watch('ageGroup');
-  console.log(gender);
-  console.log(ageGroup);
-  console.log(watchExercise);
-  useEffect(() => {
-    const minPerformanceValue = getExerciseMinimum(
-      gender,
-      ageGroup,
-      watchExercise,
-    );
-  }, [gender, ageGroup, watchExercise]);
+// function MinMaxNumbers({ children }) {
+//   const { watch } = useFormContext();
+//   const { watchExercise } = useContext(ExerciseContext);
+//   const gender = watch('gender');
+//   const ageGroup = watch('ageGroup');
+//   console.log(gender);
+//   console.log(ageGroup);
+//   console.log(watchExercise);
+//   useEffect(() => {
+//     const minPerformanceValue = getExerciseMinimum(
+//       gender,
+//       ageGroup,
+//       watchExercise,
+//     );
+//   }, [gender, ageGroup, watchExercise]);
 
-  return (
-    <div>
-      <span>Min</span>
-      <span>Max</span>
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       <span>Min</span>
+//       <span>Max</span>
+//     </div>
+//   );
+// }
 
 // children will be the exercise selection options
 function Dropdown({ children }) {
@@ -158,7 +158,7 @@ function ExerciseForm({ children, type }) {
 }
 
 ExerciseForm.DropdownHeader = DropdownHeader;
-ExerciseForm.MinMaxNumbers = MinMaxNumbers;
+// ExerciseForm.MinMaxNumbers = MinMaxNumbers;
 ExerciseForm.Dropdown = Dropdown;
 
 ExerciseForm.InputVisibilityWrapper = InputVisibilityWrapper;

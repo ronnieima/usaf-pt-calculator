@@ -36,7 +36,7 @@ function Form() {
               <ExerciseForm.DropdownHeader>
                 Upper Body Exercise
               </ExerciseForm.DropdownHeader>
-              <ExerciseForm.MinMaxNumbers />
+              {/* <ExerciseForm.MinMaxNumbers /> */}
             </div>
             <ExerciseForm.Dropdown>
               <option value="pushups">Pushups</option>
