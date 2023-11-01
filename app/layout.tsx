@@ -5,6 +5,7 @@ import "@mantine/core/styles.css";
 
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
 import NavBar from "./_ui/NavBar";
+import Footer from "./_ui/Footer";
 
 export const metadata = {
   title: "My Mantine app",
@@ -25,6 +26,7 @@ export default function RootLayout({
         <MantineProvider>
           <NavBar />
           {children}
+          <Footer />
         </MantineProvider>
       </body>
     </html>

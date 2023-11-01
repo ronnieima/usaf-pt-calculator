@@ -16,7 +16,7 @@ function Links() {
             className={classnames({
               "text-zinc-900": link.href === currentPath,
               "text-zinc-500 no-underline": link.href !== currentPath,
-              "no-underline transition-colors hover:text-zinc-800": true,
+              "transition-colors hover:text-zinc-800": true,
             })}
           >
             {link.label}

@@ -1,6 +1,6 @@
-import { Button } from "@mantine/core";
 import AgeGroupSelect from "./AgeGroupSelect";
 import ExerciseSelect from "./ExerciseSelect";
+import FormButtons from "./FormButtons";
 import GenderRadioButtons from "./GenderRadioButtons";
 
 const Form = () => {
@@ -11,31 +11,19 @@ const Form = () => {
       {/* select age group */}
       <AgeGroupSelect />
       {/* select upper exercise  */}
-      <ExerciseSelect type="upper" options={["Pushups", "Hand Releases"]} />
+      <ExerciseSelect type="upper" options={["Pushup", "Hand Release"]} />
       {/* select core exercise */}
       <ExerciseSelect
         type="core"
-        options={["Situps", "Cross Legged Reverse Crunches", "Forearm Plank"]}
+        options={["Situp", "Cross Legged Reverse Crunch", "Forearm Plank"]}
       />
       {/* select cardio exercise */}
       <ExerciseSelect
         type="cardio"
-        options={["1.5 Mile Run", "20 Meter HAMR Shuttles"]}
+        options={["1.5 Mile Run", "20 Meter HAMR Shuttle"]}
       />
       {/* reset/submit button */}
-      <div className="flex flex-col gap-8">
-        <Button
-          variant="filled"
-          color="rgba(9, 99, 28, 1)"
-          size="xl"
-          radius="lg"
-        >
-          Submit
-        </Button>
-        <Button variant="filled" color="gray" size="xl" radius="lg">
-          Reset
-        </Button>
-      </div>
+      <FormButtons />
     </form>
   );
 };
