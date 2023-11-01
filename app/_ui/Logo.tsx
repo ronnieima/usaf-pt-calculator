@@ -8,7 +8,7 @@ function Logo() {
       <Image
         src={logo}
         alt="Logo"
-        className="h-auto max-h-12 md:max-h-16 w-auto"
+        className="h-auto max-h-12 w-auto md:max-h-16"
       />
     </Link>
   );

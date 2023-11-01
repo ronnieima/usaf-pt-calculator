@@ -33,7 +33,7 @@ const Hamburger = () => {
             label={link.label}
             active={link.href === currentPath}
             variant="light"
-            className="font-semibold text-4xl"
+            className="text-4xl font-semibold"
             rightSection={<IconChevronRight size="0.8rem" stroke={1.5} />}
             leftSection={link.icon}
           />
