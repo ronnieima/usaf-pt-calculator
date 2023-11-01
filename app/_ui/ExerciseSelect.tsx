@@ -10,7 +10,7 @@ type ExerciseSelectProps = {
 };
 
 const ExerciseSelect = ({ type, options }: ExerciseSelectProps) => {
-  const [value, setValue] = useState("");
+  const [value, setValue] = useState<string|null>(null);
   const exerciseLabel = formatExerciseName(type);
   const isVisibleInput = Boolean(value);
 
