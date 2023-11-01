@@ -1,0 +1,17 @@
+import Image from "next/image";
+import logo from "../public/logo.png";
+import Link from "next/link";
+
+function Logo() {
+  return (
+    <Link href="/">
+      <Image
+        src={logo}
+        alt="Logo"
+        className="h-auto max-h-12 md:max-h-16 w-auto"
+      />
+    </Link>
+  );
+}
+
+export default Logo;
