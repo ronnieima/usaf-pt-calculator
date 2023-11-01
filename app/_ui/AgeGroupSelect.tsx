@@ -1,9 +1,13 @@
-import { Select } from "@mantine/core";
+import { Select } from "react-hook-form-mantine";
 import React from "react";
+import { useController, useFormContext } from "react-hook-form";
 
 const AgeGroupSelect = () => {
+  const { control } = useFormContext();
   return (
     <Select
+      name="ageGroup"
+      control={control}
       label="Age Group"
       placeholder="Select age group"
       size="xl"

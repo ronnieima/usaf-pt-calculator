@@ -1,8 +1,10 @@
 "use client";
 
-import { NumberInput, Select, TextInput } from "@mantine/core";
-import React, { useState } from "react";
+import { NumberInput, Select, TextInput } from "react-hook-form-mantine";
+
+import React from "react";
 import formatExerciseName from "../_util/formatExerciseName";
+import { useFormContext } from "react-hook-form";
 
 type ExerciseSelectProps = {
   type: string;
@@ -10,20 +12,21 @@ type ExerciseSelectProps = {
 };
 
 const ExerciseSelect = ({ type, options }: ExerciseSelectProps) => {
-  const [value, setValue] = useState<string|null>(null);
   const exerciseLabel = formatExerciseName(type);
-  const isVisibleInput = Boolean(value);
+  const { control, watch } = useFormContext();
+  const exerciseType = watch(exerciseLabel);
+  const isVisibleInput = Boolean(exerciseType);
 
   return (
     <section className="flex flex-col gap-4">
       <Select
-        label={`${exerciseLabel} Exercise`}
-        placeholder="Select exercise type"
+        name={exerciseLabel}
+        control={control}
         size="xl"
+        label={`${exerciseLabel} Exercise`}
         radius="0.5rem"
+        placeholder="Select exercise type"
         data={options}
-        value={value}
-        onChange={setValue}
       />
 
       <div className="relative">
@@ -34,18 +37,23 @@ const ExerciseSelect = ({ type, options }: ExerciseSelectProps) => {
               : "invisible absolute h-0 w-0 -translate-y-4 transform opacity-0 transition-all duration-0"
           }
         >
-          {value === "Forearm Plank" || value === "1.5 Mile Run" ? (
+          {exerciseType === "Forearm Plank" ||
+          exerciseType === "1.5 Mile Run" ? (
             <TextInput
+              control={control}
+              name={`${exerciseLabel} Input`}
               size="lg"
               radius="md"
-              label={`${value} Time`}
+              label={`${exerciseType} Time`}
               placeholder="MM:SS"
             />
           ) : (
             <NumberInput
+              control={control}
+              name={`${exerciseLabel} Input`}
               size="xl"
               radius="lg"
-              label={`${value} Reps`}
+              label={`${exerciseType} Reps`}
               placeholder="Reps"
             />
           )}
