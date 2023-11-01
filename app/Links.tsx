@@ -4,7 +4,6 @@ import Link from "next/link";
 import { links } from "./NavBar";
 import { usePathname } from "next/navigation";
 import classnames from "classnames";
-import { NavLink } from "@mantine/core";
 
 function Links() {
   const currentPath = usePathname();

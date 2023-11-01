@@ -2,12 +2,22 @@ import React from "react";
 import Logo from "./Logo";
 import Links from "./Links";
 import HamburgerMenu from "./HamburgerMenu";
+import {
+  IconBook,
+  IconCalculator,
+  IconClipboardText,
+  IconStretching,
+} from "@tabler/icons-react";
 
 export const links = [
-  { label: "Home", href: "/" },
-  { label: "Exercises", href: "/exercises" },
-  { label: "Charts", href: "/charts" },
-  { label: "Resources", href: "/resources" },
+  { label: "Home", href: "/", icon: <IconCalculator /> },
+  { label: "Exercises", href: "/exercises", icon: <IconStretching /> },
+  { label: "Charts", href: "/charts", icon: <IconClipboardText /> },
+  {
+    label: "Resources",
+    href: "/resources",
+    icon: <IconBook />,
+  },
 ];
 
 function NavBar() {

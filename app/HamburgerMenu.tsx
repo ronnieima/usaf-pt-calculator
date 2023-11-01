@@ -5,28 +5,37 @@ import { useDisclosure } from "@mantine/hooks";
 import Link from "next/link";
 import React from "react";
 import { links } from "./NavBar";
+import { usePathname } from "next/navigation";
+import { IconChevronRight } from "@tabler/icons-react";
 
 const Hamburger = () => {
   const [opened, { toggle, close, open }] = useDisclosure(false, {
     onOpen: () => {},
     onClose: () => {},
   });
+  const currentPath = usePathname();
 
   return (
     <>
       <Drawer
         opened={opened}
         onClose={close}
-        title="Authentication"
+        title="Navigation"
         overlayProps={{ backgroundOpacity: 0.5, blur: 4 }}
-        position="bottom"
+        position="right"
         size="50%"
       >
         {links.map((link) => (
           <NavLink
+            component={Link}
+            href={link.href}
             key={link.href}
-            label={<Link href={link.href}>{link.label}</Link>}
-            variant="filled"
+            label={link.label}
+            active={link.href === currentPath}
+            variant="light"
+            className="font-semibold text-4xl"
+            rightSection={<IconChevronRight size="0.8rem" stroke={1.5} />}
+            leftSection={link.icon}
           />
         ))}
       </Drawer>
