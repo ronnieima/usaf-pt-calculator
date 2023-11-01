@@ -4,7 +4,7 @@ import "./globals.css";
 import "@mantine/core/styles.css";
 
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
-import NavBar from "./NavBar";
+import NavBar from "./_ui/NavBar";
 
 export const metadata = {
   title: "My Mantine app",
