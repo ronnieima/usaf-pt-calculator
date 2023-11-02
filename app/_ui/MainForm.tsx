@@ -1,12 +1,6 @@
 "use client";
 
-import {
-  FormProvider,
-  useForm,
-  Form,
-  SubmitHandler,
-  Controller,
-} from "react-hook-form";
+import { FormProvider, useForm } from "react-hook-form";
 import AgeGroupSelect from "./AgeGroupSelect";
 import ExerciseSelect from "./ExerciseSelect";
 import FormButtons from "./FormButtons";
@@ -16,30 +10,20 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { DevTool } from "@hookform/devtools";
 
 const schema = z.object({
-  Gender: z.string(),
-  "Age Group": z.string(),
-  "Upper Body": z.string(),
-  "Upper Body Input": z.string(),
-  Core: z.string(),
-  "Core Input": z.string(),
+  Gender: z.string({ required_error: "required " }),
+  "Age Group": z.string({ required_error: "required " }),
+  "Upper Body": z.string({ required_error: "required " }),
+  "Upper Body Input": z.string().or(z.number({ required_error: "required " })),
+  Core: z.string({ required_error: "required " }),
+  "Core Input": z.string({ required_error: "required " }).or(z.number()),
   Cardio: z.string(),
-  "Cardio Input": z.string(),
+  "Cardio Input": z.string({ required_error: "required " }).or(z.number()),
 });
 
 type FormValuesType = z.infer<typeof schema>;
 
 const MainForm = () => {
   const methods = useForm({
-    defaultValues: {
-      gender: null,
-      ageGroup: null,
-      upperExercise: null,
-      upperValue: null,
-      coreExercise: null,
-      coreValue: null,
-      cardioExercise: null,
-      cardioValue: null,
-    },
     mode: "onChange", // Makes it easier to catch erros before a submit
     resolver: zodResolver(schema), // Set our validator
   });

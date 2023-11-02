@@ -1,7 +1,9 @@
 import { Button } from "@mantine/core";
 import React from "react";
+import { useFormContext } from "react-hook-form";
 
 const FormButtons = () => {
+  const { reset } = useFormContext();
   return (
     <div className="flex flex-col gap-8">
       <Button
@@ -13,7 +15,25 @@ const FormButtons = () => {
       >
         Submit
       </Button>
-      <Button type="reset" variant="filled" color="gray" size="xl" radius="lg">
+      <Button
+        onClick={() =>
+          reset({
+            Gender: undefined,
+            "Age Group": undefined,
+            "Upper Body": undefined,
+            "Upper Body Input": undefined,
+            Core: undefined,
+            "Core Input": undefined,
+            Cardio: undefined,
+            "Cardio Input": undefined,
+          })
+        }
+        type="reset"
+        variant="filled"
+        color="gray"
+        size="xl"
+        radius="lg"
+      >
         Reset
       </Button>
     </div>

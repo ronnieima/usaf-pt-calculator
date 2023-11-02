@@ -1,6 +1,5 @@
 "use client";
 
-import { RadioGroup } from "react-hook-form-mantine";
 import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 import { Group, Radio } from "@mantine/core";

@@ -2,7 +2,7 @@
 
 import { NumberInput, Select, TextInput } from "react-hook-form-mantine";
 
-import React from "react";
+import React, { useEffect } from "react";
 import formatExerciseName from "../_util/formatExerciseName";
 import { Controller, useFormContext } from "react-hook-form";
 
@@ -13,11 +13,16 @@ type ExerciseSelectProps = {
 
 const ExerciseSelect = ({ type, options }: ExerciseSelectProps) => {
   const exerciseLabel = formatExerciseName(type);
-  const { control, watch } = useFormContext();
+  const { control, watch, setValue } = useFormContext();
   const exerciseType = watch(exerciseLabel);
   const isVisibleInput = Boolean(exerciseType);
   const isTimeBased =
     exerciseType === "Forearm Plank" || exerciseType === "1.5 Mile Run";
+
+  // useEffect(() => {
+  //   // Unregister the field to remove old validation rules
+  //   setValue(`${exerciseLabel} Input`, null);
+  // }, [exerciseType, setValue, exerciseLabel]);
 
   return (
     <section className="flex flex-col gap-4">
@@ -35,6 +40,7 @@ const ExerciseSelect = ({ type, options }: ExerciseSelectProps) => {
               placeholder="Select exercise type"
               data={options}
               required
+              allowDeselect={false}
             />
           );
         }}
