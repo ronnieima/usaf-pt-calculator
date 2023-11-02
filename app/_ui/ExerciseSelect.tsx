@@ -13,7 +13,7 @@ type ExerciseSelectProps = {
 
 const ExerciseSelect = ({ type, options }: ExerciseSelectProps) => {
   const exerciseLabel = formatExerciseName(type);
-  const { control, watch, setValue } = useFormContext();
+  const { control, watch } = useFormContext();
   const exerciseType = watch(exerciseLabel);
   const isVisibleInput = Boolean(exerciseType);
   const isTimeBased =
@@ -39,7 +39,6 @@ const ExerciseSelect = ({ type, options }: ExerciseSelectProps) => {
               radius="0.5rem"
               placeholder="Select exercise type"
               data={options}
-              required
               allowDeselect={false}
             />
           );

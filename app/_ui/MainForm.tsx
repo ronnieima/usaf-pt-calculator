@@ -1,41 +1,29 @@
 "use client";
-
 import { FormProvider, useForm } from "react-hook-form";
 import AgeGroupSelect from "./AgeGroupSelect";
 import ExerciseSelect from "./ExerciseSelect";
 import FormButtons from "./FormButtons";
 import GenderRadioButtons from "./GenderRadioButtons";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DevTool } from "@hookform/devtools";
-
-const schema = z.object({
-  Gender: z.string({ required_error: "required " }),
-  "Age Group": z.string({ required_error: "required " }),
-  "Upper Body": z.string({ required_error: "required " }),
-  "Upper Body Input": z.string().or(z.number({ required_error: "required " })),
-  Core: z.string({ required_error: "required " }),
-  "Core Input": z.string({ required_error: "required " }).or(z.number()),
-  Cardio: z.string(),
-  "Cardio Input": z.string({ required_error: "required " }).or(z.number()),
-});
-
-type FormValuesType = z.infer<typeof schema>;
+import { FormValuesType, schema } from "../_util/validation";
 
 const MainForm = () => {
-  const methods = useForm({
+  const methods = useForm<FormValuesType>({
     mode: "onChange", // Makes it easier to catch erros before a submit
     resolver: zodResolver(schema), // Set our validator
+    defaultValues: {
+      Gender: undefined,
+      "Age Group": undefined,
+      "Upper Body": undefined,
+      "Upper Body Input": undefined,
+      Core: undefined,
+      "Core Input": undefined,
+      Cardio: undefined,
+      "Cardio Input": undefined,
+    },
   });
-
-  const {
-    handleSubmit,
-    control,
-    reset,
-    formState: { errors },
-    trigger,
-    getValues,
-  } = methods;
+  const { handleSubmit, control } = methods;
 
   function onSubmit(data: any) {
     console.log(data);
@@ -50,21 +38,26 @@ const MainForm = () => {
         >
           {/* radio gender */}
           <GenderRadioButtons />
+
           {/* select age group */}
           <AgeGroupSelect />
+
           {/* select upper exercise  */}
           <ExerciseSelect type="upper" options={["Pushup", "Hand Release"]} />
+
           {/* select core exercise */}
           <ExerciseSelect
             type="core"
             options={["Situp", "Cross Legged Reverse Crunch", "Forearm Plank"]}
           />
+
           {/* select cardio exercise */}
           <ExerciseSelect
             type="cardio"
             options={["1.5 Mile Run", "20 Meter HAMR Shuttle"]}
           />
-          {/* reset/submit button */}
+
+          {/* reset/submit buttons */}
           <FormButtons />
         </form>
       </FormProvider>

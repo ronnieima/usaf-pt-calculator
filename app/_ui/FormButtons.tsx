@@ -18,14 +18,14 @@ const FormButtons = () => {
       <Button
         onClick={() =>
           reset({
-            Gender: undefined,
-            "Age Group": undefined,
-            "Upper Body": undefined,
-            "Upper Body Input": undefined,
-            Core: undefined,
-            "Core Input": undefined,
-            Cardio: undefined,
-            "Cardio Input": undefined,
+            Gender: null,
+            "Age Group": null,
+            "Upper Body": null,
+            "Upper Body Input": null,
+            Core: null,
+            "Core Input": null,
+            Cardio: null,
+            "Cardio Input": null,
           })
         }
         type="reset"

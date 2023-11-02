@@ -15,12 +15,7 @@ const GenderRadioButtons = () => {
       name="Gender"
       render={({ field }) => {
         return (
-          <Radio.Group
-            label="Gender"
-            required
-            {...field}
-            error={errors.genders?.message as string}
-          >
+          <Radio.Group label="Gender" {...field}>
             <Group className="flex gap-16">
               <Radio value="male" label="Male" />
               <Radio value="female" label="Female" />

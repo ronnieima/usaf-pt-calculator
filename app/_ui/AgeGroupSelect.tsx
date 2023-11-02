@@ -3,10 +3,7 @@ import React from "react";
 import { Controller, useFormContext } from "react-hook-form";
 
 const AgeGroupSelect = () => {
-  const {
-    control,
-    formState: { errors },
-  } = useFormContext();
+  const { control } = useFormContext();
   return (
     <Controller
       control={control}
@@ -14,7 +11,6 @@ const AgeGroupSelect = () => {
       render={({ field }) => {
         return (
           <Select
-            required
             {...field}
             label="Age Group"
             placeholder="Select age group"
