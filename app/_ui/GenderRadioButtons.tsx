@@ -2,18 +2,34 @@
 
 import { RadioGroup } from "react-hook-form-mantine";
 import React from "react";
-import { useFormContext } from "react-hook-form";
-import { Radio } from "react-hook-form-mantine";
-import { Group } from "@mantine/core";
+import { Controller, useFormContext } from "react-hook-form";
+import { Group, Radio } from "@mantine/core";
 const GenderRadioButtons = () => {
-  const { control } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
+
   return (
-    <Radio.Group name="gender" control={control} label="Gender" withAsterisk>
-      <div className="flex gap-16">
-        <Radio.Item value="male" label="Male" />
-        <Radio.Item value="female" label="Female" />
-      </div>
-    </Radio.Group>
+    <Controller
+      control={control}
+      name="Gender"
+      render={({ field }) => {
+        return (
+          <Radio.Group
+            label="Gender"
+            required
+            {...field}
+            error={errors.genders?.message as string}
+          >
+            <Group className="flex gap-16">
+              <Radio value="male" label="Male" />
+              <Radio value="female" label="Female" />
+            </Group>
+          </Radio.Group>
+        );
+      }}
+    />
   );
 };
 
