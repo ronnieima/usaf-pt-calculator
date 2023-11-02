@@ -47,8 +47,7 @@ export async function getExerciseMaximum(gender, ageGroup, exercise) {
   }
 }
 
-async function getExerciseScore(gender, ageGroup, exerciseType, results) {
-  const exercise = formatExerciseName(exerciseType);
+async function getExerciseScore(gender, ageGroup, exercise, results) {
   console.log(exercise);
   if (exercise === "plank" || exercise === "mile") {
     results = convertDurationToSeconds(results);

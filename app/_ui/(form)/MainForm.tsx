@@ -6,23 +6,14 @@ import FormButtons from "./FormButtons";
 import GenderRadioButtons from "./GenderRadioButtons";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DevTool } from "@hookform/devtools";
-import { FormValuesType, schema } from "../_util/validation";
-import { fetchExerciseScores } from "../_db/supabase";
+import { FormValuesType, schema } from "../../_util/validation";
+import { fetchExerciseScores } from "../../_db/supabase";
+import { useState } from "react";
 
 const MainForm = () => {
   const methods = useForm<FormValuesType>({
     mode: "onChange", // Makes it easier to catch erros before a submit
     resolver: zodResolver(schema), // Set our validator
-    defaultValues: {
-      gender: undefined,
-      ageGroup: undefined,
-      upperExercise: undefined,
-      upperInput: undefined,
-      coreExercise: undefined,
-      coreInput: undefined,
-      cardioExercise: undefined,
-      cardioInput: undefined,
-    },
   });
   const { handleSubmit, control } = methods;
 

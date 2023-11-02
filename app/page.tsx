@@ -1,4 +1,4 @@
-import MainForm from "./_ui/MainForm";
+import MainForm from "./_ui/(form)/MainForm";
 import Header from "./_ui/Header";
 
 export default function Home() {

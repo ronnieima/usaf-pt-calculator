@@ -2,10 +2,9 @@
 
 import { NumberInput, Select, TextInput } from "react-hook-form-mantine";
 
-import React, { useEffect } from "react";
-import { formatTypeName } from "../_util/helpers";
+import React, { Dispatch, SetStateAction, useEffect } from "react";
+import { formatTypeName } from "../../_util/helpers";
 import { Controller, useFormContext } from "react-hook-form";
-import { rgba } from "@mantine/core";
 
 type ExerciseSelectProps = {
   type: string;
@@ -30,28 +29,15 @@ const ExerciseSelect = ({ type, options }: ExerciseSelectProps) => {
         TODO: add minmax here
       </span>
 
-      <Controller
+      <Select
         control={control}
         name={`${type}Exercise`}
-        render={({ field }) => {
-          return (
-            <>
-              <Select
-                styles={{
-                  root: {},
-                }}
-                control={control}
-                {...field}
-                size="xl"
-                label={`${exerciseLabel} Exercise`}
-                radius="0.5rem"
-                placeholder="Select exercise type"
-                data={options}
-                allowDeselect={false}
-              />
-            </>
-          );
-        }}
+        size="xl"
+        label={`${exerciseLabel} Exercise`}
+        radius="0.5rem"
+        placeholder="Select exercise type"
+        data={options}
+        allowDeselect={false}
       />
 
       <div className="relative ">
@@ -63,36 +49,25 @@ const ExerciseSelect = ({ type, options }: ExerciseSelectProps) => {
           }
         >
           {isTimeBased ? (
-            <Controller
+            <TextInput
               name={`${type}Input`}
               control={control}
-              render={({ field }) => {
-                return (
-                  <TextInput
-                    {...field}
-                    size="lg"
-                    radius="md"
-                    label={`${exerciseType} Time`}
-                    placeholder="MM:SS"
-                  />
-                );
-              }}
+              size="lg"
+              radius="md"
+              label={`${exerciseType} Time`}
+              placeholder="MM:SS"
             />
           ) : (
-            <Controller
+            <NumberInput
               name={`${type}Input`}
+              decimalSeparator=":"
               control={control}
-              render={({ field }) => {
-                return (
-                  <NumberInput
-                    {...field}
-                    size="xl"
-                    radius="lg"
-                    label={`${exerciseType} Reps`}
-                    placeholder="Reps"
-                  />
-                );
-              }}
+              size="xl"
+              radius="lg"
+              label={`${exerciseType} Reps`}
+              placeholder="Reps"
+              allowNegative={false}
+              fixedDecimalScale
             />
           )}
         </div>
