@@ -1,7 +1,8 @@
 import { createClient } from "@supabase/supabase-js";
 import convertDurationToSeconds from "../_util/convertDurationToSeconds";
+import { formatExerciseName } from "../_util/helpers";
 const supabaseUrl = "https://hnnyotwjhikrytqynjyk.supabase.co";
-const supabaseKey = import.meta.env.SUPABASE_KEY;
+const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
 export async function getExerciseMinimum(gender, ageGroup, exercise) {
@@ -46,10 +47,13 @@ export async function getExerciseMaximum(gender, ageGroup, exercise) {
   }
 }
 
-async function getExerciseScore(gender, ageGroup, exercise, results) {
+async function getExerciseScore(gender, ageGroup, exerciseType, results) {
+  const exercise = formatExerciseName(exerciseType);
+  console.log(exercise);
   if (exercise === "plank" || exercise === "mile") {
     results = convertDurationToSeconds(results);
   }
+  console.log(`${gender} / ${ageGroup} / ${exercise} / ${results}`);
   const { data, error } = await supabase
     .from("scoringCriteria")
     .select("points")
@@ -58,6 +62,7 @@ async function getExerciseScore(gender, ageGroup, exercise, results) {
     .eq("activityType", exercise)
     .gte("maxPerformanceValue", results)
     .lte("minPerformanceValue", results);
+  console.log(data, error);
 
   if (error) {
     return "Error fetching points:", error;
@@ -65,6 +70,7 @@ async function getExerciseScore(gender, ageGroup, exercise, results) {
     const points = data[0].points;
     return points;
   } else {
+    console.log("returned 0");
     return 0;
   }
 }
@@ -73,31 +79,32 @@ export async function fetchExerciseScores(formData) {
   const {
     gender,
     ageGroup,
-    upperBodyExercise,
-    upperBodyResults,
+    upperExercise,
+    upperInput,
     coreExercise,
-    coreResults,
+    coreInput,
     cardioExercise,
-    cardioResults,
+    cardioInput,
   } = formData;
-  const upperBodyScore = await getExerciseScore(
+  console.log(formData);
+  const upperScore = await getExerciseScore(
     gender,
     ageGroup,
-    upperBodyExercise,
-    upperBodyResults,
+    upperExercise,
+    upperInput,
   );
   const coreScore = await getExerciseScore(
     gender,
     ageGroup,
     coreExercise,
-    coreResults,
+    coreInput,
   );
   const cardioScore = await getExerciseScore(
     gender,
     ageGroup,
     cardioExercise,
-    cardioResults,
+    cardioInput,
   );
 
-  return { upper: upperBodyScore, core: coreScore, cardio: cardioScore };
+  return { upper: upperScore, core: coreScore, cardio: cardioScore };
 }

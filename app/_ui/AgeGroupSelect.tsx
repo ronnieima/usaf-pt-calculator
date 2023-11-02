@@ -7,7 +7,7 @@ const AgeGroupSelect = () => {
   return (
     <Controller
       control={control}
-      name="Age Group"
+      name="ageGroup"
       render={({ field }) => {
         return (
           <Select

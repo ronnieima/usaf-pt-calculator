@@ -18,14 +18,14 @@ const FormButtons = () => {
       <Button
         onClick={() =>
           reset({
-            Gender: null,
-            "Age Group": null,
-            "Upper Body": null,
-            "Upper Body Input": null,
-            Core: null,
-            "Core Input": null,
-            Cardio: null,
-            "Cardio Input": null,
+            gender: "male",
+            ageGroup: "<25",
+            upperExercise: "pushups",
+            upperInput: "23",
+            coreExercise: "situps",
+            coreInput: "23",
+            cardioExercise: "mile",
+            cardioInput: "24",
           })
         }
         type="reset"

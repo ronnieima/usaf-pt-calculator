@@ -3,21 +3,21 @@
 import { NumberInput, Select, TextInput } from "react-hook-form-mantine";
 
 import React, { useEffect } from "react";
-import formatExerciseName from "../_util/formatExerciseName";
+import { formatTypeName } from "../_util/helpers";
 import { Controller, useFormContext } from "react-hook-form";
+import { rgba } from "@mantine/core";
 
 type ExerciseSelectProps = {
   type: string;
-  options: string[];
+  options: { value: string; label: string }[];
 };
 
 const ExerciseSelect = ({ type, options }: ExerciseSelectProps) => {
-  const exerciseLabel = formatExerciseName(type);
+  const exerciseLabel = formatTypeName(type);
   const { control, watch } = useFormContext();
-  const exerciseType = watch(exerciseLabel);
+  const exerciseType = watch(`${type}Exercise`);
   const isVisibleInput = Boolean(exerciseType);
-  const isTimeBased =
-    exerciseType === "Forearm Plank" || exerciseType === "1.5 Mile Run";
+  const isTimeBased = exerciseType === "plank" || exerciseType === "mile";
 
   // useEffect(() => {
   //   // Unregister the field to remove old validation rules
@@ -25,27 +25,36 @@ const ExerciseSelect = ({ type, options }: ExerciseSelectProps) => {
   // }, [exerciseType, setValue, exerciseLabel]);
 
   return (
-    <section className="flex flex-col gap-4">
+    <section className="flex flex-col gap-4 ">
+      <span className="relative top-12 flex justify-end">
+        TODO: add minmax here
+      </span>
+
       <Controller
         control={control}
-        name={exerciseLabel}
+        name={`${type}Exercise`}
         render={({ field }) => {
           return (
-            <Select
-              control={control}
-              {...field}
-              size="xl"
-              label={`${exerciseLabel} Exercise`}
-              radius="0.5rem"
-              placeholder="Select exercise type"
-              data={options}
-              allowDeselect={false}
-            />
+            <>
+              <Select
+                styles={{
+                  root: {},
+                }}
+                control={control}
+                {...field}
+                size="xl"
+                label={`${exerciseLabel} Exercise`}
+                radius="0.5rem"
+                placeholder="Select exercise type"
+                data={options}
+                allowDeselect={false}
+              />
+            </>
           );
         }}
       />
 
-      <div className="relative">
+      <div className="relative ">
         <div
           className={
             isVisibleInput
@@ -55,7 +64,7 @@ const ExerciseSelect = ({ type, options }: ExerciseSelectProps) => {
         >
           {isTimeBased ? (
             <Controller
-              name={`${exerciseLabel} Input`}
+              name={`${type}Input`}
               control={control}
               render={({ field }) => {
                 return (
@@ -71,7 +80,7 @@ const ExerciseSelect = ({ type, options }: ExerciseSelectProps) => {
             />
           ) : (
             <Controller
-              name={`${exerciseLabel} Input`}
+              name={`${type}Input`}
               control={control}
               render={({ field }) => {
                 return (

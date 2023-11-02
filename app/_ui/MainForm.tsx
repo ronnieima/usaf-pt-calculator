@@ -7,26 +7,29 @@ import GenderRadioButtons from "./GenderRadioButtons";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { DevTool } from "@hookform/devtools";
 import { FormValuesType, schema } from "../_util/validation";
+import { fetchExerciseScores } from "../_db/supabase";
 
 const MainForm = () => {
   const methods = useForm<FormValuesType>({
     mode: "onChange", // Makes it easier to catch erros before a submit
     resolver: zodResolver(schema), // Set our validator
     defaultValues: {
-      Gender: undefined,
-      "Age Group": undefined,
-      "Upper Body": undefined,
-      "Upper Body Input": undefined,
-      Core: undefined,
-      "Core Input": undefined,
-      Cardio: undefined,
-      "Cardio Input": undefined,
+      gender: undefined,
+      ageGroup: undefined,
+      upperExercise: undefined,
+      upperInput: undefined,
+      coreExercise: undefined,
+      coreInput: undefined,
+      cardioExercise: undefined,
+      cardioInput: undefined,
     },
   });
   const { handleSubmit, control } = methods;
 
-  function onSubmit(data: any) {
+  async function onSubmit(data: any) {
     console.log(data);
+    const res = await fetchExerciseScores(data);
+    console.log(res);
   }
 
   return (
@@ -43,18 +46,31 @@ const MainForm = () => {
           <AgeGroupSelect />
 
           {/* select upper exercise  */}
-          <ExerciseSelect type="upper" options={["Pushup", "Hand Release"]} />
+          <ExerciseSelect
+            type="upper"
+            options={[
+              { value: "pushups", label: "Pushups" },
+              { value: "handrelease", label: "Hand Release" },
+            ]}
+          />
 
           {/* select core exercise */}
           <ExerciseSelect
             type="core"
-            options={["Situp", "Cross Legged Reverse Crunch", "Forearm Plank"]}
+            options={[
+              { value: "situps", label: "Situp" },
+              { value: "crunches", label: "Cross Legged Reverse Crunch" },
+              { value: "plank", label: "Forearm Plank" },
+            ]}
           />
 
           {/* select cardio exercise */}
           <ExerciseSelect
             type="cardio"
-            options={["1.5 Mile Run", "20 Meter HAMR Shuttle"]}
+            options={[
+              { value: "mile", label: "1.5 Mile Run" },
+              { value: "shuttles", label: "20 Meter HAMR Shuttle" },
+            ]}
           />
 
           {/* reset/submit buttons */}

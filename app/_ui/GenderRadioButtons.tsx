@@ -12,7 +12,7 @@ const GenderRadioButtons = () => {
   return (
     <Controller
       control={control}
-      name="Gender"
+      name="gender"
       render={({ field }) => {
         return (
           <Radio.Group label="Gender" {...field}>
