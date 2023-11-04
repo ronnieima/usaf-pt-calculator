@@ -54,7 +54,7 @@ const ExerciseSelect = ({
           </Select>
           <FormDescription>
             View the{" "}
-            <Link href={`/exercises/#${type}`} className="hover:underline">
+            <Link href={`/exercises#${type}`} className="hover:underline">
               {exerciseLabel} exercise demonstrations
             </Link>
           </FormDescription>
