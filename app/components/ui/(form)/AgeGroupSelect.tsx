@@ -31,8 +31,8 @@ const AgeGroupSelect = ({ options }: AgeGroupSelectProps) => {
             <h2>Age Group</h2>
           </FormLabel>
           <Select onValueChange={field.onChange} defaultValue={field.value}>
-            <FormControl className=" p-8">
-              <SelectTrigger className="text-xl text-slate-900">
+            <FormControl>
+              <SelectTrigger>
                 <SelectValue placeholder="Select age group" />
               </SelectTrigger>
             </FormControl>

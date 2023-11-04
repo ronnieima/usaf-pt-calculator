@@ -9,7 +9,13 @@ export const schema = z
     coreExercise: z.string().min(1, "Required boi"),
     coreInput: z.string().min(1, "Required boi"),
     cardioExercise: z.string().min(1, "Required boi"),
-    cardioInput: z.string().min(1, "Required boi"),
+    cardioInput: z
+      .string()
+      .min(0, "Must be a positive number")
+      .regex(
+        /^(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$/,
+        "Invalid time format (MM:SS)",
+      ),
   })
   .required();
 

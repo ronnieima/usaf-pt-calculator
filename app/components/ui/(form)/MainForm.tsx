@@ -13,6 +13,7 @@ import { Separator } from "@/components/ui/separator";
 
 const MainForm = () => {
   const methods = useForm<FormValuesType>({
+    reValidateMode: "onChange",
     resolver: zodResolver(schema),
   });
 
@@ -24,7 +25,10 @@ const MainForm = () => {
 
   return (
     <FormProvider {...methods}>
-      <form className="m-auto mb-3 flex max-w-2xl flex-col gap-16 text-2xl  uppercase tracking-widest text-slate-200 sm:max-w-3xl">
+      <form
+        onSubmit={methods.handleSubmit(onSubmit)}
+        className="m-auto mb-3 flex max-w-2xl flex-col gap-16 text-2xl  uppercase tracking-widest text-slate-200 sm:max-w-3xl"
+      >
         {/* radio gender */}
         <GenderRadioButtons />
 

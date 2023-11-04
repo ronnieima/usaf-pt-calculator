@@ -41,9 +41,9 @@ const ExerciseInput = ({
               <FormLabel className="text-2xl">{`${exerciseLabel} ${
                 isTimeBased ? "Time" : "Reps"
               }`}</FormLabel>
-              <FormControl className="p-8">
+              <FormControl>
                 <Input
-                  className="text-xl text-slate-900"
+                  className=" text-zinc-800"
                   placeholder={isTimeBased ? "MM:SS" : "Reps"}
                   type={isTimeBased ? "text" : "number"}
                   {...field}

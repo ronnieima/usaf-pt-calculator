@@ -39,8 +39,8 @@ const ExerciseSelect = ({
             <span>MINmax</span>
           </FormLabel>
           <Select onValueChange={field.onChange} defaultValue={field.value}>
-            <FormControl className="p-8">
-              <SelectTrigger className="text-xl text-slate-900">
+            <FormControl>
+              <SelectTrigger>
                 <SelectValue placeholder="Select exercise type" />
               </SelectTrigger>
             </FormControl>
