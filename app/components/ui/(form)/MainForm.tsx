@@ -1,15 +1,13 @@
 "use client";
 import AgeGroupSelect from "./AgeGroupSelect";
-import ExerciseSelect from "./ExerciseSelect";
+import ExerciseSelect from "./ExerciseField";
 import FormButtons from "./FormButtons";
 import GenderRadioButtons from "./GenderRadioButtons";
 import { FormValuesType, schema } from "../../../_util/validation";
 import { fetchExerciseScores } from "../../../_db/supabase";
-import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
-import { Form } from "@/components/ui/form";
 
 const MainForm = () => {
   const methods = useForm<FormValuesType>({
