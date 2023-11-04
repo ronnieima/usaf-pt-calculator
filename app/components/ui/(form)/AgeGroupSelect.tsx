@@ -1,25 +1,54 @@
-import { useCalculatorFormContext } from "@/app/_context/form-context";
-import { Select } from "@mantine/core";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import Link from "next/link";
 import React from "react";
+import { useFormContext } from "react-hook-form";
 
-const AgeGroupSelect = () => {
+type AgeGroupSelectProps = {
+  options: string[];
+};
+
+const AgeGroupSelect = ({ options }: AgeGroupSelectProps) => {
+  const { control } = useFormContext();
   return (
-    <Select
-      label="Age Group"
-      placeholder="Select age group"
-      size="xl"
-      radius="0.5rem"
-      data={[
-        "<25",
-        "25-29",
-        "30-34",
-        "35-39",
-        "40-44",
-        "45-49",
-        "50-54",
-        "55-59",
-        ">60",
-      ]}
+    <FormField
+      control={control}
+      name={`ageGroup`}
+      render={({ field }) => (
+        <FormItem>
+          <FormLabel className="text-2xl">
+            <h2>Age Group</h2>
+          </FormLabel>
+          <Select onValueChange={field.onChange} defaultValue={field.value}>
+            <FormControl className="p-8">
+              <SelectTrigger className="text-xl text-slate-900">
+                <SelectValue placeholder="Select age group" />
+              </SelectTrigger>
+            </FormControl>
+            <SelectContent>
+              {options.map((option) => (
+                <SelectItem key={option} value={option}>
+                  {option}
+                </SelectItem>
+              ))}
+            </SelectContent>
+          </Select>
+
+          <FormMessage />
+        </FormItem>
+      )}
     />
   );
 };

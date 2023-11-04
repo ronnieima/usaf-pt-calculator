@@ -34,6 +34,7 @@ const ExerciseField = ({ type, options }: ExerciseFieldProps) => {
       <ExerciseInput
         exerciseType={exerciseType}
         exerciseLabel={exerciseLabel}
+        type={type}
       />
     </section>
   );
