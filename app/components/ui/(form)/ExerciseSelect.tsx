@@ -2,7 +2,7 @@
 
 import { NumberInput, TextInput } from "@mantine/core";
 
-import { formatTypeName } from "../../_util/helpers";
+import { formatTypeName } from "../../../_util/helpers";
 
 import { useFormContext } from "react-hook-form";
 import {
@@ -40,22 +40,22 @@ const ExerciseSelect = ({ type, options }: ExerciseSelectProps) => {
 
   return (
     <section className="flex flex-col gap-4 ">
-      <span className="relative top-12 flex justify-end">
-        TODO: add minmax here
-      </span>
       <FormField
         control={control}
         name={`${type}Exercise`}
         render={({ field }) => (
           <FormItem>
-            <FormLabel>{exerciseLabel}</FormLabel>
+            <FormLabel className="flex justify-between text-2xl">
+              <h2>{exerciseLabel}</h2>
+              <span>MINmax</span>
+            </FormLabel>
             <Select onValueChange={field.onChange} defaultValue={field.value}>
-              <FormControl className="text-black">
-                <SelectTrigger>
-                  <SelectValue placeholder="Select a verified email to display" />
+              <FormControl className="p-8">
+                <SelectTrigger className="text-xl text-slate-900">
+                  <SelectValue placeholder="Select exercise type" />
                 </SelectTrigger>
               </FormControl>
-              <SelectContent className="text-black">
+              <SelectContent>
                 {options.map((option) => (
                   <SelectItem key={option.value} value={option.value}>
                     {option.label}
@@ -64,8 +64,10 @@ const ExerciseSelect = ({ type, options }: ExerciseSelectProps) => {
               </SelectContent>
             </Select>
             <FormDescription>
-              You can manage email addresses in your{" "}
-              <Link href="/examples/forms">email settings</Link>.
+              View the{" "}
+              <Link href={`/exercises/#${type}`} className="hover:underline">
+                {exerciseLabel} exercise demonstrations
+              </Link>
             </FormDescription>
             <FormMessage />
           </FormItem>

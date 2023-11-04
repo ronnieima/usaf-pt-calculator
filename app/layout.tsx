@@ -4,8 +4,8 @@ import "./globals.css";
 import "@mantine/core/styles.css";
 
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
-import NavBar from "./_ui/NavBar";
-import Footer from "./_ui/Footer";
+import NavBar from "./components/ui/NavBar";
+import Footer from "./components/ui/Footer";
 
 export const metadata = {
   title: "My Mantine app",

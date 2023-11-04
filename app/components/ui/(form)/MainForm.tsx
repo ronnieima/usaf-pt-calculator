@@ -3,8 +3,8 @@ import AgeGroupSelect from "./AgeGroupSelect";
 import ExerciseSelect from "./ExerciseSelect";
 import FormButtons from "./FormButtons";
 import GenderRadioButtons from "./GenderRadioButtons";
-import { FormValuesType, schema } from "../../_util/validation";
-import { fetchExerciseScores } from "../../_db/supabase";
+import { FormValuesType, schema } from "../../../_util/validation";
+import { fetchExerciseScores } from "../../../_db/supabase";
 import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -24,7 +24,7 @@ const MainForm = () => {
 
   return (
     <FormProvider {...methods}>
-      <form className="m-auto mb-3 flex max-w-2xl flex-col gap-16 text-2xl  uppercase tracking-widest text-stone-200 sm:max-w-3xl">
+      <form className="m-auto mb-3 flex max-w-2xl flex-col gap-16 text-2xl  uppercase tracking-widest text-slate-200 sm:max-w-3xl">
         {/* radio gender */}
         <GenderRadioButtons />
 
@@ -35,7 +35,7 @@ const MainForm = () => {
         <ExerciseSelect
           type="upper"
           options={[
-            { value: "pushups", label: "Pushups" },
+            { value: "pushups", label: "Pushup" },
             { value: "handrelease", label: "Hand Release" },
           ]}
         />
