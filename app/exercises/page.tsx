@@ -1,11 +1,12 @@
-import React from "react";
+"use client";
+import { NumberInput } from "@mantine/core";
+import { useForm } from "@mantine/form";
+import React, { useState } from "react";
 
-const ExercisesPage = () => {
-  return (
-    <div className="min-h-screen bg-gradient-to-r from-sky-800 to-indigo-800 p-5">
-      ExercisesPage
-    </div>
-  );
-};
+function ExercisesPage() {
+  const [value, setValue] = useState<string | number>("");
+  console.log(typeof value);
+  return <NumberInput value={value} onChange={setValue} />;
+}
 
 export default ExercisesPage;

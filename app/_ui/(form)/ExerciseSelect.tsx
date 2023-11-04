@@ -1,10 +1,26 @@
 "use client";
 
-import { NumberInput, Select, TextInput } from "react-hook-form-mantine";
+import { NumberInput, TextInput } from "@mantine/core";
 
-import React, { Dispatch, SetStateAction, useEffect } from "react";
 import { formatTypeName } from "../../_util/helpers";
-import { Controller, useFormContext } from "react-hook-form";
+
+import { useFormContext } from "react-hook-form";
+import {
+  FormControl,
+  FormDescription,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
+import Link from "next/link";
 
 type ExerciseSelectProps = {
   type: string;
@@ -17,7 +33,6 @@ const ExerciseSelect = ({ type, options }: ExerciseSelectProps) => {
   const exerciseType = watch(`${type}Exercise`);
   const isVisibleInput = Boolean(exerciseType);
   const isTimeBased = exerciseType === "plank" || exerciseType === "mile";
-
   // useEffect(() => {
   //   // Unregister the field to remove old validation rules
   //   setValue(`${exerciseLabel} Input`, null);
@@ -28,16 +43,33 @@ const ExerciseSelect = ({ type, options }: ExerciseSelectProps) => {
       <span className="relative top-12 flex justify-end">
         TODO: add minmax here
       </span>
-
-      <Select
+      <FormField
         control={control}
         name={`${type}Exercise`}
-        size="xl"
-        label={`${exerciseLabel} Exercise`}
-        radius="0.5rem"
-        placeholder="Select exercise type"
-        data={options}
-        allowDeselect={false}
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel>{exerciseLabel}</FormLabel>
+            <Select onValueChange={field.onChange} defaultValue={field.value}>
+              <FormControl className="text-black">
+                <SelectTrigger>
+                  <SelectValue placeholder="Select a verified email to display" />
+                </SelectTrigger>
+              </FormControl>
+              <SelectContent className="text-black">
+                {options.map((option) => (
+                  <SelectItem key={option.value} value={option.value}>
+                    {option.label}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+            <FormDescription>
+              You can manage email addresses in your{" "}
+              <Link href="/examples/forms">email settings</Link>.
+            </FormDescription>
+            <FormMessage />
+          </FormItem>
+        )}
       />
 
       <div className="relative ">
@@ -51,7 +83,6 @@ const ExerciseSelect = ({ type, options }: ExerciseSelectProps) => {
           {isTimeBased ? (
             <TextInput
               name={`${type}Input`}
-              control={control}
               size="lg"
               radius="md"
               label={`${exerciseType} Time`}
@@ -60,14 +91,11 @@ const ExerciseSelect = ({ type, options }: ExerciseSelectProps) => {
           ) : (
             <NumberInput
               name={`${type}Input`}
-              decimalSeparator=":"
-              control={control}
               size="xl"
               radius="lg"
               label={`${exerciseType} Reps`}
               placeholder="Reps"
-              allowNegative={false}
-              fixedDecimalScale
+              hideControls
             />
           )}
         </div>

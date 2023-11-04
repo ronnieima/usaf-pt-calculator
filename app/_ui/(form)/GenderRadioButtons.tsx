@@ -1,29 +1,19 @@
 "use client";
 
+import {
+  useCalculatorForm,
+  useCalculatorFormContext,
+} from "@/app/_context/form-context";
 import React from "react";
-import { Controller, useFormContext } from "react-hook-form";
-import { Radio } from "react-hook-form-mantine";
+import { Radio } from "@mantine/core";
 const GenderRadioButtons = () => {
-  const {
-    control,
-    formState: { errors },
-  } = useFormContext();
-
   return (
-    <Controller
-      control={control}
-      name="gender"
-      render={({ field }) => {
-        return (
-          <Radio.Group label="Gender" {...field}>
-            <div className="flex gap-16">
-              <Radio.Item value="male" label="Male" />
-              <Radio.Item value="female" label="Female" />
-            </div>
-          </Radio.Group>
-        );
-      }}
-    />
+    <Radio.Group label="Gender">
+      <div className="flex gap-16">
+        <Radio value="male" label="Male" />
+        <Radio value="female" label="Female" />
+      </div>
+    </Radio.Group>
   );
 };
 
