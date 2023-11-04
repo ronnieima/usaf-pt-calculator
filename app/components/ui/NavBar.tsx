@@ -1,22 +1,24 @@
 import React from "react";
 import Logo from "./Logo";
 import Links from "./Links";
-// import HamburgerMenu from "./HamburgerMenu";
+
+import MobileMenu from "./MobileMenu";
 import {
-  IconBook,
-  IconCalculator,
-  IconClipboardText,
-  IconStretching,
-} from "@tabler/icons-react";
+  Calculator,
+  ClipboardList,
+  Dumbbell,
+  Home,
+  LibraryBig,
+} from "lucide-react";
 
 export const links = [
-  { label: "Home", href: "/", icon: <IconCalculator /> },
-  { label: "Exercises", href: "/exercises", icon: <IconStretching /> },
-  { label: "Charts", href: "/charts", icon: <IconClipboardText /> },
+  { label: "Home", href: "/", icon: <Home /> },
+  { label: "Exercises", href: "/exercises", icon: <Dumbbell /> },
+  { label: "Charts", href: "/charts", icon: <ClipboardList /> },
   {
     label: "Resources",
     href: "/resources",
-    icon: <IconBook />,
+    icon: <LibraryBig />,
   },
 ];
 
@@ -24,7 +26,7 @@ function NavBar() {
   return (
     <nav className="flex items-center justify-between bg-slate-200 px-6 py-2 sm:py-4 ">
       <Logo />
-      {/* <HamburgerMenu /> */}
+      <MobileMenu />
       <Links />
     </nav>
   );

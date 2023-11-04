@@ -1,5 +1,5 @@
 "use client";
-import GenderRadioButtons from "./GenderRadioButtons";
+import GenderSelect from "./GenderSelect";
 import AgeGroupSelect from "./AgeGroupSelect";
 import ExerciseField from "./ExerciseField";
 import FormButtons from "./FormButtons";
@@ -30,7 +30,7 @@ const MainForm = () => {
         className="m-auto mb-3 flex max-w-2xl flex-col gap-16 text-2xl  uppercase tracking-widest text-slate-200 sm:max-w-3xl"
       >
         {/* radio gender */}
-        <GenderRadioButtons />
+        <GenderSelect />
 
         <Separator className="bg-slate-500 opacity-70" />
 
