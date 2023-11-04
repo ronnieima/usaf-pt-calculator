@@ -1,13 +1,15 @@
 "use client";
-import AgeGroupSelect from "./AgeGroupSelect";
-import ExerciseSelect from "./ExerciseField";
-import FormButtons from "./FormButtons";
 import GenderRadioButtons from "./GenderRadioButtons";
+import AgeGroupSelect from "./AgeGroupSelect";
+import ExerciseField from "./ExerciseField";
+import FormButtons from "./FormButtons";
+
 import { FormValuesType, schema } from "../../../_util/validation";
 import { fetchExerciseScores } from "../../../_db/supabase";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
+import { Separator } from "@/components/ui/separator";
 
 const MainForm = () => {
   const methods = useForm<FormValuesType>({
@@ -26,6 +28,8 @@ const MainForm = () => {
         {/* radio gender */}
         <GenderRadioButtons />
 
+        <Separator className="bg-slate-500 opacity-70" />
+
         {/* select age group */}
         <AgeGroupSelect
           options={[
@@ -41,8 +45,10 @@ const MainForm = () => {
           ]}
         />
 
+        <Separator className="bg-slate-500 opacity-70" />
+
         {/* select upper exercise  */}
-        <ExerciseSelect
+        <ExerciseField
           type="upper"
           options={[
             { value: "pushups", label: "Pushup" },
@@ -50,8 +56,10 @@ const MainForm = () => {
           ]}
         />
 
+        <Separator className="bg-slate-500 opacity-70" />
+
         {/* select core exercise */}
-        <ExerciseSelect
+        <ExerciseField
           type="core"
           options={[
             { value: "situps", label: "Situp" },
@@ -60,8 +68,10 @@ const MainForm = () => {
           ]}
         />
 
+        <Separator className="bg-slate-500 opacity-70" />
+
         {/* select cardio exercise */}
-        <ExerciseSelect
+        <ExerciseField
           type="cardio"
           options={[
             { value: "mile", label: "1.5 Mile Run" },

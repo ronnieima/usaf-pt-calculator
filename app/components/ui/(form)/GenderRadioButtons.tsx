@@ -1,20 +1,11 @@
 "use client";
 
-import {
-  useCalculatorForm,
-  useCalculatorFormContext,
-} from "@/app/_context/form-context";
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
+
 import React from "react";
-import { Radio } from "@mantine/core";
 const GenderRadioButtons = () => {
-  return (
-    <Radio.Group label="Gender">
-      <div className="flex gap-16">
-        <Radio value="male" label="Male" />
-        <Radio value="female" label="Female" />
-      </div>
-    </Radio.Group>
-  );
+  return <div>add select for gender</div>;
 };
 
 export default GenderRadioButtons;

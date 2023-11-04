@@ -1,7 +1,5 @@
 "use client";
 
-import { NumberInput, TextInput } from "@mantine/core";
-
 import { formatTypeName } from "../../../_util/helpers";
 
 import { useFormContext } from "react-hook-form";

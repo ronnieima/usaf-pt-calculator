@@ -12,7 +12,6 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import Link from "next/link";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
@@ -32,7 +31,7 @@ const AgeGroupSelect = ({ options }: AgeGroupSelectProps) => {
             <h2>Age Group</h2>
           </FormLabel>
           <Select onValueChange={field.onChange} defaultValue={field.value}>
-            <FormControl className="p-8">
+            <FormControl className=" p-8">
               <SelectTrigger className="text-xl text-slate-900">
                 <SelectValue placeholder="Select age group" />
               </SelectTrigger>

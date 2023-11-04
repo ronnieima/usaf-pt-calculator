@@ -1,7 +1,7 @@
 import React from "react";
 import Logo from "./Logo";
 import Links from "./Links";
-import HamburgerMenu from "./HamburgerMenu";
+// import HamburgerMenu from "./HamburgerMenu";
 import {
   IconBook,
   IconCalculator,
@@ -24,7 +24,7 @@ function NavBar() {
   return (
     <nav className="flex items-center justify-between bg-slate-200 px-6 py-2 sm:py-4 ">
       <Logo />
-      <HamburgerMenu />
+      {/* <HamburgerMenu /> */}
       <Links />
     </nav>
   );
