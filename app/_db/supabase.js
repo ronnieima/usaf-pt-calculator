@@ -127,13 +127,13 @@ async function calculateTotalScoresWithMinimumCheck(formData) {
     upper: upperScore,
     core: coreScore,
     cardio: cardioScore,
-    total: upperScore + coreScore + cardioScore,
+    totalScore: upperScore + coreScore + cardioScore,
     minimumMetStatus,
   };
 }
 
 function checkIfMinimumIsNotMet(upperScore, coreScore, cardioScore) {
-  let minimumMetStatus = { upper: true, core: true, false: true };
+  let minimumMetStatus = { upper: true, core: true, cardio: true };
   if (upperScore === 0) minimumMetStatus.upper = false;
   if (coreScore === 0) minimumMetStatus.core = false;
   if (cardioScore === 0) minimumMetStatus.cardio = false;

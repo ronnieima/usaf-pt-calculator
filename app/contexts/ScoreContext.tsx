@@ -1,23 +1,39 @@
-import {
-  Dispatch,
-  PropsWithChildren,
-  SetStateAction,
-  createContext,
-  useContext,
-  useReducer,
-  useState,
-} from "react";
+"use client";
+import React, { createContext, useContext, useState } from "react";
 
-const ScoreContext = createContext(null);
+type ScoreState = {
+  minimumMetStatus: { upper: boolean; core: boolean; cardio: boolean };
+  upper: number;
+  core: number;
+  cardio: number;
+  totalScore: number;
+};
 
-export default function ScoreContextProvider({ children }: PropsWithChildren) {
-  const [scores, setScores] = useState({
-    minimumMetStatus: { upper: false, core: false, cardio: false },
-    upperScore: 0,
-    coreScore: 0,
-    cardioScore: 0,
-    totalScore: 0,
-  });
+const initialScores: ScoreState = {
+  minimumMetStatus: { upper: true, core: true, cardio: true },
+  upper: 0,
+  core: 0,
+  cardio: 0,
+  totalScore: 0,
+};
+
+const ScoreContext = createContext<{
+  scores: ScoreState;
+  setScores: React.Dispatch<React.SetStateAction<ScoreState>>;
+}>({
+  scores: initialScores,
+  setScores: () => {},
+});
+
+type ScoreContextProviderProps = {
+  children: React.ReactNode;
+};
+
+export default function ScoreContextProvider({
+  children,
+}: ScoreContextProviderProps) {
+  const [scores, setScores] = useState(initialScores);
+
   return (
     <ScoreContext.Provider value={{ scores, setScores }}>
       {children}

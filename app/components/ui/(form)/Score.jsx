@@ -1,16 +1,14 @@
 import { useFormState } from "react-hook-form";
-// import Loader from './Loader';
 import ScoreBreakdown from "./ScoreBreakdown";
 import FailReasons from "./FailReasons";
 import ScoreMessage from "./ScoreMessage";
-import { Loader2 } from "lucide-react";
-
+import { MoonLoader } from "react-spinners";
 function Score() {
   const { isSubmitting, isSubmitSuccessful } = useFormState();
 
   return (
-    <section className="my-16 flex flex-col items-center justify-center gap-8 text-4xl uppercase text-stone-200">
-      {isSubmitting && <Loader2 />}
+    <section className="text-4xll my-16 flex flex-col items-center justify-center gap-8 uppercase text-stone-900">
+      {isSubmitting && <MoonLoader color="#36d7b7" />}
       {isSubmitSuccessful && (
         <section
           className={`${
@@ -18,8 +16,8 @@ function Score() {
           } flex flex-col gap-4 text-center`}
         >
           <ScoreMessage />
-          {/* <FailReasons /> */}
-          {/* <ScoreBreakdown /> */}
+          <FailReasons />
+          <ScoreBreakdown />
         </section>
       )}
     </section>

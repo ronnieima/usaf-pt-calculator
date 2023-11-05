@@ -3,7 +3,11 @@ import { useRouter } from "next/navigation";
 import { useFormContext } from "react-hook-form";
 
 const FormButtons = () => {
-  const { reset } = useFormContext();
+  const {
+    reset,
+    formState: { isLoading },
+  } = useFormContext();
+
   function handleReset() {
     reset();
   }
@@ -11,8 +15,9 @@ const FormButtons = () => {
   return (
     <div className="flex flex-col gap-8">
       <Button
+        disabled={isLoading}
         type="submit"
-        className="bg-green-800 py-8 shadow-lg hover:bg-green-700"
+        className={`bg-green-800 py-8 shadow-lg hover:bg-green-700 `}
       >
         Submit
       </Button>

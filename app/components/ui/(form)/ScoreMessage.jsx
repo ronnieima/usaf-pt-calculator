@@ -1,8 +1,11 @@
+import { useScoreContext } from "@/app/contexts/ScoreContext";
 import AnimatedNumber from "animated-number-react";
 
-function ScoreMessage({ isMinimumMetStatus }) {
-  const anyMinNotMet = Object.values(isMinimumMetStatus).some(
-    (value) => value === true,
+function ScoreMessage() {
+  const { scores } = useScoreContext();
+  const { minimumMetStatus, totalScore } = scores;
+  const anyMinNotMet = Object.values(minimumMetStatus).some(
+    (value) => value === false,
   );
 
   return (

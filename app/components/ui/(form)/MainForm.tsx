@@ -34,13 +34,7 @@ const MainForm = () => {
     console.log("submitting...");
     const res = await calculateAndReturnScores(data);
     console.log(res);
-    const { minimumMetStatus, upper, core, cardio } = res;
-    setScores({
-      minimumMetStatus,
-      upper,
-      core,
-      cardio,
-    });
+    setScores(res);
   }
 
   return (
@@ -106,7 +100,7 @@ const MainForm = () => {
         {/* reset/submit buttons */}
         <FormButtons />
       </form>
-      <Score minimumMetStatus={minimumMetStatus} />
+      <Score />
     </FormProvider>
   );
 };
