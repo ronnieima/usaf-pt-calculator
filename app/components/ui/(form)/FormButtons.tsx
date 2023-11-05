@@ -12,7 +12,8 @@ const FormButtons = () => {
         Submit
       </Button>
       <Button
-        onClick={() => reset}
+        type="reset"
+        onClick={() => reset()}
         className="bg-neutral-800 shadow-lg hover:bg-neutral-700"
       >
         Reset
