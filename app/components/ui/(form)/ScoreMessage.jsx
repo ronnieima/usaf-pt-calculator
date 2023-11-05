@@ -1,7 +1,7 @@
 import AnimatedNumber from "animated-number-react";
 
-function ScoreMessage() {
-  const anyMinNotMet = Object.values(isMinimumNotMet).some(
+function ScoreMessage({ isMinimumMetStatus }) {
+  const anyMinNotMet = Object.values(isMinimumMetStatus).some(
     (value) => value === true,
   );
 

@@ -11,6 +11,7 @@ import { calculateAndReturnScores } from "../../../_db/supabase";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { Separator } from "@/components/ui/separator";
+import { useScoreContext } from "@/app/contexts/ScoreContext";
 
 const MainForm = () => {
   const methods = useForm<FormValuesType>({
@@ -27,11 +28,19 @@ const MainForm = () => {
       cardioInput: "12:11",
     },
   });
+  const { setScores } = useScoreContext();
 
   async function onSubmit(data: unknown) {
     console.log("submitting...");
     const res = await calculateAndReturnScores(data);
     console.log(res);
+    const { minimumMetStatus, upper, core, cardio } = res;
+    setScores({
+      minimumMetStatus,
+      upper,
+      core,
+      cardio,
+    });
   }
 
   return (
@@ -97,7 +106,7 @@ const MainForm = () => {
         {/* reset/submit buttons */}
         <FormButtons />
       </form>
-      {/* <Score /> */}
+      <Score minimumMetStatus={minimumMetStatus} />
     </FormProvider>
   );
 };

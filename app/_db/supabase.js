@@ -21,7 +21,7 @@ export async function getExerciseMinimum(gender, ageGroup, exercise) {
   }
 }
 
-export async function getExerciseMaximum(gender, ageGroup, exercise) {
+async function getExerciseMaximum(gender, ageGroup, exercise) {
   const { data, error } = await supabase
     .from("scoringCriteria")
     .select("maxPerformanceValue")
@@ -39,8 +39,10 @@ export async function getExerciseMaximum(gender, ageGroup, exercise) {
 }
 
 async function getExerciseMinMax(gender, ageGroup, exercise) {
-  const min = await getExerciseMinimum(gender, ageGroup, exercise);
-  const max = await getExerciseMaximum(gender, ageGroup, exercise);
+  const [min, max] = await Promise.all([
+    getExerciseMinimum(gender, ageGroup, exercise),
+    getExerciseMaximum(gender, ageGroup, exercise),
+  ]);
 
   return [min, max];
 }
@@ -53,14 +55,28 @@ async function getIndividualExerciseScore(gender, ageGroup, exercise, results) {
     exercise,
   );
 
-  if (results < minimumValue) return 0;
-  if (results > maximumValue)
+  if (results < minimumValue) {
+    console.log(
+      `failed to meet minimum (${minimumValue}) for ${exercise} returning 0 : scored ${results}`,
+    );
+    console.log(" ");
+    return 0;
+  }
+  if (results > maximumValue) {
+    console.log(
+      `max value (${maximumValue}) reached for ${exercise} (${results})`,
+    );
+    console.log(" ");
     return exercise === "mile" || exercise === "shuttles" ? 60 : 20;
+  }
 
   if (exercise === "plank" || exercise === "mile") {
     results = convertDurationToSeconds(results);
   }
-  console.log(`${gender} / ${ageGroup} / ${exercise} / ${results}`);
+  console.log(
+    `Calculating ${gender} / ${ageGroup} / ${exercise} / ${results}...`,
+  );
+  console.log("");
   const { data, error } = await supabase
     .from("scoringCriteria")
     .select("points")
@@ -69,6 +85,7 @@ async function getIndividualExerciseScore(gender, ageGroup, exercise, results) {
     .eq("activityType", exercise)
     .gte("maxPerformanceValue", results)
     .lte("minPerformanceValue", results);
+  console.log(`score for ${exercise}`);
   console.log(data.at(0));
 
   if (error) {
@@ -92,6 +109,7 @@ async function calculateTotalScoresWithMinimumCheck(formData) {
     cardioExercise,
     cardioInput,
   } = formData;
+  console.log("USER INPUTTED:");
   console.log(formData);
   const [upperScore, coreScore, cardioScore] = await Promise.all([
     getIndividualExerciseScore(gender, ageGroup, upperExercise, upperInput),
@@ -99,7 +117,7 @@ async function calculateTotalScoresWithMinimumCheck(formData) {
     getIndividualExerciseScore(gender, ageGroup, cardioExercise, cardioInput),
   ]);
 
-  const isMinimumMet = checkIfMinimumIsNotMet(
+  const minimumMetStatus = checkIfMinimumIsNotMet(
     upperScore,
     coreScore,
     cardioScore,
@@ -110,16 +128,16 @@ async function calculateTotalScoresWithMinimumCheck(formData) {
     core: coreScore,
     cardio: cardioScore,
     total: upperScore + coreScore + cardioScore,
-    isMinimumMet,
+    minimumMetStatus,
   };
 }
 
 function checkIfMinimumIsNotMet(upperScore, coreScore, cardioScore) {
-  let isMinimumMet = { upper: true, core: true, false: true };
-  if (upperScore === 0) isMinimumMet.upper = false;
-  if (coreScore === 0) isMinimumMet.core = false;
-  if (cardioScore === 0) isMinimumMet.cardio = false;
-  return isMinimumMet;
+  let minimumMetStatus = { upper: true, core: true, false: true };
+  if (upperScore === 0) minimumMetStatus.upper = false;
+  if (coreScore === 0) minimumMetStatus.core = false;
+  if (cardioScore === 0) minimumMetStatus.cardio = false;
+  return minimumMetStatus;
 }
 
 export async function calculateAndReturnScores(data) {
