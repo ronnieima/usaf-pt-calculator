@@ -1,8 +1,13 @@
 import { Button } from "@/components/ui/button";
+import { useRouter } from "next/navigation";
 import { useFormContext } from "react-hook-form";
 
 const FormButtons = () => {
   const { reset } = useFormContext();
+  function handleReset() {
+    reset();
+  }
+
   return (
     <div className="flex flex-col gap-8">
       <Button
@@ -11,13 +16,13 @@ const FormButtons = () => {
       >
         Submit
       </Button>
-      <Button
-        type="reset"
-        onClick={() => reset()}
+      {/* <Button
+        type="button"
+        onClick={handleReset}
         className="bg-neutral-800 shadow-lg hover:bg-neutral-700"
       >
         Reset
-      </Button>
+      </Button> */}
     </div>
   );
 };

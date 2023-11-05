@@ -3,9 +3,10 @@ import GenderSelect from "./GenderSelect";
 import AgeGroupSelect from "./AgeGroupSelect";
 import ExerciseField from "./ExerciseField";
 import FormButtons from "./FormButtons";
+import Score from "./Score";
 
 import { FormValuesType, schema } from "../../../_util/validation";
-import { fetchExerciseScores } from "../../../_db/supabase";
+import { calculateAndReturnScores } from "../../../_db/supabase";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
@@ -15,12 +16,22 @@ const MainForm = () => {
   const methods = useForm<FormValuesType>({
     reValidateMode: "onChange",
     resolver: zodResolver(schema),
+    defaultValues: {
+      gender: "male",
+      ageGroup: "<25",
+      upperExercise: "pushups",
+      upperInput: "60",
+      coreExercise: "situps",
+      coreInput: "60",
+      cardioExercise: "mile",
+      cardioInput: "12:11",
+    },
   });
 
-  async function onSubmit(data: any) {
+  async function onSubmit(data: unknown) {
     console.log("submitting...");
-    console.log(data);
-    const res = await fetchExerciseScores(data);
+    const res = await calculateAndReturnScores(data);
+    console.log(res);
   }
 
   return (
@@ -86,6 +97,7 @@ const MainForm = () => {
         {/* reset/submit buttons */}
         <FormButtons />
       </form>
+      {/* <Score /> */}
     </FormProvider>
   );
 };

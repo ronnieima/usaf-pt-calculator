@@ -52,12 +52,12 @@ const ExerciseSelect = ({
               ))}
             </SelectContent>
           </Select>
-          <FormDescription>
+          {/* <FormDescription>
             View the{" "}
             <Link href={`/exercises#${type}`} className="hover:underline">
               {exerciseLabel} exercise demonstrations
             </Link>
-          </FormDescription>
+          </FormDescription> */}
           <FormMessage />
         </FormItem>
       )}

@@ -2,13 +2,13 @@ import { z } from "zod";
 
 export const schema = z
   .object({
-    gender: z.string().min(1, "Required boi"),
-    ageGroup: z.string().min(1, "Required boi"),
-    upperExercise: z.string().min(1, "Required boi"),
-    upperInput: z.string().min(1, "Required boi"),
-    coreExercise: z.string().min(1, "Required boi"),
-    coreInput: z.string().min(1, "Required boi"),
-    cardioExercise: z.string().min(1, "Required boi"),
+    gender: z.string(),
+    ageGroup: z.string(),
+    upperExercise: z.string(),
+    upperInput: z.string(),
+    coreExercise: z.string(),
+    coreInput: z.string(),
+    cardioExercise: z.string(),
     cardioInput: z
       .string()
       .min(0, "Must be a positive number")
