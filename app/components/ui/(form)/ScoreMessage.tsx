@@ -1,6 +1,5 @@
 import { useScoreContext } from "@/app/contexts/ScoreContext";
 import { Separator } from "@/components/ui/separator";
-import AnimatedNumber from "animated-number-react";
 
 function ScoreMessage() {
   const { scores } = useScoreContext();
@@ -13,11 +12,7 @@ function ScoreMessage() {
   return (
     <>
       <p className={`  text-6xl tracking-widest     `}>
-        Your Score is{" "}
-        <AnimatedNumber
-          value={totalScore}
-          formatValue={(value: number) => value.toFixed(1)}
-        />
+        Your Score is {totalScore}
       </p>
       <Separator />
 
