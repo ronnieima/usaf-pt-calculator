@@ -20,6 +20,7 @@ const GenderSelect = () => {
   const { control } = useFormContext();
   return (
     <FormField
+      rules={{ required: { value: true, message: "Select a gender" } }}
       control={control}
       name={`gender`}
       render={({ field }) => (

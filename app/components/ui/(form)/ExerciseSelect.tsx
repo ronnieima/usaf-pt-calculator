@@ -30,6 +30,7 @@ const ExerciseSelect = ({
   const { control } = useFormContext();
   return (
     <FormField
+      rules={{ required: { value: true, message: "Select an exercise" } }}
       control={control}
       name={`${type}Exercise`}
       render={({ field }) => (

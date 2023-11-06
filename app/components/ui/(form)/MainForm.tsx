@@ -16,16 +16,15 @@ import Score from "./Score";
 const MainForm = () => {
   const methods = useForm<FormValuesType>({
     reValidateMode: "onChange",
-    resolver: zodResolver(schema),
     defaultValues: {
-      gender: "male",
-      ageGroup: "<25",
-      upperExercise: "pushups",
-      upperInput: "60",
-      coreExercise: "situps",
-      coreInput: "60",
-      cardioExercise: "mile",
-      cardioInput: "12:11",
+      gender: "",
+      ageGroup: "",
+      upperExercise: "",
+      upperInput: "",
+      coreExercise: "",
+      coreInput: "",
+      cardioExercise: "",
+      cardioInput: "",
     },
   });
   const { setScores } = useScoreContext();

@@ -23,6 +23,7 @@ const AgeGroupSelect = ({ options }: AgeGroupSelectProps) => {
   const { control } = useFormContext();
   return (
     <FormField
+      rules={{ required: { value: true, message: "Select an age group" } }}
       control={control}
       name={`ageGroup`}
       render={({ field }) => (

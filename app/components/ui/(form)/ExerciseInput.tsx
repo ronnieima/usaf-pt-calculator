@@ -1,3 +1,4 @@
+import { getValidationRules } from "@/app/_util/validation";
 import {
   FormControl,
   FormField,
@@ -20,10 +21,14 @@ const ExerciseInput = ({
   exerciseLabel,
   type,
 }: ExerciseInputProps) => {
-  const { control } = useFormContext();
+  const {
+    control,
+    formState: { errors },
+  } = useFormContext();
   const isVisibleInput = Boolean(exerciseType);
   const isTimeBased = exerciseType === "plank" || exerciseType === "mile";
-
+  console.log(errors);
+  console.log(type, exerciseType);
   return (
     <div className="relative ">
       <div
@@ -36,6 +41,7 @@ const ExerciseInput = ({
         <FormField
           control={control}
           name={`${type}Input`}
+          rules={getValidationRules(type, exerciseType)}
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-2xl">{`${exerciseLabel} ${
