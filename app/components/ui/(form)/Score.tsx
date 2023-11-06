@@ -3,6 +3,7 @@ import ScoreBreakdown from "./ScoreBreakdown";
 import FailReasons from "./FailReasons";
 import ScoreMessage from "./ScoreMessage";
 import { MoonLoader } from "react-spinners";
+import { Separator } from "@/components/ui/separator";
 function Score() {
   const { isSubmitting, isSubmitSuccessful } = useFormState();
 
@@ -16,7 +17,9 @@ function Score() {
           } flex flex-col gap-4 text-center`}
         >
           <ScoreMessage />
+          <Separator />
           <FailReasons />
+
           <ScoreBreakdown />
         </section>
       )}

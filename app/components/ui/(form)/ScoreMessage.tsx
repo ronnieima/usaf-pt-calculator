@@ -1,4 +1,5 @@
 import { useScoreContext } from "@/app/contexts/ScoreContext";
+import { Separator } from "@/components/ui/separator";
 import AnimatedNumber from "animated-number-react";
 
 function ScoreMessage() {
@@ -18,6 +19,8 @@ function ScoreMessage() {
           formatValue={(value: number) => value.toFixed(1)}
         />
       </p>
+      <Separator />
+
       {totalScore >= 90 && !anyMinNotMet && (
         <p className="font-semibold text-green-500">Excellent</p>
       )}
