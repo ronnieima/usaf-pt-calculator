@@ -4,17 +4,18 @@ import AnimatedNumber from "animated-number-react";
 function ScoreMessage() {
   const { scores } = useScoreContext();
   const { minimumMetStatus, totalScore } = scores;
+
   const anyMinNotMet = Object.values(minimumMetStatus).some(
     (value) => value === false,
   );
 
   return (
     <>
-      <p className={`  text-6xl tracking-widest   `}>
+      <p className={`  text-6xl tracking-widest     `}>
         Your Score is{" "}
         <AnimatedNumber
           value={totalScore}
-          formatValue={(value) => value.toFixed(1)}
+          formatValue={(value: number) => value.toFixed(1)}
         />
       </p>
       {totalScore >= 90 && !anyMinNotMet && (

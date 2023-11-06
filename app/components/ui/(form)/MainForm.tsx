@@ -3,7 +3,6 @@ import GenderSelect from "./GenderSelect";
 import AgeGroupSelect from "./AgeGroupSelect";
 import ExerciseField from "./ExerciseField";
 import FormButtons from "./FormButtons";
-import Score from "./Score";
 
 import { FormValuesType, schema } from "../../../_util/validation";
 import { calculateAndReturnScores } from "../../../_db/supabase";
@@ -12,6 +11,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { Separator } from "@/components/ui/separator";
 import { useScoreContext } from "@/app/contexts/ScoreContext";
+import Score from "./Score";
 
 const MainForm = () => {
   const methods = useForm<FormValuesType>({
@@ -46,7 +46,7 @@ const MainForm = () => {
         {/* radio gender */}
         <GenderSelect />
 
-        <Separator className="bg-slate-500 opacity-70" />
+        <Separator />
 
         {/* select age group */}
         <AgeGroupSelect
@@ -63,7 +63,7 @@ const MainForm = () => {
           ]}
         />
 
-        <Separator className="bg-slate-500 opacity-70" />
+        <Separator />
 
         {/* select upper exercise  */}
         <ExerciseField
@@ -74,7 +74,7 @@ const MainForm = () => {
           ]}
         />
 
-        <Separator className="bg-slate-500 opacity-70" />
+        <Separator />
 
         {/* select core exercise */}
         <ExerciseField
@@ -86,7 +86,7 @@ const MainForm = () => {
           ]}
         />
 
-        <Separator className="bg-slate-500 opacity-70" />
+        <Separator />
 
         {/* select cardio exercise */}
         <ExerciseField
