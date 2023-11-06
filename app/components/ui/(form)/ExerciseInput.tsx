@@ -64,7 +64,7 @@ const ExerciseInput = ({
               }`}</FormLabel>
               <FormControl>
                 <Input
-                  inputMode={isTimeBased ? "none" : "numeric"}
+                  inputMode={isTimeBased ? "text" : "numeric"}
                   min={0}
                   onWheel={numberInputOnWheelPreventChange}
                   className=" text-zinc-800"
