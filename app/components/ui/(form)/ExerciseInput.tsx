@@ -7,7 +7,7 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import React from "react";
+import React, { WheelEventHandler } from "react";
 import { useFormContext } from "react-hook-form";
 
 type ExerciseInputProps = {
@@ -27,8 +27,23 @@ const ExerciseInput = ({
   } = useFormContext();
   const isVisibleInput = Boolean(exerciseType);
   const isTimeBased = exerciseType === "plank" || exerciseType === "mile";
-  console.log(errors);
-  console.log(type, exerciseType);
+
+  // Prevents scroll affecting number inputs
+  const numberInputOnWheelPreventChange: React.WheelEventHandler<
+    HTMLInputElement
+  > = (e) => {
+    // Prevent the input value change
+    e.currentTarget?.blur();
+
+    // Prevent the page/container scrolling
+    e.stopPropagation();
+
+    // Refocus immediately, on the next tick (after the current function is done)
+    setTimeout(() => {
+      e.currentTarget?.focus();
+    }, 0);
+  };
+
   return (
     <div className="relative ">
       <div
@@ -49,6 +64,8 @@ const ExerciseInput = ({
               }`}</FormLabel>
               <FormControl>
                 <Input
+                  min={0}
+                  onWheel={numberInputOnWheelPreventChange}
                   className=" text-zinc-800"
                   placeholder={isTimeBased ? "MM:SS" : "Reps"}
                   type={isTimeBased ? "text" : "number"}

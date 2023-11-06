@@ -4,17 +4,18 @@ import AgeGroupSelect from "./AgeGroupSelect";
 import ExerciseField from "./ExerciseField";
 import FormButtons from "./FormButtons";
 
-import { FormValuesType, schema } from "../../../_util/validation";
 import { calculateAndReturnScores } from "../../../_db/supabase";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import { FormProvider, useForm } from "react-hook-form";
 import { Separator } from "@/components/ui/separator";
 import { useScoreContext } from "@/app/contexts/ScoreContext";
 import Score from "./Score";
+import { useEffect } from "react";
+import { toast } from "react-toastify";
 
 const MainForm = () => {
-  const methods = useForm<FormValuesType>({
+  const methods = useForm({
+    mode: "onBlur",
     reValidateMode: "onChange",
     defaultValues: {
       gender: "",
@@ -37,70 +38,72 @@ const MainForm = () => {
   }
 
   return (
-    <FormProvider {...methods}>
-      <form
-        onSubmit={methods.handleSubmit(onSubmit)}
-        className="m-auto mb-3 flex max-w-2xl flex-col gap-16 text-2xl  uppercase tracking-widest text-slate-200 sm:max-w-3xl"
-      >
-        {/* radio gender */}
-        <GenderSelect />
+    <>
+      <FormProvider {...methods}>
+        <form
+          onSubmit={methods.handleSubmit(onSubmit)}
+          className="m-auto mb-3 flex max-w-2xl flex-col gap-16 text-2xl  uppercase tracking-widest text-slate-200 sm:max-w-3xl"
+        >
+          {/* gender */}
+          <GenderSelect />
 
-        <Separator />
+          <Separator />
 
-        {/* select age group */}
-        <AgeGroupSelect
-          options={[
-            "<25",
-            "25-29",
-            "30-34",
-            "35-39",
-            "40-44",
-            "45-49",
-            "50-54",
-            "55-59",
-            ">60",
-          ]}
-        />
+          {/* select age group */}
+          <AgeGroupSelect
+            options={[
+              "<25",
+              "25-29",
+              "30-34",
+              "35-39",
+              "40-44",
+              "45-49",
+              "50-54",
+              "55-59",
+              ">60",
+            ]}
+          />
 
-        <Separator />
+          <Separator />
 
-        {/* select upper exercise  */}
-        <ExerciseField
-          type="upper"
-          options={[
-            { value: "pushups", label: "Pushup" },
-            { value: "handrelease", label: "Hand Release" },
-          ]}
-        />
+          {/* select upper exercise  */}
+          <ExerciseField
+            type="upper"
+            options={[
+              { value: "pushups", label: "Pushup" },
+              { value: "handrelease", label: "Hand Release" },
+            ]}
+          />
 
-        <Separator />
+          <Separator />
 
-        {/* select core exercise */}
-        <ExerciseField
-          type="core"
-          options={[
-            { value: "situps", label: "Situp" },
-            { value: "crunches", label: "Cross Legged Reverse Crunch" },
-            { value: "plank", label: "Forearm Plank" },
-          ]}
-        />
+          {/* select core exercise */}
+          <ExerciseField
+            type="core"
+            options={[
+              { value: "situps", label: "Situp" },
+              { value: "crunches", label: "Cross Legged Reverse Crunch" },
+              { value: "plank", label: "Forearm Plank" },
+            ]}
+          />
 
-        <Separator />
+          <Separator />
 
-        {/* select cardio exercise */}
-        <ExerciseField
-          type="cardio"
-          options={[
-            { value: "mile", label: "1.5 Mile Run" },
-            { value: "shuttles", label: "20 Meter HAMR Shuttle" },
-          ]}
-        />
+          {/* select cardio exercise */}
+          <ExerciseField
+            type="cardio"
+            options={[
+              { value: "mile", label: "1.5 Mile Run" },
+              { value: "shuttles", label: "20 Meter HAMR Shuttle" },
+            ]}
+          />
 
-        {/* reset/submit buttons */}
-        <FormButtons />
-      </form>
-      <Score />
-    </FormProvider>
+          {/* reset/submit buttons */}
+          <FormButtons />
+        </form>
+        <Score />
+      </FormProvider>
+    </>
   );
 };
 

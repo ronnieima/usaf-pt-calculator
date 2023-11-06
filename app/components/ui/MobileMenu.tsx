@@ -33,7 +33,7 @@ const MobileMenu = () => {
                 onClick={() => push(link.href)}
                 variant="ghost"
                 key={link.href}
-                className={`justify-between text-zinc-600 ${
+                className={`h-24 justify-between text-zinc-600 ${
                   link.href === currentPath ? "bg-gray-200 font-bold" : ""
                 }`}
               >
