@@ -11,7 +11,7 @@ export default function ToastContainerWrapper() {
 
   return (
     <ToastContainer
-      position="top-right"
+      position="bottom-right"
       autoClose={5000}
       hideProgressBar={false}
       newestOnTop={false}
