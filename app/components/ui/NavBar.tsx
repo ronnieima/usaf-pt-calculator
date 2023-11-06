@@ -24,7 +24,7 @@ export const links = [
 
 function NavBar() {
   return (
-    <nav className="flex items-center justify-between bg-slate-200 px-6 py-2 sm:py-4 ">
+    <nav className="sticky top-0 z-10 flex w-full items-center justify-between bg-slate-200 px-6 py-2 sm:py-4 ">
       <Logo />
       <MobileMenu />
       <Links />
