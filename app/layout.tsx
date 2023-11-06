@@ -3,8 +3,9 @@ import "./globals.css";
 import NavBar from "./components/ui/NavBar";
 import Footer from "./components/ui/Footer";
 import ToastContainerWrapper from "./components/ToastContainerWrapper";
-import { toast } from "react-toastify";
 import Script from "next/script";
+
+import { GeistSans } from "geist/font";
 
 export const metadata = {
   title: "USAF PT Calculator",
@@ -17,7 +18,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" className={GeistSans.className}>
       <head>
         <link
           rel="icon"
@@ -32,7 +33,7 @@ export default function RootLayout({
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
         
-          gtag('config', ${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS});
+          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}');
         `}
         </Script>
       </head>
