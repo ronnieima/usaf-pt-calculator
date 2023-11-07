@@ -4,7 +4,7 @@ function FailReasons() {
   const {
     scores: { minimumMetStatus, totalScore },
   } = useScoreContext();
-  console.log(minimumMetStatus);
+  // console.log(minimumMetStatus);
   return (
     <>
       {totalScore < 75 && <p className=" text-red-500">Score below 75</p>}
