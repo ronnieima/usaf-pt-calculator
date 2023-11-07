@@ -1,11 +1,8 @@
 import React from "react";
+import UnderConstruction from "../_components/UnderConstruction";
 
 const ResourcesPage = () => {
-  return (
-    <div className="min-h-screen bg-gradient-to-r from-sky-800 to-indigo-800 p-5">
-      ResourcesPage
-    </div>
-  );
+  return <UnderConstruction />;
 };
 
 export default ResourcesPage;

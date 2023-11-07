@@ -1,12 +1,15 @@
 "use client";
 
+import UnderConstruction from "../_components/UnderConstruction";
+
 function ExercisesPage() {
   return (
-    <div className="h-screen bg-gradient-to-r from-sky-800 to-indigo-800 p-5">
+    <>
+      <UnderConstruction />
       <h2 id="upper">Upper Body Exercises</h2>
       <h2 id="core">Core Exercises</h2>
       <h2 id="cardio">Cardio Exercises</h2>
-    </div>
+    </>
   );
 }
 

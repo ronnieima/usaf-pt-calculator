@@ -1,11 +1,11 @@
 import React from "react";
+import { Button } from "../_components/ui/(shadcn)/button";
+import { ChevronRight } from "lucide-react";
+import Link from "next/link";
+import UnderConstruction from "../_components/UnderConstruction";
 
 const ChartsPage = () => {
-  return (
-    <div className="min-h-screen bg-gradient-to-r from-sky-800 to-indigo-800 p-5">
-      ChartsPage
-    </div>
-  );
+  return <UnderConstruction />;
 };
 
 export default ChartsPage;
