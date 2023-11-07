@@ -23,7 +23,7 @@ export default function RootLayout({
         <meta property="og:type" content="website" />
         <meta property="og:title" content="USAF PT Score Calculator" />
         <meta property="og:url" content="https://www.usafptcalculator.com/" />
-        <meta property="og:image" content="https://imgur.com/a/1ZnIYaJ" />
+        <meta property="og:image" content="https://imgur.com/a/7rAOOd1" />
         <meta
           property="og:description"
           content="Calculate your Air Force PT Score!"
