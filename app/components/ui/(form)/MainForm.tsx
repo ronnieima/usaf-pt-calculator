@@ -29,11 +29,11 @@ const MainForm = () => {
   const { setScores, scores } = useScoreContext();
 
   async function onSubmit(data: unknown) {
-    console.log("submitting...");
+    // console.log("submitting...");
     const res = await calculateAndReturnScores(data);
-    console.log(data);
+    // console.log(data);
     setScores(res);
-    console.log(scores);
+    // console.log(scores);
   }
 
   return (

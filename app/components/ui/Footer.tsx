@@ -9,6 +9,7 @@ const Footer = () => {
           className="transition-color text-lg font-bold text-indigo-500 hover:text-indigo-400  hover:underline"
           href="https://www.imagawa.dev"
           target="_blank"
+          title="My Portfolio Website"
         >
           Ronnie Kaito Imagawa
         </Link>
