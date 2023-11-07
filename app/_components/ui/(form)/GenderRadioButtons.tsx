@@ -18,7 +18,10 @@ const buttonStyle =
   "w-full py-8 transition-colors duration-300 hover:cursor-pointer active:bg-zinc-700 peer-aria-checked:bg-blue-600 peer-aria-checked:ring-2 peer-aria-checked:ring-ring peer-aria-checked:ring-slate-300 text-2xl shadow-lg";
 
 function GenderRadioButtons() {
-  const { control, watch } = useFormContext();
+  const {
+    control,
+    formState: { isSubmitting },
+  } = useFormContext();
   return (
     <FormField
       control={control}
@@ -29,6 +32,7 @@ function GenderRadioButtons() {
           <FormLabel className="text-2xl">Gender</FormLabel>
           <FormControl>
             <RadioGroup
+              disabled={isSubmitting}
               onValueChange={field.onChange}
               defaultValue={field.value}
               className="flex flex-col"

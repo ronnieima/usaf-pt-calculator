@@ -7,7 +7,7 @@ import {
   FormMessage,
 } from "@/app/_components/ui/(shadcn)/form";
 import { Input } from "@/app/_components/ui/(shadcn)/input";
-import React, { WheelEventHandler } from "react";
+import React from "react";
 import { useFormContext } from "react-hook-form";
 
 type ExerciseInputProps = {
@@ -23,7 +23,7 @@ const ExerciseInput = ({
 }: ExerciseInputProps) => {
   const {
     control,
-    formState: { errors },
+    formState: { isSubmitting },
   } = useFormContext();
   const isVisibleInput = Boolean(exerciseType);
   const isTimeBased = exerciseType === "plank" || exerciseType === "mile";
@@ -64,6 +64,7 @@ const ExerciseInput = ({
               }`}</FormLabel>
               <FormControl>
                 <Input
+                  disabled={isSubmitting}
                   inputMode={isTimeBased ? "text" : "numeric"}
                   min={0}
                   onWheel={numberInputOnWheelPreventChange}

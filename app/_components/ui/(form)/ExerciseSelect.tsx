@@ -27,7 +27,10 @@ const ExerciseSelect = ({
   exerciseLabel,
   type,
 }: ExerciseSelectProps) => {
-  const { control } = useFormContext();
+  const {
+    control,
+    formState: { isSubmitting },
+  } = useFormContext();
   return (
     <FormField
       rules={{ required: { value: true, message: "Select an exercise" } }}
@@ -39,7 +42,11 @@ const ExerciseSelect = ({
             <h2>{exerciseLabel} Exercise</h2>
             {/* <span>MINmax</span> */}
           </FormLabel>
-          <Select onValueChange={field.onChange} defaultValue={field.value}>
+          <Select
+            disabled={isSubmitting}
+            onValueChange={field.onChange}
+            defaultValue={field.value}
+          >
             <FormControl>
               <SelectTrigger>
                 <SelectValue placeholder="Select exercise type" />

@@ -4,26 +4,21 @@ import { useFormContext } from "react-hook-form";
 
 const FormButtons = () => {
   const {
-    reset,
-    formState: { isLoading },
+    formState: { isSubmitting },
   } = useFormContext();
-
-  function handleReset() {
-    reset();
-  }
 
   return (
     <div className="flex flex-col gap-8">
       <Button
-        disabled={isLoading}
+        disabled={isSubmitting}
         type="submit"
         className={`bg-green-800 py-8 text-2xl shadow-lg hover:bg-green-700`}
       >
-        Submit
+        {isSubmitting ? "Loading your score..." : "Submit"}
       </Button>
       {/* <Button
         type="button"
-        onClick={handleReset}
+        onClick={() => reset()}
         className="bg-neutral-800 shadow-lg hover:bg-neutral-700"
       >
         Reset

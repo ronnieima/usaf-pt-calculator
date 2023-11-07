@@ -20,7 +20,10 @@ type AgeGroupSelectProps = {
 };
 
 const AgeGroupSelect = ({ options }: AgeGroupSelectProps) => {
-  const { control } = useFormContext();
+  const {
+    control,
+    formState: { isSubmitting },
+  } = useFormContext();
   return (
     <FormField
       rules={{ required: { value: true, message: "Select an age group" } }}
@@ -31,7 +34,11 @@ const AgeGroupSelect = ({ options }: AgeGroupSelectProps) => {
           <FormLabel className="text-2xl">
             <h2>Age Group</h2>
           </FormLabel>
-          <Select onValueChange={field.onChange} defaultValue={field.value}>
+          <Select
+            disabled={isSubmitting}
+            onValueChange={field.onChange}
+            defaultValue={field.value}
+          >
             <FormControl>
               <SelectTrigger>
                 <SelectValue placeholder="Select age group" />
