@@ -1,0 +1,65 @@
+"use client";
+
+import { Button } from "@/components/ui/button";
+import {
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from "@/components/ui/form";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { useFormContext } from "react-hook-form";
+
+const buttonStyle =
+  "w-full py-8 transition-colors duration-300 hover:cursor-pointer active:bg-zinc-700 peer-aria-checked:bg-blue-600 peer-aria-checked:ring-2 peer-aria-checked:ring-ring peer-aria-checked:ring-slate-300 text-2xl shadow-lg";
+
+function GenderRadioButtons() {
+  const { control, watch } = useFormContext();
+  return (
+    <FormField
+      control={control}
+      name={"gender"}
+      rules={{ required: { value: true, message: "Gender is required" } }}
+      render={({ field }) => (
+        <FormItem className="">
+          <FormLabel className="text-2xl">Gender</FormLabel>
+          <FormControl>
+            <RadioGroup
+              onValueChange={field.onChange}
+              defaultValue={field.value}
+              className="flex flex-col"
+            >
+              <div className="grid gap-4 text-center sm:grid-cols-2">
+                <FormItem>
+                  <FormControl>
+                    <RadioGroupItem className="peer hidden" value="male" />
+                  </FormControl>
+                  <Button
+                    asChild
+                    // peer-aria-checked must be used with RadixUI components
+                    className={buttonStyle}
+                  >
+                    <FormLabel>Male</FormLabel>
+                  </Button>
+                </FormItem>
+
+                <FormItem>
+                  <FormControl>
+                    <RadioGroupItem className="peer hidden" value="female" />
+                  </FormControl>
+                  <Button asChild className={buttonStyle}>
+                    <FormLabel className="font-normal">Female</FormLabel>
+                  </Button>
+                </FormItem>
+              </div>
+            </RadioGroup>
+          </FormControl>
+          <FormMessage />
+        </FormItem>
+      )}
+    />
+  );
+}
+
+export default GenderRadioButtons;

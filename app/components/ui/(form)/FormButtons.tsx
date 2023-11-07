@@ -17,7 +17,7 @@ const FormButtons = () => {
       <Button
         disabled={isLoading}
         type="submit"
-        className={`bg-green-800 py-8 shadow-lg hover:bg-green-700 `}
+        className={`bg-green-800 py-8 text-2xl shadow-lg hover:bg-green-700`}
       >
         Submit
       </Button>

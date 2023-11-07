@@ -35,7 +35,7 @@ const ExerciseSelect = ({
       name={`${type}Exercise`}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className=" flex justify-between text-base sm:text-2xl">
+          <FormLabel className=" flex justify-between  text-2xl">
             <h2>{exerciseLabel} Exercise</h2>
             {/* <span>MINmax</span> */}
           </FormLabel>
