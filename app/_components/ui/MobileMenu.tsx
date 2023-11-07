@@ -11,8 +11,8 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/components/ui/sheet";
-import { Button } from "@/components/ui/button";
+} from "@/app/_components/ui/(shadcn)/sheet";
+import { Button } from "@/app/_components/ui/(shadcn)/button";
 import { ChevronRight, Menu } from "lucide-react";
 
 const MobileMenu = () => {

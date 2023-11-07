@@ -1,5 +1,5 @@
 import { useScoreContext } from "@/app/contexts/ScoreContext";
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/app/_components/ui/(shadcn)/separator";
 
 function ScoreMessage() {
   const { scores } = useScoreContext();

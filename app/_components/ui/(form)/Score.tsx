@@ -3,7 +3,7 @@ import ScoreBreakdown from "./ScoreBreakdown";
 import FailReasons from "./FailReasons";
 import ScoreMessage from "./ScoreMessage";
 import { MoonLoader } from "react-spinners";
-import { Separator } from "@/components/ui/separator";
+import { Separator } from "@/app/_components/ui/(shadcn)/separator";
 function Score() {
   const { isSubmitting, isSubmitSuccessful } = useFormState();
 

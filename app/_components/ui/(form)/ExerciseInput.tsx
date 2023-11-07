@@ -5,8 +5,8 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+} from "@/app/_components/ui/(shadcn)/form";
+import { Input } from "@/app/_components/ui/(shadcn)/input";
 import React, { WheelEventHandler } from "react";
 import { useFormContext } from "react-hook-form";
 
