@@ -7,7 +7,7 @@ import { calculateAndReturnScores } from "../../../_db/supabase";
 
 import { FormProvider, useForm } from "react-hook-form";
 import { Separator } from "@/app/_components/ui/(shadcn)/separator";
-import { useScoreContext } from "@/app/contexts/ScoreContext";
+import { useScoreContext } from "@/app/_contexts/ScoreContext";
 import Score from "./Score";
 import GenderRadio from "./GenderRadioButtons";
 

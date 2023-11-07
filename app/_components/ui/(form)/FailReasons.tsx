@@ -1,4 +1,4 @@
-import { useScoreContext } from "@/app/contexts/ScoreContext";
+import { useScoreContext } from "@/app/_contexts/ScoreContext";
 
 function FailReasons() {
   const {

@@ -1,7 +1,7 @@
 import { toast } from "react-toastify";
 import MainForm from "./_components/ui/(form)/MainForm";
 import Header from "./_components/ui/Header";
-import ScoreContextProvider from "./contexts/ScoreContext";
+import ScoreContextProvider from "./_contexts/ScoreContext";
 
 export default function Home() {
   return (

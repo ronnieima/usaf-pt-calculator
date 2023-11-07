@@ -1,7 +1,7 @@
 import { GiAbdominalArmor, GiMuscleUp } from "react-icons/gi";
 import { FaRunning } from "react-icons/fa";
 import IndividualExerciseScore from "./IndividualExerciseScore";
-import { useScoreContext } from "@/app/contexts/ScoreContext";
+import { useScoreContext } from "@/app/_contexts/ScoreContext";
 
 function ScoreBreakdown() {
   const {
