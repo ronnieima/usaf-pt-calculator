@@ -62,7 +62,7 @@ const ExerciseInput = ({
               <FormLabel className="text-2xl">{`${exerciseLabel} ${
                 isTimeBased ? "Time" : "Reps"
               }`}</FormLabel>
-              <FormControl>
+              <FormControl className="border-card-foreground">
                 <Input
                   disabled={isSubmitting}
                   inputMode={isTimeBased ? "text" : "numeric"}

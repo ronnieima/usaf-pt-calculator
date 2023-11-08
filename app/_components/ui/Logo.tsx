@@ -5,11 +5,9 @@ import Link from "next/link";
 function Logo() {
   return (
     <Link href="/">
-      <Image
-        src={logo}
-        alt="Logo"
-        className="h-auto max-h-12 w-auto md:max-h-16"
-      />
+      <p className="text-4xl leading-[0.8]">
+        USAF PT <br /> CALCULATOR
+      </p>
     </Link>
   );
 }

@@ -21,7 +21,7 @@ export default function RootLayout({
   const description =
     "Optimize your fitness journey with our Air Force PT Score Calculator web app! Tailored for USAF personnel, this user-friendly tool helps you track your physical fitness progress effortlessly. Accurate, efficient, and easy to use, our calculator ensures you stay on top of your fitness goals. Perfect for airmen stationed worldwide, achieve your best PT scores with precision and confidence. Try it now!";
   return (
-    <html lang="en" className={GeistSans.className}>
+    <html lang="en" className={`${GeistSans.className} scroll-smooth`}>
       <head>
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@imagawaDev" />
@@ -57,7 +57,7 @@ export default function RootLayout({
         `}
         </Script>
       </head>
-      <body className="min-h-full bg-gradient-to-r from-sky-800 to-indigo-800">
+      <body className="min-h-full  bg-gradient-to-r from-sky-800 to-indigo-800">
         <ToastContainerWrapper />
         <NavBar />
         {children}
