@@ -1,6 +1,5 @@
 "use client";
 import AgeGroupSelect from "./AgeGroupSelect";
-import ExerciseField from "./ExerciseField";
 import FormButtons from "./FormButtons";
 
 import { calculateAndReturnScores } from "../../../_db/supabase";
@@ -10,47 +9,22 @@ import { Separator } from "@/app/_components/ui/(shadcn)/separator";
 import { useScoreContext } from "@/app/_contexts/ScoreContext";
 import Score from "./Score";
 import GenderRadio from "./GenderRadioButtons";
-
-const exercises = [
-  {
-    category: "upper",
-    options: [
-      { value: "pushups", label: "Pushup" },
-      { value: "handrelease", label: "Hand Release" },
-    ],
-  },
-
-  {
-    category: "core",
-    options: [
-      { value: "situps", label: "Situp" },
-      { value: "crunches", label: "Cross Legged Reverse Crunch" },
-      { value: "plank", label: "Forearm Plank" },
-    ],
-  },
-  {
-    category: "cardio",
-    options: [
-      { value: "mile", label: "1.5 Mile Run" },
-      { value: "shuttles", label: "20 Meter HAMR Shuttle" },
-    ],
-  },
-];
+import ExerciseFields from "./ExerciseFields";
 
 const MainForm = () => {
   const methods = useForm({
     mode: "onChange",
     reValidateMode: "onChange",
-    defaultValues: {
-      gender: "male",
-      ageGroup: "<25",
-      upperExercise: "pushups",
-      upperInput: "60",
-      coreExercise: "situps",
-      coreInput: "42",
-      cardioExercise: "shuttles",
-      cardioInput: "23",
-    },
+    // defaultValues: {
+    //   gender: "male",
+    //   ageGroup: "<25",
+    //   upperExercise: "pushups",
+    //   upperInput: "60",
+    //   coreExercise: "situps",
+    //   coreInput: "42",
+    //   cardioExercise: "shuttles",
+    //   cardioInput: "23",
+    // },
   });
   const { setScores, scores } = useScoreContext();
 
@@ -88,17 +62,7 @@ const MainForm = () => {
           ]}
         />
 
-        {exercises.map((exercise) => {
-          return (
-            <>
-              <Separator />
-              <ExerciseField
-                category={exercise.category}
-                options={exercise.options}
-              />
-            </>
-          );
-        })}
+        <ExerciseFields />
 
         {/* reset/submit buttons */}
         <FormButtons />

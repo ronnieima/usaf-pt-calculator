@@ -13,24 +13,16 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/_components/ui/(shadcn)/select";
-import Link from "next/link";
 import React from "react";
 import { useFormContext } from "react-hook-form";
+import { Exercise } from "./ExerciseFields";
 
-type ExerciseSelectProps = {
-  options: { value: string; label: string }[];
-  exerciseLabel: string;
-  category: string;
-};
-const ExerciseSelect = ({
-  options,
-  exerciseLabel,
-  category,
-}: ExerciseSelectProps) => {
+const ExerciseSelect = ({ options, category }: Exercise) => {
   const {
     control,
     formState: { isSubmitting },
   } = useFormContext();
+
   return (
     <FormField
       rules={{ required: { value: true, message: "Select an exercise" } }}
@@ -39,8 +31,7 @@ const ExerciseSelect = ({
       render={({ field }) => (
         <FormItem>
           <FormLabel className=" flex justify-between  text-2xl">
-            <h2>{exerciseLabel} Exercise</h2>
-            {/* <span>MINmax</span> */}
+            <h2>{category} Exercise</h2>
           </FormLabel>
           <Select
             disabled={isSubmitting}
@@ -60,12 +51,6 @@ const ExerciseSelect = ({
               ))}
             </SelectContent>
           </Select>
-          {/* <FormDescription>
-            View the{" "}
-            <Link href={`/exercises#${type}`} className="hover:underline">
-              {exerciseLabel} exercise demonstrations
-            </Link>
-          </FormDescription> */}
           <FormMessage />
         </FormItem>
       )}
