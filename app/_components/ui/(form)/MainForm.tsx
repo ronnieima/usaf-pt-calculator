@@ -11,19 +11,45 @@ import { useScoreContext } from "@/app/_contexts/ScoreContext";
 import Score from "./Score";
 import GenderRadio from "./GenderRadioButtons";
 
+const exercises = [
+  {
+    category: "upper",
+    options: [
+      { value: "pushups", label: "Pushup" },
+      { value: "handrelease", label: "Hand Release" },
+    ],
+  },
+
+  {
+    category: "core",
+    options: [
+      { value: "situps", label: "Situp" },
+      { value: "crunches", label: "Cross Legged Reverse Crunch" },
+      { value: "plank", label: "Forearm Plank" },
+    ],
+  },
+  {
+    category: "cardio",
+    options: [
+      { value: "mile", label: "1.5 Mile Run" },
+      { value: "shuttles", label: "20 Meter HAMR Shuttle" },
+    ],
+  },
+];
+
 const MainForm = () => {
   const methods = useForm({
     mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: {
-      gender: "",
-      ageGroup: "",
-      upperExercise: "",
-      upperInput: "",
-      coreExercise: "",
-      coreInput: "",
-      cardioExercise: "",
-      cardioInput: "",
+      gender: "male",
+      ageGroup: "<25",
+      upperExercise: "pushups",
+      upperInput: "60",
+      coreExercise: "situps",
+      coreInput: "42",
+      cardioExercise: "shuttles",
+      cardioInput: "23",
     },
   });
   const { setScores, scores } = useScoreContext();
@@ -62,39 +88,17 @@ const MainForm = () => {
           ]}
         />
 
-        <Separator />
-
-        {/* select upper exercise  */}
-        <ExerciseField
-          type="upper"
-          options={[
-            { value: "pushups", label: "Pushup" },
-            { value: "handrelease", label: "Hand Release" },
-          ]}
-        />
-
-        <Separator />
-
-        {/* select core exercise */}
-        <ExerciseField
-          type="core"
-          options={[
-            { value: "situps", label: "Situp" },
-            { value: "crunches", label: "Cross Legged Reverse Crunch" },
-            { value: "plank", label: "Forearm Plank" },
-          ]}
-        />
-
-        <Separator />
-
-        {/* select cardio exercise */}
-        <ExerciseField
-          type="cardio"
-          options={[
-            { value: "mile", label: "1.5 Mile Run" },
-            { value: "shuttles", label: "20 Meter HAMR Shuttle" },
-          ]}
-        />
+        {exercises.map((exercise) => {
+          return (
+            <>
+              <Separator />
+              <ExerciseField
+                category={exercise.category}
+                options={exercise.options}
+              />
+            </>
+          );
+        })}
 
         {/* reset/submit buttons */}
         <FormButtons />

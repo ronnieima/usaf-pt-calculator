@@ -38,18 +38,18 @@ async function getExerciseMaximum(gender, ageGroup, exercise) {
   }
 }
 
-async function getExerciseMinMax(gender, ageGroup, exercise) {
+export async function getExerciseMinMax(gender, ageGroup, exercise) {
   const [min, max] = await Promise.all([
     getExerciseMinimum(gender, ageGroup, exercise),
     getExerciseMaximum(gender, ageGroup, exercise),
   ]);
-
-  return [min, max];
+  console.log(`${min} ${max} SUBMITTING `);
+  return { min, max };
 }
 
 async function getIndividualExerciseScore(gender, ageGroup, exercise, results) {
   // returns early if minimum score is not met for the exercise
-  const [minimumValue, maximumValue] = await getExerciseMinMax(
+  const { minimumValue, maximumValue } = await getExerciseMinMax(
     gender,
     ageGroup,
     exercise,

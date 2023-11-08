@@ -20,12 +20,12 @@ import { useFormContext } from "react-hook-form";
 type ExerciseSelectProps = {
   options: { value: string; label: string }[];
   exerciseLabel: string;
-  type: string;
+  category: string;
 };
 const ExerciseSelect = ({
   options,
   exerciseLabel,
-  type,
+  category,
 }: ExerciseSelectProps) => {
   const {
     control,
@@ -35,7 +35,7 @@ const ExerciseSelect = ({
     <FormField
       rules={{ required: { value: true, message: "Select an exercise" } }}
       control={control}
-      name={`${type}Exercise`}
+      name={`${category}Exercise`}
       render={({ field }) => (
         <FormItem>
           <FormLabel className=" flex justify-between  text-2xl">

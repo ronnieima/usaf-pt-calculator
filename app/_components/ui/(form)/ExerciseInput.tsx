@@ -7,24 +7,51 @@ import {
   FormMessage,
 } from "@/app/_components/ui/(shadcn)/form";
 import { Input } from "@/app/_components/ui/(shadcn)/input";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { formatExerciseName } from "@/app/_util/helpers";
+import { watch } from "fs";
+import { getExerciseMinMax } from "@/app/_db/supabase";
 
 type ExerciseInputProps = {
   exerciseType: string;
   exerciseLabel: string;
-  type: string;
+  category: string;
 };
 
-const ExerciseInput = ({ exerciseType, type }: ExerciseInputProps) => {
+const ExerciseInput = ({ exerciseType, category }: ExerciseInputProps) => {
   const {
     control,
     formState: { isSubmitting },
+    watch,
   } = useFormContext();
   const isVisibleInput = Boolean(exerciseType);
   const isTimeBased = exerciseType === "plank" || exerciseType === "mile";
   const exerciseLabel = formatExerciseName(exerciseType);
+
+  const [min, setMin] = useState();
+  const [max, setMax] = useState();
+  const showMinMax = min || max;
+
+  const gender = watch("gender");
+  const ageGroup = watch("ageGroup");
+
+  useEffect(() => {
+    // if gender, age group, or exercise is not selected, the effect will not run
+    if (!gender || !ageGroup || !exerciseType) return;
+
+    async function fetchMinMax() {
+      const { min, max } = await getExerciseMinMax(
+        gender,
+        ageGroup,
+        exerciseType,
+      );
+      setMin(min);
+      setMax(max);
+    }
+
+    fetchMinMax();
+  }, [gender, ageGroup, exerciseType]);
 
   // Prevents scroll affecting number inputs
   const numberInputOnWheelPreventChange: React.WheelEventHandler<
@@ -53,8 +80,8 @@ const ExerciseInput = ({ exerciseType, type }: ExerciseInputProps) => {
       >
         <FormField
           control={control}
-          name={`${type}Input`}
-          rules={getValidationRules(type, exerciseType)}
+          name={`${category}Input`}
+          rules={getValidationRules(category, exerciseType)}
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-2xl">{`${exerciseLabel} ${
@@ -72,6 +99,18 @@ const ExerciseInput = ({ exerciseType, type }: ExerciseInputProps) => {
                   {...field}
                 />
               </FormControl>
+              {/* <p>{`Gender: ${gender} | Age: ${ageGroup} | Exercise: ${exerciseType}`}</p> */}
+              {showMinMax && (
+                <section className="flex justify-between">
+                  <p className="text-red-700">
+                    {`Min: ${min} ${isTimeBased ? "" : "reps"}`}
+                  </p>
+                  <p className="text-green-700">
+                    {`Max: ${max} ${!isTimeBased ? "reps" : ""}`}
+                  </p>
+                </section>
+              )}
+
               <FormMessage />
             </FormItem>
           )}
