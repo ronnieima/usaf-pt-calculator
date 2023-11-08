@@ -23,7 +23,7 @@ const ExerciseField = ({ type, options }: ExerciseFieldProps) => {
   // }, [exerciseType, setValue, exerciseLabel]);
 
   return (
-    <section className="flex flex-col gap-4 ">
+    <section className="flex flex-col gap-4">
       <ExerciseSelect
         options={options}
         exerciseLabel={exerciseLabel}

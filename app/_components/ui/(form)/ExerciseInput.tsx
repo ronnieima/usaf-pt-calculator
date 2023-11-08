@@ -9,6 +9,7 @@ import {
 import { Input } from "@/app/_components/ui/(shadcn)/input";
 import React from "react";
 import { useFormContext } from "react-hook-form";
+import { formatExerciseName } from "@/app/_util/helpers";
 
 type ExerciseInputProps = {
   exerciseType: string;
@@ -16,17 +17,14 @@ type ExerciseInputProps = {
   type: string;
 };
 
-const ExerciseInput = ({
-  exerciseType,
-  exerciseLabel,
-  type,
-}: ExerciseInputProps) => {
+const ExerciseInput = ({ exerciseType, type }: ExerciseInputProps) => {
   const {
     control,
     formState: { isSubmitting },
   } = useFormContext();
   const isVisibleInput = Boolean(exerciseType);
   const isTimeBased = exerciseType === "plank" || exerciseType === "mile";
+  const exerciseLabel = formatExerciseName(exerciseType);
 
   // Prevents scroll affecting number inputs
   const numberInputOnWheelPreventChange: React.WheelEventHandler<
@@ -66,9 +64,9 @@ const ExerciseInput = ({
                 <Input
                   disabled={isSubmitting}
                   inputMode={isTimeBased ? "text" : "numeric"}
+                  className="focus:ring-primary"
                   min={0}
                   onWheel={numberInputOnWheelPreventChange}
-                  className=" text-zinc-800"
                   placeholder={isTimeBased ? "MM:SS" : "Reps"}
                   type={isTimeBased ? "text" : "number"}
                   {...field}

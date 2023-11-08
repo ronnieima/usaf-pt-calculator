@@ -12,8 +12,8 @@ const Header = () => {
         sequence={["Calculate your Air Force PT score."]}
         wrapper="h1"
         speed={50}
-        className="text-shadow-lg block w-[66%]
-         text-center text-5xl sm:text-7xl"
+        className="text-shadow-lg block w-[80%]
+         text-center text-5xl sm:w-[66%] sm:text-7xl"
       />
       <Button
         asChild

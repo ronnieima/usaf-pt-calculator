@@ -24,8 +24,8 @@ export const links = [
 
 function NavBar() {
   return (
-    <header className="sticky top-0 z-50 shadow-md">
-      <nav className="flex w-full items-center justify-between bg-slate-200 px-6 py-2 sm:py-4 ">
+    <header className="h-18 sticky top-0 z-50 shadow-md ">
+      <nav className="flex h-full items-center justify-between bg-slate-200 px-6  py-4 sm:py-4 ">
         <Logo />
 
         <MobileMenu />
