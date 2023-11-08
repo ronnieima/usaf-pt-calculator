@@ -40,7 +40,10 @@ function GenderRadioButtons() {
               <div className="grid gap-4 text-center sm:grid-cols-2">
                 <FormItem>
                   <FormControl>
-                    <RadioGroupItem className="peer hidden" value="male" />
+                    <RadioGroupItem
+                      className="peer hidden focus-visible:border-opacity-25"
+                      value="male"
+                    />
                   </FormControl>
                   <Button
                     asChild

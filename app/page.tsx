@@ -17,12 +17,15 @@ export default function Home() {
     <main className="pb-16 text-background sm:px-8 md:px-16 lg:px-32">
       <Header />
 
-      <Card className="bg-card/90 shadow-xl sm:px-16" id="form-card">
-        <CardHeader className="py-16 text-center">
-          <CardTitle className="text-4xl">
+      <Card
+        className="shadow-slate- rounded-2xl bg-card/90 shadow-2xl sm:px-16"
+        id="form-card"
+      >
+        <CardHeader className="pb-16 pt-8 text-center sm:pt-16">
+          <CardTitle className="text-shadow-lg text-3xl sm:text-5xl">
             Get your PT score with ease.
           </CardTitle>
-          <CardDescription>
+          <CardDescription className="text-xl sm:text-2xl">
             Just input your results and click submit!
           </CardDescription>
         </CardHeader>
@@ -31,9 +34,9 @@ export default function Home() {
             <MainForm />
           </ScoreContextProvider>
         </CardContent>
-        <CardFooter>
+        {/* <CardFooter>
           <p>Card Footer</p>
-        </CardFooter>
+        </CardFooter> */}
       </Card>
     </main>
   );

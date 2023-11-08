@@ -13,17 +13,17 @@ import GenderRadio from "./GenderRadioButtons";
 
 const MainForm = () => {
   const methods = useForm({
-    mode: "onBlur",
+    mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: {
-      gender: "",
-      ageGroup: "",
-      upperExercise: "",
-      upperInput: "",
-      coreExercise: "",
-      coreInput: "",
-      cardioExercise: "",
-      cardioInput: "",
+      gender: "male",
+      ageGroup: "<25",
+      upperExercise: "pushups",
+      upperInput: "50",
+      coreExercise: "situps",
+      coreInput: "23",
+      cardioExercise: "shuttles",
+      cardioInput: "44",
     },
   });
   const { setScores, scores } = useScoreContext();
