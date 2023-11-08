@@ -39,7 +39,7 @@ const AgeGroupSelect = ({ options }: AgeGroupSelectProps) => {
             onValueChange={field.onChange}
             defaultValue={field.value}
           >
-            <FormControl>
+            <FormControl className="border-card-foreground">
               <SelectTrigger>
                 <SelectValue placeholder="Select age group" />
               </SelectTrigger>

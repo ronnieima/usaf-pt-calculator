@@ -15,7 +15,7 @@ import {
 import { useFormContext } from "react-hook-form";
 
 const buttonStyle =
-  "w-full py-8 transition-colors duration-300 hover:cursor-pointer active:bg-zinc-700 peer-aria-checked:bg-blue-600 peer-aria-checked:ring-2 peer-aria-checked:ring-ring peer-aria-checked:ring-slate-300 text-2xl shadow-lg";
+  "w-full py-8 transition-colors duration-300 hover:cursor-pointer active:bg-zinc-700 peer-aria-checked:bg-primary bg-muted-foreground peer-aria-checked:ring-2 peer-aria-checked:ring-ring peer-aria-checked:ring-foreground text-2xl shadow-lg";
 
 function GenderRadioButtons() {
   const {
@@ -40,7 +40,10 @@ function GenderRadioButtons() {
               <div className="grid gap-4 text-center sm:grid-cols-2">
                 <FormItem>
                   <FormControl>
-                    <RadioGroupItem className="peer hidden" value="male" />
+                    <RadioGroupItem
+                      className="peer hidden focus-visible:border-opacity-25"
+                      value="male"
+                    />
                   </FormControl>
                   <Button
                     asChild

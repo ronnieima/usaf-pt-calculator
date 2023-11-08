@@ -8,7 +8,7 @@ function Score() {
   const { isSubmitting, isSubmitSuccessful } = useFormState();
 
   return (
-    <section className="my-16 flex flex-col items-center justify-center gap-8 text-4xl uppercase text-white">
+    <section className="my-16 flex flex-col  items-center justify-center gap-8 text-4xl uppercase text-foreground">
       {isSubmitting && <MoonLoader color="#36d7b7" />}
       {isSubmitSuccessful && (
         <section

@@ -1,15 +1,43 @@
 import { toast } from "react-toastify";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+
 import MainForm from "./_components/ui/(form)/MainForm";
 import Header from "./_components/ui/Header";
 import ScoreContextProvider from "./_contexts/ScoreContext";
 
 export default function Home() {
   return (
-    <div className="min-h-full bg-gradient-to-r from-sky-800 to-indigo-800 p-5">
+    <main className="pb-16 text-background sm:px-8 md:px-16 lg:px-32">
       <Header />
-      <ScoreContextProvider>
-        <MainForm />
-      </ScoreContextProvider>
-    </div>
+
+      <Card
+        className="shadow-slate- rounded-2xl bg-card/90 shadow-2xl sm:px-16"
+        id="form-card"
+      >
+        <CardHeader className="pb-16 pt-8 text-center sm:pt-16">
+          <CardTitle className="text-shadow-lg text-3xl sm:text-5xl">
+            Get your PT score with ease.
+          </CardTitle>
+          <CardDescription className="text-xl sm:text-2xl">
+            Just input your results and click submit!
+          </CardDescription>
+        </CardHeader>
+        <CardContent>
+          <ScoreContextProvider>
+            <MainForm />
+          </ScoreContextProvider>
+        </CardContent>
+        {/* <CardFooter>
+          <p>Card Footer</p>
+        </CardFooter> */}
+      </Card>
+    </main>
   );
 }

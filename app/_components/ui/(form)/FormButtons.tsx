@@ -12,7 +12,7 @@ const FormButtons = () => {
       <Button
         disabled={isSubmitting}
         type="submit"
-        className={`bg-green-800 py-8 text-2xl shadow-lg hover:bg-green-700`}
+        className={`bg-green-800 py-8 text-2xl shadow-2xl shadow-slate-600 hover:bg-green-700`}
       >
         {isSubmitting ? "Loading your score..." : "Submit"}
       </Button>

@@ -11,10 +11,8 @@ module.exports = {
     container: {
       center: true,
       padding: "2rem",
-      screens: {
-        "2xl": "1400px",
-      },
     },
+
     extend: {
       colors: {
         border: "hsl(var(--border))",
@@ -70,7 +68,25 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
       },
+      textShadow: {
+        sm: "0 1px 2px rgb(0,0,0,40%)",
+        DEFAULT: "0 2px 4px var(--tw-shadow-color)",
+        lg: "0 8px 16px var(--tw-shadow-color)",
+      },
     },
   },
-  plugins: [require("tailwindcss-animate"), require("tailwindcss-animated")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("tailwindcss-animated"),
+    function ({ matchUtilities, theme }) {
+      matchUtilities(
+        {
+          "text-shadow": (value) => ({
+            textShadow: value,
+          }),
+        },
+        { values: theme("textShadow") },
+      );
+    },
+  ],
 };

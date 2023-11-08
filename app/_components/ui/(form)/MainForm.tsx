@@ -13,17 +13,17 @@ import GenderRadio from "./GenderRadioButtons";
 
 const MainForm = () => {
   const methods = useForm({
-    mode: "onBlur",
+    mode: "onChange",
     reValidateMode: "onChange",
     defaultValues: {
-      gender: "",
-      ageGroup: "",
-      upperExercise: "",
-      upperInput: "",
-      coreExercise: "",
-      coreInput: "",
-      cardioExercise: "",
-      cardioInput: "",
+      gender: "male",
+      ageGroup: "<25",
+      upperExercise: "pushups",
+      upperInput: "50",
+      coreExercise: "situps",
+      coreInput: "23",
+      cardioExercise: "shuttles",
+      cardioInput: "44",
     },
   });
   const { setScores, scores } = useScoreContext();
@@ -37,70 +37,72 @@ const MainForm = () => {
   }
 
   return (
-    <FormProvider {...methods}>
-      <form
-        onSubmit={methods.handleSubmit(onSubmit)}
-        className="m-auto mb-3 flex max-w-2xl flex-col gap-16 text-2xl tracking-wide text-zinc-200 sm:max-w-3xl"
-      >
-        {/* gender */}
-        <GenderRadio />
+    <section>
+      <FormProvider {...methods}>
+        <form
+          onSubmit={methods.handleSubmit(onSubmit)}
+          className="m-auto flex max-w-2xl flex-col gap-16 text-2xl tracking-wide text-card-foreground opacity-100 sm:max-w-3xl"
+        >
+          {/* gender */}
+          <GenderRadio />
 
-        <Separator />
+          <Separator />
 
-        {/* select age group */}
-        <AgeGroupSelect
-          options={[
-            "<25",
-            "25-29",
-            "30-34",
-            "35-39",
-            "40-44",
-            "45-49",
-            "50-54",
-            "55-59",
-            ">60",
-          ]}
-        />
+          {/* select age group */}
+          <AgeGroupSelect
+            options={[
+              "<25",
+              "25-29",
+              "30-34",
+              "35-39",
+              "40-44",
+              "45-49",
+              "50-54",
+              "55-59",
+              ">60",
+            ]}
+          />
 
-        <Separator />
+          <Separator />
 
-        {/* select upper exercise  */}
-        <ExerciseField
-          type="upper"
-          options={[
-            { value: "pushups", label: "Pushup" },
-            { value: "handrelease", label: "Hand Release" },
-          ]}
-        />
+          {/* select upper exercise  */}
+          <ExerciseField
+            type="upper"
+            options={[
+              { value: "pushups", label: "Pushup" },
+              { value: "handrelease", label: "Hand Release" },
+            ]}
+          />
 
-        <Separator />
+          <Separator />
 
-        {/* select core exercise */}
-        <ExerciseField
-          type="core"
-          options={[
-            { value: "situps", label: "Situp" },
-            { value: "crunches", label: "Cross Legged Reverse Crunch" },
-            { value: "plank", label: "Forearm Plank" },
-          ]}
-        />
+          {/* select core exercise */}
+          <ExerciseField
+            type="core"
+            options={[
+              { value: "situps", label: "Situp" },
+              { value: "crunches", label: "Cross Legged Reverse Crunch" },
+              { value: "plank", label: "Forearm Plank" },
+            ]}
+          />
 
-        <Separator />
+          <Separator />
 
-        {/* select cardio exercise */}
-        <ExerciseField
-          type="cardio"
-          options={[
-            { value: "mile", label: "1.5 Mile Run" },
-            { value: "shuttles", label: "20 Meter HAMR Shuttle" },
-          ]}
-        />
+          {/* select cardio exercise */}
+          <ExerciseField
+            type="cardio"
+            options={[
+              { value: "mile", label: "1.5 Mile Run" },
+              { value: "shuttles", label: "20 Meter HAMR Shuttle" },
+            ]}
+          />
 
-        {/* reset/submit buttons */}
-        <FormButtons />
-      </form>
-      <Score />
-    </FormProvider>
+          {/* reset/submit buttons */}
+          <FormButtons />
+        </form>
+        <Score />
+      </FormProvider>
+    </section>
   );
 };
 
