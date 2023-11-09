@@ -24,9 +24,9 @@ function ExercisesPage() {
             src="https://www.dvidshub.net/video/embed/825278"
             width="800"
             height="450"
-            frameborder="0"
-            allowtransparency
-            allowfullscreen
+            frameBorder="0"
+            allowTransparency
+            allowFullScreen
           ></iframe>
         </CardContent>
       </Card>
