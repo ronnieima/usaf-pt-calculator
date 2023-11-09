@@ -40,7 +40,7 @@ const MainForm = () => {
     <FormProvider {...methods}>
       <form
         onSubmit={methods.handleSubmit(onSubmit)}
-        className="m-auto mb-3 flex max-w-2xl flex-col gap-16 text-2xl tracking-wide text-foreground sm:max-w-3xl"
+        className="mb-3 flex max-w-2xl flex-col gap-16 text-2xl tracking-wide text-foreground sm:max-w-3xl"
       >
         {/* gender */}
         <GenderRadio />

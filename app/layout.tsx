@@ -57,7 +57,7 @@ export default function RootLayout({
         `}
         </Script>
       </head>
-      <body className="min-h-full  bg-gradient-to-r from-sky-800 to-indigo-800">
+      <body className="h-full  bg-gradient-to-r from-sky-800 to-indigo-800">
         <ToastContainerWrapper />
         <NavBar />
         {children}
