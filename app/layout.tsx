@@ -23,6 +23,8 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${GeistSans.className} scroll-smooth`}>
       <head>
+        <title>USAF PT Calculator</title>
+
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:site" content="@imagawaDev" />
         <meta name="twitter:creator" content="@imagawaDev" />
