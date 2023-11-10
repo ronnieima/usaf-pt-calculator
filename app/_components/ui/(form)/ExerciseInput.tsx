@@ -1,4 +1,3 @@
-import { getValidationRules } from "@/app/_util/validation";
 import {
   FormControl,
   FormField,
@@ -9,9 +8,13 @@ import {
 import { Input } from "@/app/_components/ui/(shadcn)/input";
 import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
-import { formatExerciseName } from "@/app/_util/helpers";
-import { watch } from "fs";
+import {
+  convertStringToCamelCase,
+  formatExerciseName,
+  secondsToMinutesAndSeconds,
+} from "@/app/_util/helpers";
 import { getExerciseMinMax } from "@/app/_db/supabase";
+import { getValidationRules } from "@/app/_util/validation";
 
 type ExerciseInputProps = {
   category: string;
@@ -23,10 +26,11 @@ const ExerciseInput = ({ category }: ExerciseInputProps) => {
     formState: { isSubmitting },
     watch,
   } = useFormContext();
-  const selectedExercise = watch(`${category}Exercise`);
+  const categoryValue = convertStringToCamelCase(category);
+  const selectedExercise = watch(`${categoryValue}Exercise`);
   const isVisibleInput = Boolean(selectedExercise);
   const isTimeBased =
-    selectedExercise === "plank" || selectedExercise === "mile";
+    selectedExercise === "forearm_plank" || selectedExercise === "1.5_mile_run";
 
   const exerciseLabel = formatExerciseName(selectedExercise);
 
@@ -42,17 +46,22 @@ const ExerciseInput = ({ category }: ExerciseInputProps) => {
     if (!gender || !ageGroup || !selectedExercise) return;
 
     async function fetchMinMax() {
-      const { min, max } = await getExerciseMinMax(
+      let { min, max } = await getExerciseMinMax(
         gender,
         ageGroup,
         selectedExercise,
       );
+
+      if (isTimeBased) {
+        min = secondsToMinutesAndSeconds(min);
+        max = secondsToMinutesAndSeconds(max);
+      }
       setMin(min);
       setMax(max);
     }
 
     fetchMinMax();
-  }, [gender, ageGroup, selectedExercise]);
+  }, [gender, ageGroup, selectedExercise, isTimeBased]);
 
   // Prevents scroll affecting number inputs
   const numberInputOnWheelPreventChange: React.WheelEventHandler<
@@ -81,7 +90,8 @@ const ExerciseInput = ({ category }: ExerciseInputProps) => {
       >
         <FormField
           control={control}
-          name={`${category}Input`}
+          name={`${categoryValue}Input`}
+          rules={getValidationRules(category, selectedExercise)}
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-2xl">{`${exerciseLabel} ${
@@ -100,7 +110,7 @@ const ExerciseInput = ({ category }: ExerciseInputProps) => {
                 />
               </FormControl>
               {showMinMax && (
-                <section className="flex justify-between">
+                <section className="flex justify-between text-base sm:text-2xl">
                   <p className="text-red-700">
                     {`Min: ${min} ${isTimeBased ? "" : "reps"}`}
                   </p>

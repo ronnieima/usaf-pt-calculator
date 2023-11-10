@@ -13,7 +13,7 @@ import MainForm from "./MainForm";
 const FormCard = () => {
   return (
     <Card
-      className=" max-w-[95%] rounded-2xl bg-card/90 shadow-2xl  shadow-slate-500 lg:max-w-xl"
+      className=" max-w-[95%] rounded-2xl bg-card/90 shadow-2xl  shadow-slate-500 lg:max-w-6xl"
       id="form-card"
     >
       <CardHeader className="pb-16 pt-8 text-center sm:pt-16">

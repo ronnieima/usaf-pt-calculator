@@ -4,41 +4,28 @@ import ExerciseSelect from "./ExerciseSelect";
 import ExerciseInput from "./ExerciseInput";
 import { Separator } from "../(shadcn)/separator";
 
-type ExerciseCategory = "upper" | "core" | "cardio";
+export type ExerciseCategory = "Upper Body" | "Core" | "Cardio";
 
-type ExerciseOptions = {
-  value: string;
-  label: string;
-};
+type ExerciseOptions = string[];
 
 export type Exercise = {
   category: ExerciseCategory;
-  options: ExerciseOptions[];
+  options: ExerciseOptions;
 };
 
 const exercises: Exercise[] = [
   {
-    category: "upper",
-    options: [
-      { value: "pushups", label: "Pushup" },
-      { value: "handrelease", label: "Hand Release" },
-    ],
+    category: "Upper Body",
+    options: ["Pushup", "Hand Release Pushup"],
   },
 
   {
-    category: "core",
-    options: [
-      { value: "situps", label: "Situp" },
-      { value: "crunches", label: "Cross Legged Reverse Crunch" },
-      { value: "plank", label: "Forearm Plank" },
-    ],
+    category: "Core",
+    options: ["Situp", "Cross Legged Reverse Crunch", "Forearm Plank"],
   },
   {
-    category: "cardio",
-    options: [
-      { value: "mile", label: "1.5 Mile Run" },
-      { value: "shuttles", label: "20 Meter HAMR Shuttle" },
-    ],
+    category: "Cardio",
+    options: ["1.5 Mile Run", "20 Meter HAMR Shuttle"],
   },
 ];
 

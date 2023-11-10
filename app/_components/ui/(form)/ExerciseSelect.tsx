@@ -15,7 +15,8 @@ import {
 } from "@/app/_components/ui/(shadcn)/select";
 import React from "react";
 import { useFormContext } from "react-hook-form";
-import { Exercise } from "./ExerciseFields";
+import { Exercise, ExerciseCategory } from "./ExerciseFields";
+import { convertStringToCamelCase } from "@/app/_util/helpers";
 
 const ExerciseSelect = ({ options, category }: Exercise) => {
   const {
@@ -23,11 +24,13 @@ const ExerciseSelect = ({ options, category }: Exercise) => {
     formState: { isSubmitting },
   } = useFormContext();
 
+  const categoryValue = convertStringToCamelCase(category);
+
   return (
     <FormField
       rules={{ required: { value: true, message: "Select an exercise" } }}
       control={control}
-      name={`${category}Exercise`}
+      name={`${categoryValue}Exercise`}
       render={({ field }) => (
         <FormItem>
           <FormLabel className=" flex justify-between  text-2xl">
@@ -44,11 +47,15 @@ const ExerciseSelect = ({ options, category }: Exercise) => {
               </SelectTrigger>
             </FormControl>
             <SelectContent>
-              {options.map((option) => (
-                <SelectItem key={option.value} value={option.value}>
-                  {option.label}
-                </SelectItem>
-              ))}
+              {options.map((option) => {
+                // example: 1.5 Mile Run > 1.5_mile_run
+                const optionValue = option.toLowerCase().split(" ").join("_");
+                return (
+                  <SelectItem key={option} value={optionValue}>
+                    {option}
+                  </SelectItem>
+                );
+              })}
             </SelectContent>
           </Select>
           <FormMessage />
