@@ -33,15 +33,15 @@ const ExerciseSelect = ({ options, category }: Exercise) => {
       name={`${categoryValue}Exercise`}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className=" flex justify-between  text-2xl">
+          <FormLabel className=" flex justify-between text-2xl ">
             <h2>{category} Exercise</h2>
           </FormLabel>
           <Select
             disabled={isSubmitting}
             onValueChange={field.onChange}
-            defaultValue={field.value}
+            value={field.value}
           >
-            <FormControl className="border-card-foreground">
+            <FormControl className="border-card-foreground/30 shadow-lg">
               <SelectTrigger>
                 <SelectValue placeholder="Select exercise type" />
               </SelectTrigger>

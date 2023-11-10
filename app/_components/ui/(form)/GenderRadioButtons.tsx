@@ -1,5 +1,3 @@
-"use client";
-
 import { Button } from "@/app/_components/ui/(shadcn)/button";
 import {
   FormControl,
@@ -15,7 +13,7 @@ import {
 import { useFormContext } from "react-hook-form";
 
 const buttonStyle =
-  "w-full py-8 transition-colors duration-300 hover:cursor-pointer active:bg-zinc-700 peer-aria-checked:bg-primary bg-muted-foreground peer-aria-checked:ring-2 peer-aria-checked:ring-ring peer-aria-checked:ring-foreground text-2xl shadow-lg";
+  "w-full py-8 transition-colors duration-300 hover:cursor-pointer active:bg-primary/70 peer-aria-checked:bg-primary bg-primary/50 peer-aria-checked:ring-2 peer-aria-checked:ring-ring peer-aria-checked:ring-foreground/70 text-2xl shadow-lg active:translate-y-1 hover:scale-105";
 
 function GenderRadioButtons() {
   const {
@@ -34,12 +32,12 @@ function GenderRadioButtons() {
             <RadioGroup
               disabled={isSubmitting}
               onValueChange={field.onChange}
-              defaultValue={field.value}
+              value={field.value}
               className="flex flex-col"
             >
               <div className="grid gap-4 text-center sm:grid-cols-2">
                 <FormItem>
-                  <FormControl>
+                  <FormControl className=" shadow-2xl">
                     <RadioGroupItem
                       className="peer hidden focus-visible:border-opacity-25"
                       value="male"

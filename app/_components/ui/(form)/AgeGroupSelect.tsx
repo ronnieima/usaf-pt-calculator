@@ -49,9 +49,9 @@ const AgeGroupSelect = () => {
             <Select
               disabled={isSubmitting}
               onValueChange={field.onChange}
-              defaultValue={field.value}
+              value={field.value}
             >
-              <FormControl className="border-card-foreground">
+              <FormControl className="border-card-foreground/30 shadow-lg">
                 <SelectTrigger>
                   <SelectValue placeholder="Select age group" />
                 </SelectTrigger>

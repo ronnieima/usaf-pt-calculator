@@ -5,7 +5,6 @@ import FormButtons from "./FormButtons";
 import { calculateTotalScoresWithMinimumCheck } from "../../../_db/supabase";
 
 import { FormProvider, useForm } from "react-hook-form";
-import { Separator } from "@/app/_components/ui/(shadcn)/separator";
 import { useScoreContext } from "@/app/_contexts/ScoreContext";
 import Score from "./Score";
 import GenderRadio from "./GenderRadioButtons";
@@ -26,6 +25,16 @@ const MainForm = () => {
   const methods = useForm<formType>({
     mode: "onChange",
     reValidateMode: "onChange",
+    defaultValues: {
+      gender: "",
+      ageGroup: "",
+      upperBodyExercise: "",
+      upperBodyInput: "",
+      coreExercise: "",
+      coreInput: "",
+      cardioExercise: "",
+      cardioInput: "",
+    },
   });
   const { setScores } = useScoreContext();
 

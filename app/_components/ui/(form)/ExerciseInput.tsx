@@ -94,10 +94,10 @@ const ExerciseInput = ({ category }: ExerciseInputProps) => {
           rules={getValidationRules(category, selectedExercise)}
           render={({ field }) => (
             <FormItem>
-              <FormLabel className="text-2xl">{`${exerciseLabel} ${
+              <FormLabel className="text-2xl ">{`${exerciseLabel} ${
                 isTimeBased ? "Time" : "Reps"
               }`}</FormLabel>
-              <FormControl className="border-card-foreground">
+              <FormControl className="border-card-foreground/30 shadow-lg">
                 <Input
                   disabled={isSubmitting}
                   inputMode={isTimeBased ? "text" : "numeric"}
