@@ -10,22 +10,49 @@ export function formatTypeName(category: string) {
       return category;
   }
 }
+export const convertStringToCamelCase = (str: string): string => {
+  if (str.split(" ").length > 1) {
+    return str
+      .toLowerCase()
+      .split(" ")
+      .map((word, index) => {
+        return index === 0
+          ? word
+          : word.charAt(0).toUpperCase() + word.slice(1);
+      })
+      .join("");
+  } else {
+    return str.toLowerCase();
+  }
+};
 
 export function formatExerciseName(exercise: string) {
   switch (exercise) {
-    case "pushups":
+    case "pushup":
       return "Pushup";
-    case "handrelease":
+    case "hand_release_pushup":
       return "Hand Release Pushup";
-    case "situps":
+    case "situp":
       return "Situp";
-    case "crunches":
-      return "Cross Legged Reverse Crunch ";
-    case "plank":
-      return "Forearm Plank Time";
-    case "mile":
+    case "cross_legged_reverse_crunch":
+      return "Cross Legged Reverse Crunch";
+    case "forearm_plank":
+      return "Forearm Plank";
+    case "1.5_mile_run":
       return "1.5 Mile Run";
-    case "shuttles":
+    case "20_meter_hamr_shuttle":
       return "20 Meter HAMR Shuttle";
   }
+}
+
+export function secondsToMinutesAndSeconds(seconds: string) {
+  const secondsNumber = Number(seconds);
+  const minutes = Math.floor(secondsNumber / 60);
+  const remainingSeconds = secondsNumber % 60;
+
+  // Pad single-digit seconds with a leading zero
+  const formattedSeconds =
+    remainingSeconds < 10 ? `0${remainingSeconds}` : remainingSeconds;
+
+  return `${minutes}:${formattedSeconds}`;
 }

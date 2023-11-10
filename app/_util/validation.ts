@@ -1,9 +1,11 @@
 function upperBodyValidationRules(upperBodyExercise: string) {
-  if (upperBodyExercise === "pushups" || upperBodyExercise === "handrelease") {
+  if (
+    upperBodyExercise === "pushup" ||
+    upperBodyExercise === "hand_release_pushup"
+  ) {
     return {
       required: "Rep amount is required",
       min: { value: 0, message: "Reps must be greater than 0" },
-      max: { value: 125, message: "Maximum amount exceeded" },
       pattern: {
         value: /^\d*$/,
         message: "Must be a whole number",
@@ -13,7 +15,7 @@ function upperBodyValidationRules(upperBodyExercise: string) {
 }
 
 function coreValidationRules(coreExercise: string) {
-  if (coreExercise == "plank") {
+  if (coreExercise == "forearm_plank") {
     return {
       required: "Plank time is required",
       pattern: {
@@ -25,14 +27,16 @@ function coreValidationRules(coreExercise: string) {
         message: "Time must be greater than 0",
       },
     };
-  } else if (coreExercise === "situps" || coreExercise === "crunches") {
+  } else if (
+    coreExercise === "situp" ||
+    coreExercise === "cross_legged_reverse_crunch"
+  ) {
     return {
       required: "Rep amount is required",
       min: {
         value: 0,
         message: "Reps must be greater than 0",
       },
-      max: { value: 125, message: "Maximum amount exceeded" },
       pattern: {
         value: /^\d*$/,
         message: "Must be a whole number",
@@ -42,7 +46,7 @@ function coreValidationRules(coreExercise: string) {
 }
 
 function cardioValidationRules(cardioExercise: string) {
-  if (cardioExercise === "mile" || cardioExercise === "walk") {
+  if (cardioExercise === "1.5_mile_run" || cardioExercise === "walk") {
     return {
       required: "Time is required",
       pattern: {
@@ -54,11 +58,10 @@ function cardioValidationRules(cardioExercise: string) {
         message: "Time must be greater than 0",
       },
     };
-  } else if (cardioExercise === "shuttles") {
+  } else if (cardioExercise === "20_meter_hamr_shuttle") {
     return {
       required: "Shuttle amount is required",
       min: { value: 0, message: "Reps must be greater than 0" },
-      max: { value: 999, message: "Maximum amount exceeded" },
       pattern: {
         value: /^\d*$/,
         message: "Must be a whole number",
@@ -75,11 +78,11 @@ export function getValidationRules(
   exercise: Exercises,
 ) {
   switch (exerciseType) {
-    case "upper":
+    case "Upper Body":
       return upperBodyValidationRules(exercise);
-    case "core":
+    case "Core":
       return coreValidationRules(exercise);
-    case "cardio":
+    case "Cardio":
       return cardioValidationRules(exercise);
   }
 }

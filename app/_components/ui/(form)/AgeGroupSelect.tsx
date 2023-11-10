@@ -12,51 +12,64 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/_components/ui/(shadcn)/select";
+import { Separator } from "@radix-ui/react-select";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
-type AgeGroupSelectProps = {
-  options: string[];
-};
+const ageGroups = [
+  "<25",
+  "25-29",
+  "30-34",
+  "35-39",
+  "40-44",
+  "45-49",
+  "50-54",
+  "55-59",
+  ">60",
+];
 
-const AgeGroupSelect = ({ options }: AgeGroupSelectProps) => {
+const AgeGroupSelect = () => {
   const {
     control,
     formState: { isSubmitting },
   } = useFormContext();
   return (
-    <FormField
-      rules={{ required: { value: true, message: "Select an age group" } }}
-      control={control}
-      name={`ageGroup`}
-      render={({ field }) => (
-        <FormItem>
-          <FormLabel className="text-2xl">
-            <h2>Age Group</h2>
-          </FormLabel>
-          <Select
-            disabled={isSubmitting}
-            onValueChange={field.onChange}
-            defaultValue={field.value}
-          >
-            <FormControl className="border-card-foreground">
-              <SelectTrigger>
-                <SelectValue placeholder="Select age group" />
-              </SelectTrigger>
-            </FormControl>
-            <SelectContent>
-              {options.map((option) => (
-                <SelectItem key={option} value={option}>
-                  {option}
-                </SelectItem>
-              ))}
-            </SelectContent>
-          </Select>
+    <>
+      <Separator />
 
-          <FormMessage />
-        </FormItem>
-      )}
-    />
+      <FormField
+        rules={{ required: { value: true, message: "Select an age group" } }}
+        control={control}
+        name={`ageGroup`}
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel className="text-2xl">
+              <h2>Age Group</h2>
+            </FormLabel>
+            <Select
+              disabled={isSubmitting}
+              onValueChange={field.onChange}
+              defaultValue={field.value}
+            >
+              <FormControl className="border-card-foreground">
+                <SelectTrigger>
+                  <SelectValue placeholder="Select age group" />
+                </SelectTrigger>
+              </FormControl>
+              <SelectContent>
+                {ageGroups.map((ageGroup) => (
+                  <SelectItem key={ageGroup} value={ageGroup}>
+                    {ageGroup}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
+
+            <FormMessage />
+          </FormItem>
+        )}
+      />
+    </>
   );
 };
 

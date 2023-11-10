@@ -13,34 +13,28 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/_components/ui/(shadcn)/select";
-import Link from "next/link";
 import React from "react";
 import { useFormContext } from "react-hook-form";
+import { Exercise, ExerciseCategory } from "./ExerciseFields";
+import { convertStringToCamelCase } from "@/app/_util/helpers";
 
-type ExerciseSelectProps = {
-  options: { value: string; label: string }[];
-  exerciseLabel: string;
-  type: string;
-};
-const ExerciseSelect = ({
-  options,
-  exerciseLabel,
-  type,
-}: ExerciseSelectProps) => {
+const ExerciseSelect = ({ options, category }: Exercise) => {
   const {
     control,
     formState: { isSubmitting },
   } = useFormContext();
+
+  const categoryValue = convertStringToCamelCase(category);
+
   return (
     <FormField
       rules={{ required: { value: true, message: "Select an exercise" } }}
       control={control}
-      name={`${type}Exercise`}
+      name={`${categoryValue}Exercise`}
       render={({ field }) => (
         <FormItem>
           <FormLabel className=" flex justify-between  text-2xl">
-            <h2>{exerciseLabel} Exercise</h2>
-            {/* <span>MINmax</span> */}
+            <h2>{category} Exercise</h2>
           </FormLabel>
           <Select
             disabled={isSubmitting}
@@ -53,19 +47,17 @@ const ExerciseSelect = ({
               </SelectTrigger>
             </FormControl>
             <SelectContent>
-              {options.map((option) => (
-                <SelectItem key={option.value} value={option.value}>
-                  {option.label}
-                </SelectItem>
-              ))}
+              {options.map((option) => {
+                // example: 1.5 Mile Run > 1.5_mile_run
+                const optionValue = option.toLowerCase().split(" ").join("_");
+                return (
+                  <SelectItem key={option} value={optionValue}>
+                    {option}
+                  </SelectItem>
+                );
+              })}
             </SelectContent>
           </Select>
-          {/* <FormDescription>
-            View the{" "}
-            <Link href={`/exercises#${type}`} className="hover:underline">
-              {exerciseLabel} exercise demonstrations
-            </Link>
-          </FormDescription> */}
           <FormMessage />
         </FormItem>
       )}
