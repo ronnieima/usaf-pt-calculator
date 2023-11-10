@@ -3,13 +3,7 @@ import Logo from "./Logo";
 import Links from "./Links";
 
 import MobileMenu from "./MobileMenu";
-import {
-  Calculator,
-  ClipboardList,
-  Dumbbell,
-  Home,
-  LibraryBig,
-} from "lucide-react";
+import { ClipboardList, Dumbbell, Home, LibraryBig } from "lucide-react";
 
 export const links = [
   { label: "Home", href: "/", icon: <Home /> },
@@ -26,7 +20,6 @@ function NavBar() {
   return (
     <nav className="sticky top-0 z-50 flex h-16 items-center justify-between bg-slate-200 px-6 shadow-md ">
       <Logo />
-
       <MobileMenu />
       <Links />
     </nav>

@@ -17,12 +17,11 @@ const FormCard = () => {
       id="form-card"
     >
       <CardHeader className="pb-16 pt-8 text-center sm:pt-16">
-        <CardTitle className="text-3xl sm:text-5xl">
+        <CardTitle className="text-3xl sm:text-5xl ">
           <span className="underline">Effortless</span> PT score calculation.
         </CardTitle>
         <CardDescription className="text-sm sm:text-2xl">
-          Simply enter your test results and click &quot;Submit&quot; to
-          instantly compute your PT score!
+          Simply enter your test results and click submit!
         </CardDescription>
       </CardHeader>
       <CardContent>
