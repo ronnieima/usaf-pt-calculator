@@ -38,10 +38,7 @@ export default function RootLayout({
         <meta property="og:url" content="https://usafptcalculator.com/" />
         <meta property="og:image" content={metadata.image} />
         <meta property="og:description" content={metadata.description} />
-        <link
-          rel="icon"
-          href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%2210 0 100 100%22><text y=%22.90em%22 font-size=%2290%22>🛩</text></svg>"
-        />
+
         <Script
           src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
         />
