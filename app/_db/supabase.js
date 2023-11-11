@@ -51,10 +51,15 @@ async function getIndividualExerciseScore(gender, ageGroup, exercise, results) {
   if (exercise === "forearm_plank" || exercise === "1.5_mile_run") {
     results = convertDurationToSeconds(results);
   }
-  console.log(exercise, results, min);
-  if (results < min) {
+
+  if (exercise === "forearm_plank" || exercise === "1.5_mile_run") {
+    if (results > max) {
+      return 0;
+    }
+  } else if (results < min) {
     return 0;
   }
+
   if (results > max) {
     return isCardio ? 60 : 20;
   }
