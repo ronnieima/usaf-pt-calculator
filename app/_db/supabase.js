@@ -52,7 +52,7 @@ async function getIndividualExerciseScore(gender, ageGroup, exercise, results) {
     results = convertDurationToSeconds(results);
   }
 
-  if (exercise === "forearm_plank" || exercise === "1.5_mile_run") {
+  if (exercise === "1.5_mile_run") {
     if (results > max) {
       return 0;
     }
