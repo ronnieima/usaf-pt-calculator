@@ -21,7 +21,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${GeistSans.className} scroll-smooth`}>
+    <html
+      lang="en"
+      className={`${GeistSans.className} scroll-smooth bg-blue-950`}
+    >
       <head>
         <title>USAF PT Calculator</title>
         <meta name="description" content={metadata.description} />
@@ -52,7 +55,7 @@ export default function RootLayout({
         `}
         </Script>
       </head>
-      <body className="h-full  bg-gradient-to-r from-sky-800 to-indigo-800">
+      <body className="h-full  bg-gradient-to-r from-sky-900  to-indigo-950">
         <ToastContainerWrapper />
         <NavBar />
         {children}
