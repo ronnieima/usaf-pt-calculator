@@ -3,6 +3,8 @@ import IndividualExerciseScore from "./IndividualExerciseScore";
 import { useScoreContext } from "@/app/_contexts/ScoreContext";
 import { GiMuscleUp, GiAbdominalArmor } from "react-icons/gi";
 import { FaRunning } from "react-icons/fa";
+import PushupIcon from "./PushupIcon";
+import SitupIcon from "./SitupIcon";
 
 const ScoreIcons = () => {
   const {
@@ -10,14 +12,8 @@ const ScoreIcons = () => {
   } = useScoreContext();
   return (
     <div className="flex flex-col items-center">
-      <IndividualExerciseScore
-        icon={<GiMuscleUp size="3em" title="flexing icon" />}
-        score={`${upper}`}
-      />
-      <IndividualExerciseScore
-        icon={<GiAbdominalArmor size="3em" title="abs icon" />}
-        score={`${core}`}
-      />
+      <IndividualExerciseScore icon={<PushupIcon />} score={`${upper}`} />
+      <IndividualExerciseScore icon={<SitupIcon />} score={`${core}`} />
       <IndividualExerciseScore
         icon={<FaRunning size="3em" title="running icon" />}
         score={`${cardio}`}

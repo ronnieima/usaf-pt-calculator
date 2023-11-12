@@ -9,6 +9,7 @@ import {
 } from "@/components/ui/card";
 import ScoreContextProvider from "@/app/_contexts/ScoreContext";
 import MainForm from "./MainForm";
+import Score from "./Score";
 
 const FormCard = () => {
   return (
@@ -29,9 +30,7 @@ const FormCard = () => {
           <MainForm />
         </ScoreContextProvider>
       </CardContent>
-      {/* <CardFooter>
-      <p>Card Footer</p>
-    </CardFooter> */}
+      <CardFooter></CardFooter>
     </Card>
   );
 };

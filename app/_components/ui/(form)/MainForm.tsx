@@ -9,6 +9,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import ExerciseFields from "./ExerciseFields";
 import GenderRadio from "./GenderRadioButtons";
 import Score from "./Score";
+import { Separator } from "../(shadcn)/separator";
 
 export type formType = {
   gender: string;
@@ -24,22 +25,21 @@ export type formType = {
 const MainForm = () => {
   const methods = useForm<formType>({
     mode: "onChange",
-    reValidateMode: "onBlur",
+    reValidateMode: "onChange",
     defaultValues: {
-      gender: "male",
-      ageGroup: "<25",
-      upperBodyExercise: "pushup",
-      upperBodyInput: "43",
-      coreExercise: "situp",
-      coreInput: "23",
-      cardioExercise: "20_meter_hamr_shuttle",
-      cardioInput: "43",
+      gender: "",
+      ageGroup: "",
+      upperBodyExercise: "",
+      upperBodyInput: "",
+      coreExercise: "",
+      coreInput: "",
+      cardioExercise: "",
+      cardioInput: "",
     },
   });
   const { setScores } = useScoreContext();
 
   async function onSubmit(data: formType) {
-    console.log(data);
     const res = await calculateTotalScoresWithMinimumCheck(data);
     setScores(res);
   }
