@@ -13,7 +13,7 @@ import {
   secondsToMinutesAndSeconds,
 } from "@/app/_util/helpers";
 import { getValidationRules } from "@/app/_util/validation";
-import { LocalizationProvider, TimeField } from "@mui/x-date-pickers";
+import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
@@ -108,10 +108,12 @@ const ExerciseInput = ({ category }: ExerciseInputProps) => {
                   // I had to pull an external TimePicker component front ant design and use its styling guide
                   <div>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <TimeField
+                      <TimePicker
                         className="w-full rounded-lg border-card-foreground/30 "
                         format="mm:ss"
+                        views={["minutes", "seconds"]}
                         onChange={onChange}
+                        timeSteps={{ minutes: 1, seconds: 1 }}
                         {...field}
                       />
                     </LocalizationProvider>
