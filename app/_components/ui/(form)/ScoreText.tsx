@@ -7,9 +7,7 @@ const ScoreText = () => {
     scores: { totalScore },
   } = useScoreContext();
   return (
-    <div
-      className={`flex w-full flex-col items-center justify-center text-9xl `}
-    >
+    <div className={`flex w-full flex-col items-end justify-center   text-9xl`}>
       <p>Score</p>
       <p className="font-semibold text-blue-400">{totalScore}</p>
       <ScoreStatus />
