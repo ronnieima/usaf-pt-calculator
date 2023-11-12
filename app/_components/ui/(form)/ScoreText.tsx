@@ -11,7 +11,7 @@ const ScoreText = () => {
       className={`flex w-full flex-col justify-center text-center text-9xl   sm:items-end`}
     >
       <p>Score</p>
-      <p className="font-semibold text-blue-400">{totalScore}</p>
+      <p className="font-semibold text-blue-400">{totalScore.toFixed(2)}</p>
       <ScoreStatus />
     </div>
   );
