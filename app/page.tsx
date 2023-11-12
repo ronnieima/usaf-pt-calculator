@@ -3,7 +3,7 @@ import Header from "./_components/ui/Header";
 
 export default function Home() {
   return (
-    <main className="flex flex-col items-center justify-center pb-16 text-background">
+    <main className="flex flex-col items-center justify-center text-background sm:pb-16">
       <Header />
       <FormCard />
     </main>
