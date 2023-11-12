@@ -4,8 +4,9 @@ import ScoreStatus from "./ScoreStatus";
 
 const ScoreText = () => {
   const {
-    scores: { totalScore },
+    scores: { totalScore, upper, core, cardio },
   } = useScoreContext();
+  console.log(totalScore, upper, core, cardio);
   return (
     <div
       className={`flex w-full flex-col justify-center text-center text-9xl   sm:items-end`}

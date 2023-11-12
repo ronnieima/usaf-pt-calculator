@@ -1,5 +1,4 @@
 import { useFormState } from "react-hook-form";
-import { MoonLoader } from "react-spinners";
 import FailReasons from "./FailReasons";
 import ScoreMessage from "./ScoreMessage";
 import Spinner from "../../Spinner";
@@ -20,7 +19,6 @@ function Score() {
           <Separator className="mt-16" />
 
           <ScoreMessage />
-
           <FailReasons />
         </section>
       )}

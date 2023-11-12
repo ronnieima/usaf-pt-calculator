@@ -41,25 +41,25 @@ const MainForm = () => {
   const { setScores } = useScoreContext();
 
   async function onSubmit(data: formType) {
+    console.log(data);
     const res = await calculateTotalScoresWithMinimumCheck(data);
+    console.log(res);
     setScores(res);
   }
 
   return (
-    <ScoreContextProvider>
-      <FormProvider {...methods}>
-        <form
-          onSubmit={methods.handleSubmit(onSubmit)}
-          className=" flex flex-col gap-16 text-2xl tracking-wide text-foreground"
-        >
-          <GenderRadio />
-          <AgeGroupSelect />
-          <ExerciseFields />
-          <FormButtons />
-        </form>
-        <Score />
-      </FormProvider>
-    </ScoreContextProvider>
+    <FormProvider {...methods}>
+      <form
+        onSubmit={methods.handleSubmit(onSubmit)}
+        className=" flex flex-col gap-16 text-2xl tracking-wide text-foreground"
+      >
+        <GenderRadio />
+        <AgeGroupSelect />
+        <ExerciseFields />
+        <FormButtons />
+      </form>
+      <Score />
+    </FormProvider>
   );
 };
 

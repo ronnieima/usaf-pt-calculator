@@ -6,6 +6,7 @@ import {
   CardTitle,
 } from "@/app/_components/ui/(shadcn)/card";
 import MainForm from "./MainForm";
+import ScoreContextProvider from "@/app/_contexts/ScoreContext";
 
 const FormCard = () => {
   return (
@@ -24,7 +25,9 @@ const FormCard = () => {
       </CardHeader>
 
       <CardContent className="min-w-full">
-        <MainForm />
+        <ScoreContextProvider>
+          <MainForm />
+        </ScoreContextProvider>
       </CardContent>
     </Card>
   );
