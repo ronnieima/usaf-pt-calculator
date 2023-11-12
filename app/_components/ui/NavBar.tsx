@@ -18,7 +18,7 @@ export const links = [
 
 function NavBar() {
   return (
-    <nav className="sticky top-0 z-50 flex h-16 items-center justify-between bg-slate-200 px-6 shadow-md ">
+    <nav className="sticky top-0 z-50 flex h-16 items-center justify-between bg-slate-200 px-6 opacity-[.94] shadow-md ">
       <Logo />
       <MobileMenu />
       <Links />
