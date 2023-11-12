@@ -1,9 +1,8 @@
 import { useFormState } from "react-hook-form";
-import ScoreBreakdown from "./ScoreBreakdown";
+import { MoonLoader } from "react-spinners";
 import FailReasons from "./FailReasons";
 import ScoreMessage from "./ScoreMessage";
-import { MoonLoader } from "react-spinners";
-import { Separator } from "@/app/_components/ui/(shadcn)/separator";
+
 function Score() {
   const { isSubmitting, isSubmitSuccessful } = useFormState();
 

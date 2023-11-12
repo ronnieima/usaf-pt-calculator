@@ -9,7 +9,7 @@ const ScoreIcons = () => {
     scores: { upper, core, cardio },
   } = useScoreContext();
   return (
-    <>
+    <div className="flex flex-col items-center">
       <IndividualExerciseScore
         icon={<GiMuscleUp size="3em" title="flexing icon" />}
         score={`${upper}`}
@@ -22,7 +22,7 @@ const ScoreIcons = () => {
         icon={<FaRunning size="3em" title="running icon" />}
         score={`${cardio}`}
       />
-    </>
+    </div>
   );
 };
 
