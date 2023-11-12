@@ -8,7 +8,7 @@ const Header = () => {
       <TypeAnimationWrapper />
       <Link
         href={"#form-card"}
-        className="animate-fade-down text-lg text-neutral-400 animate-delay-[3000ms] hover:text-neutral-100 hover:underline hover:underline-offset-[6.5px]"
+        className="animate-fade-down text-lg text-neutral-400 animate-delay-[2250ms] hover:text-neutral-100 hover:underline hover:underline-offset-[6.5px]"
       >
         <ChevronDown size={48} />
       </Link>
