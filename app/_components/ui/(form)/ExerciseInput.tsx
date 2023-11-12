@@ -6,19 +6,17 @@ import {
   FormMessage,
 } from "@/app/_components/ui/(shadcn)/form";
 import { Input } from "@/app/_components/ui/(shadcn)/input";
-import React, { useEffect, useState } from "react";
-import { useFormContext } from "react-hook-form";
+import { getExerciseMinMax } from "@/app/_db/supabase";
 import {
   convertStringToCamelCase,
   formatExerciseName,
   secondsToMinutesAndSeconds,
 } from "@/app/_util/helpers";
-import { getExerciseMinMax } from "@/app/_db/supabase";
 import { getValidationRules } from "@/app/_util/validation";
-import { ConfigProvider, TimePicker } from "antd";
-import dayjs from "dayjs";
 import { LocalizationProvider, TimeField } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import React, { useEffect, useState } from "react";
+import { useFormContext } from "react-hook-form";
 type ExerciseInputProps = {
   category: string;
 };
@@ -100,7 +98,7 @@ const ExerciseInput = ({ category }: ExerciseInputProps) => {
           control={control}
           name={`${categoryValue}Input`}
           rules={getValidationRules(category, selectedExercise)}
-          render={({ field: { onChange, value } }) => (
+          render={({ field: { onChange, ...field } }) => (
             <FormItem>
               <FormLabel className="text-2xl ">{`${exerciseLabel} ${
                 isTimeBased ? "Time" : "Reps"
@@ -111,9 +109,10 @@ const ExerciseInput = ({ category }: ExerciseInputProps) => {
                   <div>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <TimeField
-                        className="w-full border-card-foreground/30 shadow-lg "
+                        className="w-full rounded-lg border-card-foreground/30 "
                         format="mm:ss"
                         onChange={onChange}
+                        {...field}
                       />
                     </LocalizationProvider>
                   </div>
@@ -126,7 +125,6 @@ const ExerciseInput = ({ category }: ExerciseInputProps) => {
                     onWheel={numberInputOnWheelPreventChange}
                     placeholder="Reps"
                     type="number"
-                    value={value}
                     onChange={onChange}
                   />
                 )}

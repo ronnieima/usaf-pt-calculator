@@ -50,11 +50,11 @@ function cardioValidationRules(cardioExercise: string) {
     return {
       required: "Time is required",
       pattern: {
-        value: /^(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$/,
+        value: /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/,
         message: "Invalid time format (mm:ss)",
       },
-      min: {
-        value: 0,
+      minLength: {
+        value: 1,
         message: "Time must be greater than 0",
       },
     };

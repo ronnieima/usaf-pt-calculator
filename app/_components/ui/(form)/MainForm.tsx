@@ -4,12 +4,11 @@ import FormButtons from "./FormButtons";
 
 import { calculateTotalScoresWithMinimumCheck } from "../../../_db/supabase";
 
-import { FormProvider, useForm } from "react-hook-form";
 import { useScoreContext } from "@/app/_contexts/ScoreContext";
-import Score from "./Score";
-import GenderRadio from "./GenderRadioButtons";
+import { FormProvider, useForm } from "react-hook-form";
 import ExerciseFields from "./ExerciseFields";
-import { DevTool } from "@hookform/devtools";
+import GenderRadio from "./GenderRadioButtons";
+import Score from "./Score";
 
 export type formType = {
   gender: string;
@@ -25,7 +24,7 @@ export type formType = {
 const MainForm = () => {
   const methods = useForm<formType>({
     mode: "onChange",
-    reValidateMode: "onChange",
+    reValidateMode: "onBlur",
     defaultValues: {
       gender: "",
       ageGroup: "",
@@ -40,6 +39,7 @@ const MainForm = () => {
   const { setScores } = useScoreContext();
 
   async function onSubmit(data: formType) {
+    console.log(data);
     const res = await calculateTotalScoresWithMinimumCheck(data);
     setScores(res);
   }
@@ -56,7 +56,6 @@ const MainForm = () => {
         <FormButtons />
       </form>
       <Score />
-      <DevTool control={methods.control} />
     </FormProvider>
   );
 };
