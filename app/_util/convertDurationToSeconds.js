@@ -1,10 +1,16 @@
+import dayjs from "dayjs";
+import toObject from "dayjs/plugin/toObject";
+dayjs.extend(toObject);
+
 export default function convertDurationToSeconds(duration) {
-  const parts = duration.split(':').map(Number);
+  const dateObject = dayjs(duration).toObject();
 
-  if (parts.length !== 2) {
-    throw new Error('Invalid duration format. Expected mm:ss');
-  }
+  // Get minutes and seconds
+  const minutes = dateObject.minutes;
+  const seconds = dateObject.seconds;
 
-  const [minutes, seconds] = parts;
-  return minutes * 60 + seconds;
+  // Convert to seconds
+  const totalSeconds = minutes * 60 + seconds;
+
+  return totalSeconds;
 }
