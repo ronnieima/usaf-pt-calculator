@@ -52,10 +52,8 @@ async function getIndividualExerciseScore(gender, ageGroup, exercise, results) {
     results = convertDurationToSeconds(results);
   }
 
-  if (exercise === "1.5_mile_run") {
-    if (results > max) {
-      return 0;
-    }
+  if ((exercise === "1.5_mile_run" && results > max) || isNaN(results)) {
+    return 0;
   } else if (results < min) {
     return 0;
   }
