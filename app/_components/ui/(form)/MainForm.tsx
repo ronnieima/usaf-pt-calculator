@@ -9,6 +9,7 @@ import { useScoreContext } from "@/app/_contexts/ScoreContext";
 import Score from "./Score";
 import GenderRadio from "./GenderRadioButtons";
 import ExerciseFields from "./ExerciseFields";
+import { DevTool } from "@hookform/devtools";
 
 export type formType = {
   gender: string;
@@ -55,6 +56,7 @@ const MainForm = () => {
         <FormButtons />
       </form>
       <Score />
+      <DevTool control={methods.control} />
     </FormProvider>
   );
 };

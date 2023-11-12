@@ -15,7 +15,10 @@ import {
 } from "@/app/_util/helpers";
 import { getExerciseMinMax } from "@/app/_db/supabase";
 import { getValidationRules } from "@/app/_util/validation";
-
+import { ConfigProvider, TimePicker } from "antd";
+import dayjs from "dayjs";
+import { LocalizationProvider, TimeField } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 type ExerciseInputProps = {
   category: string;
 };
@@ -25,6 +28,7 @@ const ExerciseInput = ({ category }: ExerciseInputProps) => {
     control,
     formState: { isSubmitting },
     watch,
+    resetField,
   } = useFormContext();
   const categoryValue = convertStringToCamelCase(category);
   const selectedExercise = watch(`${categoryValue}Exercise`);
@@ -63,6 +67,10 @@ const ExerciseInput = ({ category }: ExerciseInputProps) => {
     fetchMinMax();
   }, [gender, ageGroup, selectedExercise, isTimeBased]);
 
+  useEffect(() => {
+    resetField(`${categoryValue}Input`);
+  }, [selectedExercise, resetField, categoryValue]);
+
   // Prevents scroll affecting number inputs
   const numberInputOnWheelPreventChange: React.WheelEventHandler<
     HTMLInputElement
@@ -92,22 +100,36 @@ const ExerciseInput = ({ category }: ExerciseInputProps) => {
           control={control}
           name={`${categoryValue}Input`}
           rules={getValidationRules(category, selectedExercise)}
-          render={({ field }) => (
+          render={({ field: { onChange, value } }) => (
             <FormItem>
               <FormLabel className="text-2xl ">{`${exerciseLabel} ${
                 isTimeBased ? "Time" : "Reps"
               }`}</FormLabel>
               <FormControl className="border-card-foreground/30 shadow-lg">
-                <Input
-                  disabled={isSubmitting}
-                  inputMode={isTimeBased ? "text" : "numeric"}
-                  className="focus:ring-primary"
-                  min={0}
-                  onWheel={numberInputOnWheelPreventChange}
-                  placeholder={isTimeBased ? "MM:SS" : "Reps"}
-                  type={isTimeBased ? "text" : "number"}
-                  {...field}
-                />
+                {isTimeBased ? (
+                  // I had to pull an external TimePicker component front ant design and use its styling guide
+                  <div>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                      <TimeField
+                        className="w-full border-card-foreground/30 shadow-lg "
+                        format="mm:ss"
+                        onChange={onChange}
+                      />
+                    </LocalizationProvider>
+                  </div>
+                ) : (
+                  <Input
+                    disabled={isSubmitting}
+                    inputMode="numeric"
+                    className="focus:ring-primary"
+                    min={0}
+                    onWheel={numberInputOnWheelPreventChange}
+                    placeholder="Reps"
+                    type="number"
+                    value={value}
+                    onChange={onChange}
+                  />
+                )}
               </FormControl>
               {showMinMax && (
                 <section className="flex justify-between text-base sm:text-2xl">
