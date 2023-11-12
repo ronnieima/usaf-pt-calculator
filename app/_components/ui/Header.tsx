@@ -4,7 +4,7 @@ import TypeAnimationWrapper from "./TypeAnimationWrapper";
 
 const Header = () => {
   return (
-    <header className="flex h-[32rem] flex-col items-center justify-center gap-8 sm:h-[48rem] ">
+    <header className="flex min-h-screen flex-col items-center justify-center gap-8  ">
       <TypeAnimationWrapper />
       <Link
         href={"#form-card"}

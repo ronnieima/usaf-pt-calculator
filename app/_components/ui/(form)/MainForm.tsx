@@ -26,14 +26,14 @@ const MainForm = () => {
     mode: "onChange",
     reValidateMode: "onBlur",
     defaultValues: {
-      gender: "",
-      ageGroup: "",
-      upperBodyExercise: "",
-      upperBodyInput: "",
-      coreExercise: "",
-      coreInput: "",
-      cardioExercise: "",
-      cardioInput: "",
+      gender: "male",
+      ageGroup: "<25",
+      upperBodyExercise: "pushup",
+      upperBodyInput: "43",
+      coreExercise: "situp",
+      coreInput: "23",
+      cardioExercise: "20_meter_hamr_shuttle",
+      cardioInput: "43",
     },
   });
   const { setScores } = useScoreContext();
@@ -48,7 +48,7 @@ const MainForm = () => {
     <FormProvider {...methods}>
       <form
         onSubmit={methods.handleSubmit(onSubmit)}
-        className="mb-3 flex  flex-col gap-16 text-2xl tracking-wide text-foreground sm:max-w-3xl"
+        className=" flex flex-col gap-16 text-2xl tracking-wide text-foreground"
       >
         <GenderRadio />
         <AgeGroupSelect />

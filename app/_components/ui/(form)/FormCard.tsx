@@ -13,10 +13,10 @@ import MainForm from "./MainForm";
 const FormCard = () => {
   return (
     <Card
-      className="flex max-w-[95%] flex-col items-stretch  rounded-lg bg-card shadow-lg shadow-gray-700 lg:max-w-6xl"
+      className="flex flex-col  items-center rounded-md bg-card shadow-lg"
       id="form-card"
     >
-      <CardHeader className=" max-w-3xl pb-16 pt-8 text-center font-mono sm:pt-16">
+      <CardHeader className=" max-w-3xl pb-16 pt-8 text-center font-mono  ">
         <CardTitle className=" text-3xl text-neutral-800 sm:text-5xl">
           <span className="">Effortless</span> PT score calculation.
         </CardTitle>
@@ -24,7 +24,7 @@ const FormCard = () => {
           Simply enter your test results and click submit!
         </CardDescription>
       </CardHeader>
-      <CardContent>
+      <CardContent className="min-w-full">
         <ScoreContextProvider>
           <MainForm />
         </ScoreContextProvider>
