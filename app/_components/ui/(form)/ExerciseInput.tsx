@@ -105,7 +105,7 @@ const ExerciseInput = ({ category }: ExerciseInputProps) => {
               }`}</FormLabel>
               <FormControl className="border-card-foreground/30 shadow-lg">
                 {isTimeBased ? (
-                  // I had to pull an external TimePicker component front ant design and use its styling guide
+                  // I had to pull an external TimePicker component from MUI
                   <div>
                     <LocalizationProvider dateAdapter={AdapterDayjs}>
                       <TimePicker
