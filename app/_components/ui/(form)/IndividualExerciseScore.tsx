@@ -8,9 +8,9 @@ function IndividualExerciseScore({
   score,
 }: IndividualExerciseScoreProps) {
   return (
-    <div className="flex flex-col items-center gap-4 ">
+    <div className="flex items-center gap-4 ">
       {icon}
-      <p>{score}</p>
+      <p className="block w-16">{score}</p>
     </div>
   );
 }

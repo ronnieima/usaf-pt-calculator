@@ -9,6 +9,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import ExerciseFields from "./ExerciseFields";
 import GenderRadio from "./GenderRadioButtons";
 import Score from "./Score";
+import { Separator } from "../(shadcn)/separator";
 
 export type formType = {
   gender: string;
@@ -24,7 +25,7 @@ export type formType = {
 const MainForm = () => {
   const methods = useForm<formType>({
     mode: "onChange",
-    reValidateMode: "onBlur",
+    reValidateMode: "onChange",
     defaultValues: {
       gender: "",
       ageGroup: "",
@@ -39,7 +40,6 @@ const MainForm = () => {
   const { setScores } = useScoreContext();
 
   async function onSubmit(data: formType) {
-    console.log(data);
     const res = await calculateTotalScoresWithMinimumCheck(data);
     setScores(res);
   }
@@ -48,7 +48,7 @@ const MainForm = () => {
     <FormProvider {...methods}>
       <form
         onSubmit={methods.handleSubmit(onSubmit)}
-        className="mb-3 flex  flex-col gap-16 text-2xl tracking-wide text-foreground sm:max-w-3xl"
+        className=" flex flex-col gap-16 text-2xl tracking-wide text-foreground"
       >
         <GenderRadio />
         <AgeGroupSelect />

@@ -1,15 +1,17 @@
 import { useFormState } from "react-hook-form";
-import ScoreBreakdown from "./ScoreBreakdown";
+import { MoonLoader } from "react-spinners";
 import FailReasons from "./FailReasons";
 import ScoreMessage from "./ScoreMessage";
-import { MoonLoader } from "react-spinners";
-import { Separator } from "@/app/_components/ui/(shadcn)/separator";
+import Spinner from "./Spinner";
+import { Separator } from "../(shadcn)/separator";
+
 function Score() {
   const { isSubmitting, isSubmitSuccessful } = useFormState();
 
   return (
-    <section className="my-16 flex flex-col  items-center justify-center gap-8 text-4xl uppercase text-foreground">
-      {isSubmitting && <MoonLoader color="#36d7b7" />}
+    <section className="my-16 flex flex-col  items-center justify-center gap-8 text-4xl  text-foreground">
+      <Separator className="mt-16" />
+      {isSubmitting && <Spinner />}
       {isSubmitSuccessful && (
         <section
           className={`${
@@ -17,10 +19,8 @@ function Score() {
           } flex flex-col gap-4 text-center`}
         >
           <ScoreMessage />
-          <Separator />
-          <FailReasons />
 
-          <ScoreBreakdown />
+          <FailReasons />
         </section>
       )}
     </section>
