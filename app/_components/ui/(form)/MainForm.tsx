@@ -1,15 +1,16 @@
 "use client";
-import AgeGroupSelect from "./AgeGroupSelect";
-import FormButtons from "./FormButtons";
+import AgeGroupSelect from "./(controls)/AgeGroupSelect";
+import FormButtons from "./(controls)/FormButtons";
 
 import { calculateTotalScoresWithMinimumCheck } from "../../../_db/supabase";
 
-import { useScoreContext } from "@/app/_contexts/ScoreContext";
+import ScoreContextProvider, {
+  useScoreContext,
+} from "@/app/_contexts/ScoreContext";
 import { FormProvider, useForm } from "react-hook-form";
-import ExerciseFields from "./ExerciseFields";
-import GenderRadio from "./GenderRadioButtons";
-import Score from "./Score";
-import { Separator } from "../(shadcn)/separator";
+import ExerciseFields from "./(controls)/ExerciseFields";
+import GenderRadio from "./(controls)/GenderRadioButtons";
+import Score from "./(score)/Score";
 
 export type formType = {
   gender: string;
@@ -45,18 +46,20 @@ const MainForm = () => {
   }
 
   return (
-    <FormProvider {...methods}>
-      <form
-        onSubmit={methods.handleSubmit(onSubmit)}
-        className=" flex flex-col gap-16 text-2xl tracking-wide text-foreground"
-      >
-        <GenderRadio />
-        <AgeGroupSelect />
-        <ExerciseFields />
-        <FormButtons />
-      </form>
-      <Score />
-    </FormProvider>
+    <ScoreContextProvider>
+      <FormProvider {...methods}>
+        <form
+          onSubmit={methods.handleSubmit(onSubmit)}
+          className=" flex flex-col gap-16 text-2xl tracking-wide text-foreground"
+        >
+          <GenderRadio />
+          <AgeGroupSelect />
+          <ExerciseFields />
+          <FormButtons />
+        </form>
+        <Score />
+      </FormProvider>
+    </ScoreContextProvider>
   );
 };
 

@@ -4,7 +4,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "@/app/_components/ui/(shadcn)/accordion";
 
 function FailReasons() {
   const {

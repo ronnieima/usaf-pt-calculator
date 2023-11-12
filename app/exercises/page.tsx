@@ -5,9 +5,14 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from "@/app/_components/ui/(shadcn)/accordion";
 import UnderConstruction from "../_components/UnderConstruction";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardHeader,
+  CardTitle,
+} from "@/app/_components/ui/(shadcn)/card";
 
 function ExercisesPage() {
   return (

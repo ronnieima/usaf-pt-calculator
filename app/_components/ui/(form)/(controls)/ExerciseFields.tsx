@@ -2,7 +2,7 @@ import React from "react";
 
 import ExerciseSelect from "./ExerciseSelect";
 import ExerciseInput from "./ExerciseInput";
-import { Separator } from "../(shadcn)/separator";
+import { Separator } from "../../(shadcn)/separator";
 
 export type ExerciseCategory = "Upper Body" | "Core" | "Cardio";
 

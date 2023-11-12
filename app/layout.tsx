@@ -1,6 +1,6 @@
 import "./globals.css";
 
-import NavBar from "./_components/ui/NavBar";
+import NavBar from "./_components/ui/(navbar)/NavBar";
 import Footer from "./_components/ui/Footer";
 import ToastContainerWrapper from "./_components/ui/ToastContainerWrapper";
 import Script from "next/script";
