@@ -10,8 +10,7 @@ const Header = () => {
         href={"#form-card"}
         className="animate-fade-down text-lg text-neutral-400 animate-delay-[3000ms] hover:text-neutral-100 hover:underline hover:underline-offset-[6.5px]"
       >
-        <span className="relative right-2">Start</span>
-        <ChevronDown />
+        <ChevronDown size={48} />
       </Link>
     </header>
   );
