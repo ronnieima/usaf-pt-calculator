@@ -10,7 +10,7 @@ function IndividualExerciseScore({
   return (
     <div className="flex items-center gap-4 ">
       {icon}
-      <p className="block w-16">{score}pts</p>
+      <p className="block w-16">{score}</p>
     </div>
   );
 }

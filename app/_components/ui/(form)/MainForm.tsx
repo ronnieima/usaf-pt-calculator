@@ -41,9 +41,7 @@ const MainForm = () => {
   const { setScores } = useScoreContext();
 
   async function onSubmit(data: formType) {
-    console.log(data);
     const res = await calculateTotalScoresWithMinimumCheck(data);
-    console.log(res);
     setScores(res);
   }
 
