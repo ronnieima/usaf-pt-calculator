@@ -59,7 +59,9 @@ async function getIndividualExerciseScore(gender, ageGroup, exercise, results) {
   } else if (results < min) {
     return 0;
   }
-
+  if (results > max) {
+    return isCardio ? 60 : 20;
+  }
   const { data, error } = await supabase
     .from("scoringCriteria")
     .select("points")
