@@ -6,10 +6,12 @@ function FailReasons() {
   } = useScoreContext();
   // console.log(minimumMetStatus);
   return (
-    <>
+    <div className="text-2xl">
       {totalScore < 75 && <p className=" text-red-500">Score below 75</p>}
       {!minimumMetStatus.upper && (
-        <p className=" text-red-500">Minimum not met for upper body category</p>
+        <p className="  text-red-500">
+          Minimum not met for upper body category
+        </p>
       )}
       {!minimumMetStatus.core && (
         <p className=" text-red-500">Minimum not met for core category</p>
@@ -17,7 +19,7 @@ function FailReasons() {
       {!minimumMetStatus.cardio && (
         <p className=" text-red-500">Minimum not met for cardio category</p>
       )}
-    </>
+    </div>
   );
 }
 
