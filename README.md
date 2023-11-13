@@ -1,8 +1,14 @@
 # USAF PT Test Score Calculator
 
+>Next.js React web app simplifying PT test score calculations for airmen.
+
 ## **https://usafptcalculator.com**
 
-![image](https://github.com/ronnieima/usaf-pt-calculator/assets/70875687/cad01c48-2117-48b8-b602-b64944d9f3dc)
+![image](https://github.com/ronnieima/usaf-pt-calculator/assets/70875687/941119a5-fc54-4c50-9d26-6f24202c5b7e)
+![image](https://github.com/ronnieima/usaf-pt-calculator/assets/70875687/3bd18238-0108-4a9f-a0d3-12e8859b8f7f)
+
+
+
 
 ## Overview
 
@@ -12,7 +18,7 @@ The USAF PT Test Score Calculator is a web-based tool designed to calculate your
 
 - Calculate scores for various activities: 1.5 mile run, 20m HAMR shuttle run, push-ups, hand release push-ups, sit-ups, reverse cross legged crunches, and planks.
 - Supports multiple age groups and genders.
-- Quick and easy-to-use interface.
+- Mininmum and maximum value indicators for each exercise.
 
 ## To-Do List
 
@@ -34,7 +40,7 @@ The USAF PT Test Score Calculator is a web-based tool designed to calculate your
 
 - React.js (Next.js framwork)
 - Tailwind CSS
-- shadcn UI
+- shadcnUI Components
 - React Hook Form
 
 ## Disclaimer
