@@ -6,20 +6,18 @@ import "react-toastify/dist/ReactToastify.css";
 
 export default function ToastContainerWrapper() {
   useEffect(() => {
-    toast("usafptcalculator has been revamped with new styles!");
+    toast("Update: Charts page has been added!");
   }, []);
 
   return (
     <ToastContainer
-      position="bottom-right"
-      autoClose={5000}
-      hideProgressBar={false}
+      position="top-center"
+      autoClose={2000}
       newestOnTop={false}
       closeOnClick
       rtl={false}
       draggable
       pauseOnHover
-      theme="colored"
     />
   );
 }

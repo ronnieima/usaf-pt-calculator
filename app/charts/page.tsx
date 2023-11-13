@@ -19,11 +19,12 @@ const ChartsPage = () => {
     }
   }
   return (
-    <div className="p-16">
-      <h1 className="flex items-center justify-center text-center text-6xl text-background">
-        Score Charts
-      </h1>
-      <div className="grid min-h-screen gap-8 py-16 md:grid-cols-2 lg:grid-cols-3 lg:px-32 ">
+    <div className="flex flex-col items-center justify-center pb-16">
+      <header className=" justify-center py-16">
+        <h1 className="text-center text-6xl text-background">Score Charts</h1>
+        <p className="text-center text-slate-300">Links open in a new tab</p>
+      </header>
+      <div className="grid min-h-screen w-full max-w-[50rem] grid-cols-2 items-center justify-center gap-2 px-2 sm:gap-8 lg:grid-cols-3  ">
         {genders.map((gender) =>
           ages.map((ageGroup) => {
             console.log(ageGroup);
@@ -35,14 +36,14 @@ const ChartsPage = () => {
                 target="_blank"
               >
                 <Card
-                  className={`flex h-32 items-center justify-center rounded-none shadow-2xl hover:scale-105 active:translate-y-1 ${
+                  className={`flex h-32 w-full items-center justify-center rounded-none shadow-2xl hover:scale-105 active:translate-y-1 ${
                     gender === "male"
                       ? "bg-blue-100 hover:bg-blue-200"
                       : "bg-pink-100 hover:bg-pink-200"
                   }`}
                 >
                   <CardHeader>
-                    <CardTitle className="flex flex-col items-center justify-center text-xl capitalize">
+                    <CardTitle className="flex flex-col items-center justify-center text-3xl capitalize">
                       <p>{gender}</p>
                       <p>{ageGroup}</p>
                     </CardTitle>
