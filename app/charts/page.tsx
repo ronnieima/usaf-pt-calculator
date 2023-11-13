@@ -1,23 +1,8 @@
 "use client";
-import React from "react";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
-  DialogTrigger,
-} from "@/components/ui/dialog";
 
-import UnderConstruction from "../_components/UnderConstruction";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "../_components/ui/(shadcn)/card";
 import Link from "next/link";
 import { ageGroups } from "../_components/ui/(form)/(controls)/AgeGroupSelect";
+import { Card, CardHeader, CardTitle } from "../_components/ui/(shadcn)/card";
 
 const genders = ["male", "female"];
 const ages = ageGroups;
@@ -35,10 +20,10 @@ const ChartsPage = () => {
   }
   return (
     <div className="p-16">
-      <h1 className="flex items-center justify-center text-6xl text-background">
-        PT Charts
+      <h1 className="flex items-center justify-center text-center text-6xl text-background">
+        Score Charts
       </h1>
-      <div className="min-h-screen gap-8 px-32 py-16 md:grid md:grid-cols-2 lg:grid-cols-3 ">
+      <div className="grid min-h-screen gap-8 py-16 md:grid-cols-2 lg:grid-cols-3 lg:px-32 ">
         {genders.map((gender) =>
           ages.map((ageGroup) => {
             ageGroup = formatAgeGroup(ageGroup);
@@ -56,9 +41,10 @@ const ChartsPage = () => {
                   }`}
                 >
                   <CardHeader>
-                    <CardTitle className="capitalize">{`${gender} ${formatAgeGroup(
-                      ageGroup,
-                    )}`}</CardTitle>
+                    <CardTitle className="flex flex-col items-center justify-center text-xl capitalize">
+                      <p>{gender}</p>
+                      <p>{ageGroup}</p>
+                    </CardTitle>
                   </CardHeader>
                 </Card>
               </Link>
