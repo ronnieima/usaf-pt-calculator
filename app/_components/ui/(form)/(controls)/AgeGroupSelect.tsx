@@ -16,7 +16,7 @@ import { Separator } from "@radix-ui/react-select";
 import React from "react";
 import { useFormContext } from "react-hook-form";
 
-const ageGroups = [
+export const ageGroups = [
   "<25",
   "25-29",
   "30-34",
