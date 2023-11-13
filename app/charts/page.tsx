@@ -16,6 +16,7 @@ import {
   CardHeader,
   CardTitle,
 } from "../_components/ui/(shadcn)/card";
+import Link from "next/link";
 
 const ChartsPage = () => {
   return (
@@ -26,15 +27,16 @@ const ChartsPage = () => {
           <CardTitle>&gt;25</CardTitle>
         </CardHeader>
         <CardContent>
+          <Link
+            href="https://hnnyotwjhikrytqynjyk.supabase.co/storage/v1/object/public/usafptcalculator/scorechart_male_lt25.pdf"
+            target="_blank"
+          >
+            PDF HERE BOI
+          </Link>
           <Dialog>
             {/* todo: add this pdf in a dialog */}
             <DialogTrigger>Open</DialogTrigger>
-            <DialogContent className="min-w-none  min-h-[40rem] ">
-              <iframe
-                src="https://hnnyotwjhikrytqynjyk.supabase.co/storage/v1/object/public/usafptcalculator/scorechart_male_lt25.pdf"
-                className="h-full w-full py-2"
-              ></iframe>
-            </DialogContent>
+            <DialogContent className="min-w-none  min-h-[40rem] "></DialogContent>
           </Dialog>
         </CardContent>
       </Card>
