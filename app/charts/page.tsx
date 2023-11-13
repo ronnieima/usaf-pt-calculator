@@ -10,10 +10,10 @@ const ages = ageGroups;
 const ChartsPage = () => {
   function formatAgeGroup(ageGroup: string) {
     switch (ageGroup) {
-      case "lt25":
-        return "<25";
-      case "gt60":
-        return ">60";
+      case "<25":
+        return "lt25";
+      case ">60":
+        return "gt60";
       default:
         return ageGroup;
     }
@@ -26,11 +26,12 @@ const ChartsPage = () => {
       <div className="grid min-h-screen gap-8 py-16 md:grid-cols-2 lg:grid-cols-3 lg:px-32 ">
         {genders.map((gender) =>
           ages.map((ageGroup) => {
-            ageGroup = formatAgeGroup(ageGroup);
+            console.log(ageGroup);
+            const ageGroupFormatted = formatAgeGroup(ageGroup);
             return (
               <Link
                 key={`${gender}-${ageGroup}`}
-                href={`https://hnnyotwjhikrytqynjyk.supabase.co/storage/v1/object/public/usafptcalculator/scorechart_${gender}_${ageGroup}.pdf`}
+                href={`https://hnnyotwjhikrytqynjyk.supabase.co/storage/v1/object/public/usafptcalculator/scorechart_${gender}_${ageGroupFormatted}.pdf`}
                 target="_blank"
               >
                 <Card
