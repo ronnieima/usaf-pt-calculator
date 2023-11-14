@@ -30,6 +30,7 @@ const MobileMenu = () => {
           <SheetDescription className="flex flex-col">
             {links.map((link) => (
               <Button
+                aria-label="Navigation"
                 onClick={() => push(link.href)}
                 variant="ghost"
                 key={link.href}
