@@ -1,6 +1,5 @@
 import {
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -13,10 +12,9 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/_components/ui/(shadcn)/select";
-import React from "react";
-import { useFormContext } from "react-hook-form";
-import { Exercise, ExerciseCategory } from "./ExerciseFields";
 import { convertStringToCamelCase } from "@/app/_util/helpers";
+import { useFormContext } from "react-hook-form";
+import { Exercise } from "./ExerciseFields";
 
 const ExerciseSelect = ({ options, category }: Exercise) => {
   const {
@@ -41,7 +39,10 @@ const ExerciseSelect = ({ options, category }: Exercise) => {
             onValueChange={field.onChange}
             value={field.value}
           >
-            <FormControl className="border-card-foreground/30 shadow-lg">
+            <FormControl
+              className="border-card-foreground/30 shadow-lg"
+              aria-label={`Select ${category} Exercise`}
+            >
               <SelectTrigger>
                 <SelectValue placeholder="Select exercise type" />
               </SelectTrigger>

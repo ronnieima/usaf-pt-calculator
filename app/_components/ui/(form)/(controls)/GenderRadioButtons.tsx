@@ -10,10 +10,10 @@ import {
   RadioGroup,
   RadioGroupItem,
 } from "@/app/_components/ui/(shadcn)/radio-group";
+import { capitalizeFirstLetter } from "@/app/_util/helpers";
 import { useFormContext } from "react-hook-form";
 
-const buttonStyle =
-  "w-full py-8 transition-colors duration-300 hover:cursor-pointer active:bg-primary/70 peer-aria-checked:bg-primary bg-primary/50 peer-aria-checked:ring-2 peer-aria-checked:ring-ring peer-aria-checked:ring-foreground/70 text-2xl shadow-lg active:translate-y-1 hover:scale-105";
+export const genders = ["male", "female"];
 
 function GenderRadioButtons() {
   const {
@@ -33,34 +33,30 @@ function GenderRadioButtons() {
               disabled={isSubmitting}
               onValueChange={field.onChange}
               value={field.value}
-              className="flex flex-col"
             >
-              <div className="grid gap-4 text-center sm:grid-cols-2">
-                <FormItem>
-                  <FormControl className=" shadow-2xl">
-                    <RadioGroupItem
-                      className="peer hidden focus-visible:border-opacity-25"
-                      value="male"
-                    />
-                  </FormControl>
-                  <Button
-                    asChild
-                    // peer-aria-checked must be used with RadixUI components
-                    className={buttonStyle}
-                  >
-                    <FormLabel>Male</FormLabel>
-                  </Button>
-                </FormItem>
-
-                <FormItem>
-                  <FormControl>
-                    <RadioGroupItem className="peer hidden" value="female" />
-                  </FormControl>
-                  <Button asChild className={buttonStyle}>
-                    <FormLabel className="font-normal">Female</FormLabel>
-                  </Button>
-                </FormItem>
-              </div>
+              <section className="grid gap-4 text-center sm:grid-cols-2">
+                {genders.map((gender) => {
+                  return (
+                    <FormItem key={gender}>
+                      <FormControl className="shadow-2xl">
+                        <RadioGroupItem
+                          className="peer hidden focus-visible:border-opacity-25"
+                          value={gender}
+                        />
+                      </FormControl>
+                      <Button
+                        aria-label={gender}
+                        asChild
+                        // peer-aria-checked must be used with RadixUI components
+                        className="w-full bg-gray-900 py-8 text-2xl shadow-lg transition-colors duration-300 hover:scale-105 hover:cursor-pointer active:translate-y-1 active:bg-primary/70 peer-aria-checked:scale-105 peer-aria-checked:bg-primary  peer-aria-checked:ring-4
+                        peer-aria-checked:ring-sky-300/70"
+                      >
+                        <FormLabel>{capitalizeFirstLetter(gender)}</FormLabel>
+                      </Button>
+                    </FormItem>
+                  );
+                })}
+              </section>
             </RadioGroup>
           </FormControl>
           <FormMessage />

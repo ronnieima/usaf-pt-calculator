@@ -9,6 +9,7 @@ const Header = () => {
       <Link
         href={"#form-card"}
         className="animate-fade-down text-neutral-400 animate-delay-[2250ms] hover:text-neutral-100"
+        aria-label="Scroll to the calculator"
       >
         <ChevronDown size={48} />
       </Link>

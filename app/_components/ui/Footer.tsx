@@ -9,7 +9,7 @@ const Footer = () => {
           me at{" "}
           <Link
             href="mailto:ronniekaito@imagawa.dev"
-            className="text-indigo-300 transition-colors hover:text-indigo-100 hover:underline"
+            className="text-indigo-200 transition-colors hover:text-indigo-100 hover:underline"
           >
             ronniekaito@imagawa.dev
           </Link>
@@ -18,7 +18,7 @@ const Footer = () => {
         <p className=" text-center">
           &copy; 2023 | Developed by{" "}
           <Link
-            className="transition-color  text-lg font-bold text-indigo-500  hover:text-indigo-400 hover:underline"
+            className="transition-color  text-lg font-bold text-indigo-200  hover:text-indigo-100 hover:underline"
             href="https://www.imagawa.dev"
             target="_blank"
             title="My Portfolio Website"

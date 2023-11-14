@@ -1,9 +1,6 @@
 "use client";
 
-import Link from "next/link";
-import React from "react";
-import { links } from "./NavBar";
-import { usePathname, useRouter } from "next/navigation";
+import { Button } from "@/app/_components/ui/(shadcn)/button";
 import {
   Sheet,
   SheetContent,
@@ -12,8 +9,9 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/app/_components/ui/(shadcn)/sheet";
-import { Button } from "@/app/_components/ui/(shadcn)/button";
 import { ChevronRight, Menu } from "lucide-react";
+import { usePathname, useRouter } from "next/navigation";
+import { links } from "./NavBar";
 
 const MobileMenu = () => {
   const currentPath = usePathname();
@@ -21,7 +19,7 @@ const MobileMenu = () => {
 
   return (
     <Sheet>
-      <SheetTrigger className="lg:hidden">
+      <SheetTrigger className="lg:hidden" aria-label="Open navigation menu">
         <Menu className="h-8 w-8" />
       </SheetTrigger>
       <SheetContent side={"right"}>
@@ -30,6 +28,7 @@ const MobileMenu = () => {
           <SheetDescription className="flex flex-col">
             {links.map((link) => (
               <Button
+                aria-label={link.label}
                 onClick={() => push(link.href)}
                 variant="ghost"
                 key={link.href}

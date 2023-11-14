@@ -51,7 +51,10 @@ const AgeGroupSelect = () => {
               onValueChange={field.onChange}
               value={field.value}
             >
-              <FormControl className="border-card-foreground/30 shadow-lg">
+              <FormControl
+                className="border-card-foreground/30 shadow-lg"
+                aria-label="Select age group"
+              >
                 <SelectTrigger>
                   <SelectValue placeholder="Select age group" />
                 </SelectTrigger>
