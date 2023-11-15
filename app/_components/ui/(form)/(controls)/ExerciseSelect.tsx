@@ -1,3 +1,6 @@
+"use client";
+import "next-cloudinary/dist/cld-video-player.css";
+
 import {
   FormControl,
   FormField,
@@ -13,6 +16,7 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
+import { CldVideoPlayer } from "next-cloudinary";
 
 import {
   Select,
@@ -21,20 +25,25 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/_components/ui/(shadcn)/select";
-import { convertStringToCamelCase } from "@/app/_util/helpers";
+import {
+  convertStringToCamelCase,
+  formatExerciseName,
+} from "@/app/_util/helpers";
 import { useFormContext } from "react-hook-form";
 import { Exercise } from "./ExerciseFields";
 import { Info } from "lucide-react";
-import { Button } from "../../(shadcn)/button";
 
 const ExerciseSelect = ({ options, category }: Exercise) => {
   const {
     control,
     formState: { isSubmitting },
+    watch,
   } = useFormContext();
 
   const categoryValue = convertStringToCamelCase(category);
-
+  const selectedExercise = watch(`${categoryValue}Exercise`);
+  const exerciseLabel = formatExerciseName(selectedExercise);
+  console.log(exerciseLabel);
   return (
     <FormField
       rules={{ required: { value: true, message: "Select an exercise" } }}
@@ -52,10 +61,14 @@ const ExerciseSelect = ({ options, category }: Exercise) => {
               <DialogContent>
                 <DialogHeader>
                   <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-                  <DialogDescription>
-                    This action cannot be undone. This will permanently delete
-                    your account and remove your data from our servers.
-                  </DialogDescription>
+                  <DialogDescription></DialogDescription>
+                  <h3>{exerciseLabel}</h3>
+                  <CldVideoPlayer
+                    width="500"
+                    height="200"
+                    src={`exercises/${selectedExercise}`}
+                    logo={false}
+                  />
                 </DialogHeader>
               </DialogContent>
             </Dialog>
