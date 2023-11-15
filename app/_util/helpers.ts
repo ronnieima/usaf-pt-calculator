@@ -34,8 +34,8 @@ export function formatExerciseName(exercise: string) {
       return "Hand Release Pushup";
     case "situp":
       return "Situp";
-    case "cross_legged_reverse_crunch":
-      return "Cross Legged Reverse Crunch";
+    case "cross_leg_reverse_crunch":
+      return "Cross Leg Reverse Crunch";
     case "forearm_plank":
       return "Forearm Plank";
     case "1.5_mile_run":

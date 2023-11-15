@@ -32,7 +32,7 @@ const ExerciseSelect = ({ options, category }: Exercise) => {
       render={({ field }) => (
         <FormItem>
           <FormLabel className=" flex justify-between text-2xl ">
-            <h2>{category} Exercise</h2>
+            <h2>{category} Component</h2>
           </FormLabel>
           <Select
             disabled={isSubmitting}
