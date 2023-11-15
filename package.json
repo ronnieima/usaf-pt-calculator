@@ -29,6 +29,7 @@
     "geist": "^1.0.0",
     "lucide-react": "^0.292.0",
     "next": "14.0.1",
+    "next-cloudinary": "^5.7.0",
     "postcss-preset-mantine": "^1.9.1",
     "react": "^18",
     "react-dom": "^18",

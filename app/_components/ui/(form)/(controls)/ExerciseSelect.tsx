@@ -6,6 +6,15 @@ import {
   FormMessage,
 } from "@/app/_components/ui/(shadcn)/form";
 import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+
+import {
   Select,
   SelectContent,
   SelectItem,
@@ -15,6 +24,8 @@ import {
 import { convertStringToCamelCase } from "@/app/_util/helpers";
 import { useFormContext } from "react-hook-form";
 import { Exercise } from "./ExerciseFields";
+import { Info } from "lucide-react";
+import { Button } from "../../(shadcn)/button";
 
 const ExerciseSelect = ({ options, category }: Exercise) => {
   const {
@@ -31,8 +42,23 @@ const ExerciseSelect = ({ options, category }: Exercise) => {
       name={`${categoryValue}Exercise`}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className=" flex justify-between text-2xl ">
+          <FormLabel className=" flex items-center justify-start gap-2 text-2xl ">
             <h2>{category} Exercise</h2>
+
+            <Dialog>
+              <DialogTrigger>
+                <Info />
+              </DialogTrigger>
+              <DialogContent>
+                <DialogHeader>
+                  <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+                  <DialogDescription>
+                    This action cannot be undone. This will permanently delete
+                    your account and remove your data from our servers.
+                  </DialogDescription>
+                </DialogHeader>
+              </DialogContent>
+            </Dialog>
           </FormLabel>
           <Select
             disabled={isSubmitting}
