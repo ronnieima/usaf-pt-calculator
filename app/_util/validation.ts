@@ -29,7 +29,7 @@ function coreValidationRules(coreExercise: string) {
     };
   } else if (
     coreExercise === "situp" ||
-    coreExercise === "cross_legged_reverse_crunch"
+    coreExercise === "cross_leg_reverse_crunch"
   ) {
     return {
       required: "Rep amount is required",
