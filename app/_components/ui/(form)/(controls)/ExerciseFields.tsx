@@ -4,9 +4,9 @@ import ExerciseSelect from "./ExerciseSelect";
 import ExerciseInput from "./ExerciseInput";
 import { Separator } from "../../(shadcn)/separator";
 
-export type ExerciseComponent = { label: string; value: string };
+type ExerciseComponent = { label: string; value: string };
 
-export type ExerciseOptions = {
+type ExerciseOptions = {
   label: string;
   value: string;
   videoSource: string;
