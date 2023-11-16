@@ -25,13 +25,15 @@ const ExerciseVideos = ({ exercise }: { exercise: Exercise }) => {
               logo={false}
             />
             <figcaption>
-              <Link
-                href={option.videoSource}
-                className="text-primary hover:text-primary/50 hover:underline"
-                target="_blank"
-              >
-                Source
-              </Link>
+              {option.videoSource && (
+                <Link
+                  href={option.videoSource}
+                  className="text-primary hover:text-primary/50 hover:underline"
+                  target="_blank"
+                >
+                  Source
+                </Link>
+              )}
             </figcaption>
           </figure>
         );
