@@ -28,6 +28,7 @@ const FormButtons = () => {
         Reset
       </Button> */}
       <Button
+        data-umami-event="Submit button"
         disabled={isSubmitting}
         type="submit"
         className={`h-full bg-green-800 px-16 text-xl  shadow-lg transition-all hover:scale-105 hover:bg-green-600 active:translate-y-1 active:bg-green-700
