@@ -63,7 +63,7 @@ const ExerciseSelect = ({ exercise }: { exercise: Exercise }) => {
                   View exercise demos
                 </span>
               </DialogTrigger>
-              <DialogContent className="max-h-screen max-w-2xl overflow-y-scroll">
+              <DialogContent className=" max-h-[80svh] max-w-2xl overflow-y-scroll">
                 <DialogHeader>
                   <DialogTitle className="mb-2 text-2xl">
                     {componentLabel} Exercise Demonstrations
