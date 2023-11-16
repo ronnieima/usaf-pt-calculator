@@ -22,7 +22,7 @@ const TypeAnimationWrapper = () => {
       <TypeAnimation
         aria-hidden="true"
         preRenderFirstString={true}
-        className=" w-[80%] whitespace-pre-line
+        className=" min-w-[80%] whitespace-pre-line
        text-5xl text-shadow-lg sm:text-7xl lg:text-8xl	"
         sequence={["Cal", "Calculate your\nAir Force PT score."]}
         wrapper="span"
