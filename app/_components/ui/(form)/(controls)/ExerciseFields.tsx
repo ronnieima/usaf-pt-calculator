@@ -9,7 +9,7 @@ type ExerciseComponent = { label: string; value: string };
 type ExerciseOptions = {
   label: string;
   value: string;
-  videoSource: string;
+  videoSource?: string;
 }[];
 
 export type Exercise = {
@@ -35,6 +35,10 @@ const exercises: Exercise[] = [
         value: "hand_release_pushup",
         videoSource:
           "https://www.dvidshub.net/video/825278/2-minute-hand-release-pushup",
+      },
+      {
+        label: "Exempt (in progress)",
+        value: "exempt",
       },
     ],
   },
@@ -62,9 +66,8 @@ const exercises: Exercise[] = [
         videoSource: "https://www.dvidshub.net/video/825280/forearm-plank",
       },
       {
-        label: "Exempt",
+        label: "Exempt (in progress)",
         value: "exempt",
-        videoSource: "",
       },
     ],
   },
@@ -89,6 +92,10 @@ const exercises: Exercise[] = [
         label: "2 Kilometer Walk (in progress)",
         value: "2km_walk",
         videoSource: "https://www.youtube.com/watch?v=z6cNHsw-EWI",
+      },
+      {
+        label: "Exempt (in progress)",
+        value: "exempt",
       },
     ],
   },
