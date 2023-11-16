@@ -48,7 +48,7 @@ const ExerciseSelect = ({ exercise }: { exercise: Exercise }) => {
       render={({ field }) => (
         <FormItem>
           {/* FORM LABEL */}
-          <FormLabel className=" flex items-center justify-start gap-2 text-3xl ">
+          <FormLabel className=" flex items-center justify-start gap-4 text-3xl ">
             <h2>{componentLabel} Exercise</h2>
 
             {/* DIALOG POPUP BOX */}
@@ -56,11 +56,12 @@ const ExerciseSelect = ({ exercise }: { exercise: Exercise }) => {
               <DialogTrigger
                 title="Open video exercise demonstrations!"
                 tabIndex={-1} // Prevents button from being focused with tab
+                className="flex gap-1 text-primary hover:scale-110 active:scale-105"
               >
-                <Info
-                  size={18}
-                  className="text-primary hover:scale-110 active:scale-105"
-                />
+                <Info size={18} />
+                <span className="hidden text-sm sm:inline">
+                  View exercise demos
+                </span>
               </DialogTrigger>
               <DialogContent className="max-h-screen max-w-2xl overflow-y-scroll">
                 <DialogHeader>
@@ -91,7 +92,11 @@ const ExerciseSelect = ({ exercise }: { exercise: Exercise }) => {
             {/* OPTIONS DROPDOWN */}
             <SelectContent>
               {options.map((option) => (
-                <SelectItem key={option.label} value={option.value}>
+                <SelectItem
+                  key={option.label}
+                  value={option.value}
+                  disabled={["2km_walk", "exempt"].includes(option.value)}
+                >
                   {option.label}
                 </SelectItem>
               ))}
