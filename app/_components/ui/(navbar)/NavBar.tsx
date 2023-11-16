@@ -1,13 +1,11 @@
-import React from "react";
-import Logo from "./Logo";
 import Links from "./Links";
+import Logo from "./Logo";
 
+import { ClipboardList, Home, LibraryBig } from "lucide-react";
 import MobileMenu from "./MobileMenu";
-import { ClipboardList, Dumbbell, Home, LibraryBig } from "lucide-react";
 
 export const links = [
   { label: "Home", href: "/", icon: <Home /> },
-  { label: "Exercises", href: "/exercises", icon: <Dumbbell /> },
   { label: "Charts", href: "/charts", icon: <ClipboardList /> },
   {
     label: "Resources",

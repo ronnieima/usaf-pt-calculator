@@ -11,6 +11,7 @@ import { FormProvider, useForm } from "react-hook-form";
 import ExerciseFields from "./(controls)/ExerciseFields";
 import GenderRadio from "./(controls)/GenderRadioButtons";
 import Score from "./(score)/Score";
+import { CldVideoPlayer } from "next-cloudinary";
 
 export type formType = {
   gender: string;
