@@ -9,7 +9,7 @@ const ExerciseVideos = ({ exercise }: { exercise: Exercise }) => {
   return (
     <section className="space-y-16">
       {options.map((option) => {
-        console.log(option.value);
+        if (option.value === "exempt") return;
         return (
           <figure key={option.value}>
             <header className="mb-2 text-2xl font-bold">

@@ -61,6 +61,11 @@ const exercises: Exercise[] = [
         value: "forearm_plank",
         videoSource: "https://www.dvidshub.net/video/825280/forearm-plank",
       },
+      {
+        label: "Exempt",
+        value: "exempt",
+        videoSource: "",
+      },
     ],
   },
   {
@@ -79,6 +84,11 @@ const exercises: Exercise[] = [
         value: "20_meter_hamr_shuttle",
         videoSource:
           "https://www.dvidshub.net/video/825282/20m-high-aerobic-multi-shuttle-run",
+      },
+      {
+        label: "2 Kilometer Walk (in progress)",
+        value: "2km_walk",
+        videoSource: "https://www.youtube.com/watch?v=z6cNHsw-EWI",
       },
     ],
   },
