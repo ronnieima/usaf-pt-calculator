@@ -4,14 +4,11 @@ import FormButtons from "./(controls)/FormButtons";
 
 import { calculateTotalScoresWithMinimumCheck } from "../../../_db/supabase";
 
-import ScoreContextProvider, {
-  useScoreContext,
-} from "@/app/_contexts/ScoreContext";
+import { useScoreContext } from "@/app/_contexts/ScoreContext";
 import { FormProvider, useForm } from "react-hook-form";
 import ExerciseFields from "./(controls)/ExerciseFields";
 import GenderRadio from "./(controls)/GenderRadioButtons";
 import Score from "./(score)/Score";
-import { CldVideoPlayer } from "next-cloudinary";
 
 export type formType = {
   gender: string;

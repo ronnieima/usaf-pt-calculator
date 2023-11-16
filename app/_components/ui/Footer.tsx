@@ -8,6 +8,7 @@ const Footer = () => {
           For bug reports, suggestions, and feedback, please feel free to email
           me at{" "}
           <Link
+            data-umami-event="Email link"
             href="mailto:ronniekaito@imagawa.dev"
             className="text-indigo-200 transition-colors hover:text-indigo-100 hover:underline"
           >
@@ -18,6 +19,7 @@ const Footer = () => {
         <p className=" text-center">
           &copy; 2023 | Developed by{" "}
           <Link
+            data-umami-event="Portfolio link"
             className="transition-color  text-lg font-bold text-indigo-200  hover:text-indigo-100 hover:underline"
             href="https://www.imagawa.dev"
             target="_blank"
