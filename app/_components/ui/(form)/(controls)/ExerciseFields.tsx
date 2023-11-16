@@ -4,41 +4,96 @@ import ExerciseSelect from "./ExerciseSelect";
 import ExerciseInput from "./ExerciseInput";
 import { Separator } from "../../(shadcn)/separator";
 
-export type ExerciseCategory = "Upper Body" | "Core" | "Cardio";
+export type ExerciseComponent = { label: string; value: string };
 
-type ExerciseOptions = string[];
+export type ExerciseOptions = {
+  label: string;
+  value: string;
+  videoSource: string;
+}[];
 
 export type Exercise = {
-  category: ExerciseCategory;
+  component: ExerciseComponent;
   options: ExerciseOptions;
 };
 
 const exercises: Exercise[] = [
   {
-    category: "Upper Body",
-    options: ["Pushup", "Hand Release Pushup"],
+    component: {
+      label: "Upper Body",
+      value: "upperBody",
+    },
+
+    options: [
+      {
+        label: "Pushup",
+        value: "pushup",
+        videoSource: "https://www.youtube.com/watch?v=z6cNHsw-EWI",
+      },
+      {
+        label: "Hand Release Pushup",
+        value: "hand_release_pushup",
+        videoSource:
+          "https://www.dvidshub.net/video/825278/2-minute-hand-release-pushup",
+      },
+    ],
   },
 
   {
-    category: "Core",
-    options: ["Situp", "Cross Leg Reverse Crunch", "Forearm Plank"],
+    component: {
+      label: "Core",
+      value: "core",
+    },
+    options: [
+      {
+        label: "Situp",
+        value: "situp",
+        videoSource: "https://www.youtube.com/watch?v=z6cNHsw-EWI",
+      },
+      {
+        label: "Cross Leg Reverse Crunch",
+        value: "cross_leg_reverse_crunch",
+        videoSource:
+          "https://www.dvidshub.net/video/825274/2-minute-cross-leg-reverse-crunch",
+      },
+      {
+        label: "Forearm Plank",
+        value: "forearm_plank",
+        videoSource: "https://www.dvidshub.net/video/825280/forearm-plank",
+      },
+    ],
   },
   {
-    category: "Cardio",
-    options: ["1.5 Mile Run", "20 Meter HAMR Shuttle"],
+    component: {
+      label: "Cardio",
+      value: "cardio",
+    },
+    options: [
+      {
+        label: "1.5 Mile Run",
+        value: "1.5_mile_run",
+        videoSource: "https://www.youtube.com/watch?v=z6cNHsw-EWI",
+      },
+      {
+        label: "20 Meter HAMR Shuttle",
+        value: "20_meter_hamr_shuttle",
+        videoSource:
+          "https://www.dvidshub.net/video/825282/20m-high-aerobic-multi-shuttle-run",
+      },
+    ],
   },
 ];
 
 const ExerciseFields = () => {
   return (
     <>
-      {exercises.map(({ category, options }) => {
+      {exercises.map((exercise) => {
         return (
-          <React.Fragment key={category}>
+          <React.Fragment key={exercise.component.value}>
             <Separator />
             <section className="flex flex-col gap-4">
-              <ExerciseSelect category={category} options={options} />
-              <ExerciseInput category={category} />
+              <ExerciseSelect exercise={exercise} />
+              <ExerciseInput exercise={exercise} />
             </section>
           </React.Fragment>
         );

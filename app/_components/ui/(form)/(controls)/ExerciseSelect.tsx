@@ -11,12 +11,10 @@ import {
 import {
   Dialog,
   DialogContent,
-  DialogDescription,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { CldVideoPlayer } from "next-cloudinary";
 
 import {
   Select,
@@ -25,54 +23,57 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/_components/ui/(shadcn)/select";
-import {
-  convertStringToCamelCase,
-  formatExerciseName,
-} from "@/app/_util/helpers";
-import { useFormContext } from "react-hook-form";
-import { Exercise } from "./ExerciseFields";
 import { Info } from "lucide-react";
+import { useFormContext } from "react-hook-form";
+import { Separator } from "../../(shadcn)/separator";
+import ExerciseVideos from "../ExerciseVideos";
+import { Exercise } from "./ExerciseFields";
 
-const ExerciseSelect = ({ options, category }: Exercise) => {
+const ExerciseSelect = ({ exercise }: { exercise: Exercise }) => {
   const {
     control,
     formState: { isSubmitting },
-    watch,
   } = useFormContext();
 
-  const categoryValue = convertStringToCamelCase(category);
-  const selectedExercise = watch(`${categoryValue}Exercise`);
-  const exerciseLabel = formatExerciseName(selectedExercise);
-  console.log(exerciseLabel);
+  const {
+    component: { label: componentLabel, value: componentValue },
+    options,
+  } = exercise;
+
   return (
     <FormField
       rules={{ required: { value: true, message: "Select an exercise" } }}
       control={control}
-      name={`${categoryValue}Exercise`}
+      name={`${componentValue}Exercise`}
       render={({ field }) => (
         <FormItem>
-          <FormLabel className=" flex items-center justify-start gap-2 text-2xl ">
-            <h2>{category} Exercise</h2>
+          {/* FORM LABEL */}
+          <FormLabel className=" flex items-center justify-start gap-2 text-3xl ">
+            <h2>{componentLabel} Exercise</h2>
 
+            {/* DIALOG POPUP BOX */}
             <Dialog>
-              <DialogTrigger>
-                <Info />
+              <DialogTrigger
+                title="Open video exercise demonstrations!"
+                tabIndex={-1} // Prevents button from being focused with tab
+              >
+                <Info
+                  size={18}
+                  className="text-primary hover:scale-110 active:scale-105"
+                />
               </DialogTrigger>
-              <DialogContent>
+              <DialogContent className="max-h-screen max-w-2xl overflow-y-scroll">
                 <DialogHeader>
-                  <DialogTitle>Are you sure absolutely sure?</DialogTitle>
-                  <DialogDescription></DialogDescription>
-                  <h3>{exerciseLabel}</h3>
-                  <CldVideoPlayer
-                    width="500"
-                    height="200"
-                    src={`exercises/${selectedExercise}`}
-                    logo={false}
-                  />
+                  <DialogTitle className="mb-2 text-2xl">
+                    {componentLabel} Exercise Demonstrations
+                  </DialogTitle>
+                  <Separator />
+                  <ExerciseVideos exercise={exercise} />
                 </DialogHeader>
               </DialogContent>
             </Dialog>
           </FormLabel>
+
           <Select
             disabled={isSubmitting}
             onValueChange={field.onChange}
@@ -80,22 +81,20 @@ const ExerciseSelect = ({ options, category }: Exercise) => {
           >
             <FormControl
               className="border-card-foreground/30 shadow-lg"
-              aria-label={`Select ${category} Exercise`}
+              aria-label={`Select ${componentLabel} Exercise`}
             >
               <SelectTrigger>
                 <SelectValue placeholder="Select exercise type" />
               </SelectTrigger>
             </FormControl>
+
+            {/* OPTIONS DROPDOWN */}
             <SelectContent>
-              {options.map((option) => {
-                // example: 1.5 Mile Run > 1.5_mile_run
-                const optionValue = option.toLowerCase().split(" ").join("_");
-                return (
-                  <SelectItem key={option} value={optionValue}>
-                    {option}
-                  </SelectItem>
-                );
-              })}
+              {options.map((option) => (
+                <SelectItem key={option.label} value={option.value}>
+                  {option.label}
+                </SelectItem>
+              ))}
             </SelectContent>
           </Select>
           <FormMessage />

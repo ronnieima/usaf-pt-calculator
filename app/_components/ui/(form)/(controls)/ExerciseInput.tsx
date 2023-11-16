@@ -8,7 +8,6 @@ import {
 import { Input } from "@/app/_components/ui/(shadcn)/input";
 import { getExerciseMinMax } from "@/app/_db/supabase";
 import {
-  convertStringToCamelCase,
   formatExerciseName,
   secondsToMinutesAndSeconds,
 } from "@/app/_util/helpers";
@@ -17,19 +16,21 @@ import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
-type ExerciseInputProps = {
-  category: string;
-};
+import { Exercise } from "./ExerciseFields";
 
-const ExerciseInput = ({ category }: ExerciseInputProps) => {
+const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   const {
     control,
     formState: { isSubmitting },
     watch,
     resetField,
   } = useFormContext();
-  const categoryValue = convertStringToCamelCase(category);
-  const selectedExercise = watch(`${categoryValue}Exercise`);
+
+  const {
+    component: { label: componentLabel, value: componentValue },
+  } = exercise;
+
+  const selectedExercise = watch(`${componentValue}Exercise`);
   const isVisibleInput = Boolean(selectedExercise);
   const isTimeBased =
     selectedExercise === "forearm_plank" || selectedExercise === "1.5_mile_run";
@@ -66,8 +67,8 @@ const ExerciseInput = ({ category }: ExerciseInputProps) => {
   }, [gender, ageGroup, selectedExercise, isTimeBased]);
 
   useEffect(() => {
-    resetField(`${categoryValue}Input`);
-  }, [selectedExercise, resetField, categoryValue]);
+    resetField(`${componentValue}Input`);
+  }, [selectedExercise, resetField, componentValue]);
 
   // Prevents scroll affecting number inputs
   const numberInputOnWheelPreventChange: React.WheelEventHandler<
@@ -96,8 +97,8 @@ const ExerciseInput = ({ category }: ExerciseInputProps) => {
       >
         <FormField
           control={control}
-          name={`${categoryValue}Input`}
-          rules={getValidationRules(category, selectedExercise)}
+          name={`${componentValue}Input`}
+          rules={getValidationRules(componentLabel, selectedExercise)}
           render={({ field: { onChange, ...field } }) => (
             <FormItem>
               <FormLabel className="text-2xl ">{`${exerciseLabel} ${

@@ -1,0 +1,43 @@
+import { CldVideoPlayer } from "next-cloudinary";
+import React from "react";
+import { Exercise } from "./(controls)/ExerciseFields";
+import Link from "next/link";
+
+const ExerciseVideos = ({ exercise }: { exercise: Exercise }) => {
+  const { options } = exercise;
+
+  return (
+    <section className="space-y-16">
+      {options.map((option) => {
+        console.log(option.value);
+        return (
+          <figure key={option.value}>
+            <header className="mb-2 text-2xl font-bold">
+              <h2>{option.label}</h2>
+            </header>
+
+            {/* Component from cloudinary */}
+            <CldVideoPlayer
+              id={option.value}
+              width="1000"
+              height="500"
+              src={`exercises/${option.value}`}
+              logo={false}
+            />
+            <figcaption>
+              <Link
+                href={option.videoSource}
+                className="text-primary hover:text-primary/50 hover:underline"
+                target="_blank"
+              >
+                Source
+              </Link>
+            </figcaption>
+          </figure>
+        );
+      })}
+    </section>
+  );
+};
+
+export default ExerciseVideos;
