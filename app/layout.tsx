@@ -11,7 +11,7 @@ import { GeistSans } from "geist/font";
 const metadata = {
   title: "Calculate your USAF PT Score!",
   description:
-    "Optimize your fitness journey with our Air Force PT Score Calculator web app! Tailored for USAF personnel, this user-friendly tool helps you track your physical fitness progress effortlessly. Accurate, efficient, and easy to use, our calculator ensures you stay on top of your fitness goals. Perfect for airmen stationed worldwide, achieve your best PT scores with precision and confidence. Try it now!",
+    "Optimize your fitness journey with this unofficial Air Force PT Score Calculator web app! Tailored for USAF personnel, this user-friendly tool helps you calculate your physical training test scores effortlessly.",
 };
 
 export default function RootLayout({
