@@ -1,9 +1,10 @@
 import "./globals.css";
 
+import { getCldOgImageUrl } from "next-cloudinary";
+import Script from "next/script";
 import NavBar from "./_components/ui/(navbar)/NavBar";
 import Footer from "./_components/ui/Footer";
 import ToastContainerWrapper from "./_components/ui/ToastContainerWrapper";
-import Script from "next/script";
 
 import { GeistSans } from "geist/font";
 
@@ -20,6 +21,10 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
+  const ogImageUrl = getCldOgImageUrl({
+    src: "ogImage/ogImage",
+    text: "Calculate your Air Force PT score.",
+  });
   return (
     <html
       lang="en"
@@ -34,12 +39,12 @@ export default function RootLayout({
         <meta name="twitter:creator" content="@imagawaDev" />
         <meta name="twitter:title" content={metadata.title} />
         <meta name="twitter:description" content={metadata.description} />
-        <meta name="twitter:image" content={metadata.image} />
+        <meta name="twitter:image" content={ogImageUrl} />
 
         <meta property="og:type" content="website" />
         <meta property="og:title" content={metadata.title} />
         <meta property="og:url" content="https://usafptcalculator.com/" />
-        <meta property="og:image" content={metadata.image} />
+        <meta property="og:image" content={ogImageUrl} />
         <meta property="og:description" content={metadata.description} />
 
         <Script
