@@ -21,7 +21,7 @@ const exercises: Exercise[] = [
 
   {
     category: "Core",
-    options: ["Situp", "Cross Legged Reverse Crunch", "Forearm Plank"],
+    options: ["Situp", "Cross Leg Reverse Crunch", "Forearm Plank"],
   },
   {
     category: "Cardio",
