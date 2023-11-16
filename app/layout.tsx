@@ -12,8 +12,6 @@ const metadata = {
   title: "Calculate your USAF PT Score!",
   description:
     "Optimize your fitness journey with our Air Force PT Score Calculator web app! Tailored for USAF personnel, this user-friendly tool helps you track your physical fitness progress effortlessly. Accurate, efficient, and easy to use, our calculator ensures you stay on top of your fitness goals. Perfect for airmen stationed worldwide, achieve your best PT scores with precision and confidence. Try it now!",
-  image:
-    "https://res.cloudinary.com/dfpbpun9z/image/upload/v1699624351/OG_slgp7a.png",
 };
 
 export default function RootLayout({
@@ -23,7 +21,6 @@ export default function RootLayout({
 }) {
   const ogImageUrl = getCldOgImageUrl({
     src: "ogImage/ogImage",
-    text: "Calculate your Air Force PT score.",
   });
   return (
     <html
