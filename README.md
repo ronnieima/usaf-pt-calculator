@@ -21,8 +21,8 @@ The USAF PT Test Score Calculator is a web-based tool designed to calculate your
 
 - [ ] Add "Walk" exercise as an alternative to running.
 - [ ] Include "Exempt" options for specific activities.
-- [ ] Embed videos demonstrating each exercise.
-- [ ] Display PT Scoring Charts.
+- [X] Embed videos demonstrating each exercise.
+- [X] Display PT Scoring Charts.
 - [ ] Implement exercise timers.
 - [ ] Add Shuttle Run audio cues.
 
