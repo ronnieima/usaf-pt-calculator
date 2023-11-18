@@ -6,7 +6,7 @@ import NavBar from "./_components/ui/(navbar)/NavBar";
 import Footer from "./_components/ui/Footer";
 import ToastContainerWrapper from "./_components/ui/ToastContainerWrapper";
 
-import { GeistSans } from "geist/font/sans";
+import { GeistSans } from "geist/font";
 
 const metadata = {
   title: "USAF PT Test Calculator - All Score Charts and Exercise Videos",
