@@ -49,6 +49,17 @@ export function capitalizeFirstLetter(string: string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
+export function formatAgeGroup(ageGroup: string) {
+  switch (ageGroup) {
+    case "<25":
+      return "lt25";
+    case ">60":
+      return "gt60";
+    default:
+      return ageGroup;
+  }
+}
+
 export function secondsToMinutesAndSeconds(seconds: string) {
   const secondsNumber = Number(seconds);
   const minutes = Math.floor(secondsNumber / 60);

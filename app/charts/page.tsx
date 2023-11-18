@@ -3,19 +3,11 @@
 import Link from "next/link";
 import { ageGroups } from "../_components/ui/(form)/(controls)/AgeGroupSelect";
 import { Card, CardHeader, CardTitle } from "../_components/ui/(shadcn)/card";
+import { formatAgeGroup } from "../_util/helpers";
 
 const genders = ["male", "female"];
 const ages = ageGroups;
-export function formatAgeGroup(ageGroup: string) {
-  switch (ageGroup) {
-    case "<25":
-      return "lt25";
-    case ">60":
-      return "gt60";
-    default:
-      return ageGroup;
-  }
-}
+
 const ChartsPage = () => {
   return (
     <div className="flex flex-col items-center justify-center pb-16">

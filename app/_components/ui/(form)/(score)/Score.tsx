@@ -4,7 +4,7 @@ import ScoreMessage from "./ScoreMessage";
 import Spinner from "../../Spinner";
 import { Separator } from "../../(shadcn)/separator";
 import Link from "next/link";
-import { formatAgeGroup } from "@/app/charts/page";
+import { formatAgeGroup } from "@/app/_util/helpers";
 
 function Score() {
   const { isSubmitting, isSubmitSuccessful } = useFormState();
