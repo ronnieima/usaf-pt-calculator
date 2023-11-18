@@ -44,7 +44,7 @@ const AgeGroupSelect = () => {
         render={({ field }) => (
           <FormItem>
             <FormLabel className="text-2xl">
-              <h2>Age Group</h2>
+              <h3>Age Group</h3>
             </FormLabel>
             <Select
               disabled={isSubmitting}

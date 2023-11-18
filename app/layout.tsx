@@ -6,12 +6,15 @@ import NavBar from "./_components/ui/(navbar)/NavBar";
 import Footer from "./_components/ui/Footer";
 import ToastContainerWrapper from "./_components/ui/ToastContainerWrapper";
 
-import { GeistSans } from "geist/font";
+import { GeistSans } from "geist/font/sans";
 
 const metadata = {
-  title: "Calculate your USAF PT Score!",
+  title: "USAF PT Test Calculator - All Score Charts and Exercise Videos",
   description:
-    "Optimize your fitness journey with this unofficial Air Force PT Score Calculator web app! Tailored for USAF personnel, this user-friendly tool helps you calculate your physical training test scores effortlessly.",
+    "Calculate your Air Force PT scores with this user-friendly calculator. Tailored for USAF personnel, simplify your fitness tracking effortlessly.",
+  image: getCldOgImageUrl({
+    src: "ogImage/ogImage",
+  }),
 };
 
 export default function RootLayout({
@@ -19,16 +22,15 @@ export default function RootLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const ogImageUrl = getCldOgImageUrl({
-    src: "ogImage/ogImage",
-  });
   return (
     <html
       lang="en"
       className={`${GeistSans.className} scroll-smooth bg-blue-950`}
     >
       <head>
-        <title>USAF PT Calculator</title>
+        <link rel="canonical" href="https://www.usafptcalculator.com" />
+
+        <title>{metadata.title}</title>
         <meta name="description" content={metadata.description} />
 
         <meta name="twitter:card" content="summary_large_image" />
@@ -36,12 +38,12 @@ export default function RootLayout({
         <meta name="twitter:creator" content="@imagawaDev" />
         <meta name="twitter:title" content={metadata.title} />
         <meta name="twitter:description" content={metadata.description} />
-        <meta name="twitter:image" content={ogImageUrl} />
+        <meta name="twitter:image" content={metadata.image} />
 
         <meta property="og:type" content="website" />
         <meta property="og:title" content={metadata.title} />
-        <meta property="og:url" content="https://usafptcalculator.com/" />
-        <meta property="og:image" content={ogImageUrl} />
+        <meta property="og:url" content="https://www.usafptcalculator.com/" />
+        <meta property="og:image" content={metadata.image} />
         <meta property="og:description" content={metadata.description} />
 
         <Script

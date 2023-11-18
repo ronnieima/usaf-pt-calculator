@@ -49,7 +49,7 @@ const ExerciseSelect = ({ exercise }: { exercise: Exercise }) => {
         <FormItem>
           {/* FORM LABEL */}
           <FormLabel className=" flex items-center justify-start gap-4 text-3xl ">
-            <h2>{componentLabel} Component</h2>
+            <h3>{componentLabel} Component</h3>
 
             {/* DIALOG POPUP BOX */}
             <Dialog>
@@ -65,7 +65,7 @@ const ExerciseSelect = ({ exercise }: { exercise: Exercise }) => {
               </DialogTrigger>
               <DialogContent className=" max-h-[50svh] max-w-[80svh] overflow-y-scroll sm:max-h-[80svh]">
                 <DialogHeader>
-                  <DialogTitle className="mb-2 text-2xl">
+                  <DialogTitle className="mb-4 text-2xl">
                     {componentLabel} Exercise Demonstrations
                   </DialogTitle>
                   <Separator />

@@ -101,9 +101,9 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
           rules={getValidationRules(componentLabel, selectedExercise)}
           render={({ field: { onChange, ...field } }) => (
             <FormItem>
-              <FormLabel className="text-2xl ">{`${exerciseLabel} ${
-                isTimeBased ? "Time" : "Reps"
-              }`}</FormLabel>
+              <FormLabel className="text-2xl">
+                <h3>{`${exerciseLabel} ${isTimeBased ? "Time" : "Reps"}`}</h3>
+              </FormLabel>
               <FormControl className="border-card-foreground/30 shadow-lg">
                 {isTimeBased ? (
                   // I had to pull an external TimePicker component from MUI

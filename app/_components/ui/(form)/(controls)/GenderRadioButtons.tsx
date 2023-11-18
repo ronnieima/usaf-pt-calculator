@@ -27,7 +27,9 @@ function GenderRadioButtons() {
       rules={{ required: { value: true, message: "Gender is required" } }}
       render={({ field }) => (
         <FormItem className="">
-          <FormLabel className="text-2xl">Gender</FormLabel>
+          <FormLabel className="text-2xl">
+            <h3>Gender</h3>
+          </FormLabel>
           <FormControl>
             <RadioGroup
               disabled={isSubmitting}
