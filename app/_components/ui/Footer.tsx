@@ -14,7 +14,7 @@ const Footer = () => {
           >
             ronniekaito@imagawa.dev
           </Link>
-          . :D
+          .
         </p>
         <p className=" text-center">
           &copy; 2023 | Developed by{" "}

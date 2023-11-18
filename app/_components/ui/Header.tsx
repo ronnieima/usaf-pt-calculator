@@ -14,8 +14,7 @@ const Header = () => {
         <span className="text-sky-500">Air Force</span> PT score.
       </h1>
       <p className="text-lg text-gray-300">
-        Your personal one-stop shop for
-        <br /> Air Force fitness test resources.
+        Your personal one-stop shop for Air Force fitness test resources.
       </p>
       <Link
         href={"#form-card"}
