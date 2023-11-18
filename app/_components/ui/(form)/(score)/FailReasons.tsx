@@ -35,11 +35,9 @@ function FailReasons() {
                   {Object.entries(minimumMetStatus).map(([key, value]) => {
                     if (!value) {
                       return (
-                        <>
-                          <li key={key} className="list-item capitalize">
-                            - {key === "upper" ? "Upper Body" : key}
-                          </li>
-                        </>
+                        <li key={key} className="list-item capitalize">
+                          - {key === "upper" ? "Upper Body" : key}
+                        </li>
                       );
                     }
                   })}

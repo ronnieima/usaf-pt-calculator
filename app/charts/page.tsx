@@ -6,18 +6,17 @@ import { Card, CardHeader, CardTitle } from "../_components/ui/(shadcn)/card";
 
 const genders = ["male", "female"];
 const ages = ageGroups;
-
-const ChartsPage = () => {
-  function formatAgeGroup(ageGroup: string) {
-    switch (ageGroup) {
-      case "<25":
-        return "lt25";
-      case ">60":
-        return "gt60";
-      default:
-        return ageGroup;
-    }
+export function formatAgeGroup(ageGroup: string) {
+  switch (ageGroup) {
+    case "<25":
+      return "lt25";
+    case ">60":
+      return "gt60";
+    default:
+      return ageGroup;
   }
+}
+const ChartsPage = () => {
   return (
     <div className="flex flex-col items-center justify-center pb-16">
       <header className=" justify-center py-16">

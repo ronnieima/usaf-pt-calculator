@@ -1,5 +1,10 @@
 "use client";
-import React, { createContext, useContext, useState } from "react";
+import React, {
+  PropsWithChildren,
+  createContext,
+  useContext,
+  useState,
+} from "react";
 
 type ScoreState = {
   minimumMetStatus: { upper: boolean; core: boolean; cardio: boolean };
@@ -25,14 +30,10 @@ const ScoreContext = createContext<{
   setScores: () => {},
 });
 
-type ScoreContextProviderProps = {
-  children: React.ReactNode;
-};
-
-export default function ScoreContextProvider({
-  children,
-}: ScoreContextProviderProps) {
+export default function ScoreContextProvider({ children }: PropsWithChildren) {
   const [scores, setScores] = useState(initialScores);
+  const [gender, setGender] = useState("");
+  const [ageGroup, setAgeGroup] = useState("");
 
   return (
     <ScoreContext.Provider value={{ scores, setScores }}>
