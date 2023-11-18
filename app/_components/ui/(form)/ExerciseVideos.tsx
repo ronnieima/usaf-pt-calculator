@@ -19,8 +19,8 @@ const ExerciseVideos = ({ exercise }: { exercise: Exercise }) => {
             {/* Component from cloudinary */}
             <CldVideoPlayer
               id={option.value}
-              width="1000"
-              height="500"
+              width=""
+              height=""
               src={`exercises/${option.value}`}
               logo={false}
             />
