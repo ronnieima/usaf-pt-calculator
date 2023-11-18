@@ -9,36 +9,43 @@ import { FormProvider, useForm } from "react-hook-form";
 import ExerciseFields from "./(controls)/ExerciseFields";
 import GenderRadio from "./(controls)/GenderRadioButtons";
 import Score from "./(score)/Score";
+import { useDispatch, useSelector } from "react-redux";
+import { setFormData } from "@/lib/redux/slices/formSlice";
+import { useFormSelector } from "@/lib/redux/store";
 
-export type formType = {
+export type FormType = {
   gender: string;
   ageGroup: string;
-  upperBodyExercise: string;
-  upperBodyInput: string;
-  coreExercise: string;
-  coreInput: string;
-  cardioExercise: string;
-  cardioInput: string;
+  muscularStrengthExercise: string;
+  muscularStrengthResult: string;
+  coreEnduranceExercise: string;
+  coreEnduranceResult: string;
+  cardiorespiratoryFitnessExercise: string;
+  cardiorespiratoryFitnessResult: string;
+};
+
+export const initialValues = {
+  gender: "",
+  ageGroup: "",
+  muscularStrengthExercise: "",
+  muscularStrengthResult: "",
+  coreEnduranceExercise: "",
+  coreEnduranceResult: "",
+  cardiorespiratoryFitnessExercise: "",
+  cardiorespiratoryFitnessResult: "",
 };
 
 const MainForm = () => {
-  const methods = useForm<formType>({
+  const methods = useForm<FormType>({
     mode: "onChange",
     reValidateMode: "onChange",
-    defaultValues: {
-      gender: "",
-      ageGroup: "",
-      upperBodyExercise: "",
-      upperBodyInput: "",
-      coreExercise: "",
-      coreInput: "",
-      cardioExercise: "",
-      cardioInput: "",
-    },
+    defaultValues: initialValues,
   });
   const { setScores } = useScoreContext();
+  const dispatch = useDispatch();
+  const data = useFormSelector((state) => state.form.inputs);
 
-  async function onSubmit(data: formType) {
+  async function onSubmit(data: FormType) {
     const res = await calculateTotalScoresWithMinimumCheck(data);
     setScores(res);
   }

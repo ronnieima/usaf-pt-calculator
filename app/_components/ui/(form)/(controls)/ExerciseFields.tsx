@@ -4,7 +4,10 @@ import ExerciseSelect from "./ExerciseSelect";
 import ExerciseInput from "./ExerciseInput";
 import { Separator } from "../../(shadcn)/separator";
 
-type ExerciseComponent = { label: string; value: string };
+type ExerciseComponent = {
+  label: "Muscular Strength" | "Core Endurance" | "Cardiorespiratory Fitness";
+  value: "muscularStrength" | "coreEndurance" | "cardiorespiratoryFitness";
+};
 
 type ExerciseOptions = {
   label: string;
@@ -20,8 +23,8 @@ export type Exercise = {
 const exercises: Exercise[] = [
   {
     component: {
-      label: "Upper Body",
-      value: "upperBody",
+      label: "Muscular Strength",
+      value: "muscularStrength",
     },
 
     options: [
@@ -45,8 +48,8 @@ const exercises: Exercise[] = [
 
   {
     component: {
-      label: "Core",
-      value: "core",
+      label: "Core Endurance",
+      value: "coreEndurance",
     },
     options: [
       {
@@ -73,8 +76,8 @@ const exercises: Exercise[] = [
   },
   {
     component: {
-      label: "Cardio",
-      value: "cardio",
+      label: "Cardiorespiratory Fitness",
+      value: "cardiorespiratoryFitness",
     },
     options: [
       {
@@ -100,7 +103,6 @@ const exercises: Exercise[] = [
     ],
   },
 ];
-
 const ExerciseFields = () => {
   return (
     <>

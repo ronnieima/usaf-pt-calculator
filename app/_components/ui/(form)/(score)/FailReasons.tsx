@@ -6,7 +6,6 @@ import {
   AccordionTrigger,
 } from "@/app/_components/ui/(shadcn)/accordion";
 import React from "react";
-import Link from "next/link";
 
 function FailReasons() {
   const {
@@ -35,11 +34,9 @@ function FailReasons() {
                   {Object.entries(minimumMetStatus).map(([key, value]) => {
                     if (!value) {
                       return (
-                        <>
-                          <li key={key} className="list-item capitalize">
-                            - {key === "upper" ? "Upper Body" : key}
-                          </li>
-                        </>
+                        <li key={key} className="list-item capitalize">
+                          - {key === "upper" ? "Upper Body" : key}
+                        </li>
                       );
                     }
                   })}

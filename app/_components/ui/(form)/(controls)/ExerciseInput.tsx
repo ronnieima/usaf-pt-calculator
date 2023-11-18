@@ -66,9 +66,9 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
     fetchMinMax();
   }, [gender, ageGroup, selectedExercise, isTimeBased]);
 
-  useEffect(() => {
-    resetField(`${componentValue}Input`);
-  }, [selectedExercise, resetField, componentValue]);
+  // useEffect(() => {
+  //   resetField(`${componentValue}Result`);
+  // }, [selectedExercise, resetField, componentValue]);
 
   // Prevents scroll affecting number inputs
   const numberInputOnWheelPreventChange: React.WheelEventHandler<
@@ -97,7 +97,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
       >
         <FormField
           control={control}
-          name={`${componentValue}Input`}
+          name={`${componentValue}Result`}
           rules={getValidationRules(componentLabel, selectedExercise)}
           render={({ field: { onChange, ...field } }) => (
             <FormItem>

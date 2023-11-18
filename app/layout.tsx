@@ -7,6 +7,8 @@ import Footer from "./_components/ui/Footer";
 import ToastContainerWrapper from "./_components/ui/ToastContainerWrapper";
 
 import { GeistSans } from "geist/font";
+import { store } from "../lib/redux/store";
+import ReduxProvider from "../lib/redux/ReduxProvider";
 
 const metadata = {
   title: "USAF PT Test Calculator - All Score Charts and Exercise Videos",
@@ -53,10 +55,12 @@ export default function RootLayout({
         ></Script>
       </head>
       <body className="h-full  bg-gradient-to-r from-sky-900  to-indigo-950">
-        <ToastContainerWrapper />
-        <NavBar />
-        {children}
-        <Footer />
+        <ReduxProvider>
+          <ToastContainerWrapper />
+          <NavBar />
+          {children}
+          <Footer />
+        </ReduxProvider>
       </body>
     </html>
   );

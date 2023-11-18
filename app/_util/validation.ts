@@ -1,7 +1,7 @@
-function upperBodyValidationRules(upperBodyExercise: string) {
+function muscularStrengthValidationRules(muscularStrengthExercise: string) {
   if (
-    upperBodyExercise === "pushup" ||
-    upperBodyExercise === "hand_release_pushup"
+    muscularStrengthExercise === "pushup" ||
+    muscularStrengthExercise === "hand_release_pushup"
   ) {
     return {
       required: "Rep amount is required",
@@ -14,8 +14,8 @@ function upperBodyValidationRules(upperBodyExercise: string) {
   }
 }
 
-function coreValidationRules(coreExercise: string) {
-  if (coreExercise == "forearm_plank") {
+function coreEnduranceValidationRules(coreEnduranceExercise: string) {
+  if (coreEnduranceExercise == "forearm_plank") {
     return {
       required: "Plank time is required",
       pattern: {
@@ -28,8 +28,8 @@ function coreValidationRules(coreExercise: string) {
       },
     };
   } else if (
-    coreExercise === "situp" ||
-    coreExercise === "cross_leg_reverse_crunch"
+    coreEnduranceExercise === "situp" ||
+    coreEnduranceExercise === "cross_leg_reverse_crunch"
   ) {
     return {
       required: "Rep amount is required",
@@ -45,8 +45,13 @@ function coreValidationRules(coreExercise: string) {
   }
 }
 
-function cardioValidationRules(cardioExercise: string) {
-  if (cardioExercise === "1.5_mile_run" || cardioExercise === "walk") {
+function cardiorespiratoryFitnessValidationRules(
+  cardiorespiratoryFitnessExercise: string,
+) {
+  if (
+    cardiorespiratoryFitnessExercise === "1.5_mile_run" ||
+    cardiorespiratoryFitnessExercise === "walk"
+  ) {
     return {
       required: "Time is required",
       pattern: {
@@ -58,7 +63,7 @@ function cardioValidationRules(cardioExercise: string) {
         message: "Time must be greater than 0",
       },
     };
-  } else if (cardioExercise === "20_meter_hamr_shuttle") {
+  } else if (cardiorespiratoryFitnessExercise === "20_meter_hamr_shuttle") {
     return {
       required: "Shuttle amount is required",
       min: { value: 0, message: "Reps must be greater than 0" },
@@ -78,11 +83,11 @@ export function getValidationRules(
   exercise: Exercises,
 ) {
   switch (exerciseType) {
-    case "Upper Body":
-      return upperBodyValidationRules(exercise);
-    case "Core":
-      return coreValidationRules(exercise);
-    case "Cardio":
-      return cardioValidationRules(exercise);
+    case "Muscular Strength":
+      return muscularStrengthValidationRules(exercise);
+    case "Core Endurance Endurance":
+      return coreEnduranceValidationRules(exercise);
+    case "Cardiorespiratory Fitness":
+      return cardiorespiratoryFitnessValidationRules(exercise);
   }
 }
