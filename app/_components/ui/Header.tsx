@@ -1,5 +1,6 @@
-import Link from "next/link";
 import { ChevronDown } from "lucide-react";
+
+import Link from "next/link";
 
 const Header = () => {
   return (
