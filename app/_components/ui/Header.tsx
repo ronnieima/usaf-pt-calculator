@@ -1,6 +1,5 @@
-import Link from "next/link";
 import { ChevronDown } from "lucide-react";
-import TypeAnimationWrapper from "./TypeAnimationWrapper";
+import Link from "next/link";
 
 const Header = () => {
   return (
