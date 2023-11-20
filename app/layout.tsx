@@ -51,6 +51,7 @@ export default function RootLayout({
           async
           src="https://umami-fork-murex.vercel.app/script.js"
           data-website-id="dcd8e49c-4b05-4efb-9316-533ae15ff332"
+          strategy="lazyOnload"
         ></Script>
       </head>
       <body className="h-full  bg-gradient-to-r from-sky-900  to-indigo-950">
