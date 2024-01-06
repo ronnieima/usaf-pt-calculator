@@ -2,10 +2,9 @@ import "./globals.css";
 
 import { getCldOgImageUrl } from "next-cloudinary";
 import Script from "next/script";
+import "react-toastify/dist/ReactToastify.css";
 import NavBar from "./_components/ui/(navbar)/NavBar";
 import Footer from "./_components/ui/Footer";
-import { ToastContainer, toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
 
 import { GeistSans } from "geist/font";
 
@@ -54,7 +53,7 @@ export default function RootLayout({
           strategy="lazyOnload"
         ></Script>
       </head>
-      <body className="h-full  bg-gradient-to-r from-sky-900  to-indigo-950">
+      <body className="bg-gradient-to-r from-sky-900  to-indigo-950">
         <NavBar />
         {children}
         <Footer />
