@@ -1,20 +1,29 @@
-import { useScoreContext } from "@/app/_contexts/ScoreContext";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/app/_components/ui/(shadcn)/accordion";
-import React from "react";
-import Link from "next/link";
+import { useFormStore } from "@/app/stores/store";
 
 function FailReasons() {
-  const {
-    scores: { minimumMetStatus, totalScore },
-  } = useScoreContext();
+  const { score: upperBodyScore, minimumPerformanceValue: upperBodyMin } =
+    useFormStore((state) => state.upperBody);
+  const { score: coreScore, minimumPerformanceValue: coreMin } = useFormStore(
+    (state) => state.core,
+  );
+  const { score: cardioScore, minimumPerformanceValue: cardioMin } =
+    useFormStore((state) => state.cardio);
 
+  const finalScore = upperBodyScore + coreScore + cardioScore;
+
+  const minimumMetStatus = {
+    upperBody: upperBodyScore > upperBodyMin,
+    core: coreScore > coreMin,
+    cardio: cardioScore > cardioMin,
+  };
   if (
-    totalScore > 75 &&
+    finalScore > 75 &&
     Object.values(minimumMetStatus).every((v) => v === true)
   )
     return null;
@@ -25,7 +34,7 @@ function FailReasons() {
         <AccordionTrigger>Why did I fail?</AccordionTrigger>
         <AccordionContent>
           <div className="space-y-4 text-left text-2xl text-red-700">
-            {totalScore < 75 && <p>Score is below 75.</p>}
+            {finalScore < 75 && <p>Score is below 75.</p>}
             {Object.values(minimumMetStatus).some((v) => !v) && (
               <div>
                 <h3>

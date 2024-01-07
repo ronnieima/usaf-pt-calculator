@@ -3,12 +3,13 @@ import React from "react";
 import ExerciseSelect from "./ExerciseSelect";
 import ExerciseInput from "./ExerciseInput";
 import { Separator } from "../../(shadcn)/separator";
+import { ExerciseComponentValues, Exercises } from "@/app/content";
 
-type ExerciseComponent = { label: string; value: string };
+type ExerciseComponent = { label: string; value: ExerciseComponentValues };
 
 type ExerciseOptions = {
   label: string;
-  value: string;
+  value: Exercises;
   videoSource?: string;
 }[];
 

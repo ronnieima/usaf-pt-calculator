@@ -17,6 +17,7 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React, { useEffect, useState } from "react";
 import { useFormContext } from "react-hook-form";
 import { Exercise } from "./ExerciseFields";
+import { useFormStore } from "@/app/stores/store";
 
 const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   const {
@@ -30,41 +31,56 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
     component: { label: componentLabel, value: componentValue },
   } = exercise;
 
+  const { minimumPerformanceValue, maximumPerformanceValue } = useFormStore(
+    (state) => state[componentValue],
+  );
+  const { setMinimumValue, setMaximumValue } = useFormStore((state) => state);
+
   const selectedExercise = watch(`${componentValue}Exercise`);
+
   const isVisibleInput = Boolean(selectedExercise);
   const isTimeBased =
     selectedExercise === "forearm_plank" || selectedExercise === "1.5_mile_run";
 
   const exerciseLabel = formatExerciseName(selectedExercise);
 
-  const [min, setMin] = useState();
-  const [max, setMax] = useState();
-  const showMinMax = min || max;
+  const showMinMax = minimumPerformanceValue || maximumPerformanceValue;
 
   const gender = watch("gender");
   const ageGroup = watch("ageGroup");
 
   useEffect(() => {
-    // if gender, age group, or exercise is not selected, the effect will not run
-    if (!gender || !ageGroup || !selectedExercise) return;
+    // Early exit if the necessary data isn't available
+    if (!gender || !ageGroup || !selectedExercise) {
+      return;
+    }
 
-    async function fetchMinMax() {
-      let { min, max } = await getExerciseMinMax(
+    const fetchMinMax = async () => {
+      const [minValue, maxValue] = await getExerciseMinMax(
         gender,
         ageGroup,
         selectedExercise,
       );
 
-      if (isTimeBased) {
-        min = secondsToMinutesAndSeconds(min);
-        max = secondsToMinutesAndSeconds(max);
-      }
-      setMin(min);
-      setMax(max);
-    }
+      // Compute the min and max values based on whether it's time-based
+      const computeValue = isTimeBased
+        ? secondsToMinutesAndSeconds
+        : (value: any) => value;
+
+      setMinimumValue(componentValue, computeValue(minValue));
+      setMaximumValue(componentValue, computeValue(maxValue));
+    };
 
     fetchMinMax();
-  }, [gender, ageGroup, selectedExercise, isTimeBased]);
+  }, [
+    gender,
+    ageGroup,
+    selectedExercise,
+    isTimeBased,
+    componentValue,
+    setMaximumValue,
+    setMinimumValue,
+  ]);
 
   useEffect(() => {
     resetField(`${componentValue}Input`);
@@ -85,6 +101,10 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
       e.currentTarget?.focus();
     }, 0);
   };
+
+  if (selectedExercise === "exempt") {
+    return null;
+  }
 
   return (
     <div className="relative ">
@@ -135,10 +155,14 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
               {showMinMax && (
                 <section className="flex justify-between text-base sm:text-2xl">
                   <p className="text-red-700">
-                    {`Min: ${min} ${isTimeBased ? "" : "reps"}`}
+                    {`Min: ${minimumPerformanceValue} ${
+                      isTimeBased ? "" : "reps"
+                    }`}
                   </p>
                   <p className="text-green-700">
-                    {`Max: ${max} ${!isTimeBased ? "reps" : ""}`}
+                    {`Max: ${maximumPerformanceValue} ${
+                      !isTimeBased ? "reps" : ""
+                    }`}
                   </p>
                 </section>
               )}

@@ -95,7 +95,7 @@ const ExerciseSelect = ({ exercise }: { exercise: Exercise }) => {
                 <SelectItem
                   key={option.label}
                   value={option.value}
-                  disabled={["2km_walk", "exempt"].includes(option.value)}
+                  disabled={["2km_walk"].includes(option.value)}
                 >
                   {option.label}
                 </SelectItem>

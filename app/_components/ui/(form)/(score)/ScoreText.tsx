@@ -1,11 +1,13 @@
 import { useScoreContext } from "@/app/_contexts/ScoreContext";
 import React from "react";
 import ScoreStatus from "./ScoreStatus";
+import { useFormStore } from "@/app/stores/store";
 
 const ScoreText = () => {
-  const {
-    scores: { totalScore, upper, core, cardio },
-  } = useScoreContext();
+  const upperBody = useFormStore((state) => state.upperBody);
+  const core = useFormStore((state) => state.core);
+  const cardio = useFormStore((state) => state.cardio);
+  const finalScore = upperBody.score + core.score + cardio.score;
   return (
     <div
       className={
@@ -13,8 +15,8 @@ const ScoreText = () => {
       }
     >
       <p>Score</p>
-      <p className="font-semibold text-blue-400">{totalScore.toFixed(1)}</p>
-      <ScoreStatus />
+      <p className="font-semibold text-blue-400">{finalScore.toFixed(1)}</p>
+      <ScoreStatus finalScore={finalScore} />
     </div>
   );
 };

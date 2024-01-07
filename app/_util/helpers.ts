@@ -60,7 +60,7 @@ export function formatAgeGroup(ageGroup: string) {
   }
 }
 
-export function secondsToMinutesAndSeconds(seconds: string) {
+export function secondsToMinutesAndSeconds(seconds: number) {
   const secondsNumber = Number(seconds);
   const minutes = Math.floor(secondsNumber / 60);
   const remainingSeconds = secondsNumber % 60;

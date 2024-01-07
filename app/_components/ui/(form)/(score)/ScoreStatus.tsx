@@ -1,10 +1,16 @@
-import { useScoreContext } from "@/app/_contexts/ScoreContext";
+import { useFormStore } from "@/app/stores/store";
 import React from "react";
 
-const ScoreStatus = () => {
-  const {
-    scores: { totalScore, minimumMetStatus },
-  } = useScoreContext();
+const ScoreStatus = ({ finalScore }: { finalScore: number }) => {
+  const upperBody = useFormStore((state) => state.upperBody);
+  const core = useFormStore((state) => state.core);
+  const cardio = useFormStore((state) => state.cardio);
+
+  const minimumMetStatus = {
+    upperBody: upperBody.score >= upperBody.minimumPerformanceValue,
+    core: core.score >= core.minimumPerformanceValue,
+    cardio: cardio.score >= cardio.minimumPerformanceValue,
+  };
 
   const anyMinNotMet = Object.values(minimumMetStatus).some(
     (value) => value === false,
@@ -12,17 +18,17 @@ const ScoreStatus = () => {
   return (
     <>
       <div>
-        {totalScore < 75 || anyMinNotMet ? (
+        {finalScore < 75 || anyMinNotMet ? (
           <p className="text-6xl font-semibold text-red-700">Fail</p>
         ) : (
           <p className="text-6xl font-semibold text-green-700">Pass</p>
         )}
       </div>
       <div>
-        {totalScore >= 90 && !anyMinNotMet && (
+        {finalScore >= 90 && !anyMinNotMet && (
           <p className="text-lg font-semibold text-green-700">Excellent</p>
         )}
-        {totalScore >= 75.0 && totalScore <= 89.9 && !anyMinNotMet && (
+        {finalScore >= 75.0 && finalScore <= 89.9 && !anyMinNotMet && (
           <p className="text-lg font-semibold text-yellow-700">Satisfactory</p>
         )}
       </div>
