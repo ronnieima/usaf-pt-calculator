@@ -1,13 +1,17 @@
-import { useScoreContext } from "@/app/_contexts/ScoreContext";
 import React from "react";
 import ScoreStatus from "./ScoreStatus";
 import { useFormStore } from "@/app/stores/store";
+import { useFormContext } from "react-hook-form";
 
 const ScoreText = () => {
-  const upperBody = useFormStore((state) => state.upperBody);
-  const core = useFormStore((state) => state.core);
-  const cardio = useFormStore((state) => state.cardio);
-  const finalScore = upperBody.score + core.score + cardio.score;
+  const { getValues } = useFormContext();
+  const upperBodyExercise = getValues("upperBodyExercise");
+  const coreExercise = getValues("coreExercise");
+  const cardioExercise = getValues("cardioExercise");
+  const finalScore = useFormStore((state) =>
+    state.finalScore(upperBodyExercise, coreExercise, cardioExercise),
+  );
+
   return (
     <div
       className={
@@ -16,7 +20,7 @@ const ScoreText = () => {
     >
       <p>Score</p>
       <p className="font-semibold text-blue-400">{finalScore.toFixed(1)}</p>
-      <ScoreStatus finalScore={finalScore} />
+      <ScoreStatus />
     </div>
   );
 };

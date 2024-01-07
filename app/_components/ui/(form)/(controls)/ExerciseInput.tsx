@@ -156,12 +156,12 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
                 <section className="flex justify-between text-base sm:text-2xl">
                   <p className="text-red-700">
                     {`Min: ${minimumPerformanceValue} ${
-                      isTimeBased ? "" : "reps"
+                      isTimeBased || NaN ? "" : "reps"
                     }`}
                   </p>
                   <p className="text-green-700">
                     {`Max: ${maximumPerformanceValue} ${
-                      !isTimeBased ? "reps" : ""
+                      isTimeBased || NaN ? "" : "reps"
                     }`}
                   </p>
                 </section>

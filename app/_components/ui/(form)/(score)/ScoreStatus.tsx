@@ -1,17 +1,19 @@
 import { useFormStore } from "@/app/stores/store";
 import React from "react";
+import { useFormContext } from "react-hook-form";
 
-const ScoreStatus = ({ finalScore }: { finalScore: number }) => {
-  const upperBody = useFormStore((state) => state.upperBody);
-  const core = useFormStore((state) => state.core);
-  const cardio = useFormStore((state) => state.cardio);
-
-  const minimumMetStatus = {
-    upperBody: upperBody.score >= upperBody.minimumPerformanceValue,
-    core: core.score >= core.minimumPerformanceValue,
-    cardio: cardio.score >= cardio.minimumPerformanceValue,
-  };
-
+const ScoreStatus = () => {
+  const { getValues } = useFormContext();
+  const upperBodyExercise = getValues("upperBodyExercise");
+  const coreExercise = getValues("coreExercise");
+  const cardioExercise = getValues("cardioExercise");
+  const finalScore = useFormStore((state) =>
+    state.finalScore(upperBodyExercise, coreExercise, cardioExercise),
+  );
+  const minimumMetStatus = useFormStore((state) =>
+    state.minimumMetStatus(upperBodyExercise, coreExercise, cardioExercise),
+  );
+  console.log(minimumMetStatus);
   const anyMinNotMet = Object.values(minimumMetStatus).some(
     (value) => value === false,
   );
@@ -24,6 +26,7 @@ const ScoreStatus = ({ finalScore }: { finalScore: number }) => {
           <p className="text-6xl font-semibold text-green-700">Pass</p>
         )}
       </div>
+
       <div>
         {finalScore >= 90 && !anyMinNotMet && (
           <p className="text-lg font-semibold text-green-700">Excellent</p>

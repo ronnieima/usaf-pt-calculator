@@ -11,7 +11,7 @@ import GenderRadio from "./(controls)/GenderRadioButtons";
 import Score from "./(score)/Score";
 import ScoreChartLink from "./ScoreChartLink";
 
-export type formType = {
+export type FormType = {
   gender: string;
   ageGroup: string;
   upperBodyExercise: string;
@@ -23,13 +23,15 @@ export type formType = {
 };
 
 const MainForm = () => {
-  const methods = useForm<formType>({
+  const methods = useForm<FormType>({
     mode: "onChange",
     reValidateMode: "onChange",
   });
   const setScore = useFormStore((state) => state.setScore);
+  const setFormData = useFormStore((state) => state.setFormData);
 
-  async function onSubmit(data: formType) {
+  async function onSubmit(data: FormType) {
+    setFormData(data);
     const [upperScore, coreScore, cardioScore] =
       await calculateFinalScores(data);
     setScore("upperBody", upperScore);

@@ -1,11 +1,12 @@
 import { createClient } from "@supabase/supabase-js";
 import convertDurationToSeconds from "../_util/convertDurationToSeconds";
-import { formType } from "../_components/ui/(form)/MainForm";
+import { FormType } from "../_components/ui/(form)/MainForm";
+import { useFormStore } from "../stores/store";
 const supabaseUrl = "https://hnnyotwjhikrytqynjyk.supabase.co";
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY!;
 const supabase = createClient(supabaseUrl, supabaseKey);
 
-export async function calculateFinalScores(formData: formType) {
+export async function calculateFinalScores(formData: FormType) {
   const {
     gender,
     ageGroup,
