@@ -2,6 +2,7 @@ import { createClient } from "@supabase/supabase-js";
 import convertDurationToSeconds from "../_util/convertDurationToSeconds";
 import { FormType } from "../_components/ui/(form)/MainForm";
 import { useFormStore } from "../stores/store";
+import { Exercises } from "../content";
 const supabaseUrl = "https://hnnyotwjhikrytqynjyk.supabase.co";
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY!;
 const supabase = createClient(supabaseUrl, supabaseKey);
@@ -151,4 +152,75 @@ export function checkIfMinimumIsNotMet(
     core: coreScore !== 0,
     cardio: cardioScore !== 0,
   };
+}
+
+export async function getMinimumPerformanceValue(
+  gender: string,
+  ageGroup: string,
+  exercise: string,
+) {
+  try {
+    const data = await supabase
+      .from("scoringCriteria")
+      .select("minPerformanceValue")
+      .eq("gender", gender)
+      .eq("ageGroup", ageGroup)
+      .eq("exercise", exercise)
+      .order("minPerformanceValue", { ascending: true })
+      .limit(1);
+
+    const minValue = data.data?.at(0)?.minPerformanceValue as number;
+    return minValue;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function getMaximumPerformanceValue(
+  gender: string,
+  ageGroup: string,
+  exercise: string,
+) {
+  try {
+    const data = await supabase
+      .from("scoringCriteria")
+      .select("maxPerformanceValue")
+      .eq("gender", gender)
+      .eq("ageGroup", ageGroup)
+      .eq("exercise", exercise)
+      .order("maxPerformanceValue", { ascending: false })
+      .limit(1);
+
+    const maxValue = data.data?.at(0)?.maxPerformanceValue as number;
+    return maxValue;
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+export async function fetchPoints(
+  gender: string,
+  ageGroup: string,
+  exercise: Exercises,
+  results: number,
+) {
+  try {
+    const { data, error } = await supabase
+      .from("scoringCriteria")
+      .select("points")
+      .eq("gender", gender)
+      .eq("ageGroup", ageGroup)
+      .eq("exercise", exercise)
+      .gte("maxPerformanceValue", results)
+      .lte("minPerformanceValue", results);
+    if (error) throw new Error("Error fetching points: " + error.message);
+
+    if (data && data.length > 0) {
+      return data[0].points as number;
+    } else {
+      return 0;
+    }
+  } catch (error) {
+    throw new Error("Error fetching points:" + error);
+  }
 }

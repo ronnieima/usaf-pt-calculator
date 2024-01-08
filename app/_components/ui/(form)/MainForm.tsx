@@ -2,8 +2,6 @@
 import AgeGroupSelect from "./(controls)/AgeGroupSelect";
 import FormButtons from "./(controls)/FormButtons";
 
-import { calculateFinalScores } from "../../../_db/supabase";
-
 import { useFormStore } from "@/app/stores/store";
 import { FormProvider, useForm } from "react-hook-form";
 import ExerciseFields from "./(controls)/ExerciseFields";
@@ -27,16 +25,10 @@ const MainForm = () => {
     mode: "onChange",
     reValidateMode: "onChange",
   });
-  const setScore = useFormStore((state) => state.setScore);
-  const setFormData = useFormStore((state) => state.setFormData);
 
-  async function onSubmit(data: FormType) {
-    setFormData(data);
-    const [upperScore, coreScore, cardioScore] =
-      await calculateFinalScores(data);
-    setScore("upperBody", upperScore);
-    setScore("core", coreScore);
-    setScore("cardio", cardioScore);
+  const setFormData = useFormStore((state) => state.setFormData);
+  async function onSubmit(formData: FormType) {
+    setFormData(formData);
   }
 
   return (

@@ -1,19 +1,8 @@
 import { useFormStore } from "@/app/stores/store";
-import React from "react";
-import { useFormContext } from "react-hook-form";
 
 const ScoreStatus = () => {
-  const { getValues } = useFormContext();
-  const upperBodyExercise = getValues("upperBodyExercise");
-  const coreExercise = getValues("coreExercise");
-  const cardioExercise = getValues("cardioExercise");
-  const finalScore = useFormStore((state) =>
-    state.finalScore(upperBodyExercise, coreExercise, cardioExercise),
-  );
-  const minimumMetStatus = useFormStore((state) =>
-    state.minimumMetStatus(upperBodyExercise, coreExercise, cardioExercise),
-  );
-  console.log(minimumMetStatus);
+  const finalScore = useFormStore((state) => state.finalScore());
+  const minimumMetStatus = useFormStore((state) => state.minimumMetStatus());
   const anyMinNotMet = Object.values(minimumMetStatus).some(
     (value) => value === false,
   );

@@ -1,16 +1,9 @@
 import React from "react";
 import ScoreStatus from "./ScoreStatus";
 import { useFormStore } from "@/app/stores/store";
-import { useFormContext } from "react-hook-form";
 
-const ScoreText = () => {
-  const { getValues } = useFormContext();
-  const upperBodyExercise = getValues("upperBodyExercise");
-  const coreExercise = getValues("coreExercise");
-  const cardioExercise = getValues("cardioExercise");
-  const finalScore = useFormStore((state) =>
-    state.finalScore(upperBodyExercise, coreExercise, cardioExercise),
-  );
+const ScoreText = async () => {
+  const finalScore = useFormStore((state) => state.finalScore());
 
   return (
     <div

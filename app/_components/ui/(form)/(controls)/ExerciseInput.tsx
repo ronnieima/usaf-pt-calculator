@@ -12,12 +12,12 @@ import {
   secondsToMinutesAndSeconds,
 } from "@/app/_util/helpers";
 import { getValidationRules } from "@/app/_util/validation";
+import { useFormStore } from "@/app/stores/store";
 import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { Exercise } from "./ExerciseFields";
-import { useFormStore } from "@/app/stores/store";
 
 const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   const {
@@ -34,7 +34,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   const { minimumPerformanceValue, maximumPerformanceValue } = useFormStore(
     (state) => state[componentValue],
   );
-  const { setMinimumValue, setMaximumValue } = useFormStore((state) => state);
+  const { setMinimumValue, setMaximumValue } = useFormStore();
 
   const selectedExercise = watch(`${componentValue}Exercise`);
 

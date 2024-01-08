@@ -1,11 +1,8 @@
 import { create } from "zustand";
 import { FormType } from "../_components/ui/(form)/MainForm";
-import {
-  CardioExercises,
-  CoreExercises,
-  ExerciseComponentValues,
-  UpperBodyExercises,
-} from "../content";
+import { fetchPoints } from "../_db/supabase";
+import convertDurationToSeconds from "../_util/convertDurationToSeconds";
+import { ExerciseComponentValues, Exercises } from "../content";
 
 export const useFormStore = create<FormState>()((set, get) => ({
   // VARIABLES
@@ -36,37 +33,77 @@ export const useFormStore = create<FormState>()((set, get) => ({
   },
 
   // DERIVED STATE
-  finalScore: () => {
-    let totalScore = 100;
-    // Takes into account exemptions
-    if (get().formData.upperBodyExercise === "exempt") totalScore -= 20;
-    if (get().formData.coreExercise === "exempt") totalScore -= 20;
-    if (get().formData.cardioExercise === "exempt") totalScore -= 60;
-    return (
-      ((get().upperBody.score + get().core.score + get().cardio.score) /
-        totalScore) *
-      100
-    );
+  getScore: async () => {
+    const setScore = get().setScore;
+
+    const components: ExerciseComponentValues[] = [
+      "upperBody",
+      "core",
+      "cardio",
+    ];
+    const gender = get().formData.gender;
+    const ageGroup = get().formData.ageGroup;
+
+    for (const component of components) {
+      const exercise = get().formData[`${component}Exercise`] as Exercises;
+      const input = get().formData[`${component}Input`];
+      let result = ["forearm_plank", "1.5_mile_run"].includes(exercise)
+        ? convertDurationToSeconds(input)
+        : Number(input);
+
+      const minimumValue = get()[component].minimumPerformanceValue;
+      const maximumValue = get()[component].maximumPerformanceValue;
+
+      // Validation and calculation logic
+      if (
+        // case: fail
+        isNaN(result) ||
+        result < minimumValue ||
+        (exercise === "1.5_mile_run" && result > maximumValue)
+      ) {
+        setScore(component, 0);
+      } else if (result > maximumValue) {
+        // case: exceeds max
+        setScore(
+          component,
+          ["1.5_mile_run", "20_meter_hamr_shuttle"].includes(exercise)
+            ? 60
+            : 20,
+        );
+      } else {
+        // case: scoredin between
+
+        const finalScore = await fetchPoints(
+          gender,
+          ageGroup,
+          exercise,
+          result,
+        );
+        setScore(component, finalScore);
+      }
+    }
   },
-  minimumMetStatus: (upperBodyExercise, coreExercise, cardioExercise) => {
+
+  finalScore: () => {
+    return get().upperBody.score + get().core.score + get().cardio.score;
+  },
+
+  minimumMetStatus: () => {
     return {
       upperBody:
-        upperBodyExercise === "exempt"
-          ? true
-          : get().upperBody.score >= get().upperBody.minimumPerformanceValue,
+        get().formData.upperBodyExercise === "exempt" ||
+        get().upperBody.score >= get().upperBody.minimumPerformanceValue,
       core:
-        coreExercise === "exempt"
-          ? true
-          : get().core.score >= get().core.minimumPerformanceValue,
+        get().formData.coreExercise === "exempt" ||
+        get().core.score >= get().core.minimumPerformanceValue,
       cardio:
-        cardioExercise === "exempt"
-          ? true
-          : get().cardio.score >= get().cardio.minimumPerformanceValue,
+        get().formData.cardioExercise === "exempt" ||
+        get().cardio.score >= get().cardio.minimumPerformanceValue,
     };
   },
 
   // REDUCERS
-  setFormData: (formData) => set((state) => ({ formData })),
+  setFormData: (formData) => set(() => ({ formData })),
   setScore: (component, score) =>
     set((state) => ({
       [component]: {
@@ -107,16 +144,10 @@ type FormState = {
     maximumPerformanceValue: number;
   };
   formData: FormType;
-  finalScore: (
-    upperExercise: UpperBodyExercises,
-    coreExercise: CoreExercises,
-    cardioExercise: CardioExercises,
-  ) => number;
-  minimumMetStatus: (
-    upperExercise: UpperBodyExercises,
-    coreExercise: CoreExercises,
-    cardioExercise: CardioExercises,
-  ) => {
+  getScore: () => void;
+  finalScore: () => number;
+
+  minimumMetStatus: () => {
     upperBody: boolean;
     core: boolean;
     cardio: boolean;
