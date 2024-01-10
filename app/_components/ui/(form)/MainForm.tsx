@@ -23,24 +23,14 @@ export type FormType = {
 
 const MainForm = () => {
   const methods = useForm<FormType>({
-    defaultValues: {
-      gender: "male",
-      ageGroup: "<25",
-      upperBodyExercise: "pushup",
-      upperBodyInput: "55",
-      coreExercise: "cross_leg_reverse_crunch",
-      coreInput: "49",
-      cardioExercise: "20_meter_hamr_shuttle",
-      cardioInput: "66",
-    },
     mode: "onChange",
     reValidateMode: "onChange",
   });
 
   const setScore = useFormStore((state) => state.setScore);
 
-  const onSubmit = methods.handleSubmit(async (data) => {
-    const { upperBody, core, cardio } = await getScores(data);
+  const onSubmit = methods.handleSubmit(async (formData) => {
+    const { upperBody, core, cardio } = await getScores(formData);
     setScore("upperBody", upperBody);
     setScore("core", core);
     setScore("cardio", cardio);

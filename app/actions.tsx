@@ -41,14 +41,15 @@ export async function getScores(formData: FormType) {
 
     // Validation and calculation logic
     if (
-      // case: fail
+      // case: 0 points
       isNaN(result) ||
       result < minimumValue ||
-      (exercise === "1.5_mile_run" && result > maximumValue)
+      (exercise === "1.5_mile_run" && result > maximumValue) ||
+      exercise === "exempt"
     ) {
       componentScores[component] = 0;
     } else if (result > maximumValue) {
-      // case: exceeds max
+      // case: max value
       componentScores[component] = [
         "1.5_mile_run",
         "20_meter_hamr_shuttle",

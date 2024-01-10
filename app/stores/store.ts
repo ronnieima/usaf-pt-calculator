@@ -6,16 +6,7 @@ import { ExerciseComponentValues, Exercises } from "../content";
 
 export const useFormStore = create<FormState>()((set, get) => ({
   // VARIABLES
-  formData: {
-    gender: "",
-    ageGroup: "",
-    upperBodyExercise: "",
-    upperBodyInput: "",
-    coreExercise: "",
-    coreInput: "",
-    cardioExercise: "",
-    cardioInput: "",
-  },
+  finalScore: 0,
   upperBody: {
     score: 0,
     minimumPerformanceValue: NaN,
@@ -31,27 +22,14 @@ export const useFormStore = create<FormState>()((set, get) => ({
     minimumPerformanceValue: NaN,
     maximumPerformanceValue: NaN,
   },
-
-  // DERIVED STATE
-  finalScore: () => {
-    return get().upperBody.score + get().core.score + get().cardio.score;
+  minimumMetStatus: {
+    upperBody: undefined,
+    core: undefined,
+    cardio: undefined,
   },
-
-  minimumMetStatus: () => {
-    return {
-      upperBody:
-        get().formData.upperBodyExercise === "exempt" ||
-        get().upperBody.score >= get().upperBody.minimumPerformanceValue,
-      core:
-        get().formData.coreExercise === "exempt" ||
-        get().core.score >= get().core.minimumPerformanceValue,
-      cardio:
-        get().formData.cardioExercise === "exempt" ||
-        get().cardio.score >= get().cardio.minimumPerformanceValue,
-    };
-  },
-
   // REDUCERS
+  setFinalScore: (finalScore) => set(() => ({ finalScore })),
+  setMinimumMetStatus: (minimumMetStatus) => set(() => ({ minimumMetStatus })),
   setScore: (component, score) =>
     set((state) => ({
       [component]: {
@@ -76,6 +54,7 @@ export const useFormStore = create<FormState>()((set, get) => ({
 }));
 
 type FormState = {
+  finalScore: number;
   upperBody: {
     score: number;
     minimumPerformanceValue: number;
@@ -91,15 +70,14 @@ type FormState = {
     minimumPerformanceValue: number;
     maximumPerformanceValue: number;
   };
-  formData: FormType;
-  finalScore: () => number;
-
-  minimumMetStatus: () => {
-    upperBody: boolean;
-    core: boolean;
-    cardio: boolean;
+  minimumMetStatus: {
+    upperBody?: boolean;
+    core?: boolean;
+    cardio?: boolean;
   };
 
+  setFinalScore: (finalScore: number) => void;
+  setMinimumMetStatus: (status: {}) => void;
   setScore: (component: ExerciseComponentValues, score: number) => void;
   setMinimumValue: (
     component: ExerciseComponentValues,

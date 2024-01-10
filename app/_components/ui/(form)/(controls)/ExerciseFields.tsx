@@ -39,7 +39,7 @@ const exercises: Exercise[] = [
           "https://www.dvidshub.net/video/825278/2-minute-hand-release-pushup",
       },
       {
-        label: "Exempt (in progress)",
+        label: "Exempt ",
         value: "exempt",
       },
     ],
@@ -68,7 +68,7 @@ const exercises: Exercise[] = [
         videoSource: "https://www.dvidshub.net/video/825280/forearm-plank",
       },
       {
-        label: "Exempt (in progress)",
+        label: "Exempt ",
         value: "exempt",
       },
     ],
@@ -96,7 +96,7 @@ const exercises: Exercise[] = [
         videoSource: "https://www.youtube.com/watch?v=z6cNHsw-EWI",
       },
       {
-        label: "Exempt (in progress)",
+        label: "Exempt ",
         value: "exempt",
       },
     ],
