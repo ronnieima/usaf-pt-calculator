@@ -2,7 +2,7 @@ import React from "react";
 import ScoreStatus from "./ScoreStatus";
 import { useFormStore } from "@/app/stores/store";
 
-const ScoreText = async () => {
+const ScoreText = () => {
   const finalScore = useFormStore((state) => state.finalScore());
 
   return (

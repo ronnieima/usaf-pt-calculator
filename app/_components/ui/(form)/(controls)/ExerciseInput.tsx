@@ -6,7 +6,10 @@ import {
   FormMessage,
 } from "@/app/_components/ui/(shadcn)/form";
 import { Input } from "@/app/_components/ui/(shadcn)/input";
-import { getExerciseMinMax } from "@/app/_db/supabase";
+import {
+  getMaximumPerformanceValue,
+  getMinimumPerformanceValue,
+} from "@/app/_db/supabase";
 import {
   formatExerciseName,
   secondsToMinutesAndSeconds,
@@ -51,16 +54,13 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
 
   useEffect(() => {
     // Early exit if the necessary data isn't available
-    if (!gender || !ageGroup || !selectedExercise) {
-      return;
-    }
+    if (!gender || !ageGroup || !selectedExercise) return;
 
-    const fetchMinMax = async () => {
-      const [minValue, maxValue] = await getExerciseMinMax(
-        gender,
-        ageGroup,
-        selectedExercise,
-      );
+    const updateMinMax = async () => {
+      const [minValue, maxValue] = await Promise.all([
+        getMinimumPerformanceValue(gender, ageGroup, selectedExercise),
+        getMaximumPerformanceValue(gender, ageGroup, selectedExercise),
+      ]);
 
       // Compute the min and max values based on whether it's time-based
       const computeValue = isTimeBased
@@ -71,7 +71,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
       setMaximumValue(componentValue, computeValue(maxValue));
     };
 
-    fetchMinMax();
+    updateMinMax();
   }, [
     gender,
     ageGroup,

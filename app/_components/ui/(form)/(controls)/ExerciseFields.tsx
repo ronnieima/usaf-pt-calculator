@@ -1,9 +1,10 @@
-import React from "react";
+"use client";
 
 import ExerciseSelect from "./ExerciseSelect";
 import ExerciseInput from "./ExerciseInput";
 import { Separator } from "../../(shadcn)/separator";
 import { ExerciseComponentValues, Exercises } from "@/app/content";
+import React from "react";
 
 type ExerciseComponent = { label: string; value: ExerciseComponentValues };
 

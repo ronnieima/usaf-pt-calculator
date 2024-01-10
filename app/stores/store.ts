@@ -33,57 +33,6 @@ export const useFormStore = create<FormState>()((set, get) => ({
   },
 
   // DERIVED STATE
-  getScore: async () => {
-    const setScore = get().setScore;
-
-    const components: ExerciseComponentValues[] = [
-      "upperBody",
-      "core",
-      "cardio",
-    ];
-    const gender = get().formData.gender;
-    const ageGroup = get().formData.ageGroup;
-
-    for (const component of components) {
-      const exercise = get().formData[`${component}Exercise`] as Exercises;
-      const input = get().formData[`${component}Input`];
-      let result = ["forearm_plank", "1.5_mile_run"].includes(exercise)
-        ? convertDurationToSeconds(input)
-        : Number(input);
-
-      const minimumValue = get()[component].minimumPerformanceValue;
-      const maximumValue = get()[component].maximumPerformanceValue;
-
-      // Validation and calculation logic
-      if (
-        // case: fail
-        isNaN(result) ||
-        result < minimumValue ||
-        (exercise === "1.5_mile_run" && result > maximumValue)
-      ) {
-        setScore(component, 0);
-      } else if (result > maximumValue) {
-        // case: exceeds max
-        setScore(
-          component,
-          ["1.5_mile_run", "20_meter_hamr_shuttle"].includes(exercise)
-            ? 60
-            : 20,
-        );
-      } else {
-        // case: scoredin between
-
-        const finalScore = await fetchPoints(
-          gender,
-          ageGroup,
-          exercise,
-          result,
-        );
-        setScore(component, finalScore);
-      }
-    }
-  },
-
   finalScore: () => {
     return get().upperBody.score + get().core.score + get().cardio.score;
   },
@@ -103,7 +52,6 @@ export const useFormStore = create<FormState>()((set, get) => ({
   },
 
   // REDUCERS
-  setFormData: (formData) => set(() => ({ formData })),
   setScore: (component, score) =>
     set((state) => ({
       [component]: {
@@ -144,7 +92,6 @@ type FormState = {
     maximumPerformanceValue: number;
   };
   formData: FormType;
-  getScore: () => void;
   finalScore: () => number;
 
   minimumMetStatus: () => {
@@ -153,7 +100,6 @@ type FormState = {
     cardio: boolean;
   };
 
-  setFormData: (formData: FormType) => void;
   setScore: (component: ExerciseComponentValues, score: number) => void;
   setMinimumValue: (
     component: ExerciseComponentValues,

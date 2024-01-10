@@ -1,8 +1,6 @@
 import { createClient } from "@supabase/supabase-js";
 import convertDurationToSeconds from "../_util/convertDurationToSeconds";
 import { FormType } from "../_components/ui/(form)/MainForm";
-import { useFormStore } from "../stores/store";
-import { Exercises } from "../content";
 const supabaseUrl = "https://hnnyotwjhikrytqynjyk.supabase.co";
 const supabaseKey = process.env.NEXT_PUBLIC_SUPABASE_KEY!;
 const supabase = createClient(supabaseUrl, supabaseKey);
@@ -142,25 +140,13 @@ export async function getExerciseMinMax(
   }
 }
 
-export function checkIfMinimumIsNotMet(
-  upperScore: number,
-  coreScore: number,
-  cardioScore: number,
-) {
-  return {
-    upper: upperScore !== 0,
-    core: coreScore !== 0,
-    cardio: cardioScore !== 0,
-  };
-}
-
 export async function getMinimumPerformanceValue(
   gender: string,
   ageGroup: string,
   exercise: string,
 ) {
   try {
-    const data = await supabase
+    const response = await supabase
       .from("scoringCriteria")
       .select("minPerformanceValue")
       .eq("gender", gender)
@@ -169,10 +155,14 @@ export async function getMinimumPerformanceValue(
       .order("minPerformanceValue", { ascending: true })
       .limit(1);
 
-    const minValue = data.data?.at(0)?.minPerformanceValue as number;
+    if (!response.data || response.data.length === 0) {
+      return 0;
+    }
+
+    const minValue = response.data[0].minPerformanceValue as number;
     return minValue;
   } catch (error) {
-    console.log(error);
+    throw new Error("Failed to fetch minimum performance value");
   }
 }
 
@@ -182,7 +172,7 @@ export async function getMaximumPerformanceValue(
   exercise: string,
 ) {
   try {
-    const data = await supabase
+    const response = await supabase
       .from("scoringCriteria")
       .select("maxPerformanceValue")
       .eq("gender", gender)
@@ -191,17 +181,20 @@ export async function getMaximumPerformanceValue(
       .order("maxPerformanceValue", { ascending: false })
       .limit(1);
 
-    const maxValue = data.data?.at(0)?.maxPerformanceValue as number;
+    if (!response.data || response.data.length === 0) {
+      return 0;
+    }
+    const maxValue = response.data[0].maxPerformanceValue as number;
     return maxValue;
   } catch (error) {
-    console.log(error);
+    throw new Error("Failed to fetch maximum performance value");
   }
 }
 
 export async function fetchPoints(
   gender: string,
   ageGroup: string,
-  exercise: Exercises,
+  exercise: string,
   results: number,
 ) {
   try {

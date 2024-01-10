@@ -2,6 +2,7 @@
 import AgeGroupSelect from "./(controls)/AgeGroupSelect";
 import FormButtons from "./(controls)/FormButtons";
 
+import { getScores } from "@/app/actions";
 import { useFormStore } from "@/app/stores/store";
 import { FormProvider, useForm } from "react-hook-form";
 import ExerciseFields from "./(controls)/ExerciseFields";
@@ -22,19 +23,33 @@ export type FormType = {
 
 const MainForm = () => {
   const methods = useForm<FormType>({
+    defaultValues: {
+      gender: "male",
+      ageGroup: "<25",
+      upperBodyExercise: "pushup",
+      upperBodyInput: "55",
+      coreExercise: "cross_leg_reverse_crunch",
+      coreInput: "49",
+      cardioExercise: "20_meter_hamr_shuttle",
+      cardioInput: "66",
+    },
     mode: "onChange",
     reValidateMode: "onChange",
   });
 
-  const setFormData = useFormStore((state) => state.setFormData);
-  async function onSubmit(formData: FormType) {
-    setFormData(formData);
-  }
+  const setScore = useFormStore((state) => state.setScore);
+
+  const onSubmit = methods.handleSubmit(async (data) => {
+    const { upperBody, core, cardio } = await getScores(data);
+    setScore("upperBody", upperBody);
+    setScore("core", core);
+    setScore("cardio", cardio);
+  });
 
   return (
     <FormProvider {...methods}>
       <form
-        onSubmit={methods.handleSubmit(onSubmit)}
+        onSubmit={onSubmit}
         className=" flex flex-col gap-16 text-2xl tracking-wide text-foreground"
       >
         <GenderRadio />
