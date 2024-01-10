@@ -4,84 +4,88 @@ import { ExerciseComponentValues } from "../content";
 export const useFormStore = create<FormState>()((set, get) => ({
   // VARIABLES
   finalScore: 0,
-  upperBody: {
-    score: 0,
-    minimumPerformanceValue: NaN,
-    maximumPerformanceValue: NaN,
-  },
-  core: {
-    score: 0,
-    minimumPerformanceValue: NaN,
-    maximumPerformanceValue: NaN,
-  },
-  cardio: {
-    score: 0,
-    minimumPerformanceValue: NaN,
-    maximumPerformanceValue: NaN,
+  minMaxValues: {
+    upperBody: {
+      minimumPerformanceValue: NaN,
+      maximumPerformanceValue: NaN,
+    },
+    core: {
+      minimumPerformanceValue: NaN,
+      maximumPerformanceValue: NaN,
+    },
+    cardio: {
+      minimumPerformanceValue: NaN,
+      maximumPerformanceValue: NaN,
+    },
   },
   minimumMetStatus: {
     upperBody: undefined,
     core: undefined,
     cardio: undefined,
   },
+  scores: {
+    upperBody: NaN,
+    core: NaN,
+    cardio: NaN,
+  },
+
   // REDUCERS
   setFinalScore: (finalScore) => set(() => ({ finalScore })),
   setMinimumMetStatus: (minimumMetStatus) => set(() => ({ minimumMetStatus })),
-  setScore: (component, score) =>
+  setComponentScores: (scores) => set(() => ({ scores })),
+  setMinMaxValues: (minMaxValues) => set(() => ({ minMaxValues })),
+  setComponentMinMaxValues: (component, minMaxValues) =>
     set((state) => ({
-      [component]: {
-        ...state[component],
-        score,
-      },
-    })),
-  setMinimumValue: (component, minimumPerformanceValue) =>
-    set((state) => ({
-      [component]: {
-        ...state[component],
-        minimumPerformanceValue,
-      },
-    })),
-  setMaximumValue: (component, maximumPerformanceValue) =>
-    set((state) => ({
-      [component]: {
-        ...state[component],
-        maximumPerformanceValue,
+      ...state,
+      minMaxValues: {
+        ...state.minMaxValues,
+        [component]: minMaxValues,
       },
     })),
 }));
 
 type FormState = {
   finalScore: number;
+  minMaxValues: MinMaxValues;
+  minimumMetStatus: MinimumMetStatus;
+  scores: ComponentScores;
+
+  setFinalScore: (finalScore: number) => void;
+  setMinimumMetStatus: (status: MinimumMetStatus) => void;
+  setComponentScores: (scores: ComponentScores) => void;
+  setMinMaxValues: (minMaxValues: MinMaxValues) => void;
+  setComponentMinMaxValues: (
+    component: ExerciseComponentValues,
+    minMaxValues: {
+      minimumPerformanceValue: number;
+      maximumPerformanceValue: number;
+    },
+  ) => void;
+};
+
+export type MinMaxValues = {
   upperBody: {
-    score: number;
     minimumPerformanceValue: number;
     maximumPerformanceValue: number;
   };
   core: {
-    score: number;
     minimumPerformanceValue: number;
     maximumPerformanceValue: number;
   };
   cardio: {
-    score: number;
     minimumPerformanceValue: number;
     maximumPerformanceValue: number;
   };
-  minimumMetStatus: {
-    upperBody?: boolean;
-    core?: boolean;
-    cardio?: boolean;
-  };
+};
 
-  setFinalScore: (finalScore: number) => void;
-  setMinimumMetStatus: (status: {}) => void;
-  setScore: (component: ExerciseComponentValues, score: number) => void;
-  setMinimumValue: (
-    component: ExerciseComponentValues,
-    minimumPerformanceValue: number,
-  ) => void;
-  setMaximumValue: (
-    component: ExerciseComponentValues,
-    maximumPerformanceValue: number,
-  ) => void;
+export type ComponentScores = {
+  upperBody: number;
+  core: number;
+  cardio: number;
+};
+
+export type MinimumMetStatus = {
+  upperBody?: boolean;
+  core?: boolean;
+  cardio?: boolean;
 };

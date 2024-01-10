@@ -32,7 +32,7 @@ const MainForm = () => {
     reValidateMode: "onChange",
   });
 
-  const setScore = useFormStore((state) => state.setScore);
+  const minMaxValues = useFormStore((state) => state.minMaxValues);
 
   const onSubmit = methods.handleSubmit(async (formData) => {
     const { upperBodyScore, coreScore, cardioScore } = getResults(formData);

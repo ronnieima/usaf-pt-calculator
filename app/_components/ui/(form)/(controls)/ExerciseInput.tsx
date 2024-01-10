@@ -37,9 +37,11 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   } = exercise;
 
   const { minimumPerformanceValue, maximumPerformanceValue } = useFormStore(
-    (state) => state[componentValue],
+    (state) => state.minMaxValues[componentValue],
   );
-  const { setMinimumValue, setMaximumValue } = useFormStore();
+  const setComponentMinMaxValues = useFormStore(
+    (state) => state.setComponentMinMaxValues,
+  );
 
   const selectedExercise = watch(`${componentValue}Exercise`);
 

@@ -8,8 +8,18 @@ import {
 } from "./_db/supabase";
 import convertDurationToSeconds from "./_util/convertDurationToSeconds";
 import { ExerciseComponentValues } from "./content";
+import { ComponentScores, MinMaxValues } from "./stores/store";
 
-export async function getScores(formData: FormType) {
+export async function handleSubmitAction(
+  formData: FormType,
+  minMaxValues: MinMaxValues,
+) {
+  const individualScores = await calculateIndividualScores(formData);
+  const minimumMetStatus = calculateMinimumMetStatus(formData, minMaxValues);
+  const finalScore = calculateFinalScore(formData, individualScores);
+}
+
+async function calculateIndividualScores(formData: FormType) {
   const components: ExerciseComponentValues[] = ["upperBody", "core", "cardio"];
 
   const componentScores: { upperBody: number; core: number; cardio: number } = {
@@ -23,7 +33,7 @@ export async function getScores(formData: FormType) {
     const exercise = formData[`${component}Exercise`];
     const input = formData[`${component}Input`];
 
-    // convert the input into numbers
+    // convert the input into number
     let result = ["forearm_plank", "1.5_mile_run"].includes(exercise)
       ? convertDurationToSeconds(input)
       : Number(input);
@@ -57,11 +67,30 @@ export async function getScores(formData: FormType) {
         ? 60
         : 20;
     } else {
-      // case: scoredin between
-
+      // case: scored in between
       const finalScore = await fetchPoints(gender, ageGroup, exercise, result);
       componentScores[component] = finalScore;
     }
   }
   return componentScores;
+}
+
+function calculateMinimumMetStatus(
+  formData: FormType,
+  minMetStatus: MinMaxValues,
+) {}
+
+function calculateFinalScore(
+  { upperBodyExercise, coreExercise, cardioExercise }: FormType,
+  scores: ComponentScores,
+) {
+  let total = 100;
+  if (upperBodyExercise === "exempt") total -= 20;
+  if (coreExercise === "exempt") total -= 20;
+  if (cardioExercise === "exempt") total -= 60;
+
+  const finalScore =
+    ((scores.upperBody + scores.core + scores.cardio) / total) * 100;
+
+  return finalScore;
 }
