@@ -1,3 +1,4 @@
+"use client";
 import {
   FormControl,
   FormField,
@@ -6,10 +7,7 @@ import {
   FormMessage,
 } from "@/app/_components/ui/(shadcn)/form";
 import { Input } from "@/app/_components/ui/(shadcn)/input";
-import {
-  getMaximumPerformanceValue,
-  getMinimumPerformanceValue,
-} from "@/app/_db/supabase";
+
 import {
   formatExerciseName,
   secondsToMinutesAndSeconds,
@@ -21,6 +19,10 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { Exercise } from "./ExerciseFields";
+import {
+  getMaximumPerformanceValue,
+  getMinimumPerformanceValue,
+} from "@/app/_util/getScore";
 
 const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   const {
@@ -56,30 +58,32 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
     // Early exit if the necessary data isn't available
     if (!gender || !ageGroup || !selectedExercise) return;
 
-    const updateMinMax = async () => {
-      const [minValue, maxValue] = await Promise.all([
-        getMinimumPerformanceValue(gender, ageGroup, selectedExercise),
-        getMaximumPerformanceValue(gender, ageGroup, selectedExercise),
-      ]);
+    const minValue = getMinimumPerformanceValue(
+      gender,
+      ageGroup,
+      selectedExercise,
+    );
+    const maxValue = getMaximumPerformanceValue(
+      gender,
+      ageGroup,
+      selectedExercise,
+    );
 
-      // Compute the min and max values based on whether it's time-based
-      const computeValue = isTimeBased
-        ? secondsToMinutesAndSeconds
-        : (value: any) => value;
+    // Compute the min and max values based on whether it's time-based
+    const computeValue = isTimeBased
+      ? secondsToMinutesAndSeconds
+      : (value: any) => value;
 
-      setMinimumValue(componentValue, computeValue(minValue));
-      setMaximumValue(componentValue, computeValue(maxValue));
-    };
-
-    updateMinMax();
+    setMinimumValue(componentValue, computeValue(minValue!));
+    setMaximumValue(componentValue, computeValue(maxValue!));
   }, [
     gender,
     ageGroup,
     selectedExercise,
-    isTimeBased,
     componentValue,
-    setMaximumValue,
+    isTimeBased,
     setMinimumValue,
+    setMaximumValue,
   ]);
 
   useEffect(() => {

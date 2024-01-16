@@ -2,7 +2,12 @@
 import AgeGroupSelect from "./(controls)/AgeGroupSelect";
 import FormButtons from "./(controls)/FormButtons";
 
-import { getScores } from "@/app/actions";
+import { getResults } from "@/app/_util/getScore";
+import {
+  CardioExercises,
+  CoreExercises,
+  UpperBodyExercises,
+} from "@/app/content";
 import { useFormStore } from "@/app/stores/store";
 import { FormProvider, useForm } from "react-hook-form";
 import ExerciseFields from "./(controls)/ExerciseFields";
@@ -13,11 +18,11 @@ import ScoreChartLink from "./ScoreChartLink";
 export type FormType = {
   gender: string;
   ageGroup: string;
-  upperBodyExercise: string;
+  upperBodyExercise: UpperBodyExercises;
   upperBodyInput: string;
-  coreExercise: string;
+  coreExercise: CoreExercises;
   coreInput: string;
-  cardioExercise: string;
+  cardioExercise: CardioExercises;
   cardioInput: string;
 };
 
@@ -30,10 +35,10 @@ const MainForm = () => {
   const setScore = useFormStore((state) => state.setScore);
 
   const onSubmit = methods.handleSubmit(async (formData) => {
-    const { upperBody, core, cardio } = await getScores(formData);
-    setScore("upperBody", upperBody);
-    setScore("core", core);
-    setScore("cardio", cardio);
+    const { upperBodyScore, coreScore, cardioScore } = getResults(formData);
+    setScore("upperBody", upperBodyScore);
+    setScore("core", coreScore);
+    setScore("cardio", cardioScore);
   });
 
   return (

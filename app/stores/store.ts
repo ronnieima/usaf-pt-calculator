@@ -1,8 +1,5 @@
 import { create } from "zustand";
-import { FormType } from "../_components/ui/(form)/MainForm";
-import { fetchPoints } from "../_db/supabase";
-import convertDurationToSeconds from "../_util/convertDurationToSeconds";
-import { ExerciseComponentValues, Exercises } from "../content";
+import { ExerciseComponentValues } from "../content";
 
 export const useFormStore = create<FormState>()((set, get) => ({
   // VARIABLES
