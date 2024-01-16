@@ -7,6 +7,9 @@ import NavBar from "./_components/ui/(navbar)/NavBar";
 import Footer from "./_components/ui/Footer";
 
 import { GeistSans } from "geist/font";
+import { LocalizationProvider } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import Providers from "./_components/Providers";
 
 const metadata = {
   title: "USAF PT Test Calculator - All Score Charts and Exercise Videos",
@@ -54,9 +57,11 @@ export default function RootLayout({
         ></Script>
       </head>
       <body className="bg-gradient-to-r from-sky-900  to-indigo-950">
-        <NavBar />
-        {children}
-        <Footer />
+        <Providers>
+          <NavBar />
+          {children}
+          <Footer />
+        </Providers>
       </body>
     </html>
   );

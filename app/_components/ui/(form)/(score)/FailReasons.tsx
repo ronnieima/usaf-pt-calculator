@@ -1,9 +1,3 @@
-import {
-  Accordion,
-  AccordionContent,
-  AccordionItem,
-  AccordionTrigger,
-} from "@/app/_components/ui/(shadcn)/accordion";
 import { useFormStore } from "@/app/stores/store";
 
 function FailReasons() {
@@ -15,12 +9,8 @@ function FailReasons() {
     Object.values(minimumMetStatus).every((v) => v === true)
   )
     return null;
-
+  console.log(minimumMetStatus);
   return (
-    // <Accordion type="single" collapsible className="mt-16 w-full">
-    //   <AccordionItem value="item-1" className=" bg-gray-100 px-4 text-xl">
-    //     <AccordionTrigger>Why did I fail?</AccordionTrigger>
-    //     <AccordionContent>
     <div className="space-y-4 text-left text-2xl text-red-700">
       {finalScore < 75 && <p>Score is below 75.</p>}
       {Object.values(minimumMetStatus).some((v) => !v) && (
@@ -40,9 +30,6 @@ function FailReasons() {
         </div>
       )}
     </div>
-    //     </AccordionContent>
-    //   </AccordionItem>
-    // </Accordion>
   );
 }
 

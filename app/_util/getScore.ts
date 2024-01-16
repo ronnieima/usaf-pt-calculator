@@ -1,5 +1,6 @@
 import { FormType } from "../_components/ui/(form)/MainForm";
 import { scoringCriteria } from "../criteria";
+import convertDurationToSeconds from "./convertDurationToSeconds";
 
 export function getResults(formData: FormType) {
   const {
@@ -13,27 +14,23 @@ export function getResults(formData: FormType) {
     cardioInput,
   } = formData;
 
-  const upperBodyInputNum = parseInt(upperBodyInput);
-  const coreInputNum = parseInt(coreInput);
-  const cardioInputNum = parseInt(cardioInput);
-
   const upperBodyScore = getIndividualScore(
     upperBodyExercise,
     gender,
     ageGroup,
-    upperBodyInputNum,
+    upperBodyInput,
   );
   const coreScore = getIndividualScore(
     coreExercise,
     gender,
     ageGroup,
-    coreInputNum,
+    coreInput,
   );
   const cardioScore = getIndividualScore(
     cardioExercise,
     gender,
     ageGroup,
-    cardioInputNum,
+    cardioInput,
   );
 
   return { upperBodyScore, coreScore, cardioScore };
@@ -43,23 +40,34 @@ function getIndividualScore<T>(
   exercise: string,
   gender: string,
   ageGroup: string,
-  performanceValue: number,
+  performanceValue: string,
 ) {
+  let results;
+  if (exercise === "forearm_plank" || exercise === "1.5_mile_run") {
+    results = convertDurationToSeconds(performanceValue);
+  } else {
+    results = parseInt(performanceValue);
+  }
+  // find the record
   for (let data of scoringCriteria) {
     if (
       data.exercise === exercise &&
       data.gender === gender &&
       data.ageGroup === ageGroup &&
-      performanceValue >= data.minPerformanceValue &&
-      performanceValue <= data.maxPerformanceValue
+      results >= data.minPerformanceValue &&
+      results <= data.maxPerformanceValue
     ) {
       return data.points;
+      // if results exceed max
     } else if (
       data.exercise === exercise &&
       data.gender === gender &&
       data.ageGroup === ageGroup &&
-      performanceValue >= data.maxPerformanceValue
+      results >= data.maxPerformanceValue
     ) {
+      if (exercise === "1.5_mile_run" && results > data.maxPerformanceValue) {
+        return 0;
+      }
       const cardioExercises = [
         "exempt",
         "1.5_mile_run",

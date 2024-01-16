@@ -7,7 +7,6 @@ import {
   FormMessage,
 } from "@/app/_components/ui/(shadcn)/form";
 import { Input } from "@/app/_components/ui/(shadcn)/input";
-
 import {
   getMaximumPerformanceValue,
   getMinimumPerformanceValue,
@@ -18,8 +17,7 @@ import {
 } from "@/app/_util/helpers";
 import { getValidationRules } from "@/app/_util/validation";
 import { useFormStore } from "@/app/stores/store";
-import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
-import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { DateTimeField } from "@mui/x-date-pickers";
 import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { Exercise } from "./ExerciseFields";
@@ -50,7 +48,10 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
     selectedExercise === "forearm_plank" || selectedExercise === "1.5_mile_run";
 
   const exerciseLabel = formatExerciseName(selectedExercise);
-
+  // Compute the min and max values based on whether it's time-based
+  const computeValue = isTimeBased
+    ? secondsToMinutesAndSeconds
+    : (value: any) => value;
   const showMinMax = minimumPerformanceValue || maximumPerformanceValue;
 
   const gender = watch("gender");
@@ -71,14 +72,9 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
       selectedExercise,
     );
 
-    // Compute the min and max values based on whether it's time-based
-    const computeValue = isTimeBased
-      ? secondsToMinutesAndSeconds
-      : (value: any) => value;
-
     setComponentMinMaxValues(componentValue, {
-      minimumPerformanceValue: computeValue(minValue!),
-      maximumPerformanceValue: computeValue(maxValue!),
+      minimumPerformanceValue: minValue!,
+      maximumPerformanceValue: maxValue!,
     });
   }, [
     gender,
@@ -133,19 +129,13 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
               </FormLabel>
               <FormControl className="border-card-foreground/30 shadow-lg">
                 {isTimeBased ? (
-                  // I had to pull an external TimePicker component from MUI
-                  <div>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <TimePicker
-                        className="w-full rounded-lg border-card-foreground/30 "
-                        format="mm:ss"
-                        views={["minutes", "seconds"]}
-                        onChange={onChange}
-                        timeSteps={{ minutes: 1, seconds: 1 }}
-                        {...field}
-                      />
-                    </LocalizationProvider>
-                  </div>
+                  // I had to pull an external DateTimeField component from MUI
+                  <DateTimeField
+                    className="w-full rounded-lg border-card-foreground/30"
+                    format="mm:ss"
+                    onChange={(date) => onChange(date)}
+                    {...field}
+                  />
                 ) : (
                   <Input
                     disabled={isSubmitting}
@@ -162,12 +152,12 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
               {showMinMax && (
                 <section className="flex justify-between text-base sm:text-2xl">
                   <p className="text-red-700">
-                    {`Min: ${minimumPerformanceValue} ${
+                    {`Min: ${computeValue(minimumPerformanceValue)} ${
                       isTimeBased || NaN ? "" : "reps"
                     }`}
                   </p>
                   <p className="text-green-700">
-                    {`Max: ${maximumPerformanceValue} ${
+                    {`Max: ${computeValue(maximumPerformanceValue)} ${
                       isTimeBased || NaN ? "" : "reps"
                     }`}
                   </p>
