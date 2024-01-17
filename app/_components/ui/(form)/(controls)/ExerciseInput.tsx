@@ -77,8 +77,8 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
       : (value: any) => value;
 
     setComponentMinMaxValues(componentValue, {
-      minimumPerformanceValue: minValue!,
-      maximumPerformanceValue: maxValue!,
+      minimumPerformanceValue: computeValue(minValue!),
+      maximumPerformanceValue: computeValue(maxValue!),
     });
   }, [
     gender,
