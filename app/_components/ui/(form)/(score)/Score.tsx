@@ -18,19 +18,20 @@ function Score() {
     upperBodyExercise,
     upperBodyInput,
   } = getValues();
-  const { upperBody, core, cardio, setMinimumMetStatus, setFinalScore } =
+  const { minMaxValues, setMinimumMetStatus, setFinalScore, scores } =
     useFormStore();
 
   useEffect(() => {
     setMinimumMetStatus({
       upperBody:
         upperBodyExercise === "exempt" ||
-        upperBodyInput >= upperBody.minimumPerformanceValue,
+        upperBodyInput >= minMaxValues.upperBody.minimumPerformanceValue,
       core:
-        coreExercise === "exempt" || coreInput >= core.minimumPerformanceValue,
+        coreExercise === "exempt" ||
+        coreInput >= minMaxValues.core.minimumPerformanceValue,
       cardio:
         cardioExercise === "exempt" ||
-        cardioInput >= cardio.minimumPerformanceValue,
+        cardioInput >= minMaxValues.cardio.minimumPerformanceValue,
     });
 
     let total = 100;
@@ -39,7 +40,7 @@ function Score() {
     if (cardioExercise === "exempt") total -= 60;
 
     setFinalScore(
-      ((upperBody.score + core.score + cardio.score) / total) * 100,
+      ((scores.upperBody + scores.core + scores.cardio) / total) * 100,
     );
   }, [
     upperBodyExercise,
@@ -48,11 +49,10 @@ function Score() {
     coreInput,
     cardioExercise,
     cardioInput,
-    upperBody,
-    core,
-    cardio,
     setFinalScore,
     setMinimumMetStatus,
+    minMaxValues,
+    scores,
   ]);
 
   return (

@@ -6,9 +6,8 @@ import SitupIcon from "./SitupIcon";
 import { useFormContext } from "react-hook-form";
 
 const ScoreIcons = () => {
-  const upperBodyScore = useFormStore((state) => state.upperBody.score);
-  const coreScore = useFormStore((state) => state.core.score);
-  const cardioScore = useFormStore((state) => state.cardio.score);
+  const scores = useFormStore((state) => state.scores);
+
   const { getValues } = useFormContext();
   const formData = getValues();
   return (
@@ -18,17 +17,17 @@ const ScoreIcons = () => {
         score={
           formData.upperBodyExercise === "exempt"
             ? "Exempt"
-            : `${upperBodyScore}`
+            : `${scores.upperBody}`
         }
       />
       <IndividualExerciseScore
         icon={<SitupIcon />}
-        score={formData.coreExercise === "exempt" ? "Exempt" : `${coreScore}`}
+        score={formData.coreExercise === "exempt" ? "Exempt" : `${scores.core}`}
       />
       <IndividualExerciseScore
         icon={<FaRunning size="3em" title="running icon" />}
         score={
-          formData.cardioExercise === "exempt" ? "Exempt" : `${cardioScore}`
+          formData.cardioExercise === "exempt" ? "Exempt" : `${scores.cardio}`
         }
       />
     </div>

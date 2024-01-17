@@ -9,6 +9,10 @@ import {
 import { Input } from "@/app/_components/ui/(shadcn)/input";
 
 import {
+  getMaximumPerformanceValue,
+  getMinimumPerformanceValue,
+} from "@/app/_util/getScore";
+import {
   formatExerciseName,
   secondsToMinutesAndSeconds,
 } from "@/app/_util/helpers";
@@ -19,10 +23,6 @@ import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
 import { Exercise } from "./ExerciseFields";
-import {
-  getMaximumPerformanceValue,
-  getMinimumPerformanceValue,
-} from "@/app/_util/getScore";
 
 const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   const {
@@ -76,16 +76,17 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
       ? secondsToMinutesAndSeconds
       : (value: any) => value;
 
-    setMinimumValue(componentValue, computeValue(minValue!));
-    setMaximumValue(componentValue, computeValue(maxValue!));
+    setComponentMinMaxValues(componentValue, {
+      minimumPerformanceValue: minValue!,
+      maximumPerformanceValue: maxValue!,
+    });
   }, [
     gender,
     ageGroup,
     selectedExercise,
     componentValue,
     isTimeBased,
-    setMinimumValue,
-    setMaximumValue,
+    setComponentMinMaxValues,
   ]);
 
   useEffect(() => {
