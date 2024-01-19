@@ -27,7 +27,7 @@ import { Info } from "lucide-react";
 import { useFormContext } from "react-hook-form";
 import { Separator } from "../../(shadcn)/separator";
 import ExerciseVideos from "../ExerciseVideos";
-import { Exercise } from "./ExerciseFields";
+import { Exercise } from "@/app/content";
 
 const ExerciseSelect = ({ exercise }: { exercise: Exercise }) => {
   const {
@@ -95,7 +95,7 @@ const ExerciseSelect = ({ exercise }: { exercise: Exercise }) => {
                 <SelectItem
                   key={option.label}
                   value={option.value}
-                  disabled={["2km_walk", "exempt"].includes(option.value)}
+                  disabled={["2km_walk"].includes(option.value)}
                 >
                   {option.label}
                 </SelectItem>

@@ -18,7 +18,6 @@ const ChartsPage = () => {
       <div className="grid min-h-screen w-full max-w-[50rem] grid-cols-2 items-center justify-center gap-2 px-2 sm:gap-8 lg:grid-cols-3  ">
         {genders.map((gender) =>
           ages.map((ageGroup) => {
-            console.log(ageGroup);
             const ageGroupFormatted = formatAgeGroup(ageGroup);
             return (
               <Link

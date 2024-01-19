@@ -49,7 +49,6 @@ function GenderRadioButtons() {
                       <Button
                         aria-label={gender}
                         asChild
-                        // peer-aria-checked must be used with RadixUI components
                         className="w-full bg-gray-900 py-8 text-2xl shadow-lg transition-colors duration-300 hover:scale-105 hover:cursor-pointer active:translate-y-1 active:bg-primary/70 peer-aria-checked:scale-105 peer-aria-checked:bg-primary  peer-aria-checked:ring-4
                         peer-aria-checked:ring-sky-300/70"
                       >

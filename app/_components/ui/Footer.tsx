@@ -16,22 +16,24 @@ const Footer = () => {
           </Link>
           .
         </p>
-        <p className=" text-center">
-          &copy; 2023 | Developed by{" "}
-          <Link
-            data-umami-event="Portfolio link"
-            className="transition-color  text-lg font-bold text-indigo-200  hover:text-indigo-100 hover:underline"
-            href="https://www.imagawa.dev"
-            target="_blank"
-            title="My Portfolio Website"
-          >
-            Ronnie Kaito Imagawa
-          </Link>
-        </p>
-        <p className="text-center text-sm">
-          Disclaimer: For reference only. Not affiliated with or endorsed by the
-          USAF. Always consult official sources for accurate scoring.
-        </p>
+        <div>
+          <p className=" text-center">
+            &copy; 2023 | Developed by{" "}
+            <Link
+              data-umami-event="Portfolio link"
+              className="transition-color  text-lg font-bold text-indigo-200  hover:text-indigo-100 hover:underline"
+              href="https://www.imagawa.dev"
+              target="_blank"
+              title="My Portfolio Website"
+            >
+              Ronnie Kaito Imagawa
+            </Link>
+          </p>
+          <p className="text-center text-sm">
+            Disclaimer: For reference only. Not affiliated with or endorsed by
+            the USAF. Always consult official sources for accurate scoring.
+          </p>
+        </div>
       </section>
     </footer>
   );

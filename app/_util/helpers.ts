@@ -1,3 +1,5 @@
+import { FormType } from "../_components/ui/(form)/MainForm";
+
 export function formatTypeName(category: string) {
   switch (category) {
     case "upper":
@@ -60,7 +62,7 @@ export function formatAgeGroup(ageGroup: string) {
   }
 }
 
-export function secondsToMinutesAndSeconds(seconds: string) {
+export function secondsToMinutesAndSeconds(seconds: number) {
   const secondsNumber = Number(seconds);
   const minutes = Math.floor(secondsNumber / 60);
   const remainingSeconds = secondsNumber % 60;
@@ -71,3 +73,4 @@ export function secondsToMinutesAndSeconds(seconds: string) {
 
   return `${minutes}:${formattedSeconds}`;
 }
+

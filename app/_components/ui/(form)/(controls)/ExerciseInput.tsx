@@ -1,3 +1,4 @@
+"use client";
 import {
   FormControl,
   FormField,
@@ -6,18 +7,22 @@ import {
   FormMessage,
 } from "@/app/_components/ui/(shadcn)/form";
 import { Input } from "@/app/_components/ui/(shadcn)/input";
-import { getExerciseMinMax } from "@/app/_db/supabase";
+import {
+  getMaximumPerformanceValue,
+  getMinimumPerformanceValue,
+} from "@/app/_util/getScore";
 import {
   formatExerciseName,
   secondsToMinutesAndSeconds,
 } from "@/app/_util/helpers";
 import { getValidationRules } from "@/app/_util/validation";
-import { LocalizationProvider, TimePicker } from "@mui/x-date-pickers";
+import { Exercise } from "@/app/content";
+import { useFormStore } from "@/app/stores/store";
+import { TimeField } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import React, { useEffect, useState } from "react";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-import { Exercise } from "./ExerciseFields";
-
 const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   const {
     control,
@@ -30,44 +35,56 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
     component: { label: componentLabel, value: componentValue },
   } = exercise;
 
+  const { minimumPerformanceValue, maximumPerformanceValue } = useFormStore(
+    (state) => state.minMaxValues[componentValue],
+  );
+  const setComponentMinMaxValues = useFormStore(
+    (state) => state.setComponentMinMaxValues,
+  );
   const selectedExercise = watch(`${componentValue}Exercise`);
-  const isVisibleInput = Boolean(selectedExercise);
+  const gender = watch("gender");
+  const ageGroup = watch("ageGroup");
+  const showMinMax = minimumPerformanceValue || maximumPerformanceValue;
+
   const isTimeBased =
     selectedExercise === "forearm_plank" || selectedExercise === "1.5_mile_run";
 
   const exerciseLabel = formatExerciseName(selectedExercise);
-
-  const [min, setMin] = useState();
-  const [max, setMax] = useState();
-  const showMinMax = min || max;
-
-  const gender = watch("gender");
-  const ageGroup = watch("ageGroup");
+  // Compute the min and max values based on whether it's time-based
+  const computeValue = isTimeBased
+    ? secondsToMinutesAndSeconds
+    : (value: any) => value;
 
   useEffect(() => {
-    // if gender, age group, or exercise is not selected, the effect will not run
+    // Early exit if the necessary data isn't available
     if (!gender || !ageGroup || !selectedExercise) return;
 
-    async function fetchMinMax() {
-      let { min, max } = await getExerciseMinMax(
-        gender,
-        ageGroup,
-        selectedExercise,
-      );
+    const minValue = getMinimumPerformanceValue(
+      gender,
+      ageGroup,
+      selectedExercise,
+    );
+    const maxValue = getMaximumPerformanceValue(
+      gender,
+      ageGroup,
+      selectedExercise,
+    );
 
-      if (isTimeBased) {
-        min = secondsToMinutesAndSeconds(min);
-        max = secondsToMinutesAndSeconds(max);
-      }
-      setMin(min);
-      setMax(max);
-    }
-
-    fetchMinMax();
-  }, [gender, ageGroup, selectedExercise, isTimeBased]);
+    setComponentMinMaxValues(componentValue, {
+      minimumPerformanceValue: minValue!,
+      maximumPerformanceValue: maxValue!,
+    });
+  }, [
+    gender,
+    ageGroup,
+    selectedExercise,
+    componentValue,
+    isTimeBased,
+    setComponentMinMaxValues,
+  ]);
 
   useEffect(() => {
-    resetField(`${componentValue}Input`);
+    resetField(`${componentValue}Input`, { defaultValue: "" });
   }, [selectedExercise, resetField, componentValue]);
 
   // Prevents scroll affecting number inputs
@@ -86,69 +103,67 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
     }, 0);
   };
 
+  if (selectedExercise === "exempt") return null;
   return (
-    <div className="relative ">
-      <div
-        className={
-          isVisibleInput
-            ? "transform opacity-100 transition-all duration-1000"
-            : "invisible absolute h-0 w-0 -translate-y-4 transform opacity-0 transition-all duration-0"
-        }
-      >
-        <FormField
-          control={control}
-          name={`${componentValue}Input`}
-          rules={getValidationRules(componentLabel, selectedExercise)}
-          render={({ field: { onChange, ...field } }) => (
-            <FormItem>
-              <FormLabel className="text-2xl">
-                <h3>{`${exerciseLabel} ${isTimeBased ? "Time" : "Reps"}`}</h3>
-              </FormLabel>
-              <FormControl className="border-card-foreground/30 shadow-lg">
-                {isTimeBased ? (
-                  // I had to pull an external TimePicker component from MUI
-                  <div>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                      <TimePicker
-                        className="w-full rounded-lg border-card-foreground/30 "
-                        format="mm:ss"
-                        views={["minutes", "seconds"]}
-                        onChange={onChange}
-                        timeSteps={{ minutes: 1, seconds: 1 }}
-                        {...field}
-                      />
-                    </LocalizationProvider>
-                  </div>
-                ) : (
-                  <Input
-                    disabled={isSubmitting}
-                    inputMode="numeric"
-                    className="focus:ring-primary"
-                    min={0}
-                    onWheel={numberInputOnWheelPreventChange}
-                    placeholder="Reps"
-                    type="number"
-                    onChange={onChange}
+    <>
+      <FormField
+        control={control}
+        name={`${componentValue}Input`}
+        rules={getValidationRules(componentLabel, selectedExercise)}
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel className="text-2xl">
+              <h3>{`${exerciseLabel} ${isTimeBased ? "Time" : "Reps"}`}</h3>
+            </FormLabel>
+            <FormControl className="w-full border border-card-foreground/30 shadow-lg">
+              {isTimeBased ? (
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <TimeField
+                    className="w-full rounded-lg border-card-foreground/30 "
+                    format="mm:ss"
+                    {...field}
                   />
-                )}
-              </FormControl>
-              {showMinMax && (
-                <section className="flex justify-between text-base sm:text-2xl">
-                  <p className="text-red-700">
-                    {`Min: ${min} ${isTimeBased ? "" : "reps"}`}
-                  </p>
-                  <p className="text-green-700">
-                    {`Max: ${max} ${!isTimeBased ? "reps" : ""}`}
-                  </p>
-                </section>
+                </LocalizationProvider>
+              ) : (
+                <Input
+                  disabled={isSubmitting}
+                  inputMode="numeric"
+                  className="focus:ring-primary"
+                  min={0}
+                  onWheel={numberInputOnWheelPreventChange}
+                  placeholder="Reps"
+                  type="number"
+                  {...field}
+                />
               )}
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
 
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      </div>
-    </div>
+      {!!showMinMax ? (
+        <section className="flex justify-between text-base sm:text-2xl">
+          <p className="text-red-700">
+            {`Min: ${computeValue(minimumPerformanceValue)} ${
+              isTimeBased ? "" : "reps"
+            }`}
+          </p>
+          <p className="text-green-700">
+            {`Max: ${computeValue(maximumPerformanceValue)} ${
+              isTimeBased ? "" : "reps"
+            }`}
+          </p>
+        </section>
+      ) : (
+        <span
+          className="
+        text-center text-sm text-muted-foreground"
+        >
+          Select an age group and gender to get min/max values
+        </span>
+      )}
+    </>
   );
 };
 
