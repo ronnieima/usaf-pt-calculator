@@ -34,7 +34,7 @@ function GenderRadioButtons() {
             <RadioGroup
               disabled={isSubmitting}
               onValueChange={field.onChange}
-              value={field.value}
+              {...field}
             >
               <section className="grid gap-4 text-center sm:grid-cols-2">
                 {genders.map((gender) => {

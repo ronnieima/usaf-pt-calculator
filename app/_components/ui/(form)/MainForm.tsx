@@ -46,12 +46,12 @@ export default function MainForm() {
     },
   });
 
-  const {
-    minMaxValues,
-    setMinimumMetStatus,
-    setFinalScore,
-    setComponentScores,
-  } = useFormStore();
+  const minMaxValues = useFormStore((state) => state.minMaxValues);
+  const setMinimumMetStatus = useFormStore(
+    (state) => state.setMinimumMetStatus,
+  );
+  const setFinalScore = useFormStore((state) => state.setFinalScore);
+  const setComponentScores = useFormStore((state) => state.setComponentScores);
 
   function onSubmit(formData: FormType) {
     const { upperBodyScore, coreScore, cardioScore } = getResults(formData);
@@ -87,7 +87,7 @@ export default function MainForm() {
       </form>
 
       <Score />
-      {/* <DevTool control={methods.control} /> */}
+      <DevTool control={methods.control} />
     </FormProvider>
   );
 }

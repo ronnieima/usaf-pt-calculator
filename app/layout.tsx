@@ -5,7 +5,6 @@ import Script from "next/script";
 import "react-toastify/dist/ReactToastify.css";
 import NavBar from "./_components/ui/(navbar)/NavBar";
 import Footer from "./_components/ui/Footer";
-
 import { GeistSans } from "geist/font";
 
 const metadata = {

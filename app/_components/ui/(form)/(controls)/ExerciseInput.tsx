@@ -160,7 +160,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
           className="
         text-center text-sm text-muted-foreground"
         >
-          Select an age group and gender to get min/max values
+          Select an age group and gender to get min/max values.
         </span>
       )}
     </>

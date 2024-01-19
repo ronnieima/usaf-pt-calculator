@@ -46,14 +46,11 @@ const AgeGroupSelect = () => {
             <FormLabel className="text-2xl">
               <h3>Age Group</h3>
             </FormLabel>
-            <Select
-              disabled={isSubmitting}
-              onValueChange={field.onChange}
-              value={field.value}
-            >
+            <Select disabled={isSubmitting} onValueChange={field.onChange}>
               <FormControl
                 className="border-card-foreground/30 shadow-lg"
                 aria-label="Select age group"
+                {...field}
               >
                 <SelectTrigger>
                   <SelectValue placeholder="Select age group" />

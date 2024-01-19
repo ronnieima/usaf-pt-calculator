@@ -35,21 +35,18 @@ const ExerciseSelect = ({ exercise }: { exercise: Exercise }) => {
     formState: { isSubmitting },
   } = useFormContext();
 
-  const {
-    component: { label: componentLabel, value: componentValue },
-    options,
-  } = exercise;
+  const { component, options } = exercise;
 
   return (
     <FormField
       rules={{ required: { value: true, message: "Select an exercise" } }}
       control={control}
-      name={`${componentValue}Exercise`}
+      name={`${component.value}Exercise`}
       render={({ field }) => (
         <FormItem>
           {/* FORM LABEL */}
           <FormLabel className=" flex items-center justify-start gap-4 text-3xl ">
-            <h3>{componentLabel} Component</h3>
+            <h3>{component.label} Component</h3>
 
             {/* DIALOG POPUP BOX */}
             <Dialog>
@@ -66,7 +63,7 @@ const ExerciseSelect = ({ exercise }: { exercise: Exercise }) => {
               <DialogContent className=" max-h-[50svh] max-w-[80svh] overflow-y-scroll sm:max-h-[80svh]">
                 <DialogHeader>
                   <DialogTitle className="mb-4 text-2xl">
-                    {componentLabel} Exercise Demonstrations
+                    {component.label} Exercise Demonstrations
                   </DialogTitle>
                   <Separator />
                   <ExerciseVideos exercise={exercise} />
@@ -82,7 +79,8 @@ const ExerciseSelect = ({ exercise }: { exercise: Exercise }) => {
           >
             <FormControl
               className="border-card-foreground/30 shadow-lg"
-              aria-label={`Select ${componentLabel} Exercise`}
+              aria-label={`Select ${component.label} Exercise`}
+              {...field}
             >
               <SelectTrigger>
                 <SelectValue placeholder="Select exercise type" />
