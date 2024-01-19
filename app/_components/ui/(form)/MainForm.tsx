@@ -35,6 +35,7 @@ const MainForm = () => {
 
   const setComponentScores = useFormStore((state) => state.setComponentScores);
   const { minMaxValues, setMinimumMetStatus, setFinalScore } = useFormStore();
+  const { upperBody, core, cardio } = minMaxValues;
   const onSubmit = methods.handleSubmit(async (formData) => {
     const {
       cardioExercise,
