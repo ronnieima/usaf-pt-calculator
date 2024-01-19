@@ -1,20 +1,23 @@
 "use client";
-import AgeGroupSelect from "./(controls)/AgeGroupSelect";
-import FormButtons from "./(controls)/FormButtons";
-import { DevTool } from "@hookform/devtools";
-import { getResults } from "@/app/_util/getScore";
+import {
+  calculateFinalScore,
+  calculateMetMinimums,
+  getResults,
+} from "@/app/_util/getScore";
 import {
   CardioExercises,
   CoreExercises,
   UpperBodyExercises,
 } from "@/app/content";
 import { useFormStore } from "@/app/stores/store";
+import { DevTool } from "@hookform/devtools";
 import { FormProvider, useForm } from "react-hook-form";
+import AgeGroupSelect from "./(controls)/AgeGroupSelect";
 import ExerciseFields from "./(controls)/ExerciseFields";
+import FormButtons from "./(controls)/FormButtons";
 import GenderRadio from "./(controls)/GenderRadioButtons";
 import Score from "./(score)/Score";
 import ScoreChartLink from "./ScoreChartLink";
-import convertDurationToSeconds from "@/app/_util/convertDurationToSeconds";
 
 export type FormType = {
   gender: string;
@@ -27,65 +30,54 @@ export type FormType = {
   cardioInput: string;
 };
 
-const MainForm = () => {
+export default function MainForm() {
   const methods = useForm<FormType>({
     mode: "onChange",
     reValidateMode: "onChange",
+    defaultValues: {
+      gender: "",
+      ageGroup: "",
+      upperBodyExercise: "pushup",
+      upperBodyInput: "",
+      coreExercise: "situp",
+      coreInput: "",
+      cardioExercise: "1.5_mile_run",
+      cardioInput: "",
+    },
   });
 
-  const setComponentScores = useFormStore((state) => state.setComponentScores);
-  const { minMaxValues, setMinimumMetStatus, setFinalScore } = useFormStore();
-  const { upperBody, core, cardio } = minMaxValues;
-  const onSubmit = methods.handleSubmit(async (formData) => {
-    const {
-      cardioExercise,
-      cardioInput,
-      coreExercise,
-      coreInput,
-      upperBodyExercise,
-      upperBodyInput,
-    } = methods.getValues();
+  const {
+    minMaxValues,
+    setMinimumMetStatus,
+    setFinalScore,
+    setComponentScores,
+  } = useFormStore();
+
+  function onSubmit(formData: FormType) {
     const { upperBodyScore, coreScore, cardioScore } = getResults(formData);
+
     setComponentScores({
       upperBody: upperBodyScore,
       core: coreScore,
       cardio: cardioScore,
     });
 
-    setMinimumMetStatus({
-      upperBody:
-        upperBodyExercise === "exempt" ||
-        parseInt(upperBodyInput) >=
-          minMaxValues.upperBody.minimumPerformanceValue,
-      core:
-        coreExercise === "exempt" ||
-        (coreExercise === "forearm_plank" &&
-          convertDurationToSeconds(coreInput) >=
-            minMaxValues.core.minimumPerformanceValue) ||
-        parseInt(coreInput) >= minMaxValues.core.minimumPerformanceValue,
-      cardio:
-        cardioExercise === "exempt" ||
-        (cardioInput === "1.5_mile_run" &&
-          convertDurationToSeconds(cardioInput) <=
-            minMaxValues.cardio.maximumPerformanceValue) ||
-        parseInt(cardioInput) <= minMaxValues.cardio.maximumPerformanceValue,
-    });
-    console.log(
-      convertDurationToSeconds(cardioInput),
-      minMaxValues.cardio.maximumPerformanceValue,
+    setMinimumMetStatus(calculateMetMinimums(formData, minMaxValues));
+
+    setFinalScore(
+      calculateFinalScore(formData, {
+        upperBodyScore,
+        coreScore,
+        cardioScore,
+      }),
     );
-    let total = 100;
-    if (upperBodyExercise === "exempt") total -= 20;
-    if (coreExercise === "exempt") total -= 20;
-    if (cardioExercise === "exempt") total -= 60;
-    setFinalScore(((upperBodyScore + coreScore + cardioScore) / total) * 100);
-  });
+  }
 
   return (
     <FormProvider {...methods}>
       <form
-        onSubmit={onSubmit}
-        className=" flex flex-col gap-16 text-2xl tracking-wide text-foreground"
+        onSubmit={methods.handleSubmit(onSubmit)}
+        className="flex flex-col gap-16 text-2xl tracking-wide text-foreground"
       >
         <GenderRadio />
         <AgeGroupSelect />
@@ -95,9 +87,7 @@ const MainForm = () => {
       </form>
 
       <Score />
-      <DevTool control={methods.control} />
+      {/* <DevTool control={methods.control} /> */}
     </FormProvider>
   );
-};
-
-export default MainForm;
+}

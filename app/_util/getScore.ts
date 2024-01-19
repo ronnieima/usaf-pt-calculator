@@ -1,5 +1,6 @@
 import { FormType } from "../_components/ui/(form)/MainForm";
 import { scoringCriteria } from "../criteria";
+import { MinMaxValues } from "../stores/store";
 import convertDurationToSeconds from "./convertDurationToSeconds";
 
 export function getResults(formData: FormType) {
@@ -36,7 +37,7 @@ export function getResults(formData: FormType) {
   return { upperBodyScore, coreScore, cardioScore };
 }
 
-function getIndividualScore<T>(
+function getIndividualScore(
   exercise: string,
   gender: string,
   ageGroup: string,
@@ -116,4 +117,52 @@ export function getMaximumPerformanceValue(
   return filteredCriteria.length > 0
     ? filteredCriteria[0].maxPerformanceValue
     : null;
+}
+
+export function calculateFinalScore(
+  formData: FormType,
+  {
+    upperBodyScore,
+    coreScore,
+    cardioScore,
+  }: { upperBodyScore: number; coreScore: number; cardioScore: number },
+) {
+  let total = 100;
+  if (formData.upperBodyExercise === "exempt") total -= 20;
+  if (formData.coreExercise === "exempt") total -= 20;
+  if (formData.cardioExercise === "exempt") total -= 60;
+
+  return ((upperBodyScore + coreScore + cardioScore) / total) * 100;
+}
+
+export function calculateMetMinimums(
+  formData: FormType,
+  minMaxValues: MinMaxValues,
+) {
+  const {
+    cardioExercise,
+    cardioInput,
+    coreExercise,
+    coreInput,
+    upperBodyExercise,
+    upperBodyInput,
+  } = formData;
+  return {
+    upperBody:
+      upperBodyExercise === "exempt" ||
+      parseInt(upperBodyInput) >=
+        minMaxValues.upperBody.minimumPerformanceValue,
+    core:
+      coreExercise === "exempt" ||
+      (coreExercise === "forearm_plank" &&
+        convertDurationToSeconds(coreInput) >=
+          minMaxValues.core.minimumPerformanceValue) ||
+      parseInt(coreInput) >= minMaxValues.core.minimumPerformanceValue,
+    cardio:
+      cardioExercise === "exempt" ||
+      (cardioInput === "1.5_mile_run" &&
+        convertDurationToSeconds(cardioInput) <=
+          minMaxValues.cardio.maximumPerformanceValue) ||
+      parseInt(cardioInput) <= minMaxValues.cardio.maximumPerformanceValue,
+  };
 }

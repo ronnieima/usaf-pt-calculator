@@ -1,3 +1,5 @@
+import { FormType } from "../_components/ui/(form)/MainForm";
+
 export function formatTypeName(category: string) {
   switch (category) {
     case "upper":
@@ -71,3 +73,4 @@ export function secondsToMinutesAndSeconds(seconds: number) {
 
   return `${minutes}:${formattedSeconds}`;
 }
+

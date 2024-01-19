@@ -19,7 +19,7 @@ function coreValidationRules(coreExercise: string) {
     return {
       required: "Plank time is required",
       pattern: {
-        value: /^(([0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$/,
+        value: /^(([0][0]:[0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$/,
         message: "Invalid time format. (mm:ss)",
       },
       min: {
@@ -50,7 +50,7 @@ function cardioValidationRules(cardioExercise: string) {
     return {
       required: "Time is required",
       pattern: {
-        value: /^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}\.\d{3}Z$/,
+        value: /^(([0][0]:[0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$/,
         message: "Invalid time format (mm:ss)",
       },
       minLength: {
