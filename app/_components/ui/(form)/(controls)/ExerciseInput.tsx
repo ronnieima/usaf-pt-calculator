@@ -18,7 +18,7 @@ import {
 import { getValidationRules } from "@/app/_util/validation";
 import { Exercise } from "@/app/content";
 import { useFormStore } from "@/app/stores/store";
-import { TimePicker } from "@mui/x-date-pickers";
+import { TimeField } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import React, { useEffect } from "react";
@@ -118,11 +118,9 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
             <FormControl className="w-full border border-card-foreground/30 shadow-lg">
               {isTimeBased ? (
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <TimePicker
+                  <TimeField
                     className="w-full rounded-lg border-card-foreground/30 "
                     format="mm:ss"
-                    views={["minutes", "seconds"]}
-                    timeSteps={{ minutes: 1, seconds: 1 }}
                     {...field}
                   />
                 </LocalizationProvider>
