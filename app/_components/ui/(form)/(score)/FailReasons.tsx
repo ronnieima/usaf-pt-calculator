@@ -9,7 +9,6 @@ function FailReasons() {
     Object.values(minimumMetStatus).every((v) => v === true)
   )
     return null;
-  console.log(minimumMetStatus);
   return (
     <div className="space-y-4 text-left text-2xl text-red-700">
       {finalScore < 75 && <p>Score is below 75.</p>}

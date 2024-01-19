@@ -1,3 +1,4 @@
+import { useStore } from "zustand";
 import { FormType } from "../_components/ui/(form)/MainForm";
 import { scoringCriteria } from "../criteria";
 import { MinMaxValues } from "../stores/store";
@@ -43,42 +44,39 @@ function getIndividualScore(
   ageGroup: string,
   performanceValue: string,
 ) {
-  let results;
+  let results: number;
+  const cardioExercises = [
+    "exempt",
+    "1.5_mile_run",
+    "2km_walk",
+    "20_meter_hamr_shuttle",
+  ];
   if (exercise === "forearm_plank" || exercise === "1.5_mile_run") {
     results = convertDurationToSeconds(performanceValue);
   } else {
     results = parseInt(performanceValue);
   }
-  // find the record
-  for (let data of scoringCriteria) {
-    if (
-      data.exercise === exercise &&
-      data.gender === gender &&
-      data.ageGroup === ageGroup &&
-      results >= data.minPerformanceValue &&
-      results <= data.maxPerformanceValue
-    ) {
-      return data.points;
-      // if results exceed max
-    } else if (
-      data.exercise === exercise &&
-      data.gender === gender &&
-      data.ageGroup === ageGroup &&
-      results >= data.maxPerformanceValue
-    ) {
-      if (exercise === "1.5_mile_run" && results > data.maxPerformanceValue) {
-        return 0;
-      }
-      const cardioExercises = [
-        "exempt",
-        "1.5_mile_run",
-        "2km_walk",
-        "20_meter_hamr_shuttle",
-      ];
-      return cardioExercises.includes(exercise) ? 60 : 20;
-    }
+
+  const maxValue = getMaximumPerformanceValue(gender, ageGroup, exercise);
+  const minValue = getMinimumPerformanceValue(gender, ageGroup, exercise);
+
+  if (exercise === "1.5_mile_run" && results > maxValue!) return 0;
+  if (results < minValue! || exercise === "exempt") return 0;
+
+  if (results > maxValue!) {
+    return cardioExercises.includes(exercise) ? 60 : 20;
   }
-  return 0;
+
+  const filteredCriteria = scoringCriteria.filter(
+    (criteria) =>
+      criteria.exercise === exercise &&
+      criteria.gender === gender &&
+      criteria.ageGroup === ageGroup &&
+      results >= criteria.minPerformanceValue &&
+      results <= criteria.maxPerformanceValue,
+  );
+
+  return filteredCriteria[0].points;
 }
 
 export function getMinimumPerformanceValue(
@@ -147,6 +145,7 @@ export function calculateMetMinimums(
     upperBodyExercise,
     upperBodyInput,
   } = formData;
+
   return {
     upperBody:
       upperBodyExercise === "exempt" ||
@@ -160,7 +159,7 @@ export function calculateMetMinimums(
       parseInt(coreInput) >= minMaxValues.core.minimumPerformanceValue,
     cardio:
       cardioExercise === "exempt" ||
-      (cardioInput === "1.5_mile_run" &&
+      (cardioExercise === "1.5_mile_run" &&
         convertDurationToSeconds(cardioInput) <=
           minMaxValues.cardio.maximumPerformanceValue) ||
       parseInt(cardioInput) <= minMaxValues.cardio.maximumPerformanceValue,

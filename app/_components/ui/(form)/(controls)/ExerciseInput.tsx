@@ -16,13 +16,13 @@ import {
   secondsToMinutesAndSeconds,
 } from "@/app/_util/helpers";
 import { getValidationRules } from "@/app/_util/validation";
-import { useFormStore } from "@/app/stores/store";
-import React, { useEffect } from "react";
-import { useController, useFormContext } from "react-hook-form";
-import TimePicker from "react-time-picker";
-
 import { Exercise } from "@/app/content";
-import "react-time-picker/dist/TimePicker.css";
+import { useFormStore } from "@/app/stores/store";
+import { TimePicker } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import React, { useEffect } from "react";
+import { useFormContext } from "react-hook-form";
 const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   const {
     control,
@@ -84,8 +84,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   ]);
 
   useEffect(() => {
-    console.log("field reset!");
-    resetField(`${componentValue}Input`, { keepDirty: true });
+    resetField(`${componentValue}Input`, { defaultValue: "" });
   }, [selectedExercise, resetField, componentValue]);
 
   // Prevents scroll affecting number inputs
@@ -104,46 +103,30 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
     }, 0);
   };
 
+  if (selectedExercise === "exempt") return null;
   return (
     <>
-      {selectedExercise === "exempt" && null}
-      {isTimeBased ? (
-        <FormField
-          control={control}
-          name={`${componentValue}Input`}
-          rules={getValidationRules(componentLabel, selectedExercise)}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-2xl">
-                <h3>{`${exerciseLabel} ${isTimeBased ? "Time" : "Reps"}`}</h3>
-              </FormLabel>
-              <FormControl className="w-full border border-card-foreground/30 shadow-lg">
-                <TimePicker
-                  className="h-16 w-full border-slate-100"
-                  disableClock
-                  maxDetail="second"
-                  format="mm:ss"
-                  locale="en-US"
-                  minutePlaceholder="mm"
-                  secondPlaceholder="ss"
-                  {...field}
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      ) : (
-        <FormField
-          control={control}
-          name={`${componentValue}Input`}
-          rules={getValidationRules(componentLabel, selectedExercise)}
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-2xl">
-                <h3>{`${exerciseLabel} ${isTimeBased ? "Time" : "Reps"}`}</h3>
-              </FormLabel>
-              <FormControl className="w-full border border-card-foreground/30 shadow-lg">
+      <FormField
+        control={control}
+        name={`${componentValue}Input`}
+        rules={getValidationRules(componentLabel, selectedExercise)}
+        render={({ field }) => (
+          <FormItem>
+            <FormLabel className="text-2xl">
+              <h3>{`${exerciseLabel} ${isTimeBased ? "Time" : "Reps"}`}</h3>
+            </FormLabel>
+            <FormControl className="w-full border border-card-foreground/30 shadow-lg">
+              {isTimeBased ? (
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                  <TimePicker
+                    className="w-full rounded-lg border-card-foreground/30 "
+                    format="mm:ss"
+                    views={["minutes", "seconds"]}
+                    timeSteps={{ minutes: 1, seconds: 1 }}
+                    {...field}
+                  />
+                </LocalizationProvider>
+              ) : (
                 <Input
                   disabled={isSubmitting}
                   inputMode="numeric"
@@ -152,28 +135,35 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
                   onWheel={numberInputOnWheelPreventChange}
                   placeholder="Reps"
                   type="number"
-                  onChange={field.onChange}
+                  {...field}
                 />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      )}
+              )}
+            </FormControl>
+            <FormMessage />
+          </FormItem>
+        )}
+      />
 
-      {showMinMax && (
+      {!!showMinMax ? (
         <section className="flex justify-between text-base sm:text-2xl">
           <p className="text-red-700">
             {`Min: ${computeValue(minimumPerformanceValue)} ${
-              isTimeBased || NaN ? "" : "reps"
+              isTimeBased ? "" : "reps"
             }`}
           </p>
           <p className="text-green-700">
             {`Max: ${computeValue(maximumPerformanceValue)} ${
-              isTimeBased || NaN ? "" : "reps"
+              isTimeBased ? "" : "reps"
             }`}
           </p>
         </section>
+      ) : (
+        <span
+          className="
+        text-center text-sm text-muted-foreground"
+        >
+          Select an age group and gender to get min/max values
+        </span>
       )}
     </>
   );
