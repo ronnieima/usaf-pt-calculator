@@ -2,8 +2,9 @@
 
 import { CldVideoPlayer } from "next-cloudinary";
 import React from "react";
-import { Exercise } from "./(controls)/ExerciseFields";
+
 import Link from "next/link";
+import { Exercise } from "@/app/content";
 
 const ExerciseVideos = ({ exercise }: { exercise: Exercise }) => {
   const { options } = exercise;

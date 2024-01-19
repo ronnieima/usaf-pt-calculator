@@ -7,7 +7,6 @@ import {
   FormMessage,
 } from "@/app/_components/ui/(shadcn)/form";
 import { Input } from "@/app/_components/ui/(shadcn)/input";
-import TimePicker from "react-time-picker";
 import {
   getMaximumPerformanceValue,
   getMinimumPerformanceValue,
@@ -19,10 +18,11 @@ import {
 import { getValidationRules } from "@/app/_util/validation";
 import { useFormStore } from "@/app/stores/store";
 import React, { useEffect } from "react";
-import { useFormContext } from "react-hook-form";
-import { Exercise } from "./ExerciseFields";
+import { useController, useFormContext } from "react-hook-form";
+import TimePicker from "react-time-picker";
+
+import { Exercise } from "@/app/content";
 import "react-time-picker/dist/TimePicker.css";
-import "react-clock/dist/Clock.css";
 const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   const {
     control,
@@ -41,10 +41,11 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   const setComponentMinMaxValues = useFormStore(
     (state) => state.setComponentMinMaxValues,
   );
-
   const selectedExercise = watch(`${componentValue}Exercise`);
+  const gender = watch("gender");
+  const ageGroup = watch("ageGroup");
+  const showMinMax = minimumPerformanceValue || maximumPerformanceValue;
 
-  const isVisibleInput = Boolean(selectedExercise);
   const isTimeBased =
     selectedExercise === "forearm_plank" || selectedExercise === "1.5_mile_run";
 
@@ -53,10 +54,6 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   const computeValue = isTimeBased
     ? secondsToMinutesAndSeconds
     : (value: any) => value;
-  const showMinMax = minimumPerformanceValue || maximumPerformanceValue;
-
-  const gender = watch("gender");
-  const ageGroup = watch("ageGroup");
 
   useEffect(() => {
     // Early exit if the necessary data isn't available
@@ -87,7 +84,8 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   ]);
 
   useEffect(() => {
-    resetField(`${componentValue}Input`);
+    console.log("field reset!");
+    resetField(`${componentValue}Input`, { keepDirty: true });
   }, [selectedExercise, resetField, componentValue]);
 
   // Prevents scroll affecting number inputs
@@ -106,19 +104,10 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
     }, 0);
   };
 
-  if (selectedExercise === "exempt") {
-    return null;
-  }
-
   return (
-    <div className="relative ">
-      <div
-        className={
-          isVisibleInput
-            ? "transform opacity-100 transition-all duration-1000"
-            : "invisible absolute h-0 w-0 -translate-y-4 transform opacity-0 transition-all duration-0"
-        }
-      >
+    <>
+      {selectedExercise === "exempt" && null}
+      {isTimeBased ? (
         <FormField
           control={control}
           name={`${componentValue}Input`}
@@ -128,52 +117,65 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
               <FormLabel className="text-2xl">
                 <h3>{`${exerciseLabel} ${isTimeBased ? "Time" : "Reps"}`}</h3>
               </FormLabel>
-              <FormControl className="border-card-foreground/30 shadow-lg">
-                {isTimeBased ? (
-                  <TimePicker
-                    disableClock
-                    maxDetail="second"
-                    format="mm:ss"
-                    locale="en-US"
-                    minutePlaceholder="mm"
-                    secondPlaceholder="ss"
-                    {...field}
-                  />
-                ) : (
-                  <Input
-                    disabled={isSubmitting}
-                    inputMode="numeric"
-                    className="focus:ring-primary"
-                    min={0}
-                    onWheel={numberInputOnWheelPreventChange}
-                    placeholder="Reps"
-                    type="number"
-                    onChange={field.onChange}
-                    value={field.value}
-                  />
-                )}
+              <FormControl className="w-full border border-card-foreground/30 shadow-lg">
+                <TimePicker
+                  className="h-16 w-full border-slate-100"
+                  disableClock
+                  maxDetail="second"
+                  format="mm:ss"
+                  locale="en-US"
+                  minutePlaceholder="mm"
+                  secondPlaceholder="ss"
+                  {...field}
+                />
               </FormControl>
-              {showMinMax && (
-                <section className="flex justify-between text-base sm:text-2xl">
-                  <p className="text-red-700">
-                    {`Min: ${computeValue(minimumPerformanceValue)} ${
-                      isTimeBased || NaN ? "" : "reps"
-                    }`}
-                  </p>
-                  <p className="text-green-700">
-                    {`Max: ${computeValue(maximumPerformanceValue)} ${
-                      isTimeBased || NaN ? "" : "reps"
-                    }`}
-                  </p>
-                </section>
-              )}
-
               <FormMessage />
             </FormItem>
           )}
         />
-      </div>
-    </div>
+      ) : (
+        <FormField
+          control={control}
+          name={`${componentValue}Input`}
+          rules={getValidationRules(componentLabel, selectedExercise)}
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-2xl">
+                <h3>{`${exerciseLabel} ${isTimeBased ? "Time" : "Reps"}`}</h3>
+              </FormLabel>
+              <FormControl className="w-full border border-card-foreground/30 shadow-lg">
+                <Input
+                  disabled={isSubmitting}
+                  inputMode="numeric"
+                  className="focus:ring-primary"
+                  min={0}
+                  onWheel={numberInputOnWheelPreventChange}
+                  placeholder="Reps"
+                  type="number"
+                  onChange={field.onChange}
+                />
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      )}
+
+      {showMinMax && (
+        <section className="flex justify-between text-base sm:text-2xl">
+          <p className="text-red-700">
+            {`Min: ${computeValue(minimumPerformanceValue)} ${
+              isTimeBased || NaN ? "" : "reps"
+            }`}
+          </p>
+          <p className="text-green-700">
+            {`Max: ${computeValue(maximumPerformanceValue)} ${
+              isTimeBased || NaN ? "" : "reps"
+            }`}
+          </p>
+        </section>
+      )}
+    </>
   );
 };
 

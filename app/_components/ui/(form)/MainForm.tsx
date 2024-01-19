@@ -87,7 +87,7 @@ export default function MainForm() {
       </form>
 
       <Score />
-      {/* <DevTool control={methods.control} /> */}
+      <DevTool control={methods.control} />
     </FormProvider>
   );
 }
