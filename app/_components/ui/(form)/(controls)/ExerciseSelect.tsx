@@ -90,11 +90,7 @@ const ExerciseSelect = ({ exercise }: { exercise: Exercise }) => {
             {/* OPTIONS DROPDOWN */}
             <SelectContent>
               {options.map((option) => (
-                <SelectItem
-                  key={option.label}
-                  value={option.value}
-                  disabled={["2km_walk"].includes(option.value)}
-                >
+                <SelectItem key={option.label} value={option.value}>
                   {option.label}
                 </SelectItem>
               ))}
