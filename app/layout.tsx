@@ -6,14 +6,41 @@ import "react-toastify/dist/ReactToastify.css";
 import NavBar from "./_components/ui/(navbar)/NavBar";
 import Footer from "./_components/ui/Footer";
 import { GeistSans } from "geist/font";
+import { Metadata } from "next";
 
-const metadata = {
-  title: "USAF PT Test Calculator - All Score Charts and Exercise Videos",
+export const metadata: Metadata = {
+  title: {
+    template: "%s | USAF PT Test Calculator",
+    default: "USAF PT Test Calculator - All Score Charts and Exercise Videos",
+  },
   description:
     "Calculate your Air Force PT scores with this user-friendly calculator. Tailored for USAF personnel, simplify your fitness tracking effortlessly.",
-  image: getCldOgImageUrl({
-    src: "ogImage/ogImage",
-  }),
+  keywords: "air force, pt test, pt score, usaf, pt score calculator",
+  applicationName: "USAF PT Calculator",
+  authors: { name: "Ronnie Kaito Imagawa", url: "https://www.imagawa.dev" },
+
+  alternates: { canonical: "https://www.usafptcalculator.com" },
+  twitter: {
+    card: "summary_large_image",
+    site: "@imagawaDev",
+    creator: "@imagawaDev",
+    title: "USAF PT Test Calculator - All Score Charts and Exercise Videos",
+    description:
+      "Calculate your Air Force PT scores with this user-friendly calculator. Tailored for USAF personnel, simplify your fitness tracking effortlessly.",
+    images: getCldOgImageUrl({
+      src: "ogImage/ogImage",
+    }),
+  },
+  openGraph: {
+    type: "website",
+    title: "USAF PT Test Calculator - All Score Charts and Exercise Videos",
+    description:
+      "Calculate your Air Force PT scores with this user-friendly calculator. Tailored for USAF personnel, simplify your fitness tracking effortlessly.",
+    url: "https://www.usafptcalculator.com/",
+    images: getCldOgImageUrl({
+      src: "ogImage/ogImage",
+    }),
+  },
 };
 
 export default function RootLayout({
@@ -27,24 +54,6 @@ export default function RootLayout({
       className={`${GeistSans.className} scroll-smooth bg-blue-950`}
     >
       <head>
-        <link rel="canonical" href="https://www.usafptcalculator.com" />
-
-        <title>{metadata.title}</title>
-        <meta name="description" content={metadata.description} />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:site" content="@imagawaDev" />
-        <meta name="twitter:creator" content="@imagawaDev" />
-        <meta name="twitter:title" content={metadata.title} />
-        <meta name="twitter:description" content={metadata.description} />
-        <meta name="twitter:image" content={metadata.image} />
-
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content={metadata.title} />
-        <meta property="og:url" content="https://www.usafptcalculator.com/" />
-        <meta property="og:image" content={metadata.image} />
-        <meta property="og:description" content={metadata.description} />
-
         <Script
           async
           src="https://umami-fork-murex.vercel.app/script.js"
