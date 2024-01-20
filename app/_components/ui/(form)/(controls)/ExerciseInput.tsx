@@ -12,24 +12,18 @@ import {
   getMinimumPerformanceValue,
 } from "@/app/_util/getScore";
 import {
+  inferWalkAgeGroup,
   numberInputOnWheelPreventChange,
   secondsToMinutesAndSeconds,
 } from "@/app/_util/helpers";
 import { getValidationRules } from "@/app/_util/validation";
-import { Exercise, exercises, walkStandardsAgeGroups } from "@/app/content";
+import { Exercise, exercises } from "@/app/content";
 import { useFormStore } from "@/app/stores/store";
 import { TimeField } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "../../(shadcn)/select";
 
 const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   const {
@@ -73,15 +67,14 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
 
     const minValue = getMinimumPerformanceValue(
       gender,
-      ageGroup,
+      selectedExercise === "2km_walk" ? inferWalkAgeGroup(ageGroup) : ageGroup,
       selectedExercise,
     );
     const maxValue = getMaximumPerformanceValue(
       gender,
-      ageGroup,
+      selectedExercise === "2km_walk" ? inferWalkAgeGroup(ageGroup) : ageGroup,
       selectedExercise,
     );
-
     setComponentMinMaxValues(componentValue, {
       minimumPerformanceValue: minValue!,
       maximumPerformanceValue: maxValue!,
@@ -102,36 +95,6 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   if (selectedExercise === "exempt") return null;
   return (
     <>
-      {/* The 2KM walk has a different set of age groups */}
-      {selectedExercise === "2km_walk" && (
-        <FormField
-          control={control}
-          name="walkAgeInput"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-2xl">
-                <h3>2 Kilometer Walk Age Group</h3>
-              </FormLabel>
-              <FormControl className="w-full border border-card-foreground/30 shadow-lg">
-                <Select onValueChange={field.onChange} {...field}>
-                  <SelectTrigger className="w-full">
-                    <SelectValue placeholder="Select age group" />
-                  </SelectTrigger>
-                  <SelectContent>
-                    {walkStandardsAgeGroups.map((ageGroup) => (
-                      <SelectItem key={ageGroup} value={ageGroup}>
-                        {ageGroup}
-                      </SelectItem>
-                    ))}
-                  </SelectContent>
-                </Select>
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
-      )}
-
       <FormField
         control={control}
         name={`${componentValue}Input`}
@@ -147,6 +110,11 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
                   <TimeField
                     className="w-full rounded-lg border-card-foreground/30 "
                     format="mm:ss"
+                    slotProps={{
+                      textField: {
+                        error: false,
+                      },
+                    }}
                     {...field}
                   />
                 </LocalizationProvider>

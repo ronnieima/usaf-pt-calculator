@@ -23426,7 +23426,7 @@ export const scoringCriteria = [
   {
     exercise: "2km_walk",
     gender: "male",
-    ageGroup: "60+",
+    ageGroup: ">60",
     minPerformanceValue: 0,
     maxPerformanceValue: 1018,
     points: 1,
@@ -23466,7 +23466,7 @@ export const scoringCriteria = [
   {
     exercise: "2km_walk",
     gender: "female",
-    ageGroup: "60+",
+    ageGroup: ">60",
     minPerformanceValue: 0,
     maxPerformanceValue: 1133,
     points: 1,

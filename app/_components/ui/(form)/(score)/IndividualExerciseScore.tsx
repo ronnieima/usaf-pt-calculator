@@ -1,6 +1,6 @@
 type IndividualExerciseScoreProps = {
   icon: React.ReactNode;
-  score: string;
+  score: string | number;
 };
 
 function IndividualExerciseScore({

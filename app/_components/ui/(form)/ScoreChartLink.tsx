@@ -12,8 +12,9 @@ function ScoreChartLink() {
   return (
     <>
       {gender && ageGroup && (
-        <p className="text-center text-lg">
-          View the {gender} / {ageGroup} score chart{" "}
+        <p className="text-center text-lg tracking-tight">
+          View the <span className="text-xl font-semibold">{gender}</span> /{" "}
+          <span className="text-xl font-semibold">{ageGroup}</span> score chart{" "}
           <Link
             href={`https://hnnyotwjhikrytqynjyk.supabase.co/storage/v1/object/public/usafptcalculator/scorechart_${gender}_${formattedAgeGroup}.pdf`}
             target="_blank"
