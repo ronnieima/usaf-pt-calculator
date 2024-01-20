@@ -1,4 +1,3 @@
-import { useStore } from "zustand";
 import { FormType } from "../_components/ui/(form)/MainForm";
 import { scoringCriteria } from "../criteria";
 import { MinMaxValues } from "../stores/store";
@@ -51,7 +50,11 @@ function getIndividualScore(
     "2km_walk",
     "20_meter_hamr_shuttle",
   ];
-  if (exercise === "forearm_plank" || exercise === "1.5_mile_run") {
+  if (
+    exercise === "forearm_plank" ||
+    exercise === "1.5_mile_run" ||
+    exercise === "2km_walk"
+  ) {
     results = convertDurationToSeconds(performanceValue);
   } else {
     results = parseInt(performanceValue);
@@ -61,7 +64,8 @@ function getIndividualScore(
   const minValue = getMinimumPerformanceValue(gender, ageGroup, exercise);
 
   if (exercise === "1.5_mile_run" && results > maxValue!) return 0;
-  if (results < minValue! || exercise === "exempt") return 0;
+  if (results < minValue! || exercise === "exempt" || exercise === "2km_walk")
+    return 0;
 
   if (results > maxValue!) {
     return cardioExercises.includes(exercise) ? 60 : 20;
@@ -92,7 +96,6 @@ export function getMinimumPerformanceValue(
         criteria.ageGroup === ageGroup,
     )
     .sort((a, b) => a.minPerformanceValue - b.minPerformanceValue);
-
   return filteredCriteria.length > 0
     ? filteredCriteria[0].minPerformanceValue
     : null;
@@ -128,8 +131,8 @@ export function calculateFinalScore(
   let total = 100;
   if (formData.upperBodyExercise === "exempt") total -= 20;
   if (formData.coreExercise === "exempt") total -= 20;
-  if (formData.cardioExercise === "exempt") total -= 60;
-
+  if (["exempt", "2km_walk"].includes(formData.cardioExercise)) total -= 60;
+  console.log(upperBodyScore + coreScore + cardioScore, total);
   return ((upperBodyScore + coreScore + cardioScore) / total) * 100;
 }
 
@@ -145,7 +148,6 @@ export function calculateMetMinimums(
     upperBodyExercise,
     upperBodyInput,
   } = formData;
-
   return {
     upperBody:
       upperBodyExercise === "exempt" ||
@@ -158,10 +160,13 @@ export function calculateMetMinimums(
           minMaxValues.core.minimumPerformanceValue) ||
       parseInt(coreInput) >= minMaxValues.core.minimumPerformanceValue,
     cardio:
+      // exempt case
       cardioExercise === "exempt" ||
-      (cardioExercise === "1.5_mile_run" &&
+      // run/walk is less than max value case
+      (["1.5_mile_run", "2km_walk"].includes(cardioExercise) &&
         convertDurationToSeconds(cardioInput) <=
           minMaxValues.cardio.maximumPerformanceValue) ||
-      parseInt(cardioInput) <= minMaxValues.cardio.maximumPerformanceValue,
+      // HAMR run: input greater than min case
+      parseInt(cardioInput) >= minMaxValues.cardio.minimumPerformanceValue,
   };
 }

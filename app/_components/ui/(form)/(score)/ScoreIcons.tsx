@@ -1,12 +1,16 @@
-import { useFormStore } from "@/app/stores/store";
+import { ComponentScores, useFormStore } from "@/app/stores/store";
 import { FaRunning } from "react-icons/fa";
 import IndividualExerciseScore from "./IndividualExerciseScore";
 import PushupIcon from "./PushupIcon";
 import SitupIcon from "./SitupIcon";
-import { useFormContext } from "react-hook-form";
+import { FieldValues, useFormContext } from "react-hook-form";
+import convertDurationToSeconds from "@/app/_util/convertDurationToSeconds";
 
 const ScoreIcons = () => {
   const scores = useFormStore((state) => state.scores);
+  const cardioMax = useFormStore(
+    (state) => state.minMaxValues.cardio.maximumPerformanceValue,
+  );
 
   const { getValues } = useFormContext();
   const formData = getValues();
@@ -26,12 +30,32 @@ const ScoreIcons = () => {
       />
       <IndividualExerciseScore
         icon={<FaRunning size="3em" title="running icon" />}
-        score={
-          formData.cardioExercise === "exempt" ? "Exempt" : `${scores.cardio}`
-        }
+        score={calculateScore(formData, scores, cardioMax)}
       />
     </div>
   );
 };
 
 export default ScoreIcons;
+
+function calculateScore(
+  formData: FieldValues,
+  scores: ComponentScores,
+  cardioMax: number,
+) {
+  if (formData.cardioExercise === "exempt") {
+    return "Exempt";
+  } else if (
+    formData.cardioExercise === "2km_walk" &&
+    convertDurationToSeconds(formData.cardioInput) <= cardioMax
+  ) {
+    return "Pass";
+  } else if (
+    formData.cardioExercise === "2km_walk" &&
+    convertDurationToSeconds(formData.cardioInput) > cardioMax
+  ) {
+    return "Fail";
+  } else {
+    return scores.cardio;
+  }
+}

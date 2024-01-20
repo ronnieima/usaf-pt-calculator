@@ -45,7 +45,7 @@ const ExerciseSelect = ({ exercise }: { exercise: Exercise }) => {
       render={({ field }) => (
         <FormItem>
           {/* FORM LABEL */}
-          <FormLabel className=" flex items-center justify-start gap-4 text-3xl ">
+          <FormLabel className=" flex items-center justify-start gap-4 text-2xl ">
             <h3>{component.label} Component</h3>
 
             {/* DIALOG POPUP BOX */}
@@ -90,11 +90,7 @@ const ExerciseSelect = ({ exercise }: { exercise: Exercise }) => {
             {/* OPTIONS DROPDOWN */}
             <SelectContent>
               {options.map((option) => (
-                <SelectItem
-                  key={option.label}
-                  value={option.value}
-                  disabled={["2km_walk"].includes(option.value)}
-                >
+                <SelectItem key={option.label} value={option.value}>
                   {option.label}
                 </SelectItem>
               ))}

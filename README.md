@@ -13,16 +13,18 @@ The USAF PT Test Score Calculator is a web-based tool designed to calculate your
 
 ## Features
 
-- Calculate scores for various activities: 1.5 mile run, 20m HAMR shuttle run, push-ups, hand release push-ups, sit-ups, reverse cross leg crunches, and planks.
+- Calculate scores for various activities: 1.5 mile run, 2km walk, 20m HAMR shuttle run, push-ups, hand release push-ups, sit-ups, reverse cross leg crunches, and planks.
 - Supports multiple age groups and genders.
 - Mininmum and maximum value indicators for each exercise.
+- Demonstration videos for each exercise.
+- Includes offical scoring charts for easy reference.
 
 ## To-Do List
 
-- [ ] Add "Walk" exercise as an alternative to running.
-- [ ] Include "Exempt" options for specific activities.
-- [X] Embed videos demonstrating each exercise.
-- [X] Display PT Scoring Charts.
+- [x] Add "Walk" exercise as an alternative to running.
+- [x] Include "Exempt" options for specific activities.
+- [x] Embed videos demonstrating each exercise.
+- [x] Display PT Scoring Charts.
 - [ ] Implement exercise timers.
 - [ ] Add Shuttle Run audio cues.
 

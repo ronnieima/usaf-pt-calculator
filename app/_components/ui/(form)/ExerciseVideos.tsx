@@ -1,7 +1,6 @@
 "use client";
 
 import { CldVideoPlayer } from "next-cloudinary";
-import React from "react";
 
 import Link from "next/link";
 import { Exercise } from "@/app/content";

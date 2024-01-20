@@ -12,17 +12,19 @@ import {
   getMinimumPerformanceValue,
 } from "@/app/_util/getScore";
 import {
-  formatExerciseName,
+  inferWalkAgeGroup,
+  numberInputOnWheelPreventChange,
   secondsToMinutesAndSeconds,
 } from "@/app/_util/helpers";
 import { getValidationRules } from "@/app/_util/validation";
-import { Exercise } from "@/app/content";
+import { Exercise, exercises } from "@/app/content";
 import { useFormStore } from "@/app/stores/store";
 import { TimeField } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
+
 const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   const {
     control,
@@ -41,15 +43,19 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   const setComponentMinMaxValues = useFormStore(
     (state) => state.setComponentMinMaxValues,
   );
+
   const selectedExercise = watch(`${componentValue}Exercise`);
+  const exerciseLabel = exercises
+    .find((exercise) => exercise.component.value === componentValue)
+    ?.options.find((opt) => opt.value === selectedExercise)?.label;
   const gender = watch("gender");
   const ageGroup = watch("ageGroup");
   const showMinMax = minimumPerformanceValue || maximumPerformanceValue;
 
-  const isTimeBased =
-    selectedExercise === "forearm_plank" || selectedExercise === "1.5_mile_run";
+  const isTimeBased = ["1.5_mile_run", "forearm_plank", "2km_walk"].includes(
+    selectedExercise,
+  );
 
-  const exerciseLabel = formatExerciseName(selectedExercise);
   // Compute the min and max values based on whether it's time-based
   const computeValue = isTimeBased
     ? secondsToMinutesAndSeconds
@@ -61,15 +67,14 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
 
     const minValue = getMinimumPerformanceValue(
       gender,
-      ageGroup,
+      selectedExercise === "2km_walk" ? inferWalkAgeGroup(ageGroup) : ageGroup,
       selectedExercise,
     );
     const maxValue = getMaximumPerformanceValue(
       gender,
-      ageGroup,
+      selectedExercise === "2km_walk" ? inferWalkAgeGroup(ageGroup) : ageGroup,
       selectedExercise,
     );
-
     setComponentMinMaxValues(componentValue, {
       minimumPerformanceValue: minValue!,
       maximumPerformanceValue: maxValue!,
@@ -86,22 +91,6 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   useEffect(() => {
     resetField(`${componentValue}Input`, { defaultValue: "" });
   }, [selectedExercise, resetField, componentValue]);
-
-  // Prevents scroll affecting number inputs
-  const numberInputOnWheelPreventChange: React.WheelEventHandler<
-    HTMLInputElement
-  > = (e) => {
-    // Prevent the input value change
-    e.currentTarget?.blur();
-
-    // Prevent the page/container scrolling
-    e.stopPropagation();
-
-    // Refocus immediately, on the next tick (after the current function is done)
-    setTimeout(() => {
-      e.currentTarget?.focus();
-    }, 0);
-  };
 
   if (selectedExercise === "exempt") return null;
   return (
@@ -121,6 +110,11 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
                   <TimeField
                     className="w-full rounded-lg border-card-foreground/30 "
                     format="mm:ss"
+                    slotProps={{
+                      textField: {
+                        error: false,
+                      },
+                    }}
                     {...field}
                   />
                 </LocalizationProvider>
