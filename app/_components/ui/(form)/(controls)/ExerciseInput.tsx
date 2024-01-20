@@ -12,17 +12,25 @@ import {
   getMinimumPerformanceValue,
 } from "@/app/_util/getScore";
 import {
-  formatExerciseName,
+  numberInputOnWheelPreventChange,
   secondsToMinutesAndSeconds,
 } from "@/app/_util/helpers";
 import { getValidationRules } from "@/app/_util/validation";
-import { Exercise } from "@/app/content";
+import { Exercise, exercises, walkStandardsAgeGroups } from "@/app/content";
 import { useFormStore } from "@/app/stores/store";
 import { TimeField } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import React, { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "../../(shadcn)/select";
+
 const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   const {
     control,
@@ -41,15 +49,19 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   const setComponentMinMaxValues = useFormStore(
     (state) => state.setComponentMinMaxValues,
   );
+
   const selectedExercise = watch(`${componentValue}Exercise`);
+  const exerciseLabel = exercises
+    .find((exercise) => exercise.component.value === componentValue)
+    ?.options.find((opt) => opt.value === selectedExercise)?.label;
   const gender = watch("gender");
   const ageGroup = watch("ageGroup");
   const showMinMax = minimumPerformanceValue || maximumPerformanceValue;
 
-  const isTimeBased =
-    selectedExercise === "forearm_plank" || selectedExercise === "1.5_mile_run";
+  const isTimeBased = ["1.5_mile_run", "forearm_plank", "2km_walk"].includes(
+    selectedExercise,
+  );
 
-  const exerciseLabel = formatExerciseName(selectedExercise);
   // Compute the min and max values based on whether it's time-based
   const computeValue = isTimeBased
     ? secondsToMinutesAndSeconds
@@ -87,25 +99,39 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
     resetField(`${componentValue}Input`, { defaultValue: "" });
   }, [selectedExercise, resetField, componentValue]);
 
-  // Prevents scroll affecting number inputs
-  const numberInputOnWheelPreventChange: React.WheelEventHandler<
-    HTMLInputElement
-  > = (e) => {
-    // Prevent the input value change
-    e.currentTarget?.blur();
-
-    // Prevent the page/container scrolling
-    e.stopPropagation();
-
-    // Refocus immediately, on the next tick (after the current function is done)
-    setTimeout(() => {
-      e.currentTarget?.focus();
-    }, 0);
-  };
-
   if (selectedExercise === "exempt") return null;
   return (
     <>
+      {/* The 2KM walk has a different set of age groups */}
+      {selectedExercise === "2km_walk" && (
+        <FormField
+          control={control}
+          name="walkAgeInput"
+          render={({ field }) => (
+            <FormItem>
+              <FormLabel className="text-2xl">
+                <h3>2 Kilometer Walk Age Group</h3>
+              </FormLabel>
+              <FormControl className="w-full border border-card-foreground/30 shadow-lg">
+                <Select onValueChange={field.onChange} {...field}>
+                  <SelectTrigger className="w-full">
+                    <SelectValue placeholder="Select age group" />
+                  </SelectTrigger>
+                  <SelectContent>
+                    {walkStandardsAgeGroups.map((ageGroup) => (
+                      <SelectItem key={ageGroup} value={ageGroup}>
+                        {ageGroup}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </FormControl>
+              <FormMessage />
+            </FormItem>
+          )}
+        />
+      )}
+
       <FormField
         control={control}
         name={`${componentValue}Input`}

@@ -108,14 +108,16 @@ export const exercises: Exercise[] = [
           "https://www.dvidshub.net/video/825282/20m-high-aerobic-multi-shuttle-run",
       },
       {
-        label: "2 Kilometer Walk (in progress)",
+        label: "2 Kilometer Walk",
         value: "2km_walk",
         videoSource: "https://www.youtube.com/watch?v=z6cNHsw-EWI",
       },
       {
-        label: "Exempt ",
+        label: "Exempt",
         value: "exempt",
       },
     ],
   },
 ];
+
+export const walkStandardsAgeGroups = ["<30", "30-39", "40-49", "50-59", "60+"];
