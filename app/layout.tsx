@@ -19,7 +19,9 @@ export const metadata: Metadata = {
   applicationName: "USAF PT Calculator",
   authors: { name: "Ronnie Kaito Imagawa", url: "https://www.imagawa.dev" },
 
-  alternates: { canonical: "https://www.usafptcalculator.com" },
+  alternates: {
+    canonical: "https://www.usafptcalculator.com",
+  },
   twitter: {
     card: "summary_large_image",
     site: "@imagawaDev",
