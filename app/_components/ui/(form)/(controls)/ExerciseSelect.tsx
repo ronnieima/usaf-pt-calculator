@@ -45,7 +45,7 @@ const ExerciseSelect = ({ exercise }: { exercise: Exercise }) => {
       render={({ field }) => (
         <FormItem>
           {/* FORM LABEL */}
-          <FormLabel className=" flex items-center justify-start gap-4 text-3xl ">
+          <FormLabel className=" flex items-center justify-start gap-4 text-2xl ">
             <h3>{component.label} Component</h3>
 
             {/* DIALOG POPUP BOX */}

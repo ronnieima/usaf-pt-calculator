@@ -13,11 +13,11 @@ const FormCard = () => {
       className="flex max-w-3xl scroll-mt-16 flex-col items-center rounded-none bg-card shadow-lg  sm:rounded-md"
       id="form-card"
     >
-      <CardHeader className=" max-w-3xl pb-16 pt-8 text-center font-mono  ">
-        <CardTitle className=" text-3xl text-neutral-800 sm:text-5xl">
-          <span className="">Effortless</span> PT score calculation.
+      <CardHeader className=" max-w-3xl pb-16 pt-8 text-center font-mono ">
+        <CardTitle className=" text-3xl tracking-tighter text-neutral-800 sm:text-5xl">
+          Effortless PT score calculation.
         </CardTitle>
-        <CardDescription className="text-sm sm:text-2xl">
+        <CardDescription className="text-sm tracking-tighter sm:text-2xl">
           Simply enter your test results and click submit!
         </CardDescription>
       </CardHeader>
