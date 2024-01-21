@@ -149,7 +149,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
       />
 
       {!!showMinMax ? (
-        <section className="flex gap-8 text-base sm:text-2xl">
+        <section className="flex justify-between gap-8 text-base sm:text-2xl">
           <div>
             <p className="text-red-700">
               {`Min: ${computeValue(minimumPerformanceValue)} ${
