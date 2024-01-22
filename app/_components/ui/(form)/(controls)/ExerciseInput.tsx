@@ -8,28 +8,25 @@ import {
 } from "@/app/_components/ui/(shadcn)/form";
 import { Input } from "@/app/_components/ui/(shadcn)/input";
 import {
-  getMaximumPerformanceValue,
-  getMinimumPerformanceValue,
-} from "@/app/_util/getScore";
-import {
-  inferWalkAgeGroup,
   numberInputOnWheelPreventChange,
   secondsToMinutesAndSeconds,
 } from "@/app/_util/helpers";
 import { getValidationRules } from "@/app/_util/validation";
 import { Exercise, exercises } from "@/app/content";
+import { useRealTimeInfo } from "@/app/hooks/useRealTimeInfo";
 import { useFormStore } from "@/app/stores/store";
 import { TimeField } from "@mui/x-date-pickers";
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { useEffect } from "react";
 import { useFormContext } from "react-hook-form";
+import { Separator } from "../../(shadcn)/separator";
+import { cn } from "@/lib/utils";
 
 const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   const {
     control,
     formState: { isSubmitting },
-    watch,
     resetField,
   } = useFormContext();
 
@@ -37,19 +34,17 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
     component: { label: componentLabel, value: componentValue },
   } = exercise;
 
+  const { selectedExercise, currentInput } = useRealTimeInfo(componentValue);
+
   const { minimumPerformanceValue, maximumPerformanceValue } = useFormStore(
     (state) => state.minMaxValues[componentValue],
   );
-  const setComponentMinMaxValues = useFormStore(
-    (state) => state.setComponentMinMaxValues,
-  );
+  const score = useFormStore((state) => state.scores[componentValue]);
 
-  const selectedExercise = watch(`${componentValue}Exercise`);
   const exerciseLabel = exercises
     .find((exercise) => exercise.component.value === componentValue)
     ?.options.find((opt) => opt.value === selectedExercise)?.label;
-  const gender = watch("gender");
-  const ageGroup = watch("ageGroup");
+
   const showMinMax = minimumPerformanceValue || maximumPerformanceValue;
 
   const isTimeBased = ["1.5_mile_run", "forearm_plank", "2km_walk"].includes(
@@ -60,33 +55,6 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   const computeValue = isTimeBased
     ? secondsToMinutesAndSeconds
     : (value: any) => value;
-
-  useEffect(() => {
-    // Early exit if the necessary data isn't available
-    if (!gender || !ageGroup || !selectedExercise) return;
-
-    const minValue = getMinimumPerformanceValue(
-      gender,
-      selectedExercise === "2km_walk" ? inferWalkAgeGroup(ageGroup) : ageGroup,
-      selectedExercise,
-    );
-    const maxValue = getMaximumPerformanceValue(
-      gender,
-      selectedExercise === "2km_walk" ? inferWalkAgeGroup(ageGroup) : ageGroup,
-      selectedExercise,
-    );
-    setComponentMinMaxValues(componentValue, {
-      minimumPerformanceValue: minValue!,
-      maximumPerformanceValue: maxValue!,
-    });
-  }, [
-    gender,
-    ageGroup,
-    selectedExercise,
-    componentValue,
-    isTimeBased,
-    setComponentMinMaxValues,
-  ]);
 
   useEffect(() => {
     resetField(`${componentValue}Input`, { defaultValue: "" });
@@ -101,7 +69,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
         rules={getValidationRules(componentLabel, selectedExercise)}
         render={({ field }) => (
           <FormItem>
-            <FormLabel className="text-2xl">
+            <FormLabel className="text-xl font-bold lg:text-2xl">
               <h3>{`${exerciseLabel} ${isTimeBased ? "Time" : "Reps"}`}</h3>
             </FormLabel>
             <FormControl className="w-full border border-card-foreground/30 shadow-lg">
@@ -137,17 +105,53 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
       />
 
       {!!showMinMax ? (
-        <section className="flex justify-between text-base sm:text-2xl">
-          <p className="text-red-700">
-            {`Min: ${computeValue(minimumPerformanceValue)} ${
-              isTimeBased ? "" : "reps"
-            }`}
-          </p>
-          <p className="text-green-700">
-            {`Max: ${computeValue(maximumPerformanceValue)} ${
-              isTimeBased ? "" : "reps"
-            }`}
-          </p>
+        <section className="flex justify-start gap-16 text-base sm:text-2xl">
+          <div className="flex items-start gap-4">
+            <div className="flex flex-col items-center ">
+              <p>
+                <span className="text-3xl font-bold text-blue-900">
+                  {score}{" "}
+                </span>
+                <span className="text-xs">pts</span>
+              </p>
+              <span className="text-xs font-semibold">Score</span>
+              {currentInput >= maximumPerformanceValue && !isTimeBased && (
+                <span className="relative text-xs text-green-800">
+                  Maxed out
+                </span>
+              )}
+            </div>
+            <Separator orientation="vertical" />
+            {!isTimeBased && (
+              <>
+                <div className="flex flex-col items-center">
+                  <p>
+                    <span className="text-3xl font-bold text-red-500">
+                      {computeValue(minimumPerformanceValue)}{" "}
+                    </span>
+                    {!isTimeBased && <span className="text-xs">reps</span>}
+                  </p>
+                  <span className="text-xs font-semibold">Min</span>
+                </div>
+                <Separator orientation="vertical" />
+              </>
+            )}
+
+            {/* MAX */}
+            <div className="flex flex-col items-center ">
+              <p>
+                <span
+                  className={cn("text-3xl font-bold text-green-500", {
+                    "text-red-500": isTimeBased,
+                  })}
+                >
+                  {computeValue(maximumPerformanceValue)}{" "}
+                </span>
+                {!isTimeBased && <span className="text-xs">reps</span>}
+              </p>
+              <span className="text-xs font-semibold">Max</span>
+            </div>
+          </div>
         </section>
       ) : (
         <span

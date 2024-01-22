@@ -37,7 +37,7 @@ export function getResults(formData: FormType) {
   return { upperBodyScore, coreScore, cardioScore };
 }
 
-function getIndividualScore(
+export function getIndividualScore(
   exercise: string,
   gender: string,
   ageGroup: string,
@@ -80,7 +80,7 @@ function getIndividualScore(
       results <= criteria.maxPerformanceValue,
   );
 
-  return filteredCriteria[0].points;
+  return filteredCriteria[0]?.points ?? 0;
 }
 
 export function getMinimumPerformanceValue(

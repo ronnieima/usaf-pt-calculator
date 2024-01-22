@@ -27,21 +27,22 @@ const MobileMenu = () => {
           <SheetTitle className="text-left">Navigation</SheetTitle>
           <SheetDescription className="flex flex-col">
             {links.map((link) => (
-              <Button
-                aria-label={link.label}
-                onClick={() => push(link.href)}
-                variant="ghost"
-                key={link.href}
-                className={`h-24 justify-between text-zinc-600 ${
-                  link.href === currentPath ? "bg-gray-200 font-bold" : ""
-                }`}
-              >
-                <div className="flex gap-2">
-                  {link.icon}
-                  <span>{link.label}</span>
-                </div>
-                <ChevronRight />
-              </Button>
+              <SheetTrigger asChild key={link.href}>
+                <Button
+                  aria-label={link.label}
+                  onClick={() => push(link.href)}
+                  variant="ghost"
+                  className={`h-24 justify-between text-zinc-600 ${
+                    link.href === currentPath ? "bg-gray-200 font-bold" : ""
+                  }`}
+                >
+                  <div className="flex gap-2">
+                    {link.icon}
+                    <span>{link.label}</span>
+                  </div>
+                  <ChevronRight />
+                </Button>
+              </SheetTrigger>
             ))}
           </SheetDescription>
         </SheetHeader>

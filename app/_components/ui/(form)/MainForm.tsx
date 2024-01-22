@@ -77,7 +77,7 @@ export default function MainForm() {
     <FormProvider {...methods}>
       <form
         onSubmit={methods.handleSubmit(onSubmit)}
-        className="flex flex-col gap-16 text-2xl tracking-wide text-foreground"
+        className="flex flex-col gap-8 text-2xl tracking-wide text-foreground"
       >
         <GenderRadio />
         <AgeGroupSelect />

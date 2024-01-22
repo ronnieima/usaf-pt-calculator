@@ -43,7 +43,7 @@ const AgeGroupSelect = () => {
         name={`ageGroup`}
         render={({ field }) => (
           <FormItem>
-            <FormLabel className="text-2xl">
+            <FormLabel className="text-xl font-bold lg:text-2xl">
               <h3>Age Group</h3>
             </FormLabel>
             <Select disabled={isSubmitting} onValueChange={field.onChange}>
