@@ -107,6 +107,21 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
       {!!showMinMax ? (
         <section className="flex justify-start gap-16 text-base sm:text-2xl">
           <div className="flex items-start gap-4">
+            <div className="flex flex-col items-center ">
+              <p>
+                <span className="text-3xl font-bold text-blue-900">
+                  {score}{" "}
+                </span>
+                <span className="text-xs">pts</span>
+              </p>
+              <span className="text-xs font-semibold">Score</span>
+              {currentInput >= maximumPerformanceValue && !isTimeBased && (
+                <span className="relative text-xs text-green-800">
+                  Maxed out
+                </span>
+              )}
+            </div>
+            <Separator orientation="vertical" />
             {!isTimeBased && (
               <>
                 <div className="flex flex-col items-center">
@@ -135,23 +150,6 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
                 {!isTimeBased && <span className="text-xs">reps</span>}
               </p>
               <span className="text-xs font-semibold">Max</span>
-            </div>
-
-            <Separator orientation="vertical" />
-
-            <div className="flex flex-col items-center ">
-              <p>
-                <span className="text-3xl font-bold text-blue-900">
-                  {score}{" "}
-                </span>
-                <span className="text-xs">pts</span>
-              </p>
-              <span className="text-xs font-semibold">Score</span>
-              {currentInput >= maximumPerformanceValue && !isTimeBased && (
-                <span className="relative text-xs text-green-800">
-                  Maxed out
-                </span>
-              )}
             </div>
           </div>
         </section>
