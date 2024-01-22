@@ -117,7 +117,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
               <span className="text-xs font-semibold">Score</span>
               {currentInput >= maximumPerformanceValue && !isTimeBased && (
                 <span className="relative text-xs text-green-800">
-                  Maxed out
+                  Max reached
                 </span>
               )}
             </div>
@@ -126,7 +126,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
               <>
                 <div className="flex flex-col items-center">
                   <p>
-                    <span className="text-3xl font-bold text-red-500">
+                    <span className="text-3xl font-bold text-red-800">
                       {computeValue(minimumPerformanceValue)}{" "}
                     </span>
                     {!isTimeBased && <span className="text-xs">reps</span>}
@@ -141,7 +141,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
             <div className="flex flex-col items-center ">
               <p>
                 <span
-                  className={cn("text-3xl font-bold text-green-500", {
+                  className={cn("text-3xl font-bold text-green-800", {
                     "text-red-500": isTimeBased,
                   })}
                 >

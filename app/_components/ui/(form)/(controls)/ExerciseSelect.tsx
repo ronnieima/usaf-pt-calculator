@@ -23,11 +23,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/app/_components/ui/(shadcn)/select";
-import { Info } from "lucide-react";
+import { Exercise } from "@/app/content";
+import { Video } from "lucide-react";
 import { useFormContext } from "react-hook-form";
 import { Separator } from "../../(shadcn)/separator";
 import ExerciseVideos from "../ExerciseVideos";
-import { Exercise } from "@/app/content";
 
 const ExerciseSelect = ({ exercise }: { exercise: Exercise }) => {
   const {
@@ -55,10 +55,7 @@ const ExerciseSelect = ({ exercise }: { exercise: Exercise }) => {
                 tabIndex={-1} // Prevents button from being focused with tab
                 className="flex gap-1 text-primary hover:scale-110 active:scale-105"
               >
-                <Info size={18} />
-                <span className="hidden text-sm sm:inline">
-                  View exercise demos
-                </span>
+                <Video size={18} />
               </DialogTrigger>
               <DialogContent className=" max-h-[50svh] max-w-[80svh] overflow-y-scroll sm:max-h-[80svh]">
                 <DialogHeader>

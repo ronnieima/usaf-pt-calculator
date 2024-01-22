@@ -49,8 +49,8 @@ function GenderRadioButtons() {
                       <Button
                         aria-label={gender}
                         asChild
-                        className="w-full bg-gray-900 py-8 text-2xl shadow-lg transition-colors duration-300 hover:scale-[1.01] hover:cursor-pointer active:translate-y-1 active:bg-primary/70 peer-aria-checked:scale-105 peer-aria-checked:bg-primary  peer-aria-checked:ring-4
-                        peer-aria-checked:ring-sky-300/70"
+                        className="w-full bg-gray-900 py-8 text-2xl shadow-lg transition-colors duration-300 hover:scale-[1.01] hover:cursor-pointer active:translate-y-1 active:bg-primary/70 peer-aria-checked:scale-105 peer-aria-checked:bg-blue-700  peer-aria-checked:ring-2
+                        peer-aria-checked:ring-blue-950/70"
                       >
                         <FormLabel>{capitalizeFirstLetter(gender)}</FormLabel>
                       </Button>
