@@ -1,12 +1,13 @@
 import "./globals.css";
 
+import { GeistSans } from "geist/font";
+import { Metadata } from "next";
 import { getCldOgImageUrl } from "next-cloudinary";
 import Script from "next/script";
 import "react-toastify/dist/ReactToastify.css";
+import ToastProvider from "./_components/toast-provider";
 import NavBar from "./_components/ui/(navbar)/NavBar";
 import Footer from "./_components/ui/Footer";
-import { GeistSans } from "geist/font";
-import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: {
@@ -64,6 +65,7 @@ export default function RootLayout({
         ></Script>
       </head>
       <body className="bg-gradient-to-r from-sky-900  to-indigo-950">
+        <ToastProvider />
         <NavBar />
         {children}
         <Footer />

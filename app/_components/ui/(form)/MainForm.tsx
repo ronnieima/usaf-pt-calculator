@@ -12,12 +12,15 @@ import {
 import { useFormStore } from "@/app/stores/store";
 import { DevTool } from "@hookform/devtools";
 import { FormProvider, useForm } from "react-hook-form";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import AgeGroupSelect from "./(controls)/AgeGroupSelect";
 import ExerciseFields from "./(controls)/ExerciseFields";
 import FormButtons from "./(controls)/FormButtons";
 import GenderRadio from "./(controls)/GenderRadioButtons";
 import Score from "./(score)/Score";
 import ScoreChartLink from "./ScoreChartLink";
+import { useEffect } from "react";
 
 export type FormType = {
   gender: string;
@@ -31,6 +34,18 @@ export type FormType = {
 };
 
 export default function MainForm() {
+  useEffect(() => {
+    const notify = () =>
+      toast(
+        "22 Jan 2024 Update: Real-time score indicator and many visual updates.",
+        {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 6000,
+        },
+      );
+    notify();
+  }, []);
+
   const methods = useForm<FormType>({
     mode: "onChange",
     reValidateMode: "onChange",
