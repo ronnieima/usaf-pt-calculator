@@ -33,6 +33,11 @@ export const useFormStore = create<FormState>()((set, get) => ({
   setFinalScore: (finalScore) => set(() => ({ finalScore })),
   setMinimumMetStatus: (minimumMetStatus) => set(() => ({ minimumMetStatus })),
   setComponentScores: (scores) => set(() => ({ scores })),
+  setComponentScore: (component, score) =>
+    set((state) => ({
+      ...state,
+      scores: { ...state.scores, [component]: score },
+    })),
   setMinMaxValues: (minMaxValues) => set(() => ({ minMaxValues })),
   setComponentMinMaxValues: (component, minMaxValues) =>
     set((state) => ({
@@ -53,6 +58,10 @@ type FormState = {
   setFinalScore: (finalScore: number) => void;
   setMinimumMetStatus: (status: MinimumMetStatus) => void;
   setComponentScores: (scores: ComponentScores) => void;
+  setComponentScore: (
+    component: ExerciseComponentValues,
+    score: number,
+  ) => void;
   setMinMaxValues: (minMaxValues: MinMaxValues) => void;
   setComponentMinMaxValues: (
     component: ExerciseComponentValues,
