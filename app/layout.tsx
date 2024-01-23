@@ -10,6 +10,7 @@ import NavBar from "./_components/ui/(navbar)/NavBar";
 import Footer from "./_components/ui/Footer";
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.usafptcalculator.com"),
   title: {
     template: "%s | USAF PT Test Calculator",
     default: "USAF PT Test Calculator - All Score Charts and Exercise Videos",
