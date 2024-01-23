@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.usafptcalculator.com
+
+# Sitemaps
+Sitemap: https://www.usafptcalculator.com/sitemap.xml

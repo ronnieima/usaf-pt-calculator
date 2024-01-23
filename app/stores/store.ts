@@ -1,8 +1,9 @@
-import { create } from 'zustand';
-import { ExerciseComponentValues } from '../content';
+import { create } from "zustand";
+import { ExerciseComponentValues } from "../content";
 
 export const useFormStore = create<FormState>()((set, get) => ({
   // VARIABLES
+  isCheckedShuttleAudio: false,
   finalScore: 0,
   minMaxValues: {
     upperBody: {
@@ -30,6 +31,8 @@ export const useFormStore = create<FormState>()((set, get) => ({
   },
 
   // REDUCERS
+  toggleIsCheckedShuttleAudio: () =>
+    set((prev) => ({ isCheckedShuttleAudio: !prev.isCheckedShuttleAudio })),
   setFinalScore: (finalScore) => set(() => ({ finalScore })),
   setMinimumMetStatus: (minimumMetStatus) => set(() => ({ minimumMetStatus })),
   setComponentScores: (scores) => set(() => ({ scores })),
@@ -50,11 +53,13 @@ export const useFormStore = create<FormState>()((set, get) => ({
 }));
 
 type FormState = {
+  isCheckedShuttleAudio: boolean;
   finalScore: number;
   minMaxValues: MinMaxValues;
   minimumMetStatus: MinimumMetStatus;
   scores: ComponentScores;
 
+  toggleIsCheckedShuttleAudio: () => void;
   setFinalScore: (finalScore: number) => void;
   setMinimumMetStatus: (status: MinimumMetStatus) => void;
   setComponentScores: (scores: ComponentScores) => void;

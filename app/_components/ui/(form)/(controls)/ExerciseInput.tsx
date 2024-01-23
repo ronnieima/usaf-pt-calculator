@@ -1,27 +1,30 @@
-'use client';
+"use client";
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/app/_components/ui/(shadcn)/form';
-import { Input } from '@/app/_components/ui/(shadcn)/input';
+} from "@/app/_components/ui/(shadcn)/form";
+import { Input } from "@/app/_components/ui/(shadcn)/input";
 import {
   numberInputOnWheelPreventChange,
   secondsToMinutesAndSeconds,
-} from '@/app/_util/helpers';
-import { getValidationRules } from '@/app/_util/validation';
-import { Exercise, exercises } from '@/app/content';
-import { useRealTimeInfo } from '@/app/hooks/useRealTimeInfo';
-import { useFormStore } from '@/app/stores/store';
-import { TimeField } from '@mui/x-date-pickers';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { useEffect } from 'react';
-import { useFormContext } from 'react-hook-form';
-import { Separator } from '../../(shadcn)/separator';
-import { cn } from '@/lib/utils';
+} from "@/app/_util/helpers";
+import { getValidationRules } from "@/app/_util/validation";
+import { Exercise, exercises } from "@/app/content";
+import { useRealTimeInfo } from "@/app/hooks/useRealTimeInfo";
+import { useFormStore } from "@/app/stores/store";
+import { TimeField } from "@mui/x-date-pickers";
+import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
+import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
+import { useEffect } from "react";
+import { useFormContext } from "react-hook-form";
+import { Separator } from "../../(shadcn)/separator";
+import { cn } from "@/lib/utils";
+import ShowHamrAudioSwitch from "../ShowHamrAudioSwitch";
+import { CldVideoPlayer } from "next-cloudinary";
+import ClientCldVideoPlayer from "../ClientCldVideoPlayer";
 
 const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   const {
@@ -35,7 +38,9 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   } = exercise;
 
   const { selectedExercise, currentInput } = useRealTimeInfo(componentValue);
-
+  const isCheckedShuttleAudio = useFormStore(
+    (state) => state.isCheckedShuttleAudio,
+  );
   const { minimumPerformanceValue, maximumPerformanceValue } = useFormStore(
     (state) => state.minMaxValues[componentValue],
   );
@@ -47,7 +52,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
 
   const showMinMax = minimumPerformanceValue || maximumPerformanceValue;
 
-  const isTimeBased = ['1.5_mile_run', 'forearm_plank', '2km_walk'].includes(
+  const isTimeBased = ["1.5_mile_run", "forearm_plank", "2km_walk"].includes(
     selectedExercise,
   );
 
@@ -57,10 +62,10 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
     : (value: any) => value;
 
   useEffect(() => {
-    resetField(`${componentValue}Input`, { defaultValue: '' });
+    resetField(`${componentValue}Input`, { defaultValue: "" });
   }, [selectedExercise, resetField, componentValue]);
 
-  if (selectedExercise === 'exempt') return null;
+  if (selectedExercise === "exempt") return null;
   return (
     <>
       <FormField
@@ -70,7 +75,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
         render={({ field }) => (
           <FormItem>
             <FormLabel className="text-xl font-bold lg:text-2xl">
-              <h3>{`${exerciseLabel} ${isTimeBased ? 'Time' : 'Reps'}`}</h3>
+              <h3>{`${exerciseLabel} ${isTimeBased ? "Time" : "Reps"}`}</h3>
             </FormLabel>
             <FormControl className="w-full border border-card-foreground/30 shadow-lg">
               {isTimeBased ? (
@@ -110,7 +115,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
             <div className="flex flex-col items-center ">
               <p>
                 <span className="text-3xl font-bold text-blue-900">
-                  {score}{' '}
+                  {score}{" "}
                 </span>
                 <span className="text-xs">pts</span>
               </p>
@@ -127,7 +132,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
                 <div className="flex flex-col items-center">
                   <p>
                     <span className="text-3xl font-bold text-red-800">
-                      {computeValue(minimumPerformanceValue)}{' '}
+                      {computeValue(minimumPerformanceValue)}{" "}
                     </span>
                     {!isTimeBased && <span className="text-xs">reps</span>}
                   </p>
@@ -141,11 +146,11 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
             <div className="flex flex-col items-center ">
               <p>
                 <span
-                  className={cn('text-3xl font-bold text-green-800', {
-                    'text-red-500': isTimeBased,
+                  className={cn("text-3xl font-bold text-green-800", {
+                    "text-red-500": isTimeBased,
                   })}
                 >
-                  {computeValue(maximumPerformanceValue)}{' '}
+                  {computeValue(maximumPerformanceValue)}{" "}
                 </span>
                 {!isTimeBased && <span className="text-xs">reps</span>}
               </p>
@@ -160,6 +165,18 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
         >
           Select an age group and gender to get min/max values.
         </span>
+      )}
+      {componentValue === "cardio" && (
+        <>
+          <ShowHamrAudioSwitch />
+          {isCheckedShuttleAudio && (
+            <iframe
+              src="https://res.cloudinary.com/dfpbpun9z/video/upload/f_auto:video,q_auto/v1/usaf-pt-calculator/exercise-videos/hamr-audio"
+              height={"400"}
+              allowFullScreen
+            />
+          )}
+        </>
       )}
     </>
   );

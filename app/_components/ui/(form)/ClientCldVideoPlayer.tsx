@@ -1,12 +1,13 @@
 "use client";
 
-import { Exercises } from "@/app/content";
+import { ExerciseValues } from "@/app/content";
 import { CldVideoPlayer } from "next-cloudinary";
+import "next-cloudinary/dist/cld-video-player.css";
 
 export default function ClientCldVideoPlayer({
   exercise,
 }: {
-  exercise: Exercises;
+  exercise: ExerciseValues;
 }) {
   return (
     <CldVideoPlayer

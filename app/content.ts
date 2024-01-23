@@ -1,4 +1,7 @@
-export type Exercises = UpperBodyExercises | CoreExercises | CardioExercises;
+export type ExerciseValues =
+  | UpperBodyExercises
+  | CoreExercises
+  | CardioExercises;
 
 export type UpperBodyExercises =
   | "exempt"
@@ -27,7 +30,7 @@ export type ExerciseComponent = {
 
 export type ExerciseOptions = {
   label: string;
-  value: Exercises;
+  value: ExerciseValues;
   videoSource?: string;
 }[];
 
