@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import Link from 'next/link';
-import { ageGroups } from '../_components/ui/(form)/(controls)/AgeGroupSelect';
-import { Card, CardHeader, CardTitle } from '../_components/ui/(shadcn)/card';
-import { formatAgeGroup } from '../_util/helpers';
+import Link from "next/link";
+import { ageGroups } from "../_components/ui/(form)/(controls)/AgeGroupSelect";
+import { Card, CardHeader, CardTitle } from "../_components/ui/(shadcn)/card";
+import { formatAgeGroup } from "../_util/helpers";
 
-const genders = ['male', 'female'];
+const genders = ["male", "female"];
 const ages = ageGroups;
 
 const ChartsPage = () => {
@@ -27,9 +27,9 @@ const ChartsPage = () => {
               >
                 <Card
                   className={`flex h-32 w-full items-center justify-center rounded-none shadow-2xl hover:scale-105 active:translate-y-1 ${
-                    gender === 'male'
-                      ? 'bg-blue-100 hover:bg-blue-200'
-                      : 'bg-pink-100 hover:bg-pink-200'
+                    gender === "male"
+                      ? "bg-blue-100 hover:bg-blue-200"
+                      : "bg-pink-100 hover:bg-pink-200"
                   }`}
                 >
                   <CardHeader>
