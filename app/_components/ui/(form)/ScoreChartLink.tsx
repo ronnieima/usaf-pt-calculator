@@ -16,7 +16,7 @@ function ScoreChartLink() {
           View the <span className="text-xl font-semibold">{gender}</span> /{' '}
           <span className="text-xl font-semibold">{ageGroup}</span> score chart{' '}
           <Link
-            href={`https://hnnyotwjhikrytqynjyk.supabase.co/storage/v1/object/public/usafptcalculator/scorechart_${gender}_${formattedAgeGroup}.pdf`}
+            href={`https://res.cloudinary.com/dfpbpun9z/image/upload/v1706012763/usaf-pt-calculator/score-charts/scorechart_${gender}_${formattedAgeGroup}.pdf`}
             target="_blank"
             className="text-primary hover:text-primary/50"
           >
