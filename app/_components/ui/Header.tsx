@@ -4,7 +4,7 @@ import Link from "next/link";
 
 const Header = () => {
   return (
-    <header className="flex animate-fade-down flex-col items-center justify-center gap-8 px-16 py-20 text-center md:py-48 ">
+    <header className="flex animate-fade-down flex-col items-center justify-center gap-8 px-2 py-20 text-center sm:px-16 md:py-48">
       <h1
         className="
        text-7xl font-bold tracking-tight text-shadow-lg lg:text-8xl"
