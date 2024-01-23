@@ -7,15 +7,15 @@ import { ageGroups } from "../content";
 export default function AgeGroupItems() {
   const genders = ["male", "female"];
 
-  return (
+  https: return (
     <>
       {genders.map((gender) =>
         ageGroups.map((ageGroup) => {
-          const ageGroupFormatted = formatAgeGroup(ageGroup);
+          const formattedAgeGroup = formatAgeGroup(ageGroup);
           return (
             <Link
               key={`${gender}-${ageGroup}`}
-              href={`https://hnnyotwjhikrytqynjyk.supabase.co/storage/v1/object/public/usafptcalculator/scorechart_${gender}_${ageGroupFormatted}.pdf`}
+              href={`https://res.cloudinary.com/dfpbpun9z/image/upload/v1706012763/usaf-pt-calculator/score-charts/scorechart_${gender}_${formattedAgeGroup}.pdf`}
               target="_blank"
             >
               <Card
