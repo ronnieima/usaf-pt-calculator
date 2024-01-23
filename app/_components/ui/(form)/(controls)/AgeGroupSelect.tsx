@@ -4,29 +4,18 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@/app/_components/ui/(shadcn)/form';
+} from "@/app/_components/ui/(shadcn)/form";
 import {
   Select,
   SelectContent,
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from '@/app/_components/ui/(shadcn)/select';
-import { Separator } from '@radix-ui/react-select';
-import React from 'react';
-import { useFormContext } from 'react-hook-form';
-
-export const ageGroups = [
-  '<25',
-  '25-29',
-  '30-34',
-  '35-39',
-  '40-44',
-  '45-49',
-  '50-54',
-  '55-59',
-  '>60',
-];
+} from "@/app/_components/ui/(shadcn)/select";
+import { ageGroups } from "@/app/content";
+import { Separator } from "@radix-ui/react-select";
+import React from "react";
+import { useFormContext } from "react-hook-form";
 
 const AgeGroupSelect = () => {
   const {
@@ -38,7 +27,7 @@ const AgeGroupSelect = () => {
       <Separator />
 
       <FormField
-        rules={{ required: { value: true, message: 'Select an age group' } }}
+        rules={{ required: { value: true, message: "Select an age group" } }}
         control={control}
         name={`ageGroup`}
         render={({ field }) => (
