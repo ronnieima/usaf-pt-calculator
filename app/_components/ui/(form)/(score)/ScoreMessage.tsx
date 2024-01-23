@@ -1,5 +1,5 @@
-import ScoreIcons from "./ScoreIcons";
-import ScoreText from "./ScoreText";
+import ScoreIcons from './ScoreIcons';
+import ScoreText from './ScoreText';
 
 function ScoreMessage() {
   return (

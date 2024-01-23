@@ -1,8 +1,8 @@
-import React from "react";
-import { Button } from "./ui/(shadcn)/button";
-import Link from "next/link";
-import { ChevronLeft } from "lucide-react";
-import { Card, CardDescription, CardTitle } from "./ui/(shadcn)/card";
+import React from 'react';
+import { Button } from './ui/(shadcn)/button';
+import Link from 'next/link';
+import { ChevronLeft } from 'lucide-react';
+import { Card, CardDescription, CardTitle } from './ui/(shadcn)/card';
 
 const UnderConstruction = () => {
   return (

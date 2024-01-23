@@ -1,26 +1,26 @@
-"use client";
+'use client';
 import {
   calculateFinalScore,
   calculateMetMinimums,
   getResults,
-} from "@/app/_util/getScore";
+} from '@/app/_util/getScore';
 import {
   CardioExercises,
   CoreExercises,
   UpperBodyExercises,
-} from "@/app/content";
-import { useFormStore } from "@/app/stores/store";
-import { DevTool } from "@hookform/devtools";
-import { FormProvider, useForm } from "react-hook-form";
-import { toast } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import AgeGroupSelect from "./(controls)/AgeGroupSelect";
-import ExerciseFields from "./(controls)/ExerciseFields";
-import FormButtons from "./(controls)/FormButtons";
-import GenderRadio from "./(controls)/GenderRadioButtons";
-import Score from "./(score)/Score";
-import ScoreChartLink from "./ScoreChartLink";
-import { useEffect } from "react";
+} from '@/app/content';
+import { useFormStore } from '@/app/stores/store';
+import { DevTool } from '@hookform/devtools';
+import { FormProvider, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import AgeGroupSelect from './(controls)/AgeGroupSelect';
+import ExerciseFields from './(controls)/ExerciseFields';
+import FormButtons from './(controls)/FormButtons';
+import GenderRadio from './(controls)/GenderRadioButtons';
+import Score from './(score)/Score';
+import ScoreChartLink from './ScoreChartLink';
+import { useEffect } from 'react';
 
 export type FormType = {
   gender: string;
@@ -37,7 +37,7 @@ export default function MainForm() {
   useEffect(() => {
     const notify = () =>
       toast(
-        "22 Jan 2024 Update: Real-time score indicator and many visual updates.",
+        '22 Jan 2024 Update: Real-time score indicator and many visual updates.',
         {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 6000,
@@ -47,17 +47,17 @@ export default function MainForm() {
   }, []);
 
   const methods = useForm<FormType>({
-    mode: "onChange",
-    reValidateMode: "onChange",
+    mode: 'onChange',
+    reValidateMode: 'onChange',
     defaultValues: {
-      gender: "",
-      ageGroup: "",
-      upperBodyExercise: "pushup",
-      upperBodyInput: "",
-      coreExercise: "situp",
-      coreInput: "",
-      cardioExercise: "1.5_mile_run",
-      cardioInput: "",
+      gender: '',
+      ageGroup: '',
+      upperBodyExercise: 'pushup',
+      upperBodyInput: '',
+      coreExercise: 'situp',
+      coreInput: '',
+      cardioExercise: '1.5_mile_run',
+      cardioInput: '',
     },
   });
 

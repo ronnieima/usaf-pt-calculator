@@ -1,6 +1,6 @@
-"use client";
+'use client';
 
-import { Button } from "@/app/_components/ui/(shadcn)/button";
+import { Button } from '@/app/_components/ui/(shadcn)/button';
 import {
   Sheet,
   SheetContent,
@@ -8,10 +8,10 @@ import {
   SheetHeader,
   SheetTitle,
   SheetTrigger,
-} from "@/app/_components/ui/(shadcn)/sheet";
-import { ChevronRight, Menu } from "lucide-react";
-import { usePathname, useRouter } from "next/navigation";
-import { links } from "./NavBar";
+} from '@/app/_components/ui/(shadcn)/sheet';
+import { ChevronRight, Menu } from 'lucide-react';
+import { usePathname, useRouter } from 'next/navigation';
+import { links } from './NavBar';
 
 const MobileMenu = () => {
   const currentPath = usePathname();
@@ -22,7 +22,7 @@ const MobileMenu = () => {
       <SheetTrigger className="lg:hidden" aria-label="Open navigation menu">
         <Menu className="h-8 w-8" />
       </SheetTrigger>
-      <SheetContent side={"right"}>
+      <SheetContent side={'right'}>
         <SheetHeader>
           <SheetTitle className="text-left">Navigation</SheetTitle>
           <SheetDescription className="flex flex-col">
@@ -33,7 +33,7 @@ const MobileMenu = () => {
                   onClick={() => push(link.href)}
                   variant="ghost"
                   className={`h-24 justify-between text-zinc-600 ${
-                    link.href === currentPath ? "bg-gray-200 font-bold" : ""
+                    link.href === currentPath ? 'bg-gray-200 font-bold' : ''
                   }`}
                 >
                   <div className="flex gap-2">

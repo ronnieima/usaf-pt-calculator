@@ -4,10 +4,10 @@ export function capitalizeFirstLetter(string: string) {
 
 export function formatAgeGroup(ageGroup: string) {
   switch (ageGroup) {
-    case "<25":
-      return "lt25";
-    case ">60":
-      return "gt60";
+    case '<25':
+      return 'lt25';
+    case '>60':
+      return 'gt60';
     default:
       return ageGroup;
   }
@@ -15,20 +15,20 @@ export function formatAgeGroup(ageGroup: string) {
 
 export function inferWalkAgeGroup(ageGroup: string) {
   switch (ageGroup) {
-    case "<25":
-    case "25-29":
-      return "<30";
-    case "30-34":
-    case "35-39":
-      return "30-39";
-    case "40-44":
-    case "45-49":
-      return "40-49";
-    case "50-54":
-    case "55-59":
-      return "50-59";
-    case ">60":
-      return ">60";
+    case '<25':
+    case '25-29':
+      return '<30';
+    case '30-34':
+    case '35-39':
+      return '30-39';
+    case '40-44':
+    case '45-49':
+      return '40-49';
+    case '50-54':
+    case '55-59':
+      return '50-59';
+    case '>60':
+      return '>60';
   }
 }
 

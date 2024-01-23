@@ -1,70 +1,70 @@
 function upperBodyValidationRules(upperBodyExercise: string) {
   if (
-    upperBodyExercise === "pushup" ||
-    upperBodyExercise === "hand_release_pushup"
+    upperBodyExercise === 'pushup' ||
+    upperBodyExercise === 'hand_release_pushup'
   ) {
     return {
-      required: "Rep amount is required",
-      min: { value: 0, message: "Reps must be greater than 0" },
+      required: 'Rep amount is required',
+      min: { value: 0, message: 'Reps must be greater than 0' },
       pattern: {
         value: /^\d*$/,
-        message: "Must be a whole number",
+        message: 'Must be a whole number',
       },
     };
   }
 }
 
 function coreValidationRules(coreExercise: string) {
-  if (coreExercise == "forearm_plank") {
+  if (coreExercise == 'forearm_plank') {
     return {
-      required: "Plank time is required",
+      required: 'Plank time is required',
       pattern: {
         value: /^(([0][0]:[0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$/,
-        message: "Invalid time format. (mm:ss)",
+        message: 'Invalid time format. (mm:ss)',
       },
       min: {
         value: 0,
-        message: "Time must be greater than 0",
+        message: 'Time must be greater than 0',
       },
     };
   } else if (
-    coreExercise === "situp" ||
-    coreExercise === "cross_leg_reverse_crunch"
+    coreExercise === 'situp' ||
+    coreExercise === 'cross_leg_reverse_crunch'
   ) {
     return {
-      required: "Rep amount is required",
+      required: 'Rep amount is required',
       min: {
         value: 0,
-        message: "Reps must be greater than 0",
+        message: 'Reps must be greater than 0',
       },
       pattern: {
         value: /^\d*$/,
-        message: "Must be a whole number",
+        message: 'Must be a whole number',
       },
     };
   }
 }
 
 function cardioValidationRules(cardioExercise: string) {
-  if (cardioExercise === "1.5_mile_run" || cardioExercise === "walk") {
+  if (cardioExercise === '1.5_mile_run' || cardioExercise === 'walk') {
     return {
-      required: "Time is required",
+      required: 'Time is required',
       pattern: {
         value: /^(([0][0]:[0]?[0-5][0-9]|[0-9]):([0-5][0-9]))$/,
-        message: "Invalid time format (mm:ss)",
+        message: 'Invalid time format (mm:ss)',
       },
       minLength: {
         value: 1,
-        message: "Time must be greater than 0",
+        message: 'Time must be greater than 0',
       },
     };
-  } else if (cardioExercise === "20_meter_hamr_shuttle") {
+  } else if (cardioExercise === '20_meter_hamr_shuttle') {
     return {
-      required: "Shuttle amount is required",
-      min: { value: 0, message: "Reps must be greater than 0" },
+      required: 'Shuttle amount is required',
+      min: { value: 0, message: 'Reps must be greater than 0' },
       pattern: {
         value: /^\d*$/,
-        message: "Must be a whole number",
+        message: 'Must be a whole number',
       },
     };
   }
@@ -78,11 +78,11 @@ export function getValidationRules(
   exercise: Exercises,
 ) {
   switch (exerciseType) {
-    case "Upper Body":
+    case 'Upper Body':
       return upperBodyValidationRules(exercise);
-    case "Core":
+    case 'Core':
       return coreValidationRules(exercise);
-    case "Cardio":
+    case 'Cardio':
       return cardioValidationRules(exercise);
   }
 }

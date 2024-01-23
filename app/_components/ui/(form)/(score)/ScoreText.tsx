@@ -1,14 +1,14 @@
-import { useFormStore } from "@/app/stores/store";
-import { useFormContext } from "react-hook-form";
+import { useFormStore } from '@/app/stores/store';
+import { useFormContext } from 'react-hook-form';
 
 const ScoreText = () => {
   const { getValues } = useFormContext();
   const exercises = getValues([
-    "upperBodyExercise",
-    "coreExercise",
-    "cardioExercise",
+    'upperBodyExercise',
+    'coreExercise',
+    'cardioExercise',
   ]);
-  const isAllExempt = exercises.every((exercise) => exercise === "exempt");
+  const isAllExempt = exercises.every((exercise) => exercise === 'exempt');
 
   const minimumMetStatus = useFormStore((state) => state.minimumMetStatus);
   const finalScore = useFormStore((state) => state.finalScore);
@@ -19,7 +19,7 @@ const ScoreText = () => {
   return (
     <div
       className={
-        "flex w-full flex-col justify-center text-center text-9xl sm:items-end"
+        'flex w-full flex-col justify-center text-center text-9xl sm:items-end'
       }
     >
       <p>Score</p>

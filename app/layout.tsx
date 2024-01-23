@@ -1,48 +1,48 @@
-import "./globals.css";
+import './globals.css';
 
-import { GeistSans } from "geist/font";
-import { Metadata } from "next";
-import { getCldOgImageUrl } from "next-cloudinary";
-import Script from "next/script";
-import "react-toastify/dist/ReactToastify.css";
-import ToastProvider from "./_components/toast-provider";
-import NavBar from "./_components/ui/(navbar)/NavBar";
-import Footer from "./_components/ui/Footer";
+import { GeistSans } from 'geist/font';
+import { Metadata } from 'next';
+import { getCldOgImageUrl } from 'next-cloudinary';
+import Script from 'next/script';
+import 'react-toastify/dist/ReactToastify.css';
+import ToastProvider from './_components/toast-provider';
+import NavBar from './_components/ui/(navbar)/NavBar';
+import Footer from './_components/ui/Footer';
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.usafptcalculator.com"),
+  metadataBase: new URL('https://www.usafptcalculator.com'),
   title: {
-    template: "%s | USAF PT Test Calculator",
-    default: "USAF PT Test Calculator - All Score Charts and Exercise Videos",
+    template: '%s | USAF PT Test Calculator',
+    default: 'USAF PT Test Calculator - All Score Charts and Exercise Videos',
   },
   description:
-    "Calculate your Air Force PT scores with this user-friendly calculator. Tailored for USAF personnel, simplify your fitness tracking effortlessly.",
-  keywords: "air force, pt test, pt score, usaf, pt score calculator",
-  applicationName: "USAF PT Calculator",
-  authors: { name: "Ronnie Kaito Imagawa", url: "https://www.imagawa.dev" },
+    'Calculate your Air Force PT scores with this user-friendly calculator. Tailored for USAF personnel, simplify your fitness tracking effortlessly.',
+  keywords: 'air force, pt test, pt score, usaf, pt score calculator',
+  applicationName: 'USAF PT Calculator',
+  authors: { name: 'Ronnie Kaito Imagawa', url: 'https://www.imagawa.dev' },
 
   alternates: {
-    canonical: "https://www.usafptcalculator.com",
+    canonical: 'https://www.usafptcalculator.com',
   },
   twitter: {
-    card: "summary_large_image",
-    site: "@imagawaDev",
-    creator: "@imagawaDev",
-    title: "USAF PT Test Calculator - All Score Charts and Exercise Videos",
+    card: 'summary_large_image',
+    site: '@imagawaDev',
+    creator: '@imagawaDev',
+    title: 'USAF PT Test Calculator - All Score Charts and Exercise Videos',
     description:
-      "Calculate your Air Force PT scores with this user-friendly calculator. Tailored for USAF personnel, simplify your fitness tracking effortlessly.",
+      'Calculate your Air Force PT scores with this user-friendly calculator. Tailored for USAF personnel, simplify your fitness tracking effortlessly.',
     images: getCldOgImageUrl({
-      src: "ogImage/ogImage",
+      src: 'ogImage/ogImage',
     }),
   },
   openGraph: {
-    type: "website",
-    title: "USAF PT Test Calculator - All Score Charts and Exercise Videos",
+    type: 'website',
+    title: 'USAF PT Test Calculator - All Score Charts and Exercise Videos',
     description:
-      "Calculate your Air Force PT scores with this user-friendly calculator. Tailored for USAF personnel, simplify your fitness tracking effortlessly.",
-    url: "https://www.usafptcalculator.com/",
+      'Calculate your Air Force PT scores with this user-friendly calculator. Tailored for USAF personnel, simplify your fitness tracking effortlessly.',
+    url: 'https://www.usafptcalculator.com/',
     images: getCldOgImageUrl({
-      src: "ogImage/ogImage",
+      src: 'ogImage/ogImage',
     }),
   },
 };

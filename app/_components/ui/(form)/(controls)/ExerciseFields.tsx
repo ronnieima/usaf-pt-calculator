@@ -1,10 +1,10 @@
-"use client";
+'use client';
 
-import { exercises } from "@/app/content";
-import React from "react";
-import { Separator } from "../../(shadcn)/separator";
-import ExerciseInput from "./ExerciseInput";
-import ExerciseSelect from "./ExerciseSelect";
+import { exercises } from '@/app/content';
+import React from 'react';
+import { Separator } from '../../(shadcn)/separator';
+import ExerciseInput from './ExerciseInput';
+import ExerciseSelect from './ExerciseSelect';
 
 const ExerciseFields = () => {
   return (

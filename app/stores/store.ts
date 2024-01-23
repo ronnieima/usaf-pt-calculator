@@ -1,5 +1,5 @@
-import { create } from "zustand";
-import { ExerciseComponentValues } from "../content";
+import { create } from 'zustand';
+import { ExerciseComponentValues } from '../content';
 
 export const useFormStore = create<FormState>()((set, get) => ({
   // VARIABLES

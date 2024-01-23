@@ -1,4 +1,4 @@
-import Link from "next/link";
+import Link from 'next/link';
 
 const Footer = () => {
   return (
@@ -6,7 +6,7 @@ const Footer = () => {
       <section className="col-start-2 flex max-w-lg flex-col items-center justify-center gap-16">
         <p className="text-center">
           For bug reports, suggestions, and feedback, please feel free to email
-          me at{" "}
+          me at{' '}
           <Link
             data-umami-event="Email link"
             href="mailto:ronniekaito@imagawa.dev"
@@ -18,7 +18,7 @@ const Footer = () => {
         </p>
         <div>
           <p className=" text-center">
-            &copy; 2023 | Developed by{" "}
+            &copy; 2023 | Developed by{' '}
             <Link
               data-umami-event="Portfolio link"
               className="transition-color  text-lg font-bold text-indigo-200  hover:text-indigo-100 hover:underline"

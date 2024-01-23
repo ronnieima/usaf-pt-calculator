@@ -1,4 +1,4 @@
-import { useFormStore } from "@/app/stores/store";
+import { useFormStore } from '@/app/stores/store';
 
 function FailReasons() {
   const minimumMetStatus = useFormStore((state) => state.minimumMetStatus);
@@ -20,7 +20,7 @@ function FailReasons() {
               if (!value) {
                 return (
                   <li key={key} className="list-item capitalize">
-                    - {key === "upper" ? "Upper Body" : key}
+                    - {key === 'upper' ? 'Upper Body' : key}
                   </li>
                 );
               }

@@ -1,19 +1,19 @@
-import { Button } from "@/app/_components/ui/(shadcn)/button";
+import { Button } from '@/app/_components/ui/(shadcn)/button';
 import {
   FormControl,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/app/_components/ui/(shadcn)/form";
+} from '@/app/_components/ui/(shadcn)/form';
 import {
   RadioGroup,
   RadioGroupItem,
-} from "@/app/_components/ui/(shadcn)/radio-group";
-import { capitalizeFirstLetter } from "@/app/_util/helpers";
-import { useFormContext } from "react-hook-form";
+} from '@/app/_components/ui/(shadcn)/radio-group';
+import { capitalizeFirstLetter } from '@/app/_util/helpers';
+import { useFormContext } from 'react-hook-form';
 
-export const genders = ["male", "female"];
+export const genders = ['male', 'female'];
 
 function GenderRadioButtons() {
   const {
@@ -23,8 +23,8 @@ function GenderRadioButtons() {
   return (
     <FormField
       control={control}
-      name={"gender"}
-      rules={{ required: { value: true, message: "Gender is required" } }}
+      name={'gender'}
+      rules={{ required: { value: true, message: 'Gender is required' } }}
       render={({ field }) => (
         <FormItem className="">
           <FormLabel className="text-xl font-bold lg:text-2xl">

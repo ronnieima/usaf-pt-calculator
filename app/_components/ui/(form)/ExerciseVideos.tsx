@@ -1,9 +1,9 @@
-"use client";
+'use client';
 
-import { CldVideoPlayer } from "next-cloudinary";
+import { CldVideoPlayer } from 'next-cloudinary';
 
-import Link from "next/link";
-import { Exercise } from "@/app/content";
+import Link from 'next/link';
+import { Exercise } from '@/app/content';
 
 const ExerciseVideos = ({ exercise }: { exercise: Exercise }) => {
   const { options } = exercise;
@@ -11,7 +11,7 @@ const ExerciseVideos = ({ exercise }: { exercise: Exercise }) => {
   return (
     <section className="space-y-16">
       {options.map((option) => {
-        if (option.value === "exempt") return;
+        if (option.value === 'exempt') return;
         return (
           <figure key={option.value}>
             <header className="mb-2 text-2xl font-bold">

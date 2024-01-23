@@ -1,15 +1,15 @@
-import { inferWalkAgeGroup } from "@/app/_util/helpers";
-import { useFormStore } from "@/app/stores/store";
-import { useEffect } from "react";
-import { useFormContext } from "react-hook-form";
+import { inferWalkAgeGroup } from '@/app/_util/helpers';
+import { useFormStore } from '@/app/stores/store';
+import { useEffect } from 'react';
+import { useFormContext } from 'react-hook-form';
 import {
   getIndividualScore,
   getMaximumPerformanceValue,
   getMinimumPerformanceValue,
-} from "../_util/getScore";
+} from '../_util/getScore';
 
 export const useRealTimeInfo = (
-  componentValue: "upperBody" | "core" | "cardio",
+  componentValue: 'upperBody' | 'core' | 'cardio',
 ) => {
   const { watch } = useFormContext();
 
@@ -20,19 +20,19 @@ export const useRealTimeInfo = (
 
   const selectedExercise = watch(`${componentValue}Exercise`);
   const currentInput = watch(`${componentValue}Input`);
-  const gender = watch("gender");
-  const ageGroup = watch("ageGroup");
+  const gender = watch('gender');
+  const ageGroup = watch('ageGroup');
 
   useEffect(() => {
     if (!gender || !ageGroup || !selectedExercise) return;
     const minValue = getMinimumPerformanceValue(
       gender,
-      selectedExercise === "2km_walk" ? inferWalkAgeGroup(ageGroup) : ageGroup,
+      selectedExercise === '2km_walk' ? inferWalkAgeGroup(ageGroup) : ageGroup,
       selectedExercise,
     );
     const maxValue = getMaximumPerformanceValue(
       gender,
-      selectedExercise === "2km_walk" ? inferWalkAgeGroup(ageGroup) : ageGroup,
+      selectedExercise === '2km_walk' ? inferWalkAgeGroup(ageGroup) : ageGroup,
       selectedExercise,
     );
     const componentScore = getIndividualScore(

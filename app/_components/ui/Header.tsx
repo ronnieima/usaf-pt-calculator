@@ -1,6 +1,6 @@
-import { ChevronDown } from "lucide-react";
+import { ChevronDown } from 'lucide-react';
 
-import Link from "next/link";
+import Link from 'next/link';
 
 const Header = () => {
   return (
@@ -17,7 +17,7 @@ const Header = () => {
         Your personal one-stop shop for Air Force fitness test resources.
       </p>
       <Link
-        href={"#form-card"}
+        href={'#form-card'}
         className=" text-neutral-400  hover:text-neutral-100"
         aria-label="Scroll to the calculator"
       >

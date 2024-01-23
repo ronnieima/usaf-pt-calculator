@@ -1,10 +1,10 @@
-import { ComponentScores, useFormStore } from "@/app/stores/store";
-import { FaRunning } from "react-icons/fa";
-import IndividualExerciseScore from "./IndividualExerciseScore";
-import PushupIcon from "./PushupIcon";
-import SitupIcon from "./SitupIcon";
-import { FieldValues, useFormContext } from "react-hook-form";
-import convertDurationToSeconds from "@/app/_util/convertDurationToSeconds";
+import { ComponentScores, useFormStore } from '@/app/stores/store';
+import { FaRunning } from 'react-icons/fa';
+import IndividualExerciseScore from './IndividualExerciseScore';
+import PushupIcon from './PushupIcon';
+import SitupIcon from './SitupIcon';
+import { FieldValues, useFormContext } from 'react-hook-form';
+import convertDurationToSeconds from '@/app/_util/convertDurationToSeconds';
 
 const ScoreIcons = () => {
   const scores = useFormStore((state) => state.scores);
@@ -19,14 +19,14 @@ const ScoreIcons = () => {
       <IndividualExerciseScore
         icon={<PushupIcon />}
         score={
-          formData.upperBodyExercise === "exempt"
-            ? "Exempt"
+          formData.upperBodyExercise === 'exempt'
+            ? 'Exempt'
             : `${scores.upperBody}`
         }
       />
       <IndividualExerciseScore
         icon={<SitupIcon />}
-        score={formData.coreExercise === "exempt" ? "Exempt" : `${scores.core}`}
+        score={formData.coreExercise === 'exempt' ? 'Exempt' : `${scores.core}`}
       />
       <IndividualExerciseScore
         icon={<FaRunning size="3em" title="running icon" />}
@@ -43,18 +43,18 @@ function calculateScore(
   scores: ComponentScores,
   cardioMax: number,
 ) {
-  if (formData.cardioExercise === "exempt") {
-    return "Exempt";
+  if (formData.cardioExercise === 'exempt') {
+    return 'Exempt';
   } else if (
-    formData.cardioExercise === "2km_walk" &&
+    formData.cardioExercise === '2km_walk' &&
     convertDurationToSeconds(formData.cardioInput) <= cardioMax
   ) {
-    return "Pass";
+    return 'Pass';
   } else if (
-    formData.cardioExercise === "2km_walk" &&
+    formData.cardioExercise === '2km_walk' &&
     convertDurationToSeconds(formData.cardioInput) > cardioMax
   ) {
-    return "Fail";
+    return 'Fail';
   } else {
     return scores.cardio;
   }

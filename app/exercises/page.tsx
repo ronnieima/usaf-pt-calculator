@@ -1,18 +1,18 @@
-"use client";
+'use client';
 
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/app/_components/ui/(shadcn)/accordion";
-import UnderConstruction from "../_components/UnderConstruction";
+} from '@/app/_components/ui/(shadcn)/accordion';
+import UnderConstruction from '../_components/UnderConstruction';
 import {
   Card,
   CardContent,
   CardHeader,
   CardTitle,
-} from "@/app/_components/ui/(shadcn)/card";
+} from '@/app/_components/ui/(shadcn)/card';
 
 function ExercisesPage() {
   return (

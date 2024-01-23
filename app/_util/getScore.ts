@@ -1,7 +1,7 @@
-import { FormType } from "../_components/ui/(form)/MainForm";
-import { scoringCriteria } from "../criteria";
-import { MinMaxValues } from "../stores/store";
-import convertDurationToSeconds from "./convertDurationToSeconds";
+import { FormType } from '../_components/ui/(form)/MainForm';
+import { scoringCriteria } from '../criteria';
+import { MinMaxValues } from '../stores/store';
+import convertDurationToSeconds from './convertDurationToSeconds';
 
 export function getResults(formData: FormType) {
   const {
@@ -45,15 +45,15 @@ export function getIndividualScore(
 ) {
   let results: number;
   const cardioExercises = [
-    "exempt",
-    "1.5_mile_run",
-    "2km_walk",
-    "20_meter_hamr_shuttle",
+    'exempt',
+    '1.5_mile_run',
+    '2km_walk',
+    '20_meter_hamr_shuttle',
   ];
   if (
-    exercise === "forearm_plank" ||
-    exercise === "1.5_mile_run" ||
-    exercise === "2km_walk"
+    exercise === 'forearm_plank' ||
+    exercise === '1.5_mile_run' ||
+    exercise === '2km_walk'
   ) {
     results = convertDurationToSeconds(performanceValue);
   } else {
@@ -63,8 +63,8 @@ export function getIndividualScore(
   const maxValue = getMaximumPerformanceValue(gender, ageGroup, exercise);
   const minValue = getMinimumPerformanceValue(gender, ageGroup, exercise);
 
-  if (exercise === "1.5_mile_run" && results > maxValue!) return 0;
-  if (results < minValue! || exercise === "exempt" || exercise === "2km_walk")
+  if (exercise === '1.5_mile_run' && results > maxValue!) return 0;
+  if (results < minValue! || exercise === 'exempt' || exercise === '2km_walk')
     return 0;
 
   if (results > maxValue!) {
@@ -129,9 +129,9 @@ export function calculateFinalScore(
   }: { upperBodyScore: number; coreScore: number; cardioScore: number },
 ) {
   let total = 100;
-  if (formData.upperBodyExercise === "exempt") total -= 20;
-  if (formData.coreExercise === "exempt") total -= 20;
-  if (["exempt", "2km_walk"].includes(formData.cardioExercise)) total -= 60;
+  if (formData.upperBodyExercise === 'exempt') total -= 20;
+  if (formData.coreExercise === 'exempt') total -= 20;
+  if (['exempt', '2km_walk'].includes(formData.cardioExercise)) total -= 60;
   console.log(upperBodyScore + coreScore + cardioScore, total);
   return ((upperBodyScore + coreScore + cardioScore) / total) * 100;
 }
@@ -150,20 +150,20 @@ export function calculateMetMinimums(
   } = formData;
   return {
     upperBody:
-      upperBodyExercise === "exempt" ||
+      upperBodyExercise === 'exempt' ||
       parseInt(upperBodyInput) >=
         minMaxValues.upperBody.minimumPerformanceValue,
     core:
-      coreExercise === "exempt" ||
-      (coreExercise === "forearm_plank" &&
+      coreExercise === 'exempt' ||
+      (coreExercise === 'forearm_plank' &&
         convertDurationToSeconds(coreInput) >=
           minMaxValues.core.minimumPerformanceValue) ||
       parseInt(coreInput) >= minMaxValues.core.minimumPerformanceValue,
     cardio:
       // exempt case
-      cardioExercise === "exempt" ||
+      cardioExercise === 'exempt' ||
       // run/walk is less than max value case
-      (["1.5_mile_run", "2km_walk"].includes(cardioExercise) &&
+      (['1.5_mile_run', '2km_walk'].includes(cardioExercise) &&
         convertDurationToSeconds(cardioInput) <=
           minMaxValues.cardio.maximumPerformanceValue) ||
       // HAMR run: input greater than min case

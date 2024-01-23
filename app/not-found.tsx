@@ -1,7 +1,7 @@
-import Link from "next/link";
-import React from "react";
-import { Button } from "./_components/ui/(shadcn)/button";
-import { ChevronRight } from "lucide-react";
+import Link from 'next/link';
+import React from 'react';
+import { Button } from './_components/ui/(shadcn)/button';
+import { ChevronRight } from 'lucide-react';
 
 const NotFoundPage = () => {
   return (

@@ -1,5 +1,5 @@
-"use client";
-import "next-cloudinary/dist/cld-video-player.css";
+'use client';
+import 'next-cloudinary/dist/cld-video-player.css';
 
 import {
   FormControl,
@@ -7,14 +7,14 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from "@/app/_components/ui/(shadcn)/form";
+} from '@/app/_components/ui/(shadcn)/form';
 import {
   Dialog,
   DialogContent,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
-} from "@/components/ui/dialog";
+} from '@/components/ui/dialog';
 
 import {
   Select,
@@ -22,12 +22,12 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/app/_components/ui/(shadcn)/select";
-import { Exercise } from "@/app/content";
-import { Video } from "lucide-react";
-import { useFormContext } from "react-hook-form";
-import { Separator } from "../../(shadcn)/separator";
-import ExerciseVideos from "../ExerciseVideos";
+} from '@/app/_components/ui/(shadcn)/select';
+import { Exercise } from '@/app/content';
+import { Video } from 'lucide-react';
+import { useFormContext } from 'react-hook-form';
+import { Separator } from '../../(shadcn)/separator';
+import ExerciseVideos from '../ExerciseVideos';
 
 const ExerciseSelect = ({ exercise }: { exercise: Exercise }) => {
   const {
@@ -39,7 +39,7 @@ const ExerciseSelect = ({ exercise }: { exercise: Exercise }) => {
 
   return (
     <FormField
-      rules={{ required: { value: true, message: "Select an exercise" } }}
+      rules={{ required: { value: true, message: 'Select an exercise' } }}
       control={control}
       name={`${component.value}Exercise`}
       render={({ field }) => (

@@ -1,9 +1,9 @@
-"use client";
-import { useFormState } from "react-hook-form";
-import { Separator } from "../../(shadcn)/separator";
-import Spinner from "../../Spinner";
-import FailReasons from "./FailReasons";
-import ScoreMessage from "./ScoreMessage";
+'use client';
+import { useFormState } from 'react-hook-form';
+import { Separator } from '../../(shadcn)/separator';
+import Spinner from '../../Spinner';
+import FailReasons from './FailReasons';
+import ScoreMessage from './ScoreMessage';
 
 function Score() {
   const { isSubmitting, isSubmitSuccessful } = useFormState();
@@ -14,7 +14,7 @@ function Score() {
       {isSubmitSuccessful && (
         <section
           className={`${
-            isSubmitting && "opacity-0"
+            isSubmitting && 'opacity-0'
           } flex flex-col gap-4 text-center`}
         >
           <Separator className="mt-16" />

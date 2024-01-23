@@ -1,5 +1,5 @@
-import dayjs from "dayjs";
-import toObject from "dayjs/plugin/toObject";
+import dayjs from 'dayjs';
+import toObject from 'dayjs/plugin/toObject';
 dayjs.extend(toObject);
 
 export default function convertDurationToSeconds(duration: string) {

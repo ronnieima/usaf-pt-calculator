@@ -1,15 +1,15 @@
-import Links from "./Links";
-import Logo from "./Logo";
+import Links from './Links';
+import Logo from './Logo';
 
-import { ClipboardList, Home, LibraryBig } from "lucide-react";
-import MobileMenu from "./MobileMenu";
+import { ClipboardList, Home, LibraryBig } from 'lucide-react';
+import MobileMenu from './MobileMenu';
 
 export const links = [
-  { label: "Home", href: "/", icon: <Home /> },
-  { label: "Charts", href: "/charts", icon: <ClipboardList /> },
+  { label: 'Home', href: '/', icon: <Home /> },
+  { label: 'Charts', href: '/charts', icon: <ClipboardList /> },
   {
-    label: "Resources",
-    href: "/resources",
+    label: 'Resources',
+    href: '/resources',
     icon: <LibraryBig />,
   },
 ];

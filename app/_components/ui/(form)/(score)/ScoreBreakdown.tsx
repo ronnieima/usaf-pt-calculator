@@ -1,4 +1,4 @@
-import ScoreIcons from "./ScoreIcons";
+import ScoreIcons from './ScoreIcons';
 
 function ScoreBreakdown() {
   return (
