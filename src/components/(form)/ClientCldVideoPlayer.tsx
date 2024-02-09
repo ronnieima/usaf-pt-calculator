@@ -12,8 +12,8 @@ export default function ClientCldVideoPlayer({
   return (
     <CldVideoPlayer
       id={exercise}
-      width=""
-      height=""
+      width="full"
+      height="full"
       src={`usaf-pt-calculator/exercise-videos/${exercise}`}
       logo={false}
     />
