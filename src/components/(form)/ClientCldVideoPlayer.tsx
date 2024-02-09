@@ -10,12 +10,10 @@ export default function ClientCldVideoPlayer({
   exercise: ExerciseValues;
 }) {
   return (
-    <CldVideoPlayer
+    <iframe
       id={exercise}
-      width="full"
-      height="full"
-      src={`usaf-pt-calculator/exercise-videos/${exercise}`}
-      logo={false}
+      className="h-72 w-full"
+      src={`https://res.cloudinary.com/dfpbpun9z/video/upload/f_auto:video,q_auto/v1/exercises/${exercise}`}
     />
   );
 }

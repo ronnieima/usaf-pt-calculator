@@ -1,9 +1,11 @@
 import Link from 'next/link';
+import { Button } from './ui/button';
+import { Github } from 'lucide-react';
 
 const Footer = () => {
   return (
     <footer className="grid-col-3 grid bg-slate-900 p-6 text-zinc-300">
-      <section className="col-start-2 flex max-w-lg flex-col items-center justify-center gap-16">
+      <section className="col-start-2 flex max-w-lg flex-col items-center justify-center gap-8">
         <p className="text-center">
           For bug reports, suggestions, and feedback, please feel free to email
           me at{' '}
@@ -16,6 +18,21 @@ const Footer = () => {
           </Link>
           .
         </p>
+        <div>
+          <Button
+            asChild
+            variant={'ghost'}
+            title="Visit the GitHub repo"
+            size={'icon'}
+          >
+            <Link
+              href={'https://github.com/ronnieima/usaf-pt-calculator'}
+              target="_blank"
+            >
+              <Github />
+            </Link>
+          </Button>
+        </div>
         <div>
           <p className=" text-center">
             &copy; 2023 | Developed by{' '}
