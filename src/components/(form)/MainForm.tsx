@@ -36,13 +36,10 @@ export type FormType = {
 export default function MainForm() {
   useEffect(() => {
     const notify = () =>
-      toast(
-        '22 Jan 2024 Update: Real-time score indicator and many visual updates.',
-        {
-          position: toast.POSITION.TOP_CENTER,
-          autoClose: 6000,
-        },
-      );
+      toast('9 Feb 2024 Update: Added HAMR level chart', {
+        position: toast.POSITION.TOP_CENTER,
+        autoClose: 6000,
+      });
     notify();
   }, []);
 
@@ -92,7 +89,7 @@ export default function MainForm() {
     <FormProvider {...methods}>
       <form
         onSubmit={methods.handleSubmit(onSubmit)}
-        className="text-foreground flex flex-col gap-8 text-2xl tracking-wide"
+        className="flex flex-col gap-8 text-2xl tracking-wide text-foreground"
       >
         <GenderRadio />
         <AgeGroupSelect />

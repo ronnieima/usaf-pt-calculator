@@ -23,6 +23,7 @@ import { useEffect } from 'react';
 import { useFormContext } from 'react-hook-form';
 import { Separator } from '../../ui/separator';
 import ShowHamrAudioSwitch from '../ShowHamrAudioSwitch';
+import Link from 'next/link';
 
 const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   const {
@@ -75,11 +76,11 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
             <FormLabel className="text-xl font-bold lg:text-2xl">
               <h3>{`${exerciseLabel} ${isTimeBased ? 'Time' : 'Reps'}`}</h3>
             </FormLabel>
-            <FormControl className="border-card-foreground/30 w-full border shadow-lg">
+            <FormControl className="w-full border border-card-foreground/30 shadow-lg">
               {isTimeBased ? (
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <TimeField
-                    className="border-card-foreground/30 w-full rounded-lg "
+                    className="w-full rounded-lg border-card-foreground/30 "
                     format="mm:ss"
                     slotProps={{
                       textField: {
@@ -159,14 +160,25 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
       ) : (
         <span
           className="
-        text-muted-foreground text-center text-sm"
+        text-center text-sm text-muted-foreground"
         >
           Select an age group and gender to get min/max values.
         </span>
       )}
       {componentValue === 'cardio' && (
         <>
-          <ShowHamrAudioSwitch />
+          <div className="flex items-center justify-between">
+            <ShowHamrAudioSwitch />
+            <Link
+              href={
+                'https://res.cloudinary.com/dfpbpun9z/image/upload/f_auto,q_auto/v1/usaf-pt-calculator/hamr_levels'
+              }
+              target="_blank"
+              className="text-sm text-blue-500 hover:underline"
+            >
+              Go to HAMR Level Chart
+            </Link>
+          </div>
           {isCheckedShuttleAudio && (
             <iframe
               src="https://res.cloudinary.com/dfpbpun9z/video/upload/f_auto:video,q_auto/v1/usaf-pt-calculator/exercise-videos/hamr-audio"

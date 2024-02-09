@@ -6,13 +6,11 @@ import {
   CardTitle,
 } from '@/src/components/ui/card';
 import MainForm from './MainForm';
-import { toast } from 'react-toastify';
-import { useEffect } from 'react';
 
 const FormCard = () => {
   return (
     <Card
-      className="bg-card flex max-w-4xl scroll-mt-16 flex-col items-center rounded-none shadow-lg  sm:rounded-md"
+      className="flex max-w-4xl scroll-mt-16 flex-col items-center rounded-none bg-card shadow-lg  sm:rounded-md"
       id="form-card"
     >
       <CardHeader className=" max-w-3xl pb-16 pt-8 text-center ">
