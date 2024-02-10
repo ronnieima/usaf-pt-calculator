@@ -7,6 +7,7 @@ import {
   getMinimumPerformanceValue,
 } from '../lib/getScore';
 import { inferWalkAgeGroup } from '../lib/utils';
+import { ExerciseValues } from '../config/content';
 
 export const useRealTimeInfo = (
   componentValue: 'upperBody' | 'core' | 'cardio',
@@ -18,7 +19,7 @@ export const useRealTimeInfo = (
   );
   const setComponentScore = useFormStore((state) => state.setComponentScore);
 
-  const selectedExercise = watch(`${componentValue}Exercise`);
+  const selectedExercise: ExerciseValues = watch(`${componentValue}Exercise`);
   const currentInput = watch(`${componentValue}Input`);
   const gender = watch('gender');
   const ageGroup = watch('ageGroup');
