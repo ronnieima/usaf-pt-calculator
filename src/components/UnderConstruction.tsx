@@ -21,7 +21,7 @@ const UnderConstruction = () => {
           <CardDescription>Physical Fitness Program</CardDescription>
           <Button asChild>
             <Link
-              className=""
+              target="_blank"
               href="https://res.cloudinary.com/dfpbpun9z/image/upload/v1700294852/dafman36-2905.pdf"
             >
               DAFMAN 36-2905

@@ -2,6 +2,7 @@ import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
 import dayjs from 'dayjs';
 import toObject from 'dayjs/plugin/toObject';
+import { hamrLevels } from '../config/hamr-levels';
 dayjs.extend(toObject);
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
@@ -81,3 +82,20 @@ export const numberInputOnWheelPreventChange: React.WheelEventHandler<
     e.currentTarget?.focus();
   }, 0);
 };
+
+export function computeHamrLevelAndShuttle(repCount: number) {
+  console.log(repCount);
+  if (repCount > 155) return { level: 15, shuttle: 13, string: 'Max exceeded' };
+
+  const hamrLevel = hamrLevels.find((hamrLevel) => hamrLevel.rep === repCount);
+
+  if (!hamrLevel) {
+    return { level: 0, shuttle: 0, string: 'Level not found' };
+  }
+
+  return {
+    level: hamrLevel.level,
+    shuttle: hamrLevel.shuttle,
+    string: `Level ${hamrLevel.level} | Shuttle ${hamrLevel.shuttle}`,
+  };
+}

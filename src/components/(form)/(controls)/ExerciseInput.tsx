@@ -12,6 +12,7 @@ import { getValidationRules } from '@/src/config/validation';
 import { useRealTimeInfo } from '@/src/hooks/useRealTimeInfo';
 import {
   cn,
+  computeHamrLevelAndShuttle,
   numberInputOnWheelPreventChange,
   secondsToMinutesAndSeconds,
 } from '@/src/lib/utils';
@@ -30,6 +31,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
     control,
     formState: { isSubmitting },
     resetField,
+    watch,
   } = useFormContext();
 
   const {
@@ -72,11 +74,11 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
         name={`${componentValue}Input`}
         rules={getValidationRules(componentLabel, selectedExercise)}
         render={({ field }) => (
-          <FormItem>
+          <FormItem className="relative">
             <FormLabel className="text-xl font-bold lg:text-2xl">
               <h3>{`${exerciseLabel} ${isTimeBased ? 'Time' : 'Reps'}`}</h3>
             </FormLabel>
-            <FormControl className="w-full border border-card-foreground/30 shadow-lg">
+            <FormControl className=" w-full border border-card-foreground/30 shadow-lg">
               {isTimeBased ? (
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <TimeField
@@ -91,16 +93,27 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
                   />
                 </LocalizationProvider>
               ) : (
-                <Input
-                  disabled={isSubmitting}
-                  inputMode="numeric"
-                  className="focus:ring-primary"
-                  min={0}
-                  onWheel={numberInputOnWheelPreventChange}
-                  placeholder="Reps"
-                  type="number"
-                  {...field}
-                />
+                <>
+                  <Input
+                    disabled={isSubmitting}
+                    inputMode="numeric"
+                    className="focus:ring-primary"
+                    min={0}
+                    max={155}
+                    onWheel={numberInputOnWheelPreventChange}
+                    placeholder="Reps"
+                    type="number"
+                    {...field}
+                  />
+                  <span className="absolute right-16 top-[3.2rem] text-sm">
+                    {selectedExercise === '20_meter_hamr_shuttle' &&
+                      watch('cardioInput') !== '' &&
+                      watch('gender') &&
+                      watch('ageGroup') &&
+                      computeHamrLevelAndShuttle(Number(watch('cardioInput')))
+                        .string}
+                  </span>
+                </>
               )}
             </FormControl>
             <FormMessage />
@@ -131,11 +144,16 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
                 <div className="flex flex-col items-center">
                   <p>
                     <span className="text-3xl font-bold text-red-800">
-                      {computeValue(minimumPerformanceValue)}{' '}
+                      {`${computeValue(minimumPerformanceValue)} `}
                     </span>
                     {!isTimeBased && <span className="text-xs">reps</span>}
                   </p>
                   <span className="text-xs font-semibold">Min</span>
+                  <span className="text-sm">
+                    {selectedExercise === '20_meter_hamr_shuttle' &&
+                      computeHamrLevelAndShuttle(minimumPerformanceValue)
+                        .string}
+                  </span>
                 </div>
                 <Separator orientation="vertical" />
               </>
@@ -154,6 +172,10 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
                 {!isTimeBased && <span className="text-xs">reps</span>}
               </p>
               <span className="text-xs font-semibold">Max</span>
+              <span className="text-sm">
+                {selectedExercise === '20_meter_hamr_shuttle' &&
+                  computeHamrLevelAndShuttle(maximumPerformanceValue).string}
+              </span>
             </div>
           </div>
         </section>
