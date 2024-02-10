@@ -121,7 +121,7 @@ export const exercises: Exercise[] = [
       },
     ],
   },
-] as const;
+];
 
 export const walkStandardsAgeGroups = ['<30', '30-39', '40-49', '50-59', '60+'];
 export const ageGroups = [
