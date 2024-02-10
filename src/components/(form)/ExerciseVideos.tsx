@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { Exercise } from '@/src/config/content';
-import ClientCldVideoPlayer from './ClientCldVideoPlayer';
 
 const ExerciseVideos = ({ exercise }: { exercise: Exercise }) => {
   const { options } = exercise;
@@ -15,9 +14,10 @@ const ExerciseVideos = ({ exercise }: { exercise: Exercise }) => {
               <h2>{option.label}</h2>
             </header>
 
-            {/* Component from cloudinary */}
-            <ClientCldVideoPlayer exercise={option.value} />
-
+            <iframe
+              className="h-72 w-full"
+              src={`https://res.cloudinary.com/dfpbpun9z/video/upload/v1706012893/usaf-pt-calculator/exercise-videos/${exercise}.mp4`}
+            />
             <figcaption>
               {option.videoSource && (
                 <Link

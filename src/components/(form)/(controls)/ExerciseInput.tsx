@@ -171,7 +171,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
             <ShowHamrAudioSwitch />
             <Link
               href={
-                'https://res.cloudinary.com/dfpbpun9z/image/upload/f_auto,q_auto/v1/usaf-pt-calculator/hamr_levels'
+                'https://res.cloudinary.com/dfpbpun9z/image/upload/v1707517246/usaf-pt-calculator/hamr_levels.pdf'
               }
               target="_blank"
               className="text-sm text-blue-500 hover:underline"
@@ -181,7 +181,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
           </div>
           {isCheckedShuttleAudio && (
             <iframe
-              src="https://res.cloudinary.com/dfpbpun9z/video/upload/f_auto:video,q_auto/v1/usaf-pt-calculator/exercise-videos/hamr-audio"
+              src="https://res.cloudinary.com/dfpbpun9z/video/upload/v1706017515/usaf-pt-calculator/exercise-videos/hamr-audio.mp4"
               height={'400'}
               allowFullScreen
             />
