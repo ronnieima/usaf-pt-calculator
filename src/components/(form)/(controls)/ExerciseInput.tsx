@@ -190,7 +190,6 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
       {componentValue === 'cardio' && (
         <>
           <div className="flex items-center justify-between">
-            <ShowHamrAudioSwitch />
             <Link
               href={
                 'https://res.cloudinary.com/dfpbpun9z/image/upload/v1707517246/usaf-pt-calculator/hamr_levels.pdf'
@@ -200,13 +199,10 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
             >
               Go to HAMR Level Chart
             </Link>
+            <ShowHamrAudioSwitch />
           </div>
           {isCheckedShuttleAudio && (
-            <iframe
-              src="https://res.cloudinary.com/dfpbpun9z/video/upload/v1706017515/usaf-pt-calculator/exercise-videos/hamr-audio.mp4"
-              height={'400'}
-              allowFullScreen
-            />
+            <audio className="my-12 w-full" controls src="hamr-audio.mp3" />
           )}
         </>
       )}
