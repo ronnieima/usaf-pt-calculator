@@ -78,11 +78,11 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
             <FormLabel className="text-xl font-bold lg:text-2xl">
               <h3>{`${exerciseLabel} ${isTimeBased ? 'Time' : 'Reps'}`}</h3>
             </FormLabel>
-            <FormControl className=" w-full border border-card-foreground/30 shadow-lg">
+            <FormControl className=" w-full border border-card-foreground/30 shadow-lg ">
               {isTimeBased ? (
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
                   <TimeField
-                    className="w-full rounded-lg border-card-foreground/30 "
+                    className="w-full rounded-lg border-card-foreground/30 shadow-lg"
                     format="mm:ss"
                     slotProps={{
                       textField: {
@@ -97,7 +97,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
                   <Input
                     disabled={isSubmitting}
                     inputMode="numeric"
-                    className="focus:ring-primary"
+                    className="border-card-foreground/30 shadow-lg focus:ring-primary"
                     min={0}
                     max={155}
                     onWheel={numberInputOnWheelPreventChange}
