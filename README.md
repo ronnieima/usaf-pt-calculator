@@ -4,8 +4,10 @@
 
 ## **https://usafptcalculator.com**
 
-![image](https://github.com/ronnieima/usaf-pt-calculator/assets/70875687/941119a5-fc54-4c50-9d26-6f24202c5b7e)
-![image](https://github.com/ronnieima/usaf-pt-calculator/assets/70875687/3bd18238-0108-4a9f-a0d3-12e8859b8f7f)
+![usaf](https://github.com/ronnieima/usaf-pt-calculator/assets/70875687/3f43ca17-1be9-467a-bffe-2001e99d2cc0)
+![usaf2](https://github.com/ronnieima/usaf-pt-calculator/assets/70875687/43ed2b18-6902-4a23-aeaa-e87c57979fe9)
+![usaf3](https://github.com/ronnieima/usaf-pt-calculator/assets/70875687/553969ad-b2cf-434e-b6d7-93e7069317fd)
+
 
 ## Overview
 
@@ -26,11 +28,11 @@ The USAF PT Test Score Calculator is a web-based tool designed to calculate your
 - [x] Embed videos demonstrating each exercise.
 - [x] Display PT Scoring Charts.
 - [ ] Implement exercise timers.
-- [ ] Add Shuttle Run audio cues.
+- [X] Add Shuttle Run audio cues.
 
 ## Usage
 
-1. Visit [usafptcalculator.com](https://usafptcalculator.com).
+1. Visit [www.usafptcalculator.com](https://www.usafptcalculator.com).
 2. Select your age group and gender.
 3. Input your performance metrics for each activity.
 4. Hit "Calculate" to view your score.
