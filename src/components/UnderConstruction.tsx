@@ -16,18 +16,6 @@ const UnderConstruction = () => {
             Back home
           </Link>
         </Button>
-        <Card className=" flex flex-col gap-2 p-8">
-          <CardTitle>DAFMAN 36-2905</CardTitle>
-          <CardDescription>Physical Fitness Program</CardDescription>
-          <Button asChild>
-            <Link
-              target="_blank"
-              href="https://res.cloudinary.com/dfpbpun9z/image/upload/v1700294852/dafman36-2905.pdf"
-            >
-              DAFMAN 36-2905
-            </Link>
-          </Button>
-        </Card>
       </section>
     </main>
   );
