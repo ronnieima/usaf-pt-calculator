@@ -195,7 +195,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
                 'https://res.cloudinary.com/dfpbpun9z/image/upload/v1707517246/usaf-pt-calculator/hamr_levels.pdf'
               }
               target="_blank"
-              className="text-sm text-blue-300 hover:underline"
+              className="text-sm text-blue-950 hover:underline"
             >
               Go to HAMR Level Chart
             </Link>
