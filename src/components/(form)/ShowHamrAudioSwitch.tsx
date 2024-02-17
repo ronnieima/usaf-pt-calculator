@@ -17,6 +17,7 @@ function ShowHamrAudioSwitch() {
       <div className="flex items-center gap-2">
         <Switch
           id="showHamrAudio"
+          aria-label="Toggle Shuttle Audio"
           checked={isCheckedShuttleAudio}
           onCheckedChange={toggleIsCheckedShuttleAudio}
         ></Switch>
