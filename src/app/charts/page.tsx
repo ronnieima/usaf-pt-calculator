@@ -1,16 +1,37 @@
-import AgeGroupItems from "./AgeGroupItems";
+import { Card, CardContent, CardHeader } from '@/src/components/ui/card';
+import AgeGroupItems from './AgeGroupItems';
+import { ageGroups } from '@/src/config/content';
 
 const ChartsPage = () => {
   return (
-    <div className="flex flex-col items-center justify-center pb-16">
-      <header className=" justify-center py-16">
-        <h1 className="text-center text-6xl text-background">Score Charts</h1>
-        <p className="text-center text-slate-300">Links open in a new tab</p>
-      </header>
-      <div className="grid min-h-screen w-full max-w-[50rem] grid-cols-2 items-center justify-center gap-2 px-2 sm:gap-8 lg:grid-cols-3  ">
-        <AgeGroupItems />
-      </div>
-    </div>
+    <main className="min-h-screen">
+      <section className="mx-auto max-w-[80rem] px-4 py-8">
+        <Card className="">
+          <CardHeader className="pb-8">
+            <h1 className="text-left text-4xl font-bold leading-8">
+              Score Charts
+            </h1>
+            <p className="text-center text-muted-foreground sm:text-left">
+              Select your age group
+            </p>
+          </CardHeader>
+          <CardContent className="flex gap-16">
+            <div className="space-y-4">
+              <h2 className="text-2xl font-bold">Male</h2>
+              <div className="flex flex-col flex-wrap">
+                <AgeGroupItems gender="male" />
+              </div>
+            </div>
+            <div className="space-y-4">
+              <h2 className="text-2xl font-bold">Female</h2>
+              <div className="flex flex-col flex-wrap">
+                <AgeGroupItems gender="female" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+      </section>
+    </main>
   );
 };
 

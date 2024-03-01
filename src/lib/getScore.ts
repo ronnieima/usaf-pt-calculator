@@ -50,15 +50,8 @@ export function getIndividualScore(
     '2km_walk',
     '20_meter_hamr_shuttle',
   ];
-  if (
-    exercise === 'forearm_plank' ||
-    exercise === '1.5_mile_run' ||
-    exercise === '2km_walk'
-  ) {
-    results = convertDurationToSeconds(performanceValue);
-  } else {
-    results = parseInt(performanceValue);
-  }
+
+  results = parseInt(performanceValue);
 
   const maxValue = getMaximumPerformanceValue(gender, ageGroup, exercise);
   const minValue = getMinimumPerformanceValue(gender, ageGroup, exercise);

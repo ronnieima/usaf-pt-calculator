@@ -25,6 +25,7 @@ import { useFormContext } from 'react-hook-form';
 import { Separator } from '../../ui/separator';
 import ShowHamrAudioSwitch from '../ShowHamrAudioSwitch';
 import Link from 'next/link';
+import DurationPicker from './DurationPicker';
 
 const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   const {
@@ -65,7 +66,6 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
   useEffect(() => {
     resetField(`${componentValue}Input`, { defaultValue: '' });
   }, [selectedExercise, resetField, componentValue]);
-
   if (selectedExercise === 'exempt') return null;
   return (
     <>
@@ -80,18 +80,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
             </FormLabel>
             <FormControl className=" w-full border border-card-foreground/30 shadow-lg ">
               {isTimeBased ? (
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                  <TimeField
-                    className="w-full rounded-lg border-card-foreground/30 shadow-lg"
-                    format="mm:ss"
-                    slotProps={{
-                      textField: {
-                        error: false,
-                      },
-                    }}
-                    {...field}
-                  />
-                </LocalizationProvider>
+                <DurationPicker componentValue={componentValue} />
               ) : (
                 <>
                   <Input
@@ -164,7 +153,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
               <p>
                 <span
                   className={cn('text-3xl font-bold text-green-800', {
-                    'text-red-500': isTimeBased,
+                    'text-red-800': isTimeBased,
                   })}
                 >
                   {computeValue(maximumPerformanceValue)}{' '}
@@ -195,7 +184,7 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
                 'https://res.cloudinary.com/dfpbpun9z/image/upload/v1707517246/usaf-pt-calculator/hamr_levels.pdf'
               }
               target="_blank"
-              className="text-sm text-blue-950 hover:underline"
+              className="text-sm text-blue-800 hover:underline"
             >
               Go to HAMR Level Chart
             </Link>

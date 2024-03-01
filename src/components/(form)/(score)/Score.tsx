@@ -9,7 +9,7 @@ function Score() {
   const { isSubmitting, isSubmitSuccessful } = useFormState();
 
   return (
-    <section className="text-foreground my-16 flex  flex-col items-center justify-center gap-8  text-4xl">
+    <section className="my-16 flex flex-col  items-center justify-center gap-8 text-4xl  text-foreground">
       {isSubmitting && <Spinner />}
       {isSubmitSuccessful && (
         <section
