@@ -42,6 +42,7 @@ function Links() {
             href={
               'https://res.cloudinary.com/dfpbpun9z/image/upload/v1700294852/dafman36-2905.pdf'
             }
+            target="_blank"
             className="flex items-center"
           >
             <span className="mx-2">DAFMAN 36-2905 </span>
