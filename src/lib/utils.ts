@@ -1,24 +1,9 @@
 import { clsx, type ClassValue } from 'clsx';
 import { twMerge } from 'tailwind-merge';
-import dayjs from 'dayjs';
-import toObject from 'dayjs/plugin/toObject';
+
 import { hamrLevels } from '../config/hamr-levels';
-dayjs.extend(toObject);
 export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
-}
-
-export function convertDurationToSeconds(duration: string) {
-  const dateObject = dayjs(duration).toObject();
-
-  // Get minutes and seconds
-  const minutes = dateObject.minutes;
-  const seconds = dateObject.seconds;
-
-  // Convert to seconds
-  const totalSeconds = minutes * 60 + seconds;
-
-  return totalSeconds;
 }
 
 export function capitalizeFirstLetter(string: string) {

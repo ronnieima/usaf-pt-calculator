@@ -4,7 +4,6 @@ import IndividualExerciseScore from './IndividualExerciseScore';
 import PushupIcon from './PushupIcon';
 import SitupIcon from './SitupIcon';
 import { FieldValues, useFormContext } from 'react-hook-form';
-import { convertDurationToSeconds } from '@/src/lib/utils';
 
 const ScoreIcons = () => {
   const scores = useFormStore((state) => state.scores);
@@ -47,12 +46,12 @@ function calculateScore(
     return 'Exempt';
   } else if (
     formData.cardioExercise === '2km_walk' &&
-    convertDurationToSeconds(formData.cardioInput) <= cardioMax
+    parseInt(formData.cardioInput) <= cardioMax
   ) {
     return 'Pass';
   } else if (
     formData.cardioExercise === '2km_walk' &&
-    convertDurationToSeconds(formData.cardioInput) > cardioMax
+    parseInt(formData.cardioInput) > cardioMax
   ) {
     return 'Fail';
   } else {

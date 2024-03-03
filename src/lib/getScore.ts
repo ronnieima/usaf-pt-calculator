@@ -1,7 +1,6 @@
 import { FormType } from '../components/(form)/MainForm';
 import { scoringCriteria } from '../config/criteria';
 import { MinMaxValues } from '../stores/store';
-import { convertDurationToSeconds } from './utils';
 
 export function getResults(formData: FormType) {
   const {
@@ -149,16 +148,14 @@ export function calculateMetMinimums(
     core:
       coreExercise === 'exempt' ||
       (coreExercise === 'forearm_plank' &&
-        convertDurationToSeconds(coreInput) >=
-          minMaxValues.core.minimumPerformanceValue) ||
+        parseInt(coreInput) >= minMaxValues.core.minimumPerformanceValue) ||
       parseInt(coreInput) >= minMaxValues.core.minimumPerformanceValue,
     cardio:
       // exempt case
       cardioExercise === 'exempt' ||
       // run/walk is less than max value case
       (['1.5_mile_run', '2km_walk'].includes(cardioExercise) &&
-        convertDurationToSeconds(cardioInput) <=
-          minMaxValues.cardio.maximumPerformanceValue) ||
+        parseInt(cardioInput) <= minMaxValues.cardio.maximumPerformanceValue) ||
       // HAMR run: input greater than min case
       parseInt(cardioInput) >= minMaxValues.cardio.minimumPerformanceValue,
   };
