@@ -36,7 +36,7 @@ export type FormType = {
 export default function MainForm() {
   useEffect(() => {
     const notify = () =>
-      toast('9 Feb 2024 Update: Added HAMR level chart', {
+      toast('3 MAR 2024 Update: Improved navigation menu', {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 6000,
       });
