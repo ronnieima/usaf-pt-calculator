@@ -2,6 +2,7 @@
 import { ExerciseComponentValues } from '@/src/config/content';
 import React, { useEffect, useState } from 'react';
 import { useFormContext } from 'react-hook-form';
+import { Input } from '../../ui/input';
 
 const DurationPicker = ({
   componentValue,
@@ -32,15 +33,15 @@ const DurationPicker = ({
   };
 
   return (
-    <div className="flex items-center" key={componentValue}>
-      <div className="flex flex-col items-center">
+    <div className="flex items-center gap-2" key={componentValue}>
+      <div className="flex flex-col items-start">
         <label htmlFor="minutes" className="text-xs">
           Minutes
         </label>
-        <input
+        <Input
           id="minutes"
           type="number"
-          className="mr-2 h-16 w-24 rounded-md border border-gray-300 px-3 text-center shadow-md focus:outline-black"
+          className=" rounded-md border border-gray-300 text-center shadow-md focus:outline-black"
           max={60}
           maxLength={2}
           min={0}
@@ -50,14 +51,14 @@ const DurationPicker = ({
         />
       </div>
       <span className="text-gray-600">:</span>
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-start">
         <label htmlFor="seconds" className="text-xs">
           Seconds
         </label>
-        <input
+        <Input
           id="seconds"
           type="number"
-          className="ml-2 mr-2 h-16 w-24 rounded-md border border-gray-300 px-3 text-center shadow-md focus:outline-black"
+          className="rounded-md border border-gray-300 px-3 text-center shadow-md focus:outline-black"
           maxLength={2}
           max={60}
           min={0}

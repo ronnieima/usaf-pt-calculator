@@ -1,7 +1,8 @@
 'use client';
 
-import AgeGroupItems from '@/src/app/charts/AgeGroupItems';
-import { usePathname } from 'next/navigation';
+import { ChevronDown, ExternalLink } from 'lucide-react';
+import Link from 'next/link';
+import AgeGroupItems from '../AgeGroupItems';
 import {
   Menubar,
   MenubarContent,
@@ -11,60 +12,44 @@ import {
   MenubarSubTrigger,
   MenubarTrigger,
 } from '../ui/menubar';
-import Link from 'next/link';
-import { links } from './NavBar';
-import { cn } from '@/src/lib/utils';
 
 function Links() {
-  const currentPath = usePathname();
   return (
-    <ul className="hidden list-none gap-16 text-2xl lg:flex">
-      <Menubar className="bg-transparent ">
-        {/* <MenubarMenu key={link.href}>
+    <Menubar className="hidden gap-8 bg-transparent lg:flex ">
+      <MenubarMenu>
+        <MenubarTrigger className="text-lg">
+          <span className="mx-2"> Score Charts </span>
+          <ChevronDown />
+        </MenubarTrigger>
+        <MenubarContent>
+          <MenubarSub>
+            <MenubarSubTrigger>Male</MenubarSubTrigger>
+            <MenubarSubContent>
+              <AgeGroupItems gender="male" inMenuBar={true} />
+            </MenubarSubContent>
+          </MenubarSub>
+          <MenubarSub>
+            <MenubarSubTrigger>Female</MenubarSubTrigger>
+            <MenubarSubContent>
+              <AgeGroupItems gender="female" inMenuBar={true} />
+            </MenubarSubContent>
+          </MenubarSub>
+        </MenubarContent>
+      </MenubarMenu>
+      <MenubarMenu>
+        <MenubarTrigger asChild className="text-lg">
           <Link
-            href={link.href}
-            className={classnames({
-              'text-blue-600 underline': link.href === currentPath,
-              'text-zinc-700 no-underline': link.href !== currentPath,
-              'transition-colors hover:text-blue-300': true,
-            })}
+            href={
+              'https://res.cloudinary.com/dfpbpun9z/image/upload/v1700294852/dafman36-2905.pdf'
+            }
+            className="flex items-center"
           >
-            {link.label}
+            <span className="mx-2">DAFMAN 36-2905 </span>
+            <ExternalLink />
           </Link>
-        </MenubarMenu> */}
-        <MenubarMenu>
-          <MenubarTrigger>
-            <Link
-              href={'/'}
-              className={cn({
-                'text-blue-600 underline': '/' === currentPath,
-                'text-zinc-700 no-underline': '/' !== currentPath,
-                'transition-colors hover:text-blue-300': true,
-              })}
-            >
-              Home
-            </Link>
-          </MenubarTrigger>
-        </MenubarMenu>
-        <MenubarMenu>
-          <MenubarTrigger>Score Charts</MenubarTrigger>
-          <MenubarContent>
-            <MenubarSub>
-              <MenubarSubTrigger>Male</MenubarSubTrigger>
-              <MenubarSubContent>
-                <AgeGroupItems gender="male" />
-              </MenubarSubContent>
-            </MenubarSub>
-            <MenubarSub>
-              <MenubarSubTrigger>Female</MenubarSubTrigger>
-              <MenubarSubContent>
-                <AgeGroupItems gender="female" />
-              </MenubarSubContent>
-            </MenubarSub>
-          </MenubarContent>
-        </MenubarMenu>
-      </Menubar>
-    </ul>
+        </MenubarTrigger>
+      </MenubarMenu>
+    </Menubar>
   );
 }
 

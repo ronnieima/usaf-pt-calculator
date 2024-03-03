@@ -16,7 +16,7 @@ const ExerciseVideos = ({ exercise }: { exercise: Exercise }) => {
 
             <iframe
               className="h-72 w-full"
-              src={`https://res.cloudinary.com/dfpbpun9z/video/upload/v1706012893/usaf-pt-calculator/exercise-videos/${exercise}.mp4`}
+              src={`https://res.cloudinary.com/dfpbpun9z/video/upload/v1706012893/usaf-pt-calculator/exercise-videos/${option.value}.mp4`}
             />
             <figcaption>
               {option.videoSource && (
