@@ -9,7 +9,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from '@/src/components/ui/sheet';
-import { ChevronRight, ExternalLink, Menu } from 'lucide-react';
+import { ExternalLink, Menu } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import CollapsibleNav from './CollapsibleNav';
 import { links } from './NavBar';

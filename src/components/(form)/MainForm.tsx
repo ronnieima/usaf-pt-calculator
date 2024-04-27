@@ -34,15 +34,6 @@ export type FormType = {
 };
 
 export default function MainForm() {
-  useEffect(() => {
-    const notify = () =>
-      toast('3 MAR 2024 Update: Improved navigation menu', {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 6000,
-      });
-    notify();
-  }, []);
-
   const methods = useForm<FormType>({
     mode: 'onChange',
     reValidateMode: 'onChange',
