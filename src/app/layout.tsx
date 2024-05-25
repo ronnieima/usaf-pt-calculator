@@ -9,11 +9,13 @@ import ToastProvider from '../components/toast-provider';
 import NavBar from '../components/(navbar)/NavBar';
 import Footer from '../components/Footer';
 
+const WEBSITE_TITLE = 'US Air Force PT Test Calculator - All Score Charts and Exercise Videos';
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.usafptcalculator.com'),
   title: {
-    template: '%s | USAF PT Test Calculator',
-    default: 'USAF PT Test Calculator - All Score Charts and Exercise Videos',
+    template: '%s | US Air Force PT Test Calculator',
+    default: WEBSITE_TITLE,
   },
   description:
     'Calculate your Air Force PT scores with this user-friendly calculator. Tailored for USAF personnel, simplify your fitness tracking effortlessly.',
@@ -28,7 +30,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     site: '@imagawaDev',
     creator: '@imagawaDev',
-    title: 'USAF PT Test Calculator - All Score Charts and Exercise Videos',
+    title: WEBSITE_TITLE,
     description:
       'Calculate your Air Force PT scores with this user-friendly calculator. Tailored for USAF personnel, simplify your fitness tracking effortlessly.',
     images: getCldOgImageUrl({
@@ -37,7 +39,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     type: 'website',
-    title: 'USAF PT Test Calculator - All Score Charts and Exercise Videos',
+    title: WEBSITE_TITLE,
     description:
       'Calculate your Air Force PT scores with this user-friendly calculator. Tailored for USAF personnel, simplify your fitness tracking effortlessly.',
     url: 'https://www.usafptcalculator.com/',
