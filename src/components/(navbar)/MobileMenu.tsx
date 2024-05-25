@@ -13,6 +13,7 @@ import { ExternalLink, Menu } from 'lucide-react';
 import { usePathname, useRouter } from 'next/navigation';
 import CollapsibleNav from './CollapsibleNav';
 import { links } from './NavBar';
+import Link from 'next/link';
 
 const MobileMenu = () => {
   const currentPath = usePathname();
@@ -33,20 +34,22 @@ const MobileMenu = () => {
               return (
                 <SheetTrigger asChild key={link.href}>
                   <Button
+                  asChild
                     aria-label={link.label}
-                    onClick={() => push(link.href)}
                     variant="ghost"
-                    className={`h-24 justify-between text-lg font-bold text-zinc-600 ${
+                    className={`h-24 justify-between text-md font-bold text-zinc-600 ${
                       link.href === currentPath
                         ? 'bg-gray-200 text-lg font-bold'
                         : ''
                     }`}
                   >
-                    <div className="flex items-center gap-2">
+                    <div className="flex items-center">
+                    <Link href={link.href} target='_blank' className='flex items-center gap-2' >
                       {link.icon}
                       <span>{link.label}</span>
-                    </div>
+                    </Link>
                     <ExternalLink />
+                    </div>
                   </Button>
                 </SheetTrigger>
               );
