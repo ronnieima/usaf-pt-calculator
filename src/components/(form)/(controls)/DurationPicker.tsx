@@ -13,6 +13,7 @@ const DurationPicker = ({
   const [seconds, setSeconds] = useState<number>(0);
 
   const { setValue } = useFormContext();
+
   useEffect(() => {
     const totalSeconds = minutes * 60 + seconds;
     setValue(`${componentValue}Input`, totalSeconds);
@@ -42,7 +43,7 @@ const DurationPicker = ({
           id="minutes"
           type="number"
           className=" rounded-md border border-gray-300 text-center shadow-md focus:outline-black"
-          max={60}
+          max={59}
           maxLength={2}
           min={0}
           value={minutes?.toString().padStart(2, '0')}
@@ -60,7 +61,7 @@ const DurationPicker = ({
           type="number"
           className="rounded-md border border-gray-300 px-3 text-center shadow-md focus:outline-black"
           maxLength={2}
-          max={60}
+          max={59}
           min={0}
           value={seconds?.toString().padStart(2, '0')}
           onChange={handleSecondsChange}

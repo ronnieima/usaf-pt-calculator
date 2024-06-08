@@ -33,7 +33,7 @@ function GenderRadioButtons() {
               onValueChange={field.onChange}
               {...field}
             >
-              <section className="grid gap-4 text-center sm:grid-cols-2">
+              <section className="grid gap-16 text-center sm:grid-cols-2">
                 {genders.map((gender) => {
                   return (
                     <FormItem key={gender}>
@@ -46,7 +46,7 @@ function GenderRadioButtons() {
                       <Button
                         aria-label={gender}
                         asChild
-                        className="active:bg-primary/70 w-full bg-gray-900 py-8 text-2xl  shadow-lg transition-all duration-300 hover:scale-[1.01] hover:cursor-pointer active:translate-y-1 peer-aria-checked:scale-105  peer-aria-checked:bg-blue-700
+                        className="active:bg-primary/70 w-full bg-gray-900 py-8 text-2xl  shadow-lg transition-all duration-300 hover:scale-[1.01] hover:cursor-pointer active:translate-y-1 peer-aria-checked:scale-[1.02]  peer-aria-checked:bg-blue-700
                         peer-aria-checked:ring-2 peer-aria-checked:ring-blue-950/70"
                       >
                         <FormLabel>{capitalizeFirstLetter(gender)}</FormLabel>

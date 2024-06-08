@@ -92,6 +92,8 @@ const ExerciseInput = ({ exercise }: { exercise: Exercise }) => {
                     type="number"
                     {...field}
                   />
+
+                  {/* If HAMR is selected, it converts the inputted reps into level and shuttle and displays it on the input*/}
                   <span className="absolute right-16 top-[3.2rem] text-sm">
                     {selectedExercise === '20_meter_hamr_shuttle' &&
                       watch('cardioInput') !== '' &&
