@@ -19,7 +19,10 @@ const Footer = () => {
           </Link>
           .
         </p>
-        <div className='flex items-center gap-8'>
+        <div className='flex items-center flex-col gap-8'>
+               <Link href="https://www.buymeacoffee.com/imagawa" target='_blank' className=''>
+           <Image width={250} height={0} sizes='33vw'  src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=imagawa&button_colour=5F7FFF&font_colour=ffffff&font_family=Poppins&outline_colour=000000&coffee_colour=FFDD00" alt='buy me a coffee' unoptimized />
+          </Link>
           <Button
             asChild
             variant={'secondary'}
@@ -33,12 +36,9 @@ const Footer = () => {
               <Github />
             </Link>
           </Button>
-          <Button asChild className='bg-blue-300 hover:bg-blue-300/50'>
 
-          <Link href={"https://www.buymeacoffee.com/imagawa"} target='_blank' data-umami-event="buymeacoffee">
-            <Image width={0} height={0} sizes='100vw' className='w-auto h-full' src={"/bmc-full-logo-no-background.png"} alt='Buy me a coffee'/>
-          </Link>
-          </Button>
+    
+     
         </div>
         <div>
           <p className=" text-center">
