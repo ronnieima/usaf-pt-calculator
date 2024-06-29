@@ -13,11 +13,8 @@ const ExerciseVideos = ({ exercise }: { exercise: Exercise }) => {
             <header className="mb-2 text-2xl font-bold">
               <h2>{option.label}</h2>
             </header>
+            <iframe className='h-72 w-full'  src={`https://www.youtube.com/embed/${option.videoUrl}`} title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerPolicy="strict-origin-when-cross-origin" allowFullScreen></iframe>
 
-            <iframe
-              className="h-72 w-full"
-              src={`https://res.cloudinary.com/dfpbpun9z/video/upload/v1706012893/usaf-pt-calculator/exercise-videos/${option.value}.mp4`}
-            />
             <figcaption>
               {option.videoSource && (
                 <Link

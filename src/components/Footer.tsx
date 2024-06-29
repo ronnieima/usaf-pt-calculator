@@ -21,7 +21,7 @@ const Footer = () => {
         </p>
         <div className='flex items-center flex-col gap-8'>
                <Link href="https://www.buymeacoffee.com/imagawa" target='_blank' className=''>
-           <Image width={250} height={0} sizes='33vw'  src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=imagawa&button_colour=5F7FFF&font_colour=ffffff&font_family=Poppins&outline_colour=000000&coffee_colour=FFDD00" alt='buy me a coffee' unoptimized />
+           <Image width={270} height={0} sizes='33vw'  src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=imagawa&button_colour=5F7FFF&font_colour=ffffff&font_family=Poppins&outline_colour=000000&coffee_colour=FFDD00" alt='buy me a coffee' unoptimized />
           </Link>
           <Button
             asChild

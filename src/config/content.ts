@@ -31,6 +31,7 @@ export type ExerciseComponent = {
 export type ExerciseOptions = {
   label: string;
   value: ExerciseValues;
+  videoUrl?: string;
   videoSource?: string;
 }[];
 
@@ -50,11 +51,13 @@ export const exercises: Exercise[] = [
       {
         label: 'Pushup',
         value: 'pushup',
+        videoUrl: 'DGj2EK4URjk',
         videoSource: 'https://www.youtube.com/watch?v=z6cNHsw-EWI',
       },
       {
         label: 'Hand Release Pushup',
         value: 'hand_release_pushup',
+        videoUrl: 'H-IQOmYTwgI',
         videoSource:
           'https://www.dvidshub.net/video/825278/2-minute-hand-release-pushup',
       },
@@ -74,17 +77,20 @@ export const exercises: Exercise[] = [
       {
         label: 'Situp',
         value: 'situp',
+        videoUrl:'x5blKIwnjD4',
         videoSource: 'https://www.youtube.com/watch?v=z6cNHsw-EWI',
       },
       {
         label: 'Cross Leg Reverse Crunch',
         value: 'cross_leg_reverse_crunch',
+        videoUrl: 'VcrcqPK4Fek',
         videoSource:
           'https://www.dvidshub.net/video/825274/2-minute-cross-leg-reverse-crunch',
       },
       {
         label: 'Forearm Plank',
         value: 'forearm_plank',
+        videoUrl: 'SfLQfCPOkHw',
         videoSource: 'https://www.dvidshub.net/video/825280/forearm-plank',
       },
       {
@@ -102,17 +108,20 @@ export const exercises: Exercise[] = [
       {
         label: '1.5 Mile Run',
         value: '1.5_mile_run',
+        videoUrl: 'AzGGq5CoFzo',
         videoSource: 'https://www.youtube.com/watch?v=z6cNHsw-EWI',
       },
       {
         label: '20 Meter HAMR Shuttle',
         value: '20_meter_hamr_shuttle',
+        videoUrl: 'l68Q0IPdojc',
         videoSource:
           'https://www.dvidshub.net/video/825282/20m-high-aerobic-multi-shuttle-run',
       },
       {
         label: '2 Kilometer Walk',
         value: '2km_walk',
+        videoUrl: 'AFOW2IsiBIs',
         videoSource: 'https://www.youtube.com/watch?v=z6cNHsw-EWI',
       },
       {
