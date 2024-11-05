@@ -62,8 +62,8 @@ export default function RootLayout({
       <head>
         <Script
           async
-          src="https://umami-fork-murex.vercel.app/script.js"
-          data-website-id="dcd8e49c-4b05-4efb-9316-533ae15ff332"
+          src="https://umami.imagawa.dev/script.js"
+          data-website-id="dcecc7f1-b2be-4191-9f46-1e6c88b186ad"
           strategy="lazyOnload"
         ></Script>
       </head>
