@@ -62,7 +62,7 @@ export default function RootLayout({
       <head>
         <Script
           async
-          src="https://analytics.imagawa.dev/script.js" data-website-id="31a018bb-6d33-4d8a-8850-38badb4c2916"
+          src="https://analytics.imagawa.dev/script.js" data-website-id="8fee5b01-3e87-4935-a4f4-62f9bfb80ae6"
           strategy="lazyOnload"
         ></Script>
       </head>
