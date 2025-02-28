@@ -9,7 +9,8 @@ import ToastProvider from '../components/toast-provider';
 import NavBar from '../components/(navbar)/NavBar';
 import Footer from '../components/Footer';
 
-const WEBSITE_TITLE = 'US Air Force PT Test Calculator - All Score Charts and Exercise Videos';
+const WEBSITE_TITLE =
+  'US Air Force PT Test Calculator - All Score Charts and Exercise Videos';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://www.usafptcalculator.com'),
@@ -62,7 +63,8 @@ export default function RootLayout({
       <head>
         <Script
           async
-          src="https://analytics.imagawa.dev/script.js" data-website-id="8fee5b01-3e87-4935-a4f4-62f9bfb80ae6"
+          src="https://analytics.imagawa.dev/script.js"
+          data-website-id="5186ecc1-8d42-42ad-b0ad-a615716c35ac"
           strategy="lazyOnload"
         ></Script>
       </head>
